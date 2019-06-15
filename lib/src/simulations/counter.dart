@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 final coolController = TextEditingController();
 int N;
-List<int> numbers = [0];
+List<int> numbers;
 final List<int> colors = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
 class CountingTillN extends StatefulWidget {
@@ -12,7 +12,8 @@ class CountingTillN extends StatefulWidget {
 class _CountingTillNState extends State<CountingTillN> {
   void change() {
     N = int.parse(coolController.text);
-    for (int i = 0; i < N; i++) numbers.add(i + 1);
+    numbers.clear();
+    for (int i = 0; i <= N; i++) numbers.add(i);
   }
 
   @override
