@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'simulations/counting.dart';
 
-
 class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
