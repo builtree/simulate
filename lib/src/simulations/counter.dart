@@ -5,11 +5,7 @@ int N;
 List<int> numbers = [];
 final List<int> colors = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 
-class CountingTillN extends StatefulWidget {
-  _CountingTillNState createState() => _CountingTillNState();
-}
-
-class _CountingTillNState extends State<CountingTillN> {
+class CountingTillN extends StatelessWidget {
   void change() {
     N = int.parse(coolController.text);
     numbers.clear();
@@ -48,11 +44,7 @@ class _CountingTillNState extends State<CountingTillN> {
   }
 }
 
-class NumbersList extends StatefulWidget {
-  _NumbersListState createState() => _NumbersListState();
-}
-
-class _NumbersListState extends State<NumbersList> {
+class NumbersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
