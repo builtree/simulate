@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Simulate',
-      home: MainMenu(),
-    ));
+import 'simulations/counting.dart';
 
 class MainMenu extends StatelessWidget {
   @override
@@ -41,14 +36,25 @@ class _SimulationsListState extends State<SimulationsList> {
             child: Container(),
           ),
         ),
-        Container(
-          child: Material(
-            color: Colors.amber[400],
-            elevation: 14.0,
-            borderRadius: BorderRadius.circular(20.0),
-            shadowColor: Color(0x802196F3),
-            child: Container(),
+        GestureDetector(
+          child: Container(
+            child: Material(
+              color: Colors.amber[400],
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(20.0),
+              shadowColor: Color(0x802196F3),
+              child: Container(
+                  child: Center(
+                child: Text('Counting'),
+              )),
+            ),
           ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CountingHome()),
+            );
+          }
         ),
       ],
     );
