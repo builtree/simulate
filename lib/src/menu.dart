@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'simulations/counting.dart';
+import 'simulations/counter.dart';
 
 class MainMenu extends StatelessWidget {
   @override
@@ -27,13 +28,21 @@ class _SimulationsListState extends State<SimulationsList> {
       padding: EdgeInsets.all(10.0),
       crossAxisSpacing: 10.0,
       children: <Widget>[
-        Container(
-          child: Material(
-            color: Colors.cyanAccent[400],
-            elevation: 14.0,
-            borderRadius: BorderRadius.circular(20.0),
-            shadowColor: Color(0x802196F3),
-            child: Container(),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CountingTillN()),
+            );
+          },
+          child: Container(
+            child: Material(
+              color: Colors.cyanAccent[400],
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(20.0),
+              shadowColor: Color(0x802196F3),
+              child: Container(),
+            ),
           ),
         ),
         GestureDetector(
