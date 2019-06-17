@@ -56,14 +56,23 @@ class ToothpickPattern extends StatefulWidget {
 
 class _ToothpickPatternState extends State<ToothpickPattern> {
   int step = 0;
-  List<Toothpick> activeToothPicks = [];
-  var prevActiveToothPicks = [];
-  var toothPicks = [];
+  var activeToothPicks = new List<Toothpick>();
+  var prevToothPicks = new List<List<Toothpick>>();
+  var toothPicks = new List<Toothpick>();
   // Toothpick toothpick = new Toothpick([100.0, 100.0], true);
   // Toothpick toothpick = new Toothpick([MediaQuery.of(context).size.width/2, MediaQuery.of(context).size.height/2], true);
-  add() {
+  addStep() {
     setState(() {
       step++;
+      prevToothPicks.add([]..addAll(activeToothPicks));
+      activeToothPicks.clear();
+      print(prevToothPicks[prevToothPicks.length - 1]);
+      prevToothPicks[prevToothPicks.length - 1].forEach((pick) {
+        activeToothPicks.add(pick.compareEnd1(toothPicks));
+        // print(pick.compareEnd1(toothPicks).end1);
+        activeToothPicks.add(pick.compareEnd2(toothPicks));
+      });
+      toothPicks += prevToothPicks[prevToothPicks.length - 1];
     });
   }
 
@@ -81,10 +90,11 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
     Toothpick toothpick = new Toothpick([
       (MediaQuery.of(context).size.width) / 2,
       (MediaQuery.of(context).size.height) / 2
-    ], false);
-    activeToothPicks.clear();
-    activeToothPicks.add(toothpick);
-    print(activeToothPicks.length);
+    ], true);
+    if (step == 0) {
+      activeToothPicks.add(toothpick);
+    }
+    // print(activeToothPicks.length);
     return Scaffold(
       appBar: AppBar(
         title: Text("ToothPick Pattern"),
@@ -92,7 +102,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       body: Column(children: <Widget>[
         Expanded(
           child: CustomPaint(
-            painter: ToothpickPainter(activeToothPicks),
+            painter: ToothpickPainter(activeToothPicks, toothPicks),
             child: Container(),
           ),
         ),
@@ -112,7 +122,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
             IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                add();
+                addStep();
               },
             ),
           ],
@@ -124,16 +134,17 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
 class ToothpickPainter extends CustomPainter {
   var activeToothpicks = new List<Toothpick>();
-  ToothpickPainter(this.activeToothpicks);
-  addpicks(){
-    this.activeToothpicks.add(this.activeToothpicks[0].compareEnd1([]));
-  }
+  var toothpicks = new List<Toothpick>();
+  ToothpickPainter(this.activeToothpicks, this.toothpicks);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.strokeWidth = 2;
+    paint.strokeWidth = 1;
+    for (int i = 0; i < toothpicks.length; i++) {
+      canvas.drawLine(Offset(toothpicks[i].end1[0], toothpicks[i].end1[1]),
+          Offset(toothpicks[i].end2[0], toothpicks[i].end2[1]), paint);
+    }
     paint.color = Colors.blue;
-    addpicks();
     for (int i = 0; i < activeToothpicks.length; i++) {
       canvas.drawLine(
           Offset(activeToothpicks[i].end1[0], activeToothpicks[i].end1[1]),
