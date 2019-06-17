@@ -87,7 +87,6 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
           activeToothPicks += [new Toothpick(pick.end2, !pick.alignment)];
         }
       });
-      toothPicks += prevToothPicks[prevToothPicks.length - 1];
     });
   }
 
@@ -97,6 +96,14 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
     }
     setState(() {
       step--;
+      activeToothPicks.clear();
+      activeToothPicks += prevToothPicks[prevToothPicks.length - 1];
+      for (int i = 0;
+          i < prevToothPicks[prevToothPicks.length - 1].length;
+          i++) {
+        toothPicks.removeLast();
+      }
+      prevToothPicks.removeLast();
     });
   }
 
