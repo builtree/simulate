@@ -1,3 +1,4 @@
+import 'package:Simulate/src/simulations/toothpick.dart';
 import 'package:flutter/material.dart';
 import 'simulations/counting.dart';
 import 'simulations/counter.dart';
@@ -26,6 +27,7 @@ class _SimulationsListState extends State<SimulationsList> {
       crossAxisCount: 2,
       primary: true,
       padding: EdgeInsets.all(10.0),
+      mainAxisSpacing: 10,
       crossAxisSpacing: 10.0,
       children: <Widget>[
         GestureDetector(
@@ -53,9 +55,10 @@ class _SimulationsListState extends State<SimulationsList> {
               borderRadius: BorderRadius.circular(20.0),
               shadowColor: Color(0x802196F3),
               child: Container(
-                  child: Center(
-                child: Text('Counting'),
-              )),
+                child: Center(
+                  child: Text('Counting'),
+                ),
+              ),
             ),
           ),
           onTap: () {
@@ -63,7 +66,28 @@ class _SimulationsListState extends State<SimulationsList> {
               context,
               MaterialPageRoute(builder: (context) => CountingHome()),
             );
-          }
+          },
+        ),
+        GestureDetector(
+          child: Container(
+            child: Material(
+              color: Colors.pink[400],
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(20.0),
+              shadowColor: Color(0x802196F3),
+              child: Container(
+                child: Center(
+                  child: Text('ToothPick Pattern'),
+                ),
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ToothpickPattern()),
+            );
+          },
         ),
       ],
     );
