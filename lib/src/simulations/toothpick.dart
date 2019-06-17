@@ -22,30 +22,40 @@ class Toothpick {
     }
   }
 
-  Toothpick compareEnd1(otherPicks) {
+  bool compareEnd1(otherPicks) {
+    int flag;
     otherPicks.forEach((pick) {
       if (!listEq(pick.center, this.center)) {
-        if (listEq(pick.end1, this.end1) ||
-            listEq(pick.end2, this.end1) ||
+        if (listEq(pick.end1, this.end1) |
+            listEq(pick.end2, this.end1) |
             listEq(pick.center, this.end1)) {
-          return;
+          flag = 1;
         }
       }
     });
-    return Toothpick(end1, !this.alignment);
+    if (flag == 1) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
-  Toothpick compareEnd2(otherPicks) {
+  bool compareEnd2(otherPicks) {
+    int flag = 0;
     otherPicks.forEach((pick) {
       if (!listEq(pick.center, this.center)) {
-        if (listEq(pick.end1, this.end2) ||
-            listEq(pick.end2, this.end2) ||
+        if (listEq(pick.end1, this.end2) |
+            listEq(pick.end2, this.end2) |
             listEq(pick.center, this.end2)) {
-          return;
+          flag = 1;
         }
       }
     });
-    return Toothpick(end2, !this.alignment);
+    if (flag == 1) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
 
@@ -59,18 +69,23 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   var activeToothPicks = new List<Toothpick>();
   var prevToothPicks = new List<List<Toothpick>>();
   var toothPicks = new List<Toothpick>();
-  // Toothpick toothpick = new Toothpick([100.0, 100.0], true);
-  // Toothpick toothpick = new Toothpick([MediaQuery.of(context).size.width/2, MediaQuery.of(context).size.height/2], true);
+  var extra;
+
   addStep() {
     setState(() {
       step++;
       prevToothPicks.add([]..addAll(activeToothPicks));
+      toothPicks += prevToothPicks[prevToothPicks.length - 1];
       activeToothPicks.clear();
-      print(prevToothPicks[prevToothPicks.length - 1]);
       prevToothPicks[prevToothPicks.length - 1].forEach((pick) {
-        activeToothPicks.add(pick.compareEnd1(toothPicks));
-        // print(pick.compareEnd1(toothPicks).end1);
-        activeToothPicks.add(pick.compareEnd2(toothPicks));
+        extra = pick.compareEnd1(toothPicks);
+        if (extra) {
+          activeToothPicks += [new Toothpick(pick.end1, !pick.alignment)];
+        }
+        extra = pick.compareEnd2(toothPicks);
+        if (extra) {
+          activeToothPicks += [new Toothpick(pick.end2, !pick.alignment)];
+        }
       });
       toothPicks += prevToothPicks[prevToothPicks.length - 1];
     });
@@ -87,14 +102,10 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
-    Toothpick toothpick = new Toothpick([
-      (MediaQuery.of(context).size.width) / 2,
-      (MediaQuery.of(context).size.height) / 2
-    ], true);
+    Toothpick toothpick = new Toothpick([200.0, 200.0], true);
     if (step == 0) {
       activeToothPicks.add(toothpick);
     }
-    // print(activeToothPicks.length);
     return Scaffold(
       appBar: AppBar(
         title: Text("ToothPick Pattern"),
