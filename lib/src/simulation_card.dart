@@ -4,6 +4,7 @@ class SimulationCard extends StatefulWidget {
   final String simulationName;
   final Widget direct;
   final String image;
+  bool fav = false;
   SimulationCard(
       {Key key, @required this.simulationName, @required this.direct, @required this.image})
       : super(key: key);
@@ -12,6 +13,11 @@ class SimulationCard extends StatefulWidget {
 }
 
 class _SimulationCardState extends State<SimulationCard> {
+  _togglefav(){
+    setState(() {
+      widget.fav = !widget.fav;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -78,9 +84,11 @@ class _SimulationCardState extends State<SimulationCard> {
                   child: Container(),
                 ),
                 IconButton(
-                  icon: Icon(Icons.star),
+                  icon: (widget.fav ? Icon(Icons.star) : Icon(Icons.star_border)),
                   color: Colors.yellow,
-                  onPressed: null,
+                  onPressed: () {
+                    _togglefav();
+                    },
                   iconSize: 30,
                 ),
               ],
