@@ -121,7 +121,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: null, elevation: 4, label: Text('Step: $step')),
+          onPressed: null, elevation: 10, label: Text('Step: $step')),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         elevation: 30,
