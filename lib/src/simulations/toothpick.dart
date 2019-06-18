@@ -109,33 +109,31 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
-    Toothpick toothpick = new Toothpick([200.0, 200.0], true);
-    if (step == 0) {
+    Toothpick toothpick = new Toothpick([MediaQuery.of(context).size.width/2, MediaQuery.of(context).size.height/2 - 100], true);
+    if (step == 1) {
       activeToothPicks.add(toothpick);
     }
     return Scaffold(
       appBar: AppBar(
         title: Text("ToothPick Pattern"),
       ),
-      body: Column(children: <Widget>[
-        Expanded(
-          child: CustomPaint(
-            painter: ToothpickPainter(activeToothPicks, toothPicks),
-            child: Container(),
-          ),
-        ),
-        Row(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: null, elevation: 4, label: Text('Step: $step')),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white,
+        elevation: 30,
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.remove),
+              iconSize: 30,
+              highlightColor: Colors.blue,
               onPressed: () {
                 subtract();
               },
-            ),
-            Expanded(
-              child: Center(
-                child: Text(step.toString()),
-              ),
             ),
             IconButton(
               icon: Icon(Icons.add),
@@ -145,7 +143,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
             ),
           ],
         ),
-      ]),
+      ),
+      body: Container(
+        child: CustomPaint(
+          painter: ToothpickPainter(activeToothPicks, toothPicks),
+          child: Container(),
+        ),
+      ),
     );
   }
 }
