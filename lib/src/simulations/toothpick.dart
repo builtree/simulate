@@ -109,9 +109,11 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
-    Toothpick toothpick = new Toothpick([MediaQuery.of(context).size.width/2, MediaQuery.of(context).size.height/2 - 100], true);
     if (step == 1) {
-      activeToothPicks.add(toothpick);
+      activeToothPicks.add(new Toothpick([
+        MediaQuery.of(context).size.width / 2,
+        MediaQuery.of(context).size.height / 2 - 100
+      ], true));
     }
     return Scaffold(
       appBar: AppBar(
