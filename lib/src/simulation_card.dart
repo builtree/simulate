@@ -6,92 +6,65 @@ class SimulationCard extends StatefulWidget {
   final String image;
   bool fav = false;
   SimulationCard(
-      {Key key, @required this.simulationName, @required this.direct, @required this.image})
+      {Key key,
+      @required this.simulationName,
+      @required this.direct,
+      @required this.image})
       : super(key: key);
 
   _SimulationCardState createState() => _SimulationCardState();
 }
 
 class _SimulationCardState extends State<SimulationCard> {
-  _togglefav(){
+  _togglefav() {
+    print(1);
     setState(() {
       widget.fav = !widget.fav;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: MediaQuery.of(context).size.height / 4,
       child: Card(
-        semanticContainer: true,
-        elevation: 10,
-        shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        elevation: 10,
         child: Column(
           children: <Widget>[
-            SizedBox(
-              height: 150,
+            Container(
+              width: 160,
               child: Stack(
                 children: <Widget>[
-                  Positioned.fill(
-                      child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(10.0)),
-                    child: Image.asset(
-                      widget.image,
-                      fit: BoxFit.fill,
-                    ),
-                  )),
-                  Positioned(
-                    bottom: 10.0,
-                    left: 10.0,
-                    right: 16.0,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.bottomLeft,
-                      child: Text(
-                        widget.simulationName,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 19,
-                          backgroundColor: Colors.black,
-                        ),
+                  SizedBox(
+                    width: 150,
+                    height: MediaQuery.of(context).size.height / 4 - 35,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.asset(
+                        widget.image,
+                        fit: BoxFit.fill,
                       ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 5,
+                    right: 5,
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      onTap: _togglefav(),
                     ),
                   ),
                 ],
               ),
             ),
-            Row(
-              children: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => widget.direct,
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'START',
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
-                  ),
-                ),
-                Expanded(
-                  child: Container(),
-                ),
-                IconButton(
-                  icon: (widget.fav ? Icon(Icons.star) : Icon(Icons.star_border)),
-                  color: Colors.yellow,
-                  onPressed: () {
-                    _togglefav();
-                    },
-                  iconSize: 30,
-                ),
-              ],
+            Center(
+              child: Text(widget.simulationName, style: TextStyle(fontWeight: FontWeight.w700),),
             )
           ],
         ),
