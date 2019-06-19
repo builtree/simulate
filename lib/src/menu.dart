@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'simulations/toothpick.dart';
 import 'simulations/counting.dart';
 import 'simulations/counter.dart';
 import 'simulations/langton_ant.dart';
@@ -91,6 +92,30 @@ class _SimulationsListState extends State<SimulationsList> {
               )),
             ),
           ),
+        ),
+        GestureDetector(
+          child: Container(
+            child: Material(
+              color: Colors.pink[400],
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(20.0),
+              shadowColor: Color(0x802196F3),
+              child: Container(
+                child: Center(
+                  child: Text(
+                    'ToothPick Pattern',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ToothpickPattern()),
+            );
+          },
         ),
       ],
     );
