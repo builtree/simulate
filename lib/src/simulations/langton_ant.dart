@@ -18,6 +18,18 @@ class _LangtonAntState extends State<LangtonAnt> {
     colorsList[size ~/ 2][size ~/ 2] = 1;
   }
 
+  @override
+  void dispose() {
+    colorsList = List<List<int>>.generate(
+        size, (i) => List<int>.generate(size, (j) => 0));
+    headDir = direction.up;
+    x = size ~/ 2;
+    y = size ~/ 2;
+    setupX = 0;
+    setupY = 0;
+    super.dispose();
+  }
+
   void nextPixel() {
     setState(() {
       if (colorsList[x][y] == 0) {

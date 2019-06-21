@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'src/menu.dart';
 
 void main() => runApp(MaterialApp(
@@ -21,7 +22,7 @@ class StartScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MainMenu()),
+              CupertinoPageRoute(builder: (context) => MainMenu()),
             );
           },
         ),

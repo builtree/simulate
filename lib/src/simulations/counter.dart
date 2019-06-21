@@ -38,6 +38,7 @@ class CountingTillN extends StatelessWidget {
           change();
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => NumbersList()));
+          coolController.clear();
         },
       ),
     );
