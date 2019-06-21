@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
 
-final size = 29;
+final size = 7;
 var colorsList =
     List<List<int>>.generate(size, (i) => List<int>.generate(size, (j) => 0));
 enum direction { up, right, down, left }
