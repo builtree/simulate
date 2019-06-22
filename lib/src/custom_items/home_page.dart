@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'simulation_card.dart';
+import '../simulations/toothpick.dart';
+import '../simulations/langton_ant.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -13,12 +15,12 @@ class HomePage extends StatelessWidget {
               SimulationCard(
                 simulationName: 'ToothPick Pattern',
                 image: 'images/ToothpickPattern.gif',
-                direct: null,
+                direct: ToothpickPattern(),
               ),
               SimulationCard(
                 simulationName: 'Langton\'s Ant',
                 image: 'images/LangtonsAnt.gif',
-                direct: null,
+                direct: LangtonAnt(),
               ),
             ],
           ),

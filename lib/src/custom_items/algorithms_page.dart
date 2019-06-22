@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'simulation_card.dart';
+import '../simulations/toothpick.dart';
+import '../simulations/langton_ant.dart';
 
 class AlgorithmsPage extends StatelessWidget {
   @override
@@ -11,12 +13,12 @@ class AlgorithmsPage extends StatelessWidget {
           SimulationCard(
             simulationName: 'ToothPick Pattern',
             image: 'images/ToothpickPattern.gif',
-            direct: null,
+            direct: ToothpickPattern()
           ),
           SimulationCard(
             simulationName: 'Langton\'s Ant',
             image: 'images/LangtonsAnt.gif',
-            direct: null,
+            direct: LangtonAnt(),
           ),
         ],
       ),

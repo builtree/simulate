@@ -27,52 +27,60 @@ class _SimulationCardState extends State<SimulationCard> {
     return Container(
       height: 100,
       width: 150,
-      // color: Colors.green,
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.all(10),
-              height: 130,
-              width: 120,
-              child: Image.asset(
-                widget.image,
-                fit: BoxFit.fill,
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(3),
-              child: Text(
-                widget.simulationName,
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Colors.black,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => widget.direct),
+          );
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Column(
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(10),
+                height: 130,
+                width: 120,
+                child: Image.asset(
+                  widget.image,
+                  fit: BoxFit.fill,
                 ),
               ),
-            ),
-            Container(
-              height: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.info_outline),
-                    onPressed: (){},
+              Container(
+                padding: EdgeInsets.all(3),
+                child: Text(
+                  widget.simulationName,
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    color: Colors.black,
                   ),
-                  IconButton(
-                    icon: (fav
-                        ? Icon(Icons.favorite)
-                        : Icon(Icons.favorite_border)),
-                    onPressed: (){
-                      _togglefav();},
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+              Container(
+                height: 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.info_outline),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: (fav
+                          ? Icon(Icons.favorite)
+                          : Icon(Icons.favorite_border)),
+                      onPressed: () {
+                        _togglefav();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
