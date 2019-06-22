@@ -150,14 +150,12 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       body: Transform.scale(
         scale: _scaleAmount,
         child: GestureDetector(
-          onScaleUpdate: (ScaleUpdateDetails scaleDetails){
+          onScaleUpdate: (ScaleUpdateDetails scaleDetails) {
             setState(() {
               _scaleAmount = scaleDetails.scale;
             });
           },
           child: Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
             child: CustomPaint(
               painter: ToothpickPainter(activeToothPicks, toothPicks),
               child: Container(),
