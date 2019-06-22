@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'custom_items/home_page.dart';
 import 'custom_items/physics_page.dart';
+import 'custom_items/algorithms_page.dart';
+import 'simulations/toothpick.dart';
 
 class Home extends StatefulWidget {
   final List<Widget> _categoryTabs = [
@@ -56,7 +58,7 @@ class _HomeState extends State<Home>
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {},
-          )
+          ),
         ],
         bottom: TabBar(
           controller: _categoryController,
@@ -72,7 +74,7 @@ class _HomeState extends State<Home>
         children: <Widget>[
           HomePage(),
           PhysicsPage(),
-          Container(),
+          AlgorithmsPage(),
           Container(),
           Container(),
         ],

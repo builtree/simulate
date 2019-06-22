@@ -8,26 +8,6 @@ class PhysicsPage extends StatelessWidget {
       child: GridView.count(
         crossAxisCount: (MediaQuery.of(context).size.width / 200).floor(),
         children: <Widget>[
-          SimulationCard(
-            simulationName: 'ToothPick Pattern',
-            image: 'images/counting.gif',
-            direct: null,
-          ),
-          SimulationCard(
-            simulationName: 'ToothPick Pattern',
-            image: 'images/counting.gif',
-            direct: null,
-          ),
-          SimulationCard(
-            simulationName: 'ToothPick Pattern',
-            image: 'images/counting.gif',
-            direct: null,
-          ),
-          SimulationCard(
-            simulationName: 'ToothPick Pattern',
-            image: 'images/counting.gif',
-            direct: null,
-          )
         ],
       ),
     );
