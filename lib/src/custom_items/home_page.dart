@@ -8,115 +8,18 @@ class HomePage extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           HomeHorizontalList(
-            listName: 'Favorites',
-            elements: <Widget>[
-              Container(
-                width: 180,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              )
-            ],
-          ),
-          HomeHorizontalList(
             listName: 'Recents',
             elements: <Widget>[
-              Container(
-                width: 180,
-              ),
               SimulationCard(
                 simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
+                image: 'images/ToothpickPattern.gif',
                 direct: null,
               ),
               SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
+                simulationName: 'Langton\'s Ant',
+                image: 'images/LangtonsAnt.gif',
                 direct: null,
               ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              )
-            ],
-          ),
-          HomeHorizontalList(
-            listName: 'Explore',
-            elements: <Widget>[
-              Container(
-                width: 180,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              )
-            ],
-          ),
-          HomeHorizontalList(
-            listName: 'Suggested',
-            elements: <Widget>[
-              Container(
-                width: 180,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              ),
-              SimulationCard(
-                simulationName: 'ToothPick Pattern',
-                image: 'images/counting.gif',
-                direct: null,
-              )
             ],
           ),
         ],
