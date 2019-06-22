@@ -70,6 +70,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   var prevToothPicks = new List<List<Toothpick>>();
   var toothPicks = new List<Toothpick>();
   var extra;
+  double _scaleAmount = 1.0;
 
   addStep() {
     setState(() {
@@ -146,10 +147,22 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
           ],
         ),
       ),
-      body: Container(
-        child: CustomPaint(
-          painter: ToothpickPainter(activeToothPicks, toothPicks),
-          child: Container(),
+      body: Transform.scale(
+        scale: _scaleAmount,
+        child: GestureDetector(
+          onScaleUpdate: (ScaleUpdateDetails scaleDetails){
+            setState(() {
+              _scaleAmount = scaleDetails.scale;
+            });
+          },
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: CustomPaint(
+              painter: ToothpickPainter(activeToothPicks, toothPicks),
+              child: Container(),
+            ),
+          ),
         ),
       ),
     );
