@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'custom_items/home_page.dart';
 import 'custom_items/physics_page.dart';
 import 'custom_items/algorithms_page.dart';
-import 'simulations/toothpick.dart';
 
 class Home extends StatefulWidget {
   final List<Widget> _categoryTabs = [
