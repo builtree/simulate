@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/menu.dart';
+import 'src/home.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -21,7 +21,7 @@ class StartScreen extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MainMenu()),
+              MaterialPageRoute(builder: (context) => Home()),
             );
           },
         ),
