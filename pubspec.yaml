@@ -1,4 +1,4 @@
-name: Simulate
+name: simulate
 description: A new Flutter project.
 
 # The following defines the version and build number for your application.
@@ -62,7 +62,7 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  fonts: 
+  fonts:
     - family: Ubuntu
       fonts:
         - asset: fonts/Ubuntu-Regular.ttf
