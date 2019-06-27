@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SimulationCard extends StatefulWidget {
   final String simulationName;
   final Widget direct;
   final String image;
+  final String infoLink;
   SimulationCard(
       {Key key,
       @required this.simulationName,
       @required this.direct,
-      @required this.image})
+      @required this.image,
+      @required this.infoLink})
       : super(key: key);
 
   _SimulationCardState createState() => _SimulationCardState();
@@ -66,7 +69,14 @@ class _SimulationCardState extends State<SimulationCard> {
                   children: <Widget>[
                     IconButton(
                       icon: Icon(Icons.info_outline),
-                      onPressed: () {},
+                      onPressed: () async {
+                        final url = widget.infoLink;
+                        if (await canLaunch(url)) {
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch';
+                        }
+                      },
                     ),
                     IconButton(
                       icon: (fav
