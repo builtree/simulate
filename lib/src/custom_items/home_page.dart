@@ -16,12 +16,14 @@ class HomePage extends StatelessWidget {
                 simulationName: 'ToothPick Pattern',
                 image: 'images/ToothpickPattern.gif',
                 direct: ToothpickPattern(),
+                infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
               ),
               SimulationCard(
                 simulationName: 'Langton\'s Ant',
                 image: 'images/LangtonsAnt.gif',
                 direct: LangtonAnt(),
-              ),
+                infoLink: 'https://en.wikipedia.org/wiki/Langton%27s_ant',
+              )
             ],
           ),
         ],
