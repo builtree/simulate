@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'simulation_card.dart';
-import '../simulations/toothpick.dart';
-import '../simulations/langton_ant.dart';
+import '../simulations/simulations.dart';
 
 class AlgorithmsPage extends StatelessWidget {
   @override
@@ -9,20 +7,7 @@ class AlgorithmsPage extends StatelessWidget {
     return Container(
       child: GridView.count(
         crossAxisCount: (MediaQuery.of(context).size.width / 200).floor(),
-        children: <Widget>[
-          SimulationCard(
-            simulationName: 'ToothPick Pattern',
-            image: 'images/ToothpickPattern.gif',
-            direct: ToothpickPattern(),
-            infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
-          ),
-          SimulationCard(
-            simulationName: 'Langton\'s Ant',
-            image: 'images/LangtonsAnt.gif',
-            direct: LangtonAnt(),
-            infoLink: 'https://en.wikipedia.org/wiki/Langton%27s_ant',
-          ),
-        ],
+        children: Simulations.returnWidgets([0,1])
       ),
     );
   }
