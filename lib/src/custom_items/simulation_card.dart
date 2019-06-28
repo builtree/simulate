@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
-import 'package:simulate/src/simulations/simulations.dart';
+import 'package:simulate/src/data/simulations.dart';
 
 class SimulationCard extends StatefulWidget {
   final String simulationName;

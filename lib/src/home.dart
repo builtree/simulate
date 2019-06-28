@@ -3,8 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
 import 'package:simulate/src/custom_items/physics_page.dart';
 import 'package:simulate/src/custom_items/algorithms_page.dart';
-import 'package:provider/provider.dart';
-import 'package:simulate/src/simulations/simulations.dart';
 
 class Home extends StatefulWidget {
   final List<Widget> _categoryTabs = [

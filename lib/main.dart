@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simulate/src/home.dart';
 import 'package:provider/provider.dart';
-import 'package:simulate/src/simulations/simulations.dart';
+import 'package:simulate/src/data/simulations.dart';
 
 void main() => runApp(
       ChangeNotifierProvider<Simulations>(

@@ -3,12 +3,13 @@ import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/langton_ant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:async/async.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1];
   final _algorithm = [0, 1];
+  final _physics = [];
   var prefs;
+
   Simulations() {
     getFavorites();
   }
@@ -46,8 +47,15 @@ class Simulations with ChangeNotifier {
     getFavorites();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    // print(_favorites);s
     _algorithm.forEach((index) => widgets.add(allWidgets[index]));
+    return widgets;
+  }
+
+  List<Widget> get physics {
+    getFavorites();
+    List<Widget> widgets = [];
+    List<Widget> allWidgets = allSimulations();
+    _physics.forEach((index) => widgets.add(allWidgets[index]));
     return widgets;
   }
 
@@ -55,7 +63,6 @@ class Simulations with ChangeNotifier {
     _favorites[index] *= -1;
     List<String> favorites = _favorites.map((i) => i.toString()).toList();
     await prefs.setStringList('favorites', favorites);
-    // print(favorites);
     notifyListeners();
   }
 }
