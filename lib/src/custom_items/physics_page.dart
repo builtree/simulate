@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'simulation_card.dart';
 
 class PhysicsPage extends StatelessWidget {
   @override
