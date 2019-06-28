@@ -1,32 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:provider/provider.dart';
+import 'package:simulate/src/data/simulations.dart';
 
 class SimulationCard extends StatefulWidget {
   final String simulationName;
   final Widget direct;
   final String image;
   final String infoLink;
+  final int fav;
+  final int id;
   SimulationCard(
       {Key key,
+      @required this.id,
       @required this.simulationName,
       @required this.direct,
       @required this.image,
-      @required this.infoLink})
+      @required this.infoLink,
+      @required this.fav})
       : super(key: key);
 
   _SimulationCardState createState() => _SimulationCardState();
 }
 
 class _SimulationCardState extends State<SimulationCard> {
-  bool fav = false;
+  int fav;
+
   _togglefav() {
     setState(() {
-      fav = !fav;
+      fav *= -1;
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    fav = widget.fav;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<Simulations>(context);
     return Container(
       height: 100,
       width: 150,
@@ -79,10 +93,11 @@ class _SimulationCardState extends State<SimulationCard> {
                       },
                     ),
                     IconButton(
-                      icon: (fav
+                      icon: (fav == 1
                           ? Icon(Icons.favorite)
                           : Icon(Icons.favorite_border)),
                       onPressed: () {
+                        appState.toggleFavorite(widget.id);
                         _togglefav();
                       },
                     ),
