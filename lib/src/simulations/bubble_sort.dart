@@ -1,8 +1,11 @@
-import 'dart:math';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:collection/collection.dart';
+
+Function eq = const ListEquality().equals;
 
 class BubbleSortBars extends StatefulWidget {
   @override
@@ -88,6 +91,10 @@ class BubbleSortSim extends StatefulWidget {
 
 class _BubbleSortSimState extends State<BubbleSortSim> {
   List<int> _elements = [];
+  int i = 0;
+  int n;
+  int tmp;
+  bool swap = true;
 
   @override
   void initState() {
@@ -96,11 +103,11 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
     for (int i = 0; i < widget.numberOfElements; i++) {
       _elements.add(rng.nextInt(400));
     }
+    n = _elements.length;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
-    SchedulerBinding.instance.addPostFrameCallback((_) => bubbleSort());
   }
 
   @override
@@ -114,26 +121,36 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
     super.dispose();
   }
 
-  bubbleSort() {
-    var tmp;
-    var swapped = false;
-    do {
-      swapped = false;
-      for (var i = 1; i < _elements.length; i++) {
-        if (_elements[i - 1] > _elements[i]) {
-          tmp = _elements[i - 1];
-          _elements[i - 1] = _elements[i];
-          _elements[i] = tmp;
-          swapped = true;
-          sleep(const Duration(seconds:1));
-          setState(() {});
-        }
-      }
-    } while (swapped);
+  nextStep() {
+    // print(i);
+    // print(swap);
+    if (n == 0) {
+      swap = false;
+    }
+    if (i == n - 1) {
+      i = 0;
+      n--;
+    }
+    if (_elements[i] > _elements[i + 1]) {
+      // print(1);
+      tmp = _elements[i];
+      _elements[i] = _elements[i + 1];
+      _elements[i + 1] = tmp;
+      i++;
+      // sleep(const Duration(seconds: 1));
+    } else {
+      i++;
+    }
+    setState(() {
+        // sleep(const Duration());
+      });
   }
 
   @override
   Widget build(BuildContext context) {
+    if (swap == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
+    }
     return Container(
       child: CustomPaint(
         painter: BubbleSortPainter(
@@ -153,7 +170,7 @@ class BubbleSortPainter extends CustomPainter {
   double height;
   BubbleSortPainter(this.elements, width, this.height) {
     _barWidth = (width / (elements.length + 1));
-    print(_barWidth);
+    // print(_barWidth);
   }
   @override
   void paint(Canvas canvas, Size size) {
@@ -167,7 +184,7 @@ class BubbleSortPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(BubbleSortPainter oldDelegate) => false;
+  bool shouldRepaint(BubbleSortPainter oldDelegate) => true;
 
   @override
   bool shouldRebuildSemantics(BubbleSortPainter oldDelegate) => false;
