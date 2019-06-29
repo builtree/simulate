@@ -44,7 +44,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 2,
         simulationName: 'Bubble Sort (Bars)',
-        image: '',
+        image: 'images/Bubblesort.gif',
         direct: BubbleSortBars(),
         infoLink: '',
         fav: _favorites[2],
