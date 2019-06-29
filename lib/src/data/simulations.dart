@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
+import 'package:simulate/src/simulations/bubble_sort.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/langton_ant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1];
-  final _algorithm = [0, 1];
+  static var _favorites = [-1, -1, -1];
+  final _algorithm = [0, 1, 2];
   final _physics = [];
   var prefs;
 
@@ -39,6 +40,14 @@ class Simulations with ChangeNotifier {
         direct: LangtonAnt(),
         infoLink: 'https://en.wikipedia.org/wiki/Langton%27s_ant',
         fav: _favorites[1],
+      ),
+      SimulationCard(
+        id: 2,
+        simulationName: 'Bubble Sort (Bars)',
+        image: 'images/Bubblesort.gif',
+        direct: BubbleSortBars(),
+        infoLink: '',
+        fav: _favorites[2],
       ),
     ];
   }
