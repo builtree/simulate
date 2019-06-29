@@ -120,8 +120,6 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
   }
 
   nextStep() {
-    // print(i);
-    // print(swap);
     if (n == 0) {
       swap = false;
     }
@@ -130,17 +128,14 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
       n--;
     }
     if (_elements[i] > _elements[i + 1]) {
-      // print(1);
       tmp = _elements[i];
       _elements[i] = _elements[i + 1];
       _elements[i + 1] = tmp;
       i++;
-      // sleep(const Duration(seconds: 1));
     } else {
       i++;
     }
     setState(() {
-        // sleep(const Duration());
       });
   }
 
@@ -168,7 +163,6 @@ class BubbleSortPainter extends CustomPainter {
   double height;
   BubbleSortPainter(this.elements, width, this.height) {
     _barWidth = (width / (elements.length + 1));
-    // print(_barWidth);
   }
   @override
   void paint(Canvas canvas, Size size) {
