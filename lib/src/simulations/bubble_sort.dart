@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -109,14 +110,28 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
   }
 
   List<Widget> returnContainers() {
-    this.barwidth = MediaQuery.of(context).size.width / (_elements.length+1);
+    this.barwidth = MediaQuery.of(context).size.width / (_elements.length + 1);
     List<Widget> containers = [];
     for (int k = 0; k < _elements.length; ++k) {
-      containers.add(Container(
-        color: Colors.white,
-        height: _elements[k] + 0.0,
-        width: barwidth,
-      ));
+      if (k == i) {
+        containers.add(Container(
+          color: Colors.red,
+          height: _elements[k] + 0.0,
+          width: barwidth,
+        ));
+      } else if (k == i - 1) {
+        containers.add(Container(
+          color: Colors.blue,
+          height: _elements[k] + 0.0,
+          width: barwidth,
+        ));
+      } else {
+        containers.add(Container(
+          color: Colors.white,
+          height: _elements[k] + 0.0,
+          width: barwidth,
+        ));
+      }
     }
     return containers;
   }
@@ -137,7 +152,9 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
     } else {
       i++;
     }
-    setState(() {});
+    setState(() {
+      sleep(const Duration(seconds: 1));
+    });
   }
 
   @override
