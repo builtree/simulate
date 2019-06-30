@@ -12,6 +12,7 @@ class Simulations with ChangeNotifier {
   final _algorithm = [0, 1, 2, 3];
   final _mathematics = [4];
   final _physics = [];
+  final _chemistry = [];
   var prefs;
 
   Simulations() {
@@ -71,6 +72,11 @@ class Simulations with ChangeNotifier {
     ];
   }
 
+  List<Widget> get all {
+    getFavorites();
+    return allSimulations();
+  }
+
   List<Widget> get algorithms {
     getFavorites();
     List<Widget> widgets = [];
@@ -92,6 +98,26 @@ class Simulations with ChangeNotifier {
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
     _mathematics.forEach((index) => widgets.add(allWidgets[index]));
+    return widgets;
+  }
+
+  List<Widget> get chemistry {
+    getFavorites();
+    List<Widget> widgets = [];
+    List<Widget> allWidgets = allSimulations();
+    _chemistry.forEach((index) => widgets.add(allWidgets[index]));
+    return widgets;
+  }
+
+  List<Widget> get favorites {
+    getFavorites();
+    List<Widget> widgets = [];
+    List<Widget> allWidgets = allSimulations();
+    for (int i = 0; i < _favorites.length; ++i) {
+      if (_favorites[i] == 1) {
+        widgets.add(allWidgets[i]);
+      }
+    }
     return widgets;
   }
 

@@ -26,12 +26,6 @@ class SimulationCard extends StatefulWidget {
 class _SimulationCardState extends State<SimulationCard> {
   int fav;
 
-  _togglefav() {
-    setState(() {
-      fav *= -1;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -98,12 +92,13 @@ class _SimulationCardState extends State<SimulationCard> {
                     ),
                     IconButton(
                       padding: EdgeInsets.only(bottom: 10),
-                      icon: (fav == 1
+                      icon: (widget.fav == 1)
                           ? Icon(Icons.favorite)
-                          : Icon(Icons.favorite_border)),
+                          : Icon(Icons.favorite_border),
                       onPressed: () {
-                        appState.toggleFavorite(widget.id);
-                        _togglefav();
+                        setState(() {
+                          appState.toggleFavorite(widget.id);
+                        });
                       },
                     ),
                   ],

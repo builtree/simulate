@@ -10,8 +10,28 @@ class HomePage extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           HomeHorizontalList(
-            listName: 'Recents',
-            elements: appState.allSimulations()
+            listName: 'Favorites',
+            elements: (appState.favorites.length != 0)
+                ? appState.favorites
+                : [
+                    Container(
+                      width: MediaQuery.of(context).size.width - 20,
+                      child: Center(
+                        child: Text(
+                          "No favorites yet!",
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: 24,
+                            fontFamily: 'Ubuntu',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+          ),
+          HomeHorizontalList(
+            listName: 'All',
+            elements: appState.all,
           ),
         ],
       ),
@@ -22,9 +42,11 @@ class HomePage extends StatelessWidget {
 class HomeHorizontalList extends StatelessWidget {
   final String listName;
   final List<Widget> elements;
+
   HomeHorizontalList(
       {Key key, @required this.listName, @required this.elements})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
