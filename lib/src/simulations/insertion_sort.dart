@@ -10,8 +10,31 @@ class InsertionHome extends StatefulWidget {
 }
 
 class _InsertionHomeState extends State<InsertionHome> {
+  var randomVar = Random();
+  List<int> barValuesList;
+  List<Container> barsList = [];
+
+  makeContainers() {
+    if (!doNotRefresh || barValuesList.length == 0) {
+      barValuesList = List.generate(
+          sliderValue.toInt(),
+          (idx) =>
+              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.5));
+    } else
+      doNotRefresh = false;
+    barsList.clear();
+    barValuesList.forEach((value) => barsList.add(
+          Container(
+            width: MediaQuery.of(context).size.width / sliderValue * 0.9,
+            height: (value != 0) ? value.toDouble() : 0.5,
+            color: Colors.white,
+          ),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
+    makeContainers();
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -33,7 +56,19 @@ class _InsertionHomeState extends State<InsertionHome> {
           ),
         ),
       ),
-      body: InsertionSortBars(),
+      body: Container(
+        color: Colors.grey[900],
+        child: Column(
+          children: <Widget>[
+            Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: barsList,
+            ),
+            Spacer(),
+          ],
+        ),
+      ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
         height: MediaQuery.of(context).size.height / 8,
@@ -98,51 +133,5 @@ class _InsertionHomeState extends State<InsertionHome> {
   void dispose() {
     sliderValue = 5;
     super.dispose();
-  }
-}
-
-class InsertionSortBars extends StatefulWidget {
-  _InsertionSortBarsState createState() => _InsertionSortBarsState();
-}
-
-class _InsertionSortBarsState extends State<InsertionSortBars> {
-  var randomVar = Random();
-  List<int> barValuesList;
-  List<Container> barsList = [];
-
-  makeContainers() {
-    if (!doNotRefresh || barValuesList.length == 0) {
-      barValuesList = List.generate(
-          sliderValue.toInt(),
-          (idx) =>
-              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.5));
-    } else
-      doNotRefresh = false;
-    barsList.clear();
-    barValuesList.forEach((value) => barsList.add(
-          Container(
-            width: MediaQuery.of(context).size.width / sliderValue * 0.9,
-            height: (value != 0) ? value.toDouble() : 0.5,
-            color: Colors.white,
-          ),
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    makeContainers();
-    return Container(
-      color: Colors.grey[900],
-      child: Column(
-        children: <Widget>[
-          Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: barsList,
-          ),
-          Spacer(),
-        ],
-      ),
-    );
   }
 }
