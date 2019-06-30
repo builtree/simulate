@@ -1,9 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:collection/collection.dart';
-
-Function eq = const ListEquality().equals;
 
 class BubbleSortBars extends StatefulWidget {
   @override
@@ -93,6 +90,8 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
   int n;
   int tmp;
   bool swap = true;
+  double barwidth;
+  List<Widget> containerList = [];
 
   @override
   void initState() {
@@ -102,25 +101,28 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
       _elements.add(rng.nextInt(400));
     }
     n = _elements.length;
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
   }
 
   @override
   dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     super.dispose();
   }
 
+  List<Widget> returnContainers() {
+    this.barwidth = MediaQuery.of(context).size.width / (_elements.length+1);
+    List<Widget> containers = [];
+    for (int k = 0; k < _elements.length; ++k) {
+      containers.add(Container(
+        color: Colors.white,
+        height: _elements[k] + 0.0,
+        width: barwidth,
+      ));
+    }
+    return containers;
+  }
+
   nextStep() {
-    if (n == 0) {
+    if (n == 1) {
       swap = false;
     }
     if (i == n - 1) {
@@ -135,49 +137,18 @@ class _BubbleSortSimState extends State<BubbleSortSim> {
     } else {
       i++;
     }
-    setState(() {
-      });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    containerList = returnContainers();
     if (swap == true) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
     }
-    return Container(
-      child: CustomPaint(
-        painter: BubbleSortPainter(
-          _elements,
-          MediaQuery.of(context).size.width,
-          MediaQuery.of(context).size.height,
-        ),
-        child: Container(),
-      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: containerList,
     );
   }
-}
-
-class BubbleSortPainter extends CustomPainter {
-  List<int> elements;
-  double _barWidth;
-  double height;
-  BubbleSortPainter(this.elements, width, this.height) {
-    _barWidth = (width / (elements.length + 1));
-  }
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (int i = 0; i < elements.length; i++) {
-      var paint = Paint();
-      paint.color = Colors.white;
-      paint.strokeWidth = _barWidth;
-      canvas.drawLine(Offset((i + 1) * _barWidth, height),
-          Offset((i + 1) * _barWidth, height - elements[i]), paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(BubbleSortPainter oldDelegate) => true;
-
-  @override
-  bool shouldRebuildSemantics(BubbleSortPainter oldDelegate) => false;
 }
