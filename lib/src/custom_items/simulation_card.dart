@@ -52,10 +52,13 @@ class _SimulationCardState extends State<SimulationCard> {
           );
         },
         child: Card(
+          elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
                 padding: EdgeInsets.all(10),
@@ -82,6 +85,7 @@ class _SimulationCardState extends State<SimulationCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
+                      padding: EdgeInsets.only(bottom: 10),
                       icon: Icon(Icons.info_outline),
                       onPressed: () async {
                         final url = widget.infoLink;
@@ -93,6 +97,7 @@ class _SimulationCardState extends State<SimulationCard> {
                       },
                     ),
                     IconButton(
+                      padding: EdgeInsets.only(bottom: 10),
                       icon: (fav == 1
                           ? Icon(Icons.favorite)
                           : Icon(Icons.favorite_border)),

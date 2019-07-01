@@ -4,11 +4,12 @@ import 'package:simulate/src/simulations/bubble_sort.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/langton_ant.dart';
+import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1];
-  final _algorithm = [0, 1, 2, 3];
+  static var _favorites = [-1, -1, -1, -1, -1];
+  final _algorithm = [0, 1, 2, 3, 4];
   final _mathematics = [3];
   final _physics = [];
   var prefs;
@@ -53,12 +54,21 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 3,
+        simulationName: 'Insertion Sort',
+        image: 'images/InsertionSort.gif',
+        direct: InsertionHome(),
+        infoLink: '',
+        fav: _favorites[3],
+      ),
+      SimulationCard(
+        id: 4,
         simulationName: 'Rose Pattern',
         image: 'images/RosePattern.gif',
         direct: RosePattern(),
         infoLink: '',
-        fav: _favorites[3],
+        fav: _favorites[4],
       ),
+      
     ];
   }
 
