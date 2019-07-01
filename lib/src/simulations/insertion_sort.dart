@@ -1,8 +1,10 @@
 import 'dart:math';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-int sliderValue = 5;
-bool isWorking = false, doNotRefresh = false;
+int sliderValue = 5, iterator = -1, i = -1;
+bool isWorking = false, doNotRefresh = true;
 
 class InsertionHome extends StatefulWidget {
   _InsertionHomeState createState() => _InsertionHomeState();
@@ -10,8 +12,17 @@ class InsertionHome extends StatefulWidget {
 
 class _InsertionHomeState extends State<InsertionHome> {
   var randomVar = Random();
-  List<int> barValuesList;
+  List<int> barValuesList = [];
   List<Container> barsList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
 
   makeContainers() {
     if (!doNotRefresh || barValuesList.length == 0) {
@@ -22,18 +33,50 @@ class _InsertionHomeState extends State<InsertionHome> {
     } else
       doNotRefresh = false;
     barsList.clear();
-    barValuesList.forEach((value) => barsList.add(
-          Container(
-            width: MediaQuery.of(context).size.width / sliderValue * 0.9,
-            height: (value != 0) ? value.toDouble() : 0.5,
-            color: Colors.white,
-          ),
-        ));
+    int temp = 0;
+    barValuesList.forEach((value) {
+      barsList.add(
+        Container(
+          width: MediaQuery.of(context).size.width / sliderValue * 0.9,
+          height: (value != 0) ? value.toDouble() : 0.5,
+          color: (temp == iterator)
+              ? Colors.blue
+              : (temp != i)
+                  ? Colors.white
+                  : (i != barValuesList.length - 1) ? Colors.red : Colors.white,
+        ),
+      );
+      ++temp;
+    });
+    sortBars();
+  }
+
+  sortBars() {
+    setState(() {
+      if (!isWorking) return;
+      sleep(Duration(milliseconds: 70));
+      if (iterator != barValuesList.length) {
+        for (i = 0; i < iterator; i++) {
+          if (barValuesList[i] > barValuesList[iterator]) {
+            int temp = barValuesList[iterator];
+            barValuesList.removeAt(iterator);
+            barValuesList.insert(i, temp);
+            if (iterator != i) --iterator;
+            break;
+          }
+        }
+        ++iterator;
+      } else
+        isWorking = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     makeContainers();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          doNotRefresh = true;
+        }));
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -78,14 +121,17 @@ class _InsertionHomeState extends State<InsertionHome> {
             children: <Widget>[
               Spacer(flex: 2),
               Slider(
-                min: 5,
-                max: 50,
+                min: 2,
+                max: 99,
                 activeColor: Colors.orange,
                 inactiveColor: Colors.orange[50],
                 onChanged: (value) {
                   setState(() {
                     isWorking = false;
+                    doNotRefresh = false;
                     sliderValue = value.toInt();
+                    iterator = -1;
+                    i = -1;
                   });
                 },
                 value: sliderValue.toDouble(),
@@ -110,6 +156,7 @@ class _InsertionHomeState extends State<InsertionHome> {
           setState(() {
             doNotRefresh = true;
             isWorking = !isWorking;
+            (iterator == -1) ? iterator = 1 : iterator = iterator;
           });
         },
         child: (!isWorking)
@@ -118,7 +165,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                 size: 30,
               )
             : Icon(
-                Icons.stop,
+                Icons.pause,
                 size: 30,
               ),
         backgroundColor: Colors.orange,
@@ -130,7 +177,7 @@ class _InsertionHomeState extends State<InsertionHome> {
 
   @override
   void dispose() {
-    sliderValue = 5;
+    sliderValue = 2;
     super.dispose();
   }
 }
