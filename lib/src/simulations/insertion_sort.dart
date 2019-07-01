@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-int sliderValue = 5, iterator = -1, i = -1;
+int sliderValue = 5, iterator = -1, i = -1, numSteps = 0;
 bool isWorking = false, doNotRefresh = true;
 
 class InsertionHome extends StatefulWidget {
@@ -57,17 +57,19 @@ class _InsertionHomeState extends State<InsertionHome> {
       sleep(Duration(milliseconds: 70));
       if (iterator != barValuesList.length) {
         for (i = 0; i < iterator; i++) {
+          ++numSteps;
           if (barValuesList[i] > barValuesList[iterator]) {
             int temp = barValuesList[iterator];
             barValuesList.removeAt(iterator);
             barValuesList.insert(i, temp);
-            if (iterator != i) --iterator;
             break;
           }
         }
         ++iterator;
-      } else
+      } else {
         isWorking = false;
+        i = barValuesList.length - 1;
+      }
     });
   }
 
@@ -98,18 +100,33 @@ class _InsertionHomeState extends State<InsertionHome> {
           ),
         ),
       ),
-      body: Container(
-        color: Colors.grey[900],
-        child: Column(
-          children: <Widget>[
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: barsList,
+      body: Stack(
+        children: <Widget>[
+          Container(
+            color: Colors.grey[900],
+            child: Column(
+              children: <Widget>[
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: barsList,
+                ),
+                Spacer(),
+              ],
             ),
-            Spacer(),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 5,
+            left: 5,
+            child: Text(
+              "Counter: $numSteps",
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Ubuntu',
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
@@ -132,6 +149,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                     sliderValue = value.toInt();
                     iterator = -1;
                     i = -1;
+                    numSteps = 0;
                   });
                 },
                 value: sliderValue.toDouble(),
