@@ -9,7 +9,7 @@ class BubbleSortBars extends StatefulWidget {
 }
 
 class _BubbleSortBarsState extends State<BubbleSortBars> {
-  int _numberOfElements = 12;
+  int _numberOfElements = 2;
   List<int> _elements = [];
   int i = 0, counter = 0;
   int n;
@@ -21,6 +21,11 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   void initState() {
+    _numberOfElements = 2;
+    i = 0;
+    counter = 0;
+    swap = false;
+    doNotRefresh = false;
     super.initState();
   }
 
@@ -29,8 +34,8 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
     super.dispose();
   }
 
-_containerList() {
-  containerList.clear();
+  _containerList() {
+    containerList.clear();
     if (!doNotRefresh) {
       _elements.clear();
       i = 0;
@@ -45,19 +50,19 @@ _containerList() {
       if (k == i) {
         containerList.add(Container(
           color: (swap) ? Colors.red : Colors.white,
-          height: _elements[k] + 0.0,
+          height: _elements[k] + 0.5,
           width: barwidth,
         ));
       } else if (k == i - 1) {
         containerList.add(Container(
-          color: (swap) ? Colors.blue : Colors.white10,
-          height: _elements[k] + 0.0,
+          color: (swap) ? Colors.blue : Colors.white,
+          height: _elements[k] + 0.5,
           width: barwidth,
         ));
       } else {
         containerList.add(Container(
           color: Colors.white,
-          height: _elements[k] + 0.0,
+          height: _elements[k] + 0.5,
           width: barwidth,
         ));
       }
@@ -67,21 +72,22 @@ _containerList() {
   nextStep() {
     counter++;
     setState(() {
-    if (n == 1) {
-      swap = false;
-    }
-    if (i == n - 1) {
-      i = 0;
-      n--;
-    }
-    if (_elements[i] > _elements[i + 1]) {
-      tmp = _elements[i];
-      _elements[i] = _elements[i + 1];
-      _elements[i + 1] = tmp;
-      i++;
-    } else {
-      i++;
-    }});
+      if (n == 1) {
+        swap = false;
+      }
+      if (i == n - 1) {
+        i = 0;
+        n--;
+      }
+      if (_elements[i] > _elements[i + 1]) {
+        tmp = _elements[i];
+        _elements[i] = _elements[i + 1];
+        _elements[i + 1] = tmp;
+        i++;
+      } else {
+        i++;
+      }
+    });
   }
 
   @override
@@ -122,6 +128,7 @@ _containerList() {
                 max: 99,
                 onChanged: (value) {
                   doNotRefresh = false;
+                  counter = 0;
                   swap = false;
                   setState(() {
                     _numberOfElements = value.toInt();
