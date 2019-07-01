@@ -44,13 +44,13 @@ _containerList() {
     for (int k = 0; k < _elements.length; ++k) {
       if (k == i) {
         containerList.add(Container(
-          color: Colors.red,
+          color: (swap) ? Colors.red : Colors.white,
           height: _elements[k] + 0.0,
           width: barwidth,
         ));
       } else if (k == i - 1) {
         containerList.add(Container(
-          color: Colors.blue,
+          color: (swap) ? Colors.blue : Colors.white10,
           height: _elements[k] + 0.0,
           width: barwidth,
         ));
@@ -101,7 +101,7 @@ _containerList() {
       ),
       floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
-          child: Icon(Icons.play_arrow),
+          child: (!swap) ? Icon(Icons.play_arrow) : Icon(Icons.pause),
           onPressed: () {
             doNotRefresh = true;
             swap = !swap;
