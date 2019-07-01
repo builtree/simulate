@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-int sliderValue = 5, iterator = -1, i = -1, numSteps = 0;
+int sliderValue = 2, iterator = -1, i = -1, numSteps = 0;
 bool isWorking = false, doNotRefresh = true;
 
 class InsertionHome extends StatefulWidget {

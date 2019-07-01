@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1, -1];
-  final _algorithm = [0, 1, 2, 3, 4];
-  final _mathematics = [3];
+  final _algorithm = [0, 1, 2, 3];
+  final _mathematics = [4];
   final _physics = [];
   var prefs;
 
@@ -68,7 +68,6 @@ class Simulations with ChangeNotifier {
         infoLink: '',
         fav: _favorites[4],
       ),
-      
     ];
   }
 
