@@ -1,4 +1,4 @@
-import 'dart:math' as prefix0;
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -28,81 +28,93 @@ class _RosePatternSimState extends State<RosePatternSim> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: EdgeInsets.all(10),
       children: <Widget>[
-        Container(
-          padding: EdgeInsets.all(30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('N'),
-              Slider(
-                label: '$_n',
-                min: 0,
-                max: 10,
-                divisions: 10,
-                value: _n,
-                onChanged: (double value) {
-                  setState(() {
-                    _n = value;
-                  });
-                },
-              ),
-            ],
+        Center(
+          child: Text(
+            'Numerator: ${_n.round()}',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.all(30),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text('D'),
-              Slider(
-                label: '$_d',
-                min: 0,
-                max: 10,
-                divisions: 10,
-                value: _d,
-                onChanged: (double value) {
-                  setState(() {
-                    _d = value;
-                  });
-                },
-              ),
-            ],
+        Slider(
+          label: '${_n.round()}',
+          min: 0,
+          max: 100,
+          divisions: 100,
+          value: _n,
+          onChanged: (double value) {
+            setState(() {
+              _n = value;
+            });
+          },
+        ),
+        Divider(),
+        Center(
+          child: Text(
+            'Denominator: ${_d.round()}',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
+        Slider(
+          label: '${_d.round()}',
+          min: 0,
+          max: 100,
+          divisions: 100,
+          value: _d,
+          onChanged: (double value) {
+            setState(() {
+              _d = value;
+            });
+          },
+        ),
+        Divider(),
         Container(
-          color: Colors.red,
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height / 2,
           child: CustomPaint(
-            painter: RosePainter(_d, _n/_d),
+            painter: RosePainter(
+                _d.round(),
+                _n / _d,
+                MediaQuery.of(context).size.width / 2,
+                MediaQuery.of(context).size.height / 3),
             child: Container(),
           ),
-        )
+        ),
+        Divider(),
+        Center(
+          child: Text('Value of k (n/k): ${_n/_d}'),
+        ),
       ],
     );
   }
 }
 
 class RosePainter extends CustomPainter {
-  double d;
-  double k;
+  int d;
+  double k, transformx, transformy;
   List<Offset> points = [];
-  RosePainter(this.d, this.k);
+  RosePainter(this.d, this.k, this.transformx, this.transformy);
+
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.color = Colors.white;
-    for(double i = 0; i< 2*d*prefix0.pi; i+=0.01){
-      points.add(Offset(100*prefix0.cos(k*i)*prefix0.cos(i),100*prefix0.cos(k*i)*prefix0.sin(i)).translate(150, 150));
+    paint.color = Colors.black;
+    for (double i = 0; i < 2 * d * pi; i += 0.01) {
+      points.add(Offset(200 * cos(k * i) * cos(i),
+              200 * cos(k * i) * sin(i))
+          .translate(transformx, transformy));
     }
     canvas.drawPoints(PointMode.polygon, points, paint);
   }
 
   @override
-  bool shouldRepaint(RosePainter oldDelegate) => false;
+  bool shouldRepaint(RosePainter oldDelegate) => true;
 
   @override
   bool shouldRebuildSemantics(RosePainter oldDelegate) => false;

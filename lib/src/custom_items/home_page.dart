@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           HomeHorizontalList(
             listName: 'Recents',
-            elements: appState.algorithms
+            elements: appState.allSimulations()
           ),
         ],
       ),

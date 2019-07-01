@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1];
-  final _algorithm = [0, 1, 2, 3];
+  final _algorithm = [0, 1, 2];
+  final _mathematics = [3];
   final _physics = [];
   var prefs;
 
@@ -53,7 +54,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 3,
         simulationName: 'Rose Pattern',
-        image: 'images/Bubblesort.gif',
+        image: 'images/RosePattern.gif',
         direct: RosePattern(),
         infoLink: '',
         fav: _favorites[3],
@@ -74,6 +75,14 @@ class Simulations with ChangeNotifier {
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
     _physics.forEach((index) => widgets.add(allWidgets[index]));
+    return widgets;
+  }
+
+  List<Widget> get mathematics {
+    getFavorites();
+    List<Widget> widgets = [];
+    List<Widget> allWidgets = allSimulations();
+    _mathematics.forEach((index) => widgets.add(allWidgets[index]));
     return widgets;
   }
 
