@@ -52,6 +52,7 @@ class _SimulationCardState extends State<SimulationCard> {
           );
         },
         child: Card(
+          elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
