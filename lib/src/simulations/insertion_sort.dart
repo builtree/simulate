@@ -196,6 +196,11 @@ class _InsertionHomeState extends State<InsertionHome> {
   @override
   void dispose() {
     sliderValue = 2;
+    iterator = -1;
+    i = -1;
+    numSteps = 0;
+    isWorking = false;
+    doNotRefresh = true;
     super.dispose();
   }
 }
