@@ -8,9 +8,10 @@ class AlgorithmsPage extends StatelessWidget {
     final appState = Provider.of<Simulations>(context);
     return Container(
       child: GridView.count(
-        crossAxisCount: (MediaQuery.of(context).size.width / 200).floor(),
-        children: appState.algorithms
-      ),
+          crossAxisCount: (MediaQuery.of(context).size.width < 600)
+              ? 2
+              : (MediaQuery.of(context).size.width / 200).floor(),
+          children: appState.algorithms),
     );
   }
 }
