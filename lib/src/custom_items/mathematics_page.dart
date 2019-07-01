@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/data/simulations.dart';
 import 'package:provider/provider.dart';
 
-class PhysicsPage extends StatelessWidget {
+class MathematicsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
@@ -11,7 +11,7 @@ class PhysicsPage extends StatelessWidget {
         crossAxisCount: (MediaQuery.of(context).size.width < 600)
             ? 2
             : (MediaQuery.of(context).size.width / 200).floor(),
-        children: appState.physics,
+        children: appState.mathematics,
       ),
     );
   }
