@@ -48,6 +48,7 @@ flutter:
     - images/ToothpickPattern.gif
     - images/LangtonsAnt.gif
     - images/Bubblesort.gif
+    - images/InsertionSort.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
