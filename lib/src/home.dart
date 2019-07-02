@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:simulate/src/custom_items/chemistry_page.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
 import 'package:simulate/src/custom_items/mathematics_page.dart';
 import 'package:simulate/src/custom_items/physics_page.dart';
@@ -83,7 +84,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           PhysicsPage(),
           AlgorithmsPage(),
           MathematicsPage(),
-          Container(),
+          ChemistryPage(),
         ],
       ),
     );
