@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-int sliderValue = 2, iterator = -1, i = -1, numSteps = 0;
+int sliderValue = 2, iterator = -1, i = -1, numSteps = 0, sleepDuration = 70;
 bool isWorking = false, doNotRefresh = true;
 
 class InsertionHome extends StatefulWidget {
@@ -29,7 +29,7 @@ class _InsertionHomeState extends State<InsertionHome> {
       barValuesList = List.generate(
           sliderValue.toInt(),
           (idx) =>
-              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.5));
+              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.7));
     } else
       doNotRefresh = false;
     barsList.clear();
@@ -54,7 +54,7 @@ class _InsertionHomeState extends State<InsertionHome> {
   sortBars() {
     setState(() {
       if (!isWorking) return;
-      sleep(Duration(milliseconds: 70));
+      sleep(Duration(milliseconds: sleepDuration));
       if (iterator != barValuesList.length) {
         for (i = 0; i < iterator; i++) {
           ++numSteps;
@@ -130,13 +130,13 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: MediaQuery.of(context).size.height / 8,
+        height: MediaQuery.of(context).size.height / 5,
         child: Material(
           elevation: 30,
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Spacer(flex: 2),
+              Spacer(flex: 4),
               Slider(
                 min: 2,
                 max: 99,
@@ -156,7 +156,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Center(
                 child: Text(
-                  "${sliderValue.toInt()}",
+                  "Elements: $sliderValue",
                   style: TextStyle(
                     color: Colors.orangeAccent[400],
                     fontSize: 18,
@@ -164,7 +164,28 @@ class _InsertionHomeState extends State<InsertionHome> {
                   ),
                 ),
               ),
-              Spacer(),
+              Slider(
+                min: 0,
+                max: 200,
+                activeColor: Colors.orange,
+                inactiveColor: Colors.orange[50],
+                onChanged: (value) {
+                  doNotRefresh = true;
+                  sleepDuration = value.toInt();
+                },
+                value: sleepDuration.toDouble(),
+              ),
+              Center(
+                child: Text(
+                  "Delay (milliseconds): $sleepDuration",
+                  style: TextStyle(
+                    color: Colors.orangeAccent[400],
+                    fontSize: 18,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+              Spacer(flex: 3),
             ],
           ),
         ),
@@ -201,6 +222,7 @@ class _InsertionHomeState extends State<InsertionHome> {
     numSteps = 0;
     isWorking = false;
     doNotRefresh = true;
+    sleepDuration = 70;
     super.dispose();
   }
 }
