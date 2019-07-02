@@ -166,7 +166,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Slider(
                 min: 0,
-                max: 200,
+                max: 100,
                 activeColor: Colors.orange,
                 inactiveColor: Colors.orange[50],
                 onChanged: (value) {
