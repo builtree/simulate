@@ -139,7 +139,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               Spacer(flex: 4),
               Slider(
                 min: 2,
-                max: 99,
+                max: 299,
                 activeColor: Colors.orange,
                 inactiveColor: Colors.orange[50],
                 onChanged: (value) {
@@ -166,12 +166,27 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Slider(
                 min: 0,
-                max: 100,
+                max: 500,
                 activeColor: Colors.orange,
                 inactiveColor: Colors.orange[50],
+                onChangeStart: (value) {
+                  setState(() {
+                    doNotRefresh = true;
+                    isWorking = false;
+                  });
+                },
                 onChanged: (value) {
-                  doNotRefresh = true;
-                  sleepDuration = value.toInt();
+                  setState(() {
+                    doNotRefresh = true;
+                    sleepDuration = value.toInt();
+                  });
+                },
+                onChangeEnd: (value) {
+                  setState(() {
+                    isWorking = true;
+                    doNotRefresh = true;
+                    sleepDuration = value.toInt();
+                  });
                 },
                 value: sleepDuration.toDouble(),
               ),
