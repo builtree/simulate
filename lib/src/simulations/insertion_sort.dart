@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 int sliderValue = 2, iterator = -1, i = -1, numSteps = 0, sleepDuration = 70;
-bool isWorking = false, doNotRefresh = true;
+bool isWorking = false,
+    doNotRefresh = true,
+    colorGreen = false,
+    wasAlreadyWorking = false;
 
 class InsertionHome extends StatefulWidget {
   _InsertionHomeState createState() => _InsertionHomeState();
@@ -39,11 +42,15 @@ class _InsertionHomeState extends State<InsertionHome> {
         Container(
           width: MediaQuery.of(context).size.width / sliderValue * 0.9,
           height: (value != 0) ? value.toDouble() : 0.5,
-          color: (temp == iterator)
-              ? Colors.blue
-              : (temp != i)
-                  ? Colors.white
-                  : (i != barValuesList.length - 1) ? Colors.red : Colors.white,
+          color: (colorGreen == true)
+              ? Colors.greenAccent[400]
+              : (temp == iterator)
+                  ? Colors.red
+                  : (temp != i)
+                      ? Colors.white
+                      : (i != barValuesList.length - 1)
+                          ? Colors.blue
+                          : Colors.white,
         ),
       );
       ++temp;
@@ -54,6 +61,7 @@ class _InsertionHomeState extends State<InsertionHome> {
   sortBars() {
     setState(() {
       if (!isWorking) return;
+      colorGreen = false;
       sleep(Duration(milliseconds: sleepDuration));
       if (iterator != barValuesList.length) {
         for (i = 0; i < iterator; i++) {
@@ -68,6 +76,7 @@ class _InsertionHomeState extends State<InsertionHome> {
         ++iterator;
       } else {
         isWorking = false;
+        colorGreen = true;
         i = barValuesList.length - 1;
       }
     });
@@ -144,6 +153,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                 inactiveColor: Colors.orange[50],
                 onChanged: (value) {
                   setState(() {
+                    colorGreen = false;
                     isWorking = false;
                     doNotRefresh = false;
                     sliderValue = value.toInt();
@@ -171,6 +181,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                 inactiveColor: Colors.orange[50],
                 onChangeStart: (value) {
                   setState(() {
+                    if (isWorking) wasAlreadyWorking = true;
                     doNotRefresh = true;
                     isWorking = false;
                   });
@@ -183,8 +194,11 @@ class _InsertionHomeState extends State<InsertionHome> {
                 },
                 onChangeEnd: (value) {
                   setState(() {
-                    isWorking = true;
                     doNotRefresh = true;
+                    if (wasAlreadyWorking) {
+                      isWorking = true;
+                      wasAlreadyWorking = false;
+                    }
                     sleepDuration = value.toInt();
                   });
                 },
@@ -238,6 +252,8 @@ class _InsertionHomeState extends State<InsertionHome> {
     isWorking = false;
     doNotRefresh = true;
     sleepDuration = 70;
+    colorGreen = false;
+    wasAlreadyWorking = false;
     super.dispose();
   }
 }
