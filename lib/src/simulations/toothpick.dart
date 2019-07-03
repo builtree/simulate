@@ -132,8 +132,8 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   Widget build(BuildContext context) {
     if (step == 1) {
       activeToothPicks.add(new Toothpick([
-        MediaQuery.of(context).size.width / 2,
-        MediaQuery.of(context).size.height / 2 - 100
+        (MediaQuery.of(context).size.width / 2).roundToDouble(),
+        (MediaQuery.of(context).size.height / 2 - 100).roundToDouble()
       ], true));
     }
     return Scaffold(
