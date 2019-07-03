@@ -9,15 +9,16 @@ class BubbleSortBars extends StatefulWidget {
 }
 
 class _BubbleSortBarsState extends State<BubbleSortBars> {
-  int _numberOfElements = 2;
+  int _numberOfElements;
   List<int> _elements = [];
   int i = 0, counter = 0;
   int n;
-  int tmp;
+  int tmp, delay = 0;
   bool swap = false;
   double barwidth;
   List<Widget> containerList = [];
   bool doNotRefresh = false;
+  int finalIterator = 0;
 
   @override
   void initState() {
@@ -26,11 +27,21 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
     counter = 0;
     swap = false;
     doNotRefresh = false;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.initState();
   }
 
   @override
   dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
@@ -46,35 +57,61 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
       n = _elements.length;
     }
     this.barwidth = MediaQuery.of(context).size.width / (_elements.length + 1);
-    for (int k = 0; k < _elements.length; ++k) {
-      if (k == i) {
-        containerList.add(Container(
-          color: (swap) ? Colors.red : Colors.white,
-          height: _elements[k] + 0.5,
-          width: barwidth,
-        ));
-      } else if (k == i - 1) {
-        containerList.add(Container(
-          color: (swap) ? Colors.blue : Colors.white,
-          height: _elements[k] + 0.5,
-          width: barwidth,
-        ));
-      } else {
-        containerList.add(Container(
-          color: Colors.white,
-          height: _elements[k] + 0.5,
-          width: barwidth,
-        ));
+    if (n != 1) {
+      for (int k = 0; k < _elements.length; ++k) {
+        if (k == i) {
+          containerList.add(Container(
+            color: Colors.red,
+            height: _elements[k] + 0.5,
+            width: barwidth,
+          ));
+        } else if (k == i - 1) {
+          containerList.add(Container(
+            color: Colors.blue,
+            height: _elements[k] + 0.5,
+            width: barwidth,
+          ));
+        } else {
+          containerList.add(Container(
+            color: Colors.white,
+            height: _elements[k] + 0.5,
+            width: barwidth,
+          ));
+        }
+      }
+    } else {
+      containerList.clear();
+      finalIterator++;
+
+      for (int k = 0; k < _elements.length; ++k) {
+        if (k <= finalIterator) {
+          containerList.add(Container(
+            color: Colors.greenAccent[400],
+            height: _elements[k] + 0.5,
+            width: barwidth,
+          ));
+        } else {
+          containerList.add(Container(
+            color: Colors.white,
+            height: _elements[k] + 0.5,
+            width: barwidth,
+          ));
+        }
+      }
+      if (finalIterator == _elements.length) {
+        finalIterator = 0;
       }
     }
   }
 
   nextStep() {
-    counter++;
     setState(() {
+      sleep(Duration(milliseconds: delay));
       if (n == 1) {
         swap = false;
+        return;
       }
+      counter++;
       if (i == n - 1) {
         i = 0;
         n--;
@@ -93,30 +130,44 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   @override
   Widget build(BuildContext context) {
     _containerList();
-    if (swap == true) {
+    if (swap == true || finalIterator != 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
     }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           'Bubble Sort',
-          style: TextStyle(fontFamily: 'Ubuntu'),
+          style: TextStyle(
+            fontFamily: 'Ubuntu',
+            color: Colors.black,
+          ),
         ),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.teal,
-          child: (!swap) ? Icon(Icons.play_arrow) : Icon(Icons.pause),
+          backgroundColor: Colors.white,
+          child: (!swap)
+              ? Icon(
+                  Icons.play_arrow,
+                  color: Colors.black,
+                )
+              : Icon(
+                  Icons.pause,
+                  color: Colors.black,
+                ),
           onPressed: () {
             doNotRefresh = true;
             swap = !swap;
             setState(() {});
-            // doNotRefresh = false;
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height / 8,
+        height: MediaQuery.of(context).size.height / 6,
         child: Material(
           elevation: 30,
           color: Colors.white,
@@ -125,7 +176,9 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               Spacer(flex: 2),
               Slider(
                 min: 2,
-                max: 99,
+                max: 200,
+                activeColor: Colors.black,
+                inactiveColor: Colors.grey,
                 onChanged: (value) {
                   doNotRefresh = false;
                   counter = 0;
@@ -138,7 +191,32 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               ),
               Center(
                 child: Text(
-                  "${_numberOfElements.toInt()}",
+                  "Elements: ${_numberOfElements.toInt()}",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+              Spacer(
+                flex: 1,
+              ),
+              Slider(
+                min: 0,
+                max: 500,
+                activeColor: Colors.black,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    doNotRefresh = true;
+                    delay = value.toInt();
+                  });
+                },
+                value: delay.roundToDouble(),
+              ),
+              Center(
+                child: Text(
+                  "Delay: ${delay.toInt()} ms",
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
@@ -181,122 +259,3 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
     );
   }
 }
-
-// class BubbleSortSim extends StatefulWidget {
-//   final int numberOfElements;
-//   BubbleSortSim({
-//     Key key,
-//     @required this.numberOfElements,
-//   }) : super(key: key);
-//   @override
-//   _BubbleSortSimState createState() => _BubbleSortSimState();
-// }
-
-// class _BubbleSortSimState extends State<BubbleSortSim> {
-//   List<int> _elements = [];
-//   int i = 0;
-//   int n;
-//   int tmp;
-//   bool swap = true;
-//   double barwidth;
-//   List<Widget> containerList = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     var rng = new Random();
-//     for (int i = 0; i < widget.numberOfElements; i++) {
-//       _elements.add(rng.nextInt(400));
-//     }
-//     n = _elements.length;
-//   }
-
-//   @override
-//   dispose() {
-//     super.dispose();
-//   }
-
-//   List<Widget> returncontainerList() {
-//     this.barwidth = MediaQuery.of(context).size.width / (_elements.length + 1);
-//     List<Widget> containerList = [];
-//     for (int k = 0; k < _elements.length; ++k) {
-//       if (k == i) {
-//         containerList.add(Container(
-//           color: Colors.red,
-//           height: _elements[k] + 0.0,
-//           width: barwidth,
-//         ));
-//       } else if (k == i - 1) {
-//         containerList.add(Container(
-//           color: Colors.blue,
-//           height: _elements[k] + 0.0,
-//           width: barwidth,
-//         ));
-//       } else {
-//         containerList.add(Container(
-//           color: Colors.white,
-//           height: _elements[k] + 0.0,
-//           width: barwidth,
-//         ));
-//       }
-//     }
-//     return containerList;
-//   }
-
-//   nextStep() {
-//     if (n == 1) {
-//       swap = false;
-//     }
-//     if (i == n - 1) {
-//       i = 0;
-//       n--;
-//     }
-//     if (_elements[i] > _elements[i + 1]) {
-//       tmp = _elements[i];
-//       _elements[i] = _elements[i + 1];
-//       _elements[i + 1] = tmp;
-//       i++;
-//     } else {
-//       i++;
-//     }
-//     setState(() {
-//       sleep(const Duration(seconds: 1));
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     containerList = returncontainerList();
-//     // if (swap == true) {
-//     //   WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
-//     // }
-//     return Stack(
-//       children: <Widget>[
-//         Container(
-//           color: Colors.grey[900],
-//           child: Column(
-//             children: <Widget>[
-//               Spacer(),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: containerList,
-//               ),
-//               Spacer(),
-//             ],
-//           ),
-//         ),
-//         Positioned(
-//           top: 5,
-//           left: 5,
-//           child: Text(
-//             "Counter: ",
-//             style: TextStyle(
-//               color: Colors.white,
-//               fontFamily: 'Ubuntu',
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
