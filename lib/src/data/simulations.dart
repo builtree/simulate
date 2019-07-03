@@ -15,11 +15,11 @@ class Simulations with ChangeNotifier {
   final _chemistry = [];
   var prefs;
   final _searchTags = {
-    0: " toothpick pattern algorithm sequence ",
-    1: " langtons ant pattern algorithm ",
-    2: " bubble sort algorithm sorting bars ",
-    3: " insertion sort algorithm sorting bars ",
-    4: " rose pattern mathematics sequence ",
+    0: "toothpick pattern algorithm sequence ",
+    1: "langtons ant pattern algorithm ",
+    2: "bubble sort algorithm sorting bars ",
+    3: "insertion sort algorithm sorting bars ",
+    4: "rose pattern mathematics sequence ",
   };
 
   Simulations() {
@@ -132,7 +132,7 @@ class Simulations with ChangeNotifier {
     query = query.toLowerCase();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    final regex = RegExp(' $query[a-z]* ');
+    final regex = RegExp('$query[a-z]* ');
     _searchTags.forEach((key, tags) {
       if (regex.hasMatch(tags)) {
         widgets.add(allWidgets[key]);
