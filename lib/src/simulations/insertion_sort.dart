@@ -254,6 +254,12 @@ class _InsertionHomeState extends State<InsertionHome> {
     sleepDuration = 70;
     colorGreen = false;
     wasAlreadyWorking = false;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 }
