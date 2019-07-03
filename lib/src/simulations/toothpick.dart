@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:collection/equality.dart';
+import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 
 Function listEq = const DeepCollectionEquality().equals;
 
@@ -70,6 +71,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   var prevToothPicks = new List<List<Toothpick>>();
   var toothPicks = new List<Toothpick>();
   var extra;
+  double _scaleAmount = 1.0;
 
   addStep() {
     setState(() {
@@ -108,6 +110,25 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   }
 
   @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     if (step == 1) {
       activeToothPicks.add(new Toothpick([
@@ -117,39 +138,74 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text("ToothPick Pattern"),
+        title: Text(
+          "ToothPick Pattern",
+          style: TextStyle(
+            fontFamily: 'Ubuntu',
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
-          onPressed: null, elevation: 10, label: Text('Step: $step')),
-      bottomNavigationBar: BottomAppBar(
-        color: Colors.white,
-        elevation: 30,
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.remove),
-              iconSize: 30,
-              highlightColor: Colors.blue,
-              onPressed: () {
-                subtract();
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                addStep();
-              },
-            ),
-          ],
+        onPressed: null,
+        elevation: 10,
+        label: Text('Step: $step'),
+        backgroundColor: Colors.red,
+      ),
+      bottomNavigationBar: Material(
+        elevation: 10,
+        child: Container(
+          height: MediaQuery.of(context).size.height / 10,
+          color: Colors.white,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    iconSize: 30,
+                    highlightColor: Colors.blue,
+                    onPressed: () {
+                      subtract();
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: () {
+                      addStep();
+                    },
+                  ),
+                ],
+              ),
+              Slider(
+                value: _scaleAmount,
+                activeColor: Colors.red,
+                min: 0.01,
+                max: 2,
+                onChanged: (value) {
+                  setState(() {
+                    _scaleAmount = value;
+                  });
+                },
+              ),
+            ],
+          ),
         ),
       ),
       body: Container(
-        child: CustomPaint(
-          painter: ToothpickPainter(activeToothPicks, toothPicks),
-          child: Container(),
+        child: Transform.scale(
+          scale: _scaleAmount,
+          child: CustomPaint(
+            painter: ToothpickPainter(activeToothPicks, toothPicks),
+            child: Container(),
+          ),
         ),
       ),
     );
@@ -163,12 +219,12 @@ class ToothpickPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
-    paint.strokeWidth = 1;
+    paint.strokeWidth = 2;
     for (int i = 0; i < toothpicks.length; i++) {
       canvas.drawLine(Offset(toothpicks[i].end1[0], toothpicks[i].end1[1]),
           Offset(toothpicks[i].end2[0], toothpicks[i].end2[1]), paint);
     }
-    paint.color = Colors.blue;
+    paint.color = Colors.red;
     for (int i = 0; i < activeToothpicks.length; i++) {
       canvas.drawLine(
           Offset(activeToothpicks[i].end1[0], activeToothpicks[i].end1[1]),
