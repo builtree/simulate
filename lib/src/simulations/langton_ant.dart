@@ -8,6 +8,7 @@ enum direction { up, right, down, left }
 direction headDir = direction.up;
 var x = size ~/ 2, y = size ~/ 2;
 var setupX = 0, setupY = 0;
+int steps = 0;
 
 class LangtonAnt extends StatefulWidget {
   _LangtonAntState createState() => _LangtonAntState();
@@ -29,6 +30,7 @@ class _LangtonAntState extends State<LangtonAnt> {
 
   void nextPixel() {
     setState(() {
+      ++steps;
       if (colorsList[x][y] == 0) {
         colorsList[x][y] = 1;
         if (headDir == direction.up) {
@@ -101,20 +103,36 @@ class _LangtonAntState extends State<LangtonAnt> {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 2,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: size,
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height / 2,
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: size,
+                ),
+                itemCount: size * size,
+                itemBuilder: buildItem,
+                padding: EdgeInsets.all(5.0),
+              ),
             ),
-            itemCount: size * size,
-            itemBuilder: buildItem,
-            padding: EdgeInsets.all(5.0),
           ),
-        ),
+          Positioned(
+            child: Text(
+              "Steps: $steps",
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Ubuntu',
+                fontSize: 18,
+              ),
+            ),
+            top: 10,
+            left: 10,
+          ),
+        ],
       ),
     );
   }
@@ -164,6 +182,7 @@ class _LangtonAntState extends State<LangtonAnt> {
     headDir = direction.up;
     x = size ~/ 2;
     y = size ~/ 2;
+    steps = 0;
     super.dispose();
   }
 }
