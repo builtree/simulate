@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final size = 29;
 var colorsList =
@@ -15,6 +16,15 @@ class LangtonAnt extends StatefulWidget {
 class _LangtonAntState extends State<LangtonAnt> {
   _LangtonAntState() {
     colorsList[size ~/ 2][size ~/ 2] = 1;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
   }
 
   void nextPixel() {
@@ -129,5 +139,16 @@ class _LangtonAntState extends State<LangtonAnt> {
         ),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
   }
 }
