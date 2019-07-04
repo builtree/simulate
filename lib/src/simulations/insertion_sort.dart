@@ -85,7 +85,7 @@ class _InsertionHomeState extends State<InsertionHome> {
       if (!isWorking) return;
       colorGreen = false;
       sleep(Duration(milliseconds: sleepDuration));
-      if (iterator != barValuesList.length) {
+      if (iterator < barValuesList.length) {
         for (i = 0; i < iterator; i++) {
           ++numSteps;
           if (barValuesList[i] > barValuesList[iterator]) {
@@ -96,10 +96,12 @@ class _InsertionHomeState extends State<InsertionHome> {
           }
         }
         ++iterator;
-      } else {
-        isWorking = false;
+      } else if (iterator == barValuesList.length) {
         i = barValuesList.length - 1;
+        ++iterator;
+      } else {
         colorGreen = true;
+        isWorking = false;
       }
     });
   }
@@ -252,7 +254,7 @@ class _InsertionHomeState extends State<InsertionHome> {
             (iterator == -1) ? iterator = 1 : iterator = iterator;
           });
         },
-        child: (!isWorking)
+        child: (!isWorking || colorGreen)
             ? Icon(
                 Icons.play_arrow,
                 size: 30,
