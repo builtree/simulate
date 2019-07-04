@@ -13,7 +13,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   List<int> _elements = [];
   int i = 0, counter = 0;
   int n;
-  int tmp, delay = 0;
+  int tmp, delay = 0, delay2 = 0;
   bool swap = false;
   double barwidth;
   List<Widget> containerList = [];
@@ -105,8 +105,8 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   }
 
   nextStep() {
+    sleep(Duration(milliseconds: delay));
     setState(() {
-      sleep(Duration(milliseconds: delay));
       if (n == 1) {
         swap = false;
         return;
@@ -203,20 +203,26 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               ),
               Slider(
                 min: 0,
-                max: 500,
+                max: 100,
+                divisions: 100,
                 activeColor: Colors.black,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
+                  setState(() {
+                    delay2 = value.toInt();
+                  });
+                },
+                onChangeEnd: (value) {
                   setState(() {
                     doNotRefresh = true;
                     delay = value.toInt();
                   });
                 },
-                value: delay.roundToDouble(),
+                value: delay2.roundToDouble(),
               ),
               Center(
                 child: Text(
-                  "Delay: ${delay.toInt()} ms",
+                  "Delay: ${delay2.toInt()} ms",
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
