@@ -88,8 +88,18 @@ class _LangtonAntState extends State<LangtonAnt> {
     setupY = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Langton's Ant"),
-        backgroundColor: Colors.red[500],
+        title: Text(
+          "Langton's Ant",
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Ubuntu',
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
       ),
       body: Center(
         child: Container(
@@ -149,6 +159,11 @@ class _LangtonAntState extends State<LangtonAnt> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    colorsList = List<List<int>>.generate(
+        size, (i) => List<int>.generate(size, (j) => 0));
+    headDir = direction.up;
+    x = size ~/ 2;
+    y = size ~/ 2;
     super.dispose();
   }
 }
