@@ -58,7 +58,7 @@ class Simulations with ChangeNotifier {
         simulationName: 'Insertion Sort',
         image: 'images/InsertionSort.gif',
         direct: InsertionHome(),
-        infoLink: '',
+        infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
         fav: _favorites[3],
       ),
       SimulationCard(
