@@ -73,7 +73,7 @@ class Simulations with ChangeNotifier {
         simulationName: 'Rose Pattern',
         image: 'images/RosePattern.gif',
         direct: RosePattern(),
-        infoLink: '',
+        infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[4],
       ),
     ];
