@@ -204,7 +204,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               Slider(
                 min: 0,
                 max: 100,
-                divisions: 100,
+                divisions: 10,
                 activeColor: Colors.black,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
@@ -253,7 +253,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
             top: 5,
             left: 5,
             child: Text(
-              "Counter: $counter",
+              "Comparisons: $counter \nMax: ${_elements[i]} \nArray Iteration: ${_elements.length - n + 1}",
               style: TextStyle(
                 color: Colors.white,
                 fontFamily: 'Ubuntu',
