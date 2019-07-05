@@ -50,7 +50,6 @@ class HomeHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 235,
       margin: EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
