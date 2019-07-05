@@ -3,8 +3,16 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-int sliderValue = 2, iterator = -1, i = -1, numSteps = 0;
-bool isWorking = false, doNotRefresh = true;
+int sliderValue = 2,
+    iterator = -1,
+    i = -1,
+    numSteps = 0,
+    sleepDuration = 70,
+    greenIterator = 0;
+bool isWorking = false,
+    doNotRefresh = true,
+    colorGreen = false,
+    wasAlreadyWorking = false;
 
 class InsertionHome extends StatefulWidget {
   _InsertionHomeState createState() => _InsertionHomeState();
@@ -29,21 +37,24 @@ class _InsertionHomeState extends State<InsertionHome> {
       barValuesList = List.generate(
           sliderValue.toInt(),
           (idx) =>
-              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.5));
+              randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.7));
     } else
       doNotRefresh = false;
-    barsList.clear();
     int temp = 0;
+    barsList.clear();
+    greenIterator = 0;
     barValuesList.forEach((value) {
       barsList.add(
         Container(
           width: MediaQuery.of(context).size.width / sliderValue * 0.9,
           height: (value != 0) ? value.toDouble() : 0.5,
           color: (temp == iterator)
-              ? Colors.blue
+              ? Colors.red
               : (temp != i)
                   ? Colors.white
-                  : (i != barValuesList.length - 1) ? Colors.red : Colors.white,
+                  : (i != barValuesList.length - 1)
+                      ? Colors.blue
+                      : Colors.white,
         ),
       );
       ++temp;
@@ -51,11 +62,30 @@ class _InsertionHomeState extends State<InsertionHome> {
     sortBars();
   }
 
+  makeGreen() {
+    setState(() {
+      if (greenIterator < sliderValue) {
+        int value = barValuesList[greenIterator];
+        barsList.removeAt(greenIterator);
+        barsList.insert(
+          greenIterator,
+          Container(
+            width: MediaQuery.of(context).size.width / sliderValue * 0.9,
+            height: (value != 0) ? value.toDouble() : 0.5,
+            color: Colors.greenAccent[400],
+          ),
+        );
+      }
+      ++greenIterator;
+    });
+  }
+
   sortBars() {
     setState(() {
       if (!isWorking) return;
-      sleep(Duration(milliseconds: 70));
-      if (iterator != barValuesList.length) {
+      colorGreen = false;
+      sleep(Duration(milliseconds: sleepDuration));
+      if (iterator < barValuesList.length) {
         for (i = 0; i < iterator; i++) {
           ++numSteps;
           if (barValuesList[i] > barValuesList[iterator]) {
@@ -66,16 +96,22 @@ class _InsertionHomeState extends State<InsertionHome> {
           }
         }
         ++iterator;
-      } else {
-        isWorking = false;
+      } else if (iterator == barValuesList.length) {
         i = barValuesList.length - 1;
+        ++iterator;
+      } else {
+        colorGreen = true;
+        isWorking = false;
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    makeContainers();
+    if (!colorGreen)
+      makeContainers();
+    else
+      makeGreen();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           doNotRefresh = true;
         }));
@@ -130,20 +166,21 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: MediaQuery.of(context).size.height / 8,
+        height: MediaQuery.of(context).size.height / 5,
         child: Material(
           elevation: 30,
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Spacer(flex: 2),
+              Spacer(flex: 4),
               Slider(
                 min: 2,
-                max: 99,
+                max: 149,
                 activeColor: Colors.orange,
                 inactiveColor: Colors.orange[50],
                 onChanged: (value) {
                   setState(() {
+                    colorGreen = false;
                     isWorking = false;
                     doNotRefresh = false;
                     sliderValue = value.toInt();
@@ -156,7 +193,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Center(
                 child: Text(
-                  "${sliderValue.toInt()}",
+                  "Elements: $sliderValue",
                   style: TextStyle(
                     color: Colors.orangeAccent[400],
                     fontSize: 18,
@@ -164,7 +201,47 @@ class _InsertionHomeState extends State<InsertionHome> {
                   ),
                 ),
               ),
-              Spacer(),
+              Slider(
+                min: 0,
+                max: 500,
+                activeColor: Colors.orange,
+                inactiveColor: Colors.orange[50],
+                onChangeStart: (value) {
+                  setState(() {
+                    if (isWorking) wasAlreadyWorking = true;
+                    doNotRefresh = true;
+                    isWorking = false;
+                  });
+                },
+                onChanged: (value) {
+                  setState(() {
+                    doNotRefresh = true;
+                    sleepDuration = value.toInt();
+                  });
+                },
+                onChangeEnd: (value) {
+                  setState(() {
+                    doNotRefresh = true;
+                    if (wasAlreadyWorking) {
+                      isWorking = true;
+                      wasAlreadyWorking = false;
+                    }
+                    sleepDuration = value.toInt();
+                  });
+                },
+                value: sleepDuration.toDouble(),
+              ),
+              Center(
+                child: Text(
+                  "Delay (milliseconds): $sleepDuration",
+                  style: TextStyle(
+                    color: Colors.orangeAccent[400],
+                    fontSize: 18,
+                    fontFamily: 'Ubuntu',
+                  ),
+                ),
+              ),
+              Spacer(flex: 3),
             ],
           ),
         ),
@@ -177,7 +254,7 @@ class _InsertionHomeState extends State<InsertionHome> {
             (iterator == -1) ? iterator = 1 : iterator = iterator;
           });
         },
-        child: (!isWorking)
+        child: (!isWorking || colorGreen)
             ? Icon(
                 Icons.play_arrow,
                 size: 30,
@@ -201,6 +278,16 @@ class _InsertionHomeState extends State<InsertionHome> {
     numSteps = 0;
     isWorking = false;
     doNotRefresh = true;
+    sleepDuration = 70;
+    greenIterator = 0;
+    colorGreen = false;
+    wasAlreadyWorking = false;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 }

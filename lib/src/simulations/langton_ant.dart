@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final size = 29;
 var colorsList =
@@ -7,6 +8,7 @@ enum direction { up, right, down, left }
 direction headDir = direction.up;
 var x = size ~/ 2, y = size ~/ 2;
 var setupX = 0, setupY = 0;
+int steps = 0;
 
 class LangtonAnt extends StatefulWidget {
   _LangtonAntState createState() => _LangtonAntState();
@@ -17,8 +19,18 @@ class _LangtonAntState extends State<LangtonAnt> {
     colorsList[size ~/ 2][size ~/ 2] = 1;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
+
   void nextPixel() {
     setState(() {
+      ++steps;
       if (colorsList[x][y] == 0) {
         colorsList[x][y] = 1;
         if (headDir == direction.up) {
@@ -78,23 +90,49 @@ class _LangtonAntState extends State<LangtonAnt> {
     setupY = 0;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Langton's Ant"),
-        backgroundColor: Colors.red[500],
-      ),
-      body: Center(
-        child: Container(
-          alignment: Alignment.center,
-          height: MediaQuery.of(context).size.height / 2,
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: size,
-            ),
-            itemCount: size * size,
-            itemBuilder: buildItem,
-            padding: EdgeInsets.all(5.0),
+        title: Text(
+          "Langton's Ant",
+          style: TextStyle(
+            color: Colors.black,
+            fontFamily: 'Ubuntu',
           ),
         ),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+      ),
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: Container(
+              alignment: Alignment.center,
+              height: MediaQuery.of(context).size.height / 2,
+              child: GridView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: size,
+                ),
+                itemCount: size * size,
+                itemBuilder: buildItem,
+                padding: EdgeInsets.all(5.0),
+              ),
+            ),
+          ),
+          Positioned(
+            child: Text(
+              "Steps: $steps",
+              style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'Ubuntu',
+                fontSize: 18,
+              ),
+            ),
+            top: 10,
+            left: 10,
+          ),
+        ],
       ),
     );
   }
@@ -129,5 +167,22 @@ class _LangtonAntState extends State<LangtonAnt> {
         ),
       );
     }
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    colorsList = List<List<int>>.generate(
+        size, (i) => List<int>.generate(size, (j) => 0));
+    headDir = direction.up;
+    x = size ~/ 2;
+    y = size ~/ 2;
+    steps = 0;
+    super.dispose();
   }
 }
