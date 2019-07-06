@@ -9,6 +9,7 @@ direction headDir = direction.up;
 var x = size ~/ 2, y = size ~/ 2;
 var setupX = 0, setupY = 0;
 int steps = 0;
+bool shouldWork = false;
 
 class LangtonAnt extends StatefulWidget {
   _LangtonAntState createState() => _LangtonAntState();
@@ -85,16 +86,26 @@ class _LangtonAntState extends State<LangtonAnt> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => nextPixel());
+    if (shouldWork)
+      WidgetsBinding.instance.addPostFrameCallback((_) => nextPixel());
     setupX = 0;
     setupY = 0;
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           "Langton's Ant",
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Ubuntu',
+            fontSize: 20,
           ),
         ),
         iconTheme: IconThemeData(
@@ -105,7 +116,8 @@ class _LangtonAntState extends State<LangtonAnt> {
       ),
       body: Stack(
         children: <Widget>[
-          Center(
+          Align(
+            alignment: Alignment(0, -0.2),
             child: Container(
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height / 2,
@@ -120,7 +132,8 @@ class _LangtonAntState extends State<LangtonAnt> {
               ),
             ),
           ),
-          Positioned(
+          Align(
+            alignment: Alignment(0, -0.85),
             child: Text(
               "Steps: $steps",
               style: TextStyle(
@@ -129,11 +142,21 @@ class _LangtonAntState extends State<LangtonAnt> {
                 fontSize: 18,
               ),
             ),
-            top: 10,
-            left: 10,
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        child: Icon(
+          (!shouldWork) ? Icons.play_arrow : Icons.pause,
+          color: Colors.black,
+          size: 24,
+        ),
+        onPressed: () => setState(() {
+              shouldWork = !shouldWork;
+            }),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -147,8 +170,11 @@ class _LangtonAntState extends State<LangtonAnt> {
       return GridTile(
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 0.8),
-            color: Colors.black,
+            border: Border.all(
+              color: Colors.black,
+              width: 0.8,
+            ),
+            color: Colors.white,
           ),
         ),
       );
@@ -161,8 +187,11 @@ class _LangtonAntState extends State<LangtonAnt> {
       return GridTile(
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 0.8),
-            color: Colors.redAccent,
+            border: Border.all(
+              color: Colors.white,
+              width: 0.8,
+            ),
+            color: Colors.black,
           ),
         ),
       );
@@ -183,6 +212,7 @@ class _LangtonAntState extends State<LangtonAnt> {
     x = size ~/ 2;
     y = size ~/ 2;
     steps = 0;
+    shouldWork = false;
     super.dispose();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/data/simulations.dart';
@@ -42,7 +43,7 @@ class _SimulationCardState extends State<SimulationCard> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => widget.direct),
+            CupertinoPageRoute(builder: (context) => widget.direct),
           );
         },
         child: Card(
@@ -56,7 +57,7 @@ class _SimulationCardState extends State<SimulationCard> {
               Flexible(
                 flex: 6,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(5,10,5,5),
+                  padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                   child: Image.asset(
                     widget.image,
                     fit: BoxFit.fill,

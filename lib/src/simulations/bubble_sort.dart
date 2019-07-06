@@ -136,12 +136,20 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         centerTitle: true,
         title: Text(
           'Bubble Sort',
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
+            fontSize: 20,
           ),
         ),
         backgroundColor: Colors.white,

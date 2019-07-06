@@ -119,9 +119,8 @@ class _InsertionHomeState extends State<InsertionHome> {
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios),
           color: Colors.black,
-          iconSize: 28,
           onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Colors.white,
@@ -132,7 +131,7 @@ class _InsertionHomeState extends State<InsertionHome> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
       ),
@@ -166,18 +165,18 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: MediaQuery.of(context).size.height / 5,
+        height: MediaQuery.of(context).size.height / 5.5,
         child: Material(
           elevation: 30,
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Spacer(flex: 4),
+              Spacer(flex: 5),
               Slider(
                 min: 2,
                 max: 149,
-                activeColor: Colors.orange,
-                inactiveColor: Colors.orange[50],
+                activeColor: Colors.black,
+                inactiveColor: Colors.black38,
                 onChanged: (value) {
                   setState(() {
                     colorGreen = false;
@@ -195,17 +194,18 @@ class _InsertionHomeState extends State<InsertionHome> {
                 child: Text(
                   "Elements: $sliderValue",
                   style: TextStyle(
-                    color: Colors.orangeAccent[400],
+                    color: Colors.black,
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
                   ),
                 ),
               ),
+              Spacer(),
               Slider(
                 min: 0,
                 max: 500,
-                activeColor: Colors.orange,
-                inactiveColor: Colors.orange[50],
+                activeColor: Colors.black,
+                inactiveColor: Colors.black38,
                 onChangeStart: (value) {
                   setState(() {
                     if (isWorking) wasAlreadyWorking = true;
@@ -235,7 +235,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                 child: Text(
                   "Delay (milliseconds): $sleepDuration",
                   style: TextStyle(
-                    color: Colors.orangeAccent[400],
+                    color: Colors.black,
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
                   ),
@@ -258,13 +258,15 @@ class _InsertionHomeState extends State<InsertionHome> {
             ? Icon(
                 Icons.play_arrow,
                 size: 30,
+                color: Colors.black,
               )
             : Icon(
                 Icons.pause,
                 size: 30,
+                color: Colors.black,
               ),
-        backgroundColor: Colors.orange,
-        elevation: 5,
+        backgroundColor: Colors.white,
+        elevation: 8,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

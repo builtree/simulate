@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:simulate/src/home.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/data/simulations.dart';
@@ -10,27 +12,50 @@ void main() => runApp(
           debugShowCheckedModeBanner: false,
           title: 'Simulate',
           home: StartScreen(),
+          theme: ThemeData(
+            accentColor: Colors.black,
+            fontFamily: 'Ubuntu',
+            appBarTheme: AppBarTheme(
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
+  @override
+  _StartScreenState createState() => _StartScreenState();
+}
+
+class _StartScreenState extends State<StartScreen> {
+  timer() async => Timer(
+        Duration(seconds: 1),
+        homePage,
+      );
+
+  homePage() => Navigator.pushReplacement(
+        context,
+        CupertinoPageRoute(
+          builder: (builder) => Home(),
+        ),
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    timer();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Simulate'),
-        backgroundColor: Colors.red[500],
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('START'),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Home()),
-            );
-          },
+    return Container(
+      color: Colors.white,
+      child: Center(
+        child: Image.asset(
+          'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
+          height: 300,
+          width: 149.4,
         ),
       ),
     );

@@ -53,6 +53,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         iconTheme: IconThemeData(
           color: Colors.black,
@@ -62,14 +63,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Ubuntu',
+            fontSize: 20,
           ),
         ),
         backgroundColor: Colors.white,
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          onPressed: () {},
+        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              showSearch(context: context, delegate: SimulationSearch());
+              showSearch(
+                context: context,
+                delegate: SimulationSearch(),
+              );
             },
           ),
         ],
