@@ -12,6 +12,13 @@ void main() => runApp(
           debugShowCheckedModeBanner: false,
           title: 'Simulate',
           home: StartScreen(),
+          theme: ThemeData(
+            accentColor: Colors.black,
+            fontFamily: 'Ubuntu',
+            appBarTheme: AppBarTheme(
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );
