@@ -43,9 +43,9 @@ class _StartScreenState extends State<StartScreen> {
       color: Colors.white,
       child: Center(
         child: Image.asset(
-          'android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png',
+          'android/app/src/main/res/mipmap-xhdpi/ic_launcher.png',
           height: 600,
-          width: 300,
+          width: 298,
         ),
       ),
     );
