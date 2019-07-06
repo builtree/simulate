@@ -151,7 +151,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
         centerTitle: true,

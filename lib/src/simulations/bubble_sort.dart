@@ -149,7 +149,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
         backgroundColor: Colors.white,

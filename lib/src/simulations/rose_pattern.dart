@@ -50,7 +50,7 @@ class _RosePatternState extends State<RosePattern> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),

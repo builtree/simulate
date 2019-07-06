@@ -63,7 +63,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Ubuntu',
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
         backgroundColor: Colors.white,

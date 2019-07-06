@@ -131,7 +131,7 @@ class _InsertionHomeState extends State<InsertionHome> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
-            fontSize: 28,
+            fontSize: 20,
           ),
         ),
       ),
