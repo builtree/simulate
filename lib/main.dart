@@ -22,7 +22,7 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-  timer() async => Timer(Duration(seconds: 2), homePage);
+  timer() async => Timer(Duration(seconds: 1), homePage);
 
   homePage() => Navigator.pushReplacement(
         context,
