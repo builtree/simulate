@@ -90,6 +90,13 @@ class _LangtonAntState extends State<LangtonAnt> {
     setupY = 0;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           "Langton's Ant",
           style: TextStyle(

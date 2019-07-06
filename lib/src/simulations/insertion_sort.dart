@@ -119,7 +119,7 @@ class _InsertionHomeState extends State<InsertionHome> {
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back_ios),
           color: Colors.black,
           onPressed: () => Navigator.pop(context),
         ),

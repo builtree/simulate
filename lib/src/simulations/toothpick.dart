@@ -138,6 +138,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
     }
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           "ToothPick Pattern",
           style: TextStyle(
