@@ -75,7 +75,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              showSearch(context: context, delegate: SimulationSearch());
+              showSearch(
+                context: context,
+                delegate: SimulationSearch(),
+              );
             },
           ),
         ],

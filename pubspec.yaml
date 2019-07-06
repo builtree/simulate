@@ -50,6 +50,7 @@ flutter:
     - images/Bubblesort.gif
     - images/RosePattern.gif
     - images/InsertionSort.gif
+    - android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
