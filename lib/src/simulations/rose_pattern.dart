@@ -50,6 +50,7 @@ class _RosePatternState extends State<RosePattern> {
           style: TextStyle(
             fontFamily: 'Ubuntu',
             color: Colors.black,
+            fontSize: 28,
           ),
         ),
         iconTheme: IconThemeData(color: Colors.black),
@@ -158,7 +159,7 @@ class _RosePatternState extends State<RosePattern> {
               top: 5,
               left: 5,
               child: Text(
-                'k ~ ${(_n /_d).toStringAsFixed(2)}',
+                'k ~ ${(_n / _d).toStringAsFixed(2)}',
                 style: TextStyle(
                   fontFamily: 'Ubuntu',
                   color: Colors.black,

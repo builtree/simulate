@@ -102,6 +102,7 @@ class _LangtonAntState extends State<LangtonAnt> {
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Ubuntu',
+            fontSize: 28,
           ),
         ),
         iconTheme: IconThemeData(
