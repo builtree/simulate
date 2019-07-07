@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -213,7 +212,6 @@ class FourierPainter extends CustomPainter {
     paint.color = Colors.black;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 2;
-    // canvas.translate(100, 200);
     for (int i = 0; i < _n; i++) {
       prevco = coor;
       if (wave == 'Square Wave') {
