@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
+import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/langton_ant.dart';
@@ -8,9 +9,9 @@ import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2, 3];
-  final _mathematics = [4];
+  final _mathematics = [4, 5];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -20,6 +21,7 @@ class Simulations with ChangeNotifier {
     2: "bubble sort algorithm sorting bars ",
     3: "insertion sort algorithm sorting bars ",
     4: "rose pattern mathematics sequence ",
+    5: "fourier series mathematics"
   };
 
   Simulations() {
@@ -75,6 +77,14 @@ class Simulations with ChangeNotifier {
         direct: RosePattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[4],
+      ),
+      SimulationCard(
+        id: 5,
+        simulationName: 'Fourier Series',
+        image: 'images/Fourier.gif',
+        direct: FourierSeries(),
+        infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
+        fav: _favorites[5],
       ),
     ];
   }
