@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-> Before contributing, we highly recommend introducing yourself and your ideas on gitter.
+> Before contributing, we highly recommend introducing yourself and your ideas on gitter.[![Gitter](https://badges.gitter.im/codEd-org/simulate.svg)](https://gitter.im/codEd-org/simulate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ### Setting Up Simulate:
 
