@@ -16,7 +16,7 @@
     flutter run
     ```
 
-### Building your stuff
+### Building your stuff:
 
 #### Fixing a bug:
 
@@ -33,4 +33,4 @@ git checkout -b [BRANCH NAME]
 
 ---
 
-> Don't hesitate in asking questions, it's a part of learning and everyone is here to help.
+*Don't hesitate in asking questions, it's a part of learning and everyone is here to help.*
