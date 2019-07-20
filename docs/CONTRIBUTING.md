@@ -27,7 +27,7 @@ git checkout -b [BRANCH NAME]
 ```
 3. Fix the bug and open a pull request
 
-#### Adding a new Simualtion:
+#### Adding a new Simulation:
 
 > (We aren't accepting new simulation right now, you can request one by opening an issue or on gitter)
 
