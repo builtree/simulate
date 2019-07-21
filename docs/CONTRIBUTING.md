@@ -4,15 +4,16 @@
 
 ### Setting Up Simulate:
 
-1. Make sure you have flutter installed (https://flutter.dev/docs/get-started/install)
+1. Make sure you have Flutter installed (https://flutter.dev/docs/get-started/install)
 2. Fork the repository
 3. Clone the forked repository:
     ```console
     git clone https://github.com/[YOUR USERNAME]/simulate.git
     ```
 4. Connect a device or run an emulator (Make sure your connected device has enabled USB Debugging and isn't on 'Charge Only' when connected) 
-5. Run:
+5. Navigate to the project directory and Run:
     ```console
+    cd simulate
     flutter run
     ```
 
@@ -29,7 +30,7 @@ git checkout -b [BRANCH NAME]
 
 #### Adding a new Simulation:
 
-> (We aren't accepting new simulation right now, you can request one by opening an issue or on gitter)
+> (We aren't accepting new simulations right now, you can request one by opening an issue or on gitter)
 
 ---
 
