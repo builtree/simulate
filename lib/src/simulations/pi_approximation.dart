@@ -174,7 +174,7 @@ class DotPainter extends CustomPainter {
     double x, y;
     R = size.width / 2.1;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 50; i++) {
       x = -R + 2 * random.nextDouble() * R;
       y = -R + 2 * random.nextDouble() * R;
 
