@@ -7,13 +7,12 @@ List<List<double>> coordinates = List();
 class PiApproximation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.black,
+            color: Colors.white,
           ),
           onPressed: () => Navigator.pop(context),
         ),
@@ -21,10 +20,12 @@ class PiApproximation extends StatelessWidget {
         title: Text(
           "Pi Approximation",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontFamily: 'Ubuntu',
           ),
         ),
+        backgroundColor: Colors.grey[850],
+        elevation: 0,
       ),
       backgroundColor: Colors.grey[850],
       body: Stack(
@@ -38,40 +39,29 @@ class PiApproximation extends StatelessWidget {
             ),
           ),
           MakeDots(),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.transparent,
-        height: size.height / 10,
-        width: size.width,
-        child: Material(
-          color: Colors.white,
-          shadowColor: Colors.black,
-          elevation: 10,
-          child: Center(
-            child: Stack(
+          Positioned(
+            top: 20,
+            left: 10,
+            child: Values(),
+          ),
+          Align(
+            alignment: Alignment(0, 0.8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Positioned(
-                  left: 5,
-                  child: Center(
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "Approximate value of Pi: ",
-                          style: TextStyle(
-                            fontFamily: 'Ubuntu',
-                            fontSize: 18,
-                          ),
-                        ),
-                        PiValue(),
-                      ],
-                    ),
+                Text(
+                  "Pi (approx): ",
+                  style: TextStyle(
+                    fontFamily: 'Ubuntu',
+                    fontSize: 18,
+                    color: Colors.white,
                   ),
                 ),
+                PiValue(),
               ],
             ),
           ),
-        ),
+        ],
       ),
     );
   }
@@ -111,6 +101,27 @@ class BackgroundPainter extends CustomPainter {
   bool shouldRebuildSemantics(BackgroundPainter oldDelegate) => false;
 }
 
+class Values extends StatefulWidget {
+  _ValuesState createState() => _ValuesState();
+}
+
+class _ValuesState extends State<Values> {
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    return Text(
+      "Dots inside circle (Red): ${insideCircle.toInt()}\n"
+      "Total dots (Red + Green): ${total.toInt()}\n\n"
+      "Approx Value of Pi = 4 * Red / (Red + Green)",
+      style: TextStyle(
+        fontFamily: 'Ubuntu',
+        fontSize: 18,
+        color: Colors.white,
+      ),
+    );
+  }
+}
+
 class PiValue extends StatefulWidget {
   _PiValueState createState() => _PiValueState();
 }
@@ -120,10 +131,11 @@ class _PiValueState extends State<PiValue> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     return Text(
-      "$pi",
+      "${pi.toStringAsFixed(20)}",
       style: TextStyle(
         fontFamily: 'Ubuntu',
         fontSize: 18,
+        color: Colors.white,
       ),
     );
   }
@@ -162,7 +174,7 @@ class DotPainter extends CustomPainter {
     double x, y;
     R = size.width / 2.1;
 
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 10; i++) {
       x = -R + 2 * random.nextDouble() * R;
       y = -R + 2 * random.nextDouble() * R;
 
