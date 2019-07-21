@@ -114,7 +114,7 @@ class _ValuesState extends State<Values> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     return Text(
-      "Dots inside circle (Red): ${insideCircle.toInt()}\n"
+      "\tDots inside circle (Red): ${insideCircle.toInt()}\n"
       "Total dots (Red + Green): ${total.toInt()}",
       style: TextStyle(
         fontFamily: 'Ubuntu',
