@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:flutter/services.dart';
+
 double pi = 0, total = 0, insideCircle = 0;
 List<List<double>> coordinates = List();
 
@@ -150,10 +152,25 @@ class MakeDots extends StatefulWidget {
 
 class _MakeDotsState extends State<MakeDots> {
   @override
+  void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    super.initState();
+  }
+
+  @override
   void dispose() {
     coordinates.clear();
     total = 0;
     insideCircle = 0;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
