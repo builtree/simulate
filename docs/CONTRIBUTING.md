@@ -10,7 +10,7 @@
     ```console
     git clone https://github.com/[YOUR USERNAME]/simulate.git
     ```
-4. Connect a device or run an emulator (Make sure your connected device has enabled USB Debugging and isn't on 'Charge Only' when connected) 
+4. Connect a device or run an emulator (Make sure your connected device has USB Debugging enabled) 
 5. Navigate to the project directory and Run:
     ```console
     cd simulate
