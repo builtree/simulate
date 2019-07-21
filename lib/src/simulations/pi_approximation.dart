@@ -39,13 +39,17 @@ class PiApproximation extends StatelessWidget {
             ),
           ),
           MakeDots(),
-          Positioned(
-            top: 20,
-            left: 10,
-            child: Values(),
+          Align(
+            alignment: Alignment(0, 0.5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Values(),
+              ],
+            ),
           ),
           Align(
-            alignment: Alignment(0, 0.8),
+            alignment: Alignment(0, 0.75),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -53,7 +57,7 @@ class PiApproximation extends StatelessWidget {
                   "Pi (approx): ",
                   style: TextStyle(
                     fontFamily: 'Ubuntu',
-                    fontSize: 18,
+                    fontSize: 20,
                     color: Colors.white,
                   ),
                 ),
@@ -79,14 +83,14 @@ class BackgroundPainter extends CustomPainter {
       ..style = PaintingStyle.stroke;
 
     canvas.drawCircle(
-      Offset(size.width / 2, size.height / 2),
+      Offset(size.width / 2, size.height / 3),
       R,
       brush,
     );
 
     canvas.drawRect(
       Rect.fromCenter(
-        center: Offset(size.width / 2, size.height / 2),
+        center: Offset(size.width / 2, size.height / 3),
         height: 2 * R,
         width: 2 * R,
       ),
@@ -111,11 +115,10 @@ class _ValuesState extends State<Values> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     return Text(
       "Dots inside circle (Red): ${insideCircle.toInt()}\n"
-      "Total dots (Red + Green): ${total.toInt()}\n\n"
-      "Approx Value of Pi = 4 * Red / (Red + Green)",
+      "Total dots (Red + Green): ${total.toInt()}",
       style: TextStyle(
         fontFamily: 'Ubuntu',
-        fontSize: 18,
+        fontSize: 20,
         color: Colors.white,
       ),
     );
@@ -134,7 +137,7 @@ class _PiValueState extends State<PiValue> {
       "${pi.toStringAsFixed(20)}",
       style: TextStyle(
         fontFamily: 'Ubuntu',
-        fontSize: 18,
+        fontSize: 20,
         color: Colors.white,
       ),
     );
@@ -192,7 +195,7 @@ class DotPainter extends CustomPainter {
           : brush.color = Colors.red;
 
       canvas.drawCircle(
-        Offset(size.width / 2 + x, size.height / 2 + y),
+        Offset(size.width / 2 + x, size.height / 3 + y),
         1,
         brush,
       );
