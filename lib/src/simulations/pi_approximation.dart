@@ -49,17 +49,25 @@ class PiApproximation extends StatelessWidget {
           shadowColor: Colors.black,
           elevation: 10,
           child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+            child: Stack(
               children: <Widget>[
-                Text(
-                  "\t\t\t\t\tApproximate value of Pi: ",
-                  style: TextStyle(
-                    fontFamily: 'Ubuntu',
-                    fontSize: 18,
+                Positioned(
+                  left: 5,
+                  child: Center(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          "Approximate value of Pi: ",
+                          style: TextStyle(
+                            fontFamily: 'Ubuntu',
+                            fontSize: 18,
+                          ),
+                        ),
+                        PiValue(),
+                      ],
+                    ),
                   ),
                 ),
-                PiValue(),
               ],
             ),
           ),
