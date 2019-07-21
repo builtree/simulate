@@ -19,7 +19,7 @@ class PiApproximation extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          "Pi Approximation",
+          "Monte Carlo Method (Pi Approximation)",
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Ubuntu',

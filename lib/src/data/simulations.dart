@@ -23,7 +23,7 @@ class Simulations with ChangeNotifier {
     3: "insertion sort algorithm sorting bars ",
     4: "rose pattern mathematics sequence ",
     5: "fourier series mathematics ",
-    6: "pi approximation monte carlo ",
+    6: "pi approximation monte carlo method ",
   };
 
   Simulations() {
@@ -90,7 +90,7 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 6,
-        simulationName: 'Pi Approximation',
+        simulationName: 'Monte Carlo Method',
         image: 'images/PiApproximation.gif',
         direct: PiApproximation(),
         infoLink:
