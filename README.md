@@ -13,4 +13,4 @@ Some pre-requisites:
 2. Try installing and experimenting with the development version on your phone
 3. Don't hesitate in asking questions, we'll be happy to help
    
-All further guidelines can be found in the [documentation](docs/CONTRIBUTING.md)
+All further guidelines can be found in the [documentation](docs/)
