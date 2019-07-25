@@ -8,25 +8,24 @@ List<List<double>> coordinates = List();
 class PiApproximation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Colors.white,
+            color: Colors.black,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
         title: Text(
-          "Monte Carlo Method (Pi Approximation)",
+          "Pi Approximation (Monte Carlo Method)",
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             fontFamily: 'Ubuntu',
           ),
         ),
-        backgroundColor: Colors.grey[850],
-        elevation: 0,
       ),
       backgroundColor: Colors.grey[850],
       body: Stack(
@@ -40,6 +39,14 @@ class PiApproximation extends StatelessWidget {
             ),
           ),
           MakeDots(),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              color: Colors.white,
+              width: size.width,
+              height: size.height / 8.3,
+            ),
+          ),
           Align(
             alignment: Alignment(0, 0.5),
             child: Row(
@@ -50,7 +57,7 @@ class PiApproximation extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment(0, 0.75),
+            alignment: Alignment(0, 0.9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -59,7 +66,7 @@ class PiApproximation extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Ubuntu',
                     fontSize: 20,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 PiValue(),
@@ -139,7 +146,7 @@ class _PiValueState extends State<PiValue> {
       style: TextStyle(
         fontFamily: 'Ubuntu',
         fontSize: 20,
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }
