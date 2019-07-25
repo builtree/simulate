@@ -171,7 +171,7 @@ class _InsertionHomeState extends State<InsertionHome> {
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              Spacer(flex: 5),
+              Spacer(),
               Slider(
                 min: 2,
                 max: 149,
@@ -190,17 +190,14 @@ class _InsertionHomeState extends State<InsertionHome> {
                 },
                 value: sliderValue.toDouble(),
               ),
-              Center(
-                child: Text(
-                  "Elements: $sliderValue",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+              Text(
+                "Elements: $sliderValue",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Ubuntu',
                 ),
               ),
-              Spacer(),
               Slider(
                 min: 0,
                 max: 500,
@@ -231,17 +228,15 @@ class _InsertionHomeState extends State<InsertionHome> {
                 },
                 value: sleepDuration.toDouble(),
               ),
-              Center(
-                child: Text(
-                  "Delay (milliseconds): $sleepDuration",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+              Text(
+                "Delay (milliseconds): $sleepDuration",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontFamily: 'Ubuntu',
                 ),
               ),
-              Spacer(flex: 3),
+              Spacer(),
             ],
           ),
         ),
