@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'data/simulations.dart';
+import 'dart:io';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/custom_items/chemistry_page.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
@@ -126,7 +127,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           fontFamily: 'Ubuntu',
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        if (text == "Exit") exit(0);
+      },
     );
   }
 }
