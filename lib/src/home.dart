@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'data/simulations.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:simulate/src/custom_items/chemistry_page.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
 import 'package:simulate/src/custom_items/mathematics_page.dart';
@@ -127,8 +128,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           fontFamily: 'Ubuntu',
         ),
       ),
-      onTap: () {
-        if (text == "Exit") exit(0);
+      onTap: () async {
+        if (text == "Exit")
+          exit(0);
+        else if (text == "About") {
+          Navigator.pop(context);
+          final url = 'https://github.com/cod-ed/simulate';
+          if (await canLaunch(url))
+            await launch(url);
+          else
+            throw 'Could not launch';
+        }
       },
     );
   }
