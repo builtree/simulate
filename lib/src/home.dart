@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'data/simulations.dart';
+import 'dart:io';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:simulate/src/custom_items/chemistry_page.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
 import 'package:simulate/src/custom_items/mathematics_page.dart';
@@ -53,7 +55,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         centerTitle: true,
         iconTheme: IconThemeData(
           color: Colors.black,
@@ -67,10 +68,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.search),
@@ -91,6 +88,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           tabs: widget._categoryTabs,
         ),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            DrawerHeader(
+              child: Image.asset(
+                'android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png',
+                height: MediaQuery.of(context).size.height / 18,
+                width: MediaQuery.of(context).size.height / 18 * 3.0881,
+              ),
+            ),
+            customListTile(context, "Rate the app", Icon(Icons.star_border)),
+            customListTile(context, "About", Icon(Icons.info_outline)),
+            Spacer(),
+            customListTile(context, "Exit", Icon(Icons.exit_to_app)),
+          ],
+        ),
+      ),
       body: TabBarView(
         controller: _categoryController,
         children: <Widget>[
@@ -101,6 +115,31 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ChemistryPage(),
         ],
       ),
+    );
+  }
+
+  Widget customListTile(BuildContext context, String text, Icon icon) {
+    return ListTile(
+      trailing: Icon(icon.icon),
+      title: Text(
+        text,
+        style: TextStyle(
+          fontSize: 16,
+          fontFamily: 'Ubuntu',
+        ),
+      ),
+      onTap: () async {
+        if (text == "Exit")
+          exit(0);
+        else if (text == "About") {
+          Navigator.pop(context);
+          final url = 'https://github.com/cod-ed/simulate';
+          if (await canLaunch(url))
+            await launch(url);
+          else
+            throw 'Could not launch';
+        }
+      },
     );
   }
 }
