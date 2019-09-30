@@ -21,7 +21,7 @@
 
 #### Fixing a bug:
 
-1. Open an issue or report on gitter
+1. Open an issue or report on slack
 2. Make a new branch
 ```console
 git checkout -b [BRANCH NAME]

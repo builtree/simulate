@@ -4,7 +4,7 @@ Collection of simulations and visualizations in a cross platform app made using 
 
 # Contributing
 
-Before contributing, we highly recommend introducing yourself and your ideas on gitter.
+Before contributing, we highly recommend introducing yourself and your ideas on slack.
 
 Some pre-requisites:
 
