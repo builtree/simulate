@@ -170,7 +170,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       bottomNavigationBar: Material(
         elevation: 10,
         child: Container(
-          height: MediaQuery.of(context).size.height / 10,
+          height: MediaQuery.of(context).size.height / 6,
           color: Colors.white,
           child: Column(
             children: <Widget>[
@@ -179,7 +179,6 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.remove),
-                    iconSize: 30,
                     highlightColor: Colors.blue,
                     onPressed: () {
                       subtract();
