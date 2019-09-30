@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-> Before contributing, we highly recommend introducing yourself and your ideas on gitter.[![Gitter](https://badges.gitter.im/codEd-org/simulate.svg)](https://gitter.im/codEd-org/simulate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+> Before contributing, we highly recommend introducing yourself and your ideas on slack. (Coming soon)
 
 ### Setting Up Simulate:
 
@@ -21,7 +21,7 @@
 
 #### Fixing a bug:
 
-1. Open an issue or report on gitter
+1. Open an issue or report on slack
 2. Make a new branch
 ```console
 git checkout -b [BRANCH NAME]
@@ -30,7 +30,7 @@ git checkout -b [BRANCH NAME]
 
 #### Adding a new Simulation:
 
-> (We aren't accepting new simulations right now, you can request one by opening an issue or on gitter)
+> (We aren't accepting new simulations right now, you can request one by opening an issue)
 
 ---
 
