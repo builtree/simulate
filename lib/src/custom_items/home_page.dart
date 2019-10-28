@@ -19,11 +19,7 @@ class HomePage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "No favorites yet!",
-                          style: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: 24,
-                            fontFamily: 'Ubuntu',
-                          ),
+                          style: Theme.of(context).textTheme.caption,
                         ),
                       ),
                     ),

@@ -48,6 +48,7 @@ class _SimulationCardState extends State<SimulationCard> {
         },
         child: Card(
           elevation: 5,
+          color: Theme.of(context).primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -70,10 +71,7 @@ class _SimulationCardState extends State<SimulationCard> {
                   padding: EdgeInsets.all(3),
                   child: Text(
                     widget.simulationName,
-                    style: TextStyle(
-                      fontFamily: 'Ubuntu',
-                      color: Colors.black,
-                    ),
+                    style: Theme.of(context).textTheme.subhead,
                   ),
                 ),
               ),
