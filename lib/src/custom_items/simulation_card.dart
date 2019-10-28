@@ -56,7 +56,7 @@ class _SimulationCardState extends State<SimulationCard> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Flexible(
-                flex: 6,
+                flex: 5,
                 child: Container(
                   padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
                   child: Image.asset(
@@ -78,6 +78,7 @@ class _SimulationCardState extends State<SimulationCard> {
               Flexible(
                 flex: 2,
                 child: Container(
+                  color: Colors.transparent,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[

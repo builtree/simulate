@@ -46,7 +46,7 @@ class HomeHorizontalList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
       child: Column(
         children: <Widget>[
           Container(
@@ -54,13 +54,12 @@ class HomeHorizontalList extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Text(
               listName,
-              style: TextStyle(fontFamily: 'Ubuntu', fontSize: 17),
+              style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: 17),
               textAlign: TextAlign.left,
             ),
           ),
           Container(
-            color: Colors.white,
-            height: 200,
+            height: 215,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,

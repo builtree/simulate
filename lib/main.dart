@@ -3,50 +3,36 @@ import 'package:flutter/cupertino.dart';
 import 'package:simulate/src/home.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/data/simulations.dart';
+import 'package:simulate/src/data/themedata.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final _primaryColor = Colors.white;
-final _counterColor = Colors.black;
+void main() async {
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<Simulations>(
+          builder: (context) => Simulations(),
+        ),
+        ChangeNotifierProvider<ThemeProvider>(
+          builder: (context) => ThemeProvider(),
+        ),
+      ],
+      child: HomeCall(),
+    ),
+  );
+}
 
-final ThemeData _themeData = ThemeData(
-  brightness: Brightness.light,
-  accentColor: _counterColor,
-  fontFamily: 'Ubuntu',
-  indicatorColor: Colors.black,
-  primaryColor: _primaryColor,
-  textTheme: TextTheme(
-    title: TextStyle(
-      color: _counterColor,
-      fontFamily: 'Ubuntu',
-    ),
-    subhead: TextStyle(
-      color: _counterColor,
-      fontFamily: 'Ubuntu',
-    ),
-    caption: TextStyle(
-      color: Colors.grey[400],
-      fontSize: 24,
-      fontFamily: 'Ubuntu',
-    ),
-  ),
-  appBarTheme: AppBarTheme(
-    color: _primaryColor,
-    iconTheme: IconThemeData(
-      color: _counterColor,
-    ),
-  ),
-  tabBarTheme: TabBarTheme(
-    labelColor: _counterColor,
-    unselectedLabelColor: _counterColor.withOpacity(0.3),
-  ),
-);
-
-void main() => runApp(
-      ChangeNotifierProvider<Simulations>(
-        builder: (context) => Simulations(),
-        child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Simulate',
-            home: Home(),
-            theme: _themeData),
-      ),
+class HomeCall extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Simulate',
+      home: Home(),
+      theme: theme.theme,
     );
+  }
+}

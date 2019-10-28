@@ -7,6 +7,7 @@ import 'package:simulate/src/custom_items/home_page.dart';
 import 'package:simulate/src/custom_items/mathematics_page.dart';
 import 'package:simulate/src/custom_items/algorithms_page.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
+import 'package:simulate/src/data/themedata.dart';
 
 class Home extends StatefulWidget {
   final List<Widget> _categoryTabs = [
@@ -26,7 +27,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _categoryController;
-
   @override
   void initState() {
     super.initState();
@@ -44,16 +44,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
           'Simulate',
           style: Theme.of(context).textTheme.title,
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
         ),
         actions: <Widget>[
           IconButton(
@@ -70,6 +67,41 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           controller: _categoryController,
           isScrollable: true,
           tabs: widget._categoryTabs,
+        ),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Center(
+                child: Text(
+                  'Simulate',
+                  style: Theme.of(context).textTheme.title.copyWith(
+                        fontSize: 40,
+                      ),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            ListTile(
+              leading: Text(
+                "Dark Mode",
+                style: Theme.of(context).textTheme.subtitle.copyWith(
+                      fontSize: 20,
+                    ),
+              ),
+              trailing: Switch(
+                value: theme.darkTheme,
+                activeColor: Colors.black,
+                onChanged: (bool value) {
+                  theme.toggleTheme();
+                },
+              ),
+            )
+          ],
         ),
       ),
       body: TabBarView(
