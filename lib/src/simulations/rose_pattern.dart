@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RosePattern extends StatefulWidget {
   @override
@@ -36,6 +37,11 @@ class _RosePatternState extends State<RosePattern> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: 512.0,
+      height: 1024.0,
+      allowFontScaling: true,
+    )..init(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -47,21 +53,15 @@ class _RosePatternState extends State<RosePattern> {
         ),
         title: Text(
           'Rose Pattern',
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.title,
         ),
-        iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         centerTitle: true,
       ),
       bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height / 4,
+        height: ScreenUtil.instance.height / 4,
         child: Material(
           elevation: 30,
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[
               Spacer(flex: 2),
@@ -69,7 +69,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 10,
                 divisions: 1000,
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -81,10 +81,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Numerator: $_n",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               Spacer(
@@ -94,7 +91,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 10,
                 divisions: 1000,
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -106,10 +103,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Denominator: $_d",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               Spacer(),
@@ -117,7 +111,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 1,
                 divisions: 100,
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -129,10 +123,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Offset: $offset",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               Spacer(),
@@ -160,10 +151,7 @@ class _RosePatternState extends State<RosePattern> {
               left: 5,
               child: Text(
                 'k ~ ${(_n / _d).toStringAsFixed(2)}',
-                style: TextStyle(
-                  fontFamily: 'Ubuntu',
-                  color: Colors.black,
-                ),
+                style: Theme.of(context).textTheme.subtitle,
               ),
             )
           ],
