@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
+import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/pi_approximation.dart';
@@ -10,20 +12,18 @@ import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1];
-  final _algorithm = [0, 1, 2, 3];
-  final _mathematics = [4, 5, 6];
+  static var _favorites = [-1, -1, -1, -1, -1];
+  final _algorithm = [0, 1, 2];
+  final _mathematics = [3, 4];
   final _physics = [];
   final _chemistry = [];
   var prefs;
   final _searchTags = {
     0: "toothpick pattern algorithm sequence ",
-    1: "langtons ant pattern algorithm ",
-    2: "bubble sort algorithm sorting bars ",
-    3: "insertion sort algorithm sorting bars ",
-    4: "rose pattern mathematics sequence ",
-    5: "fourier series mathematics ",
-    6: "pi approximation monte carlo method ",
+    1: "bubble sort algorithm sorting bars ",
+    2: "insertion sort algorithm sorting bars ",
+    3: "rose pattern mathematics sequence ",
+    4: "fourier series mathematics ",
   };
 
   Simulations() {
@@ -39,63 +39,47 @@ class Simulations with ChangeNotifier {
   }
 
   List<Widget> allSimulations() {
+    final theme = ThemeProvider();
     return <Widget>[
       SimulationCard(
         id: 0,
         simulationName: 'ToothPick Pattern',
-        image: 'images/ToothpickPattern.gif',
+        image: theme.darkTheme ? 'images/ToothpickPatternDark.png': 'images/ToothpickPatternLight.png',
         direct: ToothpickPattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
         fav: _favorites[0],
       ),
       SimulationCard(
         id: 1,
-        simulationName: 'Langton\'s Ant',
-        image: 'images/LangtonsAnt.gif',
-        direct: LangtonAnt(),
-        infoLink: 'https://en.wikipedia.org/wiki/Langton%27s_ant',
-        fav: _favorites[1],
-      ),
-      SimulationCard(
-        id: 2,
         simulationName: 'Bubble Sort (Bars)',
         image: 'images/Bubblesort.gif',
         direct: BubbleSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Bubble_sort',
-        fav: _favorites[2],
+        fav: _favorites[1],
       ),
       SimulationCard(
-        id: 3,
+        id: 2,
         simulationName: 'Insertion Sort',
         image: 'images/InsertionSort.gif',
         direct: InsertionHome(),
         infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
+        fav: _favorites[2],
+      ),
+      SimulationCard(
+        id: 3,
+        simulationName: 'Rose Pattern',
+        image: theme.darkTheme ? 'images/RosePatternDark.png': 'images/RosePatternLight.png',
+        direct: RosePattern(),
+        infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[3],
       ),
       SimulationCard(
         id: 4,
-        simulationName: 'Rose Pattern',
-        image: 'images/RosePattern.gif',
-        direct: RosePattern(),
-        infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
-        fav: _favorites[4],
-      ),
-      SimulationCard(
-        id: 5,
         simulationName: 'Fourier Series',
         image: 'images/Fourier.gif',
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
-        fav: _favorites[5],
-      ),
-      SimulationCard(
-        id: 6,
-        simulationName: 'Monte Carlo Method',
-        image: 'images/PiApproximation.gif',
-        direct: PiApproximation(),
-        infoLink:
-            'https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/',
-        fav: _favorites[6],
+        fav: _favorites[4],
       ),
     ];
   }

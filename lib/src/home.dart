@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'data/simulations.dart';
 import 'dart:io';
 import 'package:provider/provider.dart';

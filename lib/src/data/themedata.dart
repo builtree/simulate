@@ -18,7 +18,7 @@ class ThemeProvider with ChangeNotifier {
 
   getThemeData() async {
     prefs = await SharedPreferences.getInstance();
-    bool dark = await (prefs.getBool('theme') ?? false);
+    bool dark = await prefs.getBool('theme') ?? false;
     _darkTheme = dark;
     _primaryColor = _darkTheme ? Colors.black : Colors.white;
     _counterColor = _darkTheme ? Colors.white : Colors.black;
