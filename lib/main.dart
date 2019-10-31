@@ -16,7 +16,7 @@ void main() async {
           builder: (context) => Simulations(),
         ),
         ChangeNotifierProvider<ThemeProvider>(
-          builder: (context) => ThemeProvider(),
+          builder: (context) => ThemeProvider(sharedPreferences),
         ),
       ],
       child: HomeCall(),

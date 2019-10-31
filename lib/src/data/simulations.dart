@@ -39,7 +39,7 @@ class Simulations with ChangeNotifier {
   }
 
   List<Widget> allSimulations() {
-    final theme = ThemeProvider();
+    final theme = ThemeProvider(prefs);
     return <Widget>[
       SimulationCard(
         id: 0,
@@ -76,7 +76,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 4,
         simulationName: 'Fourier Series',
-        image: 'images/Fourier.gif',
+        image: theme.darkTheme ? 'images/FourierSeriesDark.png': 'images/FourierSeriesLight.png',
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
