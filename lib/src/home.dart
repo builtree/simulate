@@ -119,6 +119,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
 class SimulationSearch extends SearchDelegate<SimulationCard> {
   @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context);
+  }
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
