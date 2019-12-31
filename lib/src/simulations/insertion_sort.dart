@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 int sliderValue = 2,
     iterator = -1,
@@ -51,10 +52,10 @@ class _InsertionHomeState extends State<InsertionHome> {
           color: (temp == iterator)
               ? Colors.red
               : (temp != i)
-                  ? Colors.white
+                  ? Theme.of(context).primaryColor
                   : (i != barValuesList.length - 1)
                       ? Colors.blue
-                      : Colors.white,
+                      : Theme.of(context).primaryColor,
         ),
       );
       ++temp;
@@ -108,6 +109,11 @@ class _InsertionHomeState extends State<InsertionHome> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: 512.0,
+      height: 1024.0,
+      allowFontScaling: true,
+    )..init(context);
     if (!colorGreen)
       makeContainers();
     else
@@ -116,23 +122,16 @@ class _InsertionHomeState extends State<InsertionHome> {
           doNotRefresh = true;
         }));
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.black,
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: Colors.white,
         elevation: 5,
         centerTitle: true,
         title: Text(
           "Insertion Sort",
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.title,
         ),
       ),
       body: Stack(
@@ -165,18 +164,18 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: MediaQuery.of(context).size.height / 5.5,
+        height: ScreenUtil.instance.height / 5.5,
         child: Material(
           elevation: 30,
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[
               Spacer(),
               Slider(
                 min: 2,
                 max: 149,
-                activeColor: Colors.black,
-                inactiveColor: Colors.black38,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
                     colorGreen = false;
@@ -192,17 +191,13 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Text(
                 "Elements: $sliderValue",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontFamily: 'Ubuntu',
-                ),
+                style: Theme.of(context).textTheme.subtitle,
               ),
               Slider(
                 min: 0,
                 max: 500,
-                activeColor: Colors.black,
-                inactiveColor: Colors.black38,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
                 onChangeStart: (value) {
                   setState(() {
                     if (isWorking) wasAlreadyWorking = true;
@@ -230,11 +225,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Text(
                 "Delay (milliseconds): $sleepDuration",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontFamily: 'Ubuntu',
-                ),
+                style: Theme.of(context).textTheme.subtitle,
               ),
               Spacer(),
             ],

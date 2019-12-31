@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Function listEq = const DeepCollectionEquality().equals;
 
@@ -131,6 +132,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
+    double defaultScreenWidth = 512.0;
+    double defaultScreenHeight = 1024.0;
+    ScreenUtil.instance = ScreenUtil(
+      width: defaultScreenWidth,
+      height: defaultScreenHeight,
+      allowFontScaling: true,
+    )..init(context);
     if (step == 1) {
       activeToothPicks.add(new Toothpick([
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
@@ -148,30 +156,27 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         ),
         title: Text(
           "ToothPick Pattern",
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            color: Colors.black,
-            fontSize: 20,
-          ),
+          style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black,
-        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: null,
         elevation: 10,
-        label: Text('Step: $step'),
+        label: Text(
+          'Step: $step',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         backgroundColor: Colors.red,
       ),
       bottomNavigationBar: Material(
         elevation: 10,
         child: Container(
-          height: MediaQuery.of(context).size.height / 10,
-          color: Colors.white,
+          height: ScreenUtil.instance.height / 10,
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[
               Row(
@@ -179,8 +184,6 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.remove),
-                    iconSize: 30,
-                    highlightColor: Colors.blue,
                     onPressed: () {
                       subtract();
                     },
@@ -198,6 +201,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                 activeColor: Colors.red,
                 min: 0.01,
                 max: 2,
+                inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
                     _scaleAmount = value;
@@ -212,7 +216,11 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         child: Transform.scale(
           scale: _scaleAmount,
           child: CustomPaint(
-            painter: ToothpickPainter(activeToothPicks, toothPicks),
+            painter: ToothpickPainter(
+              activeToothPicks,
+              toothPicks,
+              Theme.of(context).accentColor,
+            ),
             child: Container(),
           ),
         ),
@@ -224,11 +232,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 class ToothpickPainter extends CustomPainter {
   var activeToothpicks = new List<Toothpick>();
   var toothpicks = new List<Toothpick>();
-  ToothpickPainter(this.activeToothpicks, this.toothpicks);
+  var colorTheme = new Color(0);
+  ToothpickPainter(this.activeToothpicks, this.toothpicks, this.colorTheme);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
     paint.strokeWidth = 2;
+    paint.color = this.colorTheme;
     for (int i = 0; i < toothpicks.length; i++) {
       canvas.drawLine(Offset(toothpicks[i].end1[0], toothpicks[i].end1[1]),
           Offset(toothpicks[i].end2[0], toothpicks[i].end2[1]), paint);

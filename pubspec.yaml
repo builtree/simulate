@@ -26,6 +26,7 @@ dependencies:
   url_launcher:
   provider:
   shared_preferences:
+  flutter_screenutil: ^0.6.0
 
 dev_dependencies:
   flutter_test:
@@ -45,13 +46,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/ToothpickPattern.gif
-    - images/LangtonsAnt.gif
+    - images/RosePatternDark.png
+    - images/RosePatternLight.png
+    - images/ToothpickPatternDark.png
+    - images/ToothpickPatternLight.png
+    - images/FourierSeriesDark.png
+    - images/FourierSeriesLight.png
     - images/Bubblesort.gif
-    - images/RosePattern.gif
     - images/InsertionSort.gif
-    - images/Fourier.gif
-    - images/PiApproximation.gif
     - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

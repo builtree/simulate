@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BubbleSortBars extends StatefulWidget {
   @override
@@ -73,7 +74,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           ));
         } else {
           containerList.add(Container(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             height: _elements[k] + 0.5,
             width: barwidth,
           ));
@@ -92,7 +93,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           ));
         } else {
           containerList.add(Container(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             height: _elements[k] + 0.5,
             width: barwidth,
           ));
@@ -129,6 +130,11 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: 512.0,
+      height: 1024.0,
+      allowFontScaling: true,
+    )..init(context);
     _containerList();
     if (swap == true || finalIterator != 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
@@ -146,15 +152,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
         centerTitle: true,
         title: Text(
           'Bubble Sort',
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black,
+          style: Theme.of(context).textTheme.title,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -175,17 +173,17 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        height: MediaQuery.of(context).size.height / 6,
+        height: ScreenUtil.instance.height / 6,
         child: Material(
           elevation: 30,
-          color: Colors.white,
+          color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[
               Spacer(flex: 2),
               Slider(
                 min: 2,
                 max: 200,
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   doNotRefresh = false;
@@ -213,7 +211,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
                 min: 0,
                 max: 100,
                 divisions: 10,
-                activeColor: Colors.black,
+                activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
