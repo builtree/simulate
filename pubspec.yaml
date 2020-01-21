@@ -52,6 +52,7 @@ flutter:
     - images/InsertionSort.gif
     - images/Fourier.gif
     - images/PiApproximation.gif
+    - images/lissajous.gif
     - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

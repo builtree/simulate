@@ -8,11 +8,12 @@ import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/langton_ant.dart';
 import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simulate/src/simulations/lissajous_curve.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2, 3];
-  final _mathematics = [4, 5, 6];
+  final _mathematics = [4, 5, 6, 7];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -24,11 +25,13 @@ class Simulations with ChangeNotifier {
     4: "rose pattern mathematics sequence ",
     5: "fourier series mathematics ",
     6: "pi approximation monte carlo method ",
+    7: "Lissajous curve representation",
   };
 
   Simulations() {
     getFavorites();
   }
+
 
   getFavorites() async {
     prefs = await SharedPreferences.getInstance();
@@ -97,6 +100,15 @@ class Simulations with ChangeNotifier {
             'https://www.geeksforgeeks.org/estimating-value-pi-using-monte-carlo/',
         fav: _favorites[6],
       ),
+      SimulationCard(
+        id: 7,
+        simulationName: 'Lissajous curve',
+        image: 'images/lissajous.gif',
+        direct: LissajousSim(),
+        infoLink:
+            'https://en.wikipedia.org/wiki/Lissajous_curve',
+        fav: _favorites[7],
+      )
     ];
   }
 
