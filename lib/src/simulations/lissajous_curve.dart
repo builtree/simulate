@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'dart:math';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LissajousSim extends StatefulWidget {
   LissajousSimState createState() => LissajousSimState();
@@ -10,101 +11,13 @@ class LissajousSimState extends State<LissajousSim> {
   double sliderVala = 0, sliderValb = 0, sliderPhaseDiff = 0, sliderA = 0, sliderB = 0;
   MyPainter myPainter;
 
-  List<Widget> textFields(BuildContext cntxt) {
-    return [
-      Row(
-        children: <Widget>[
-          Align(
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(50)),
-                    ),
-                    contentPadding: EdgeInsets.all(10)),
-              ),
-              width: MediaQuery.of(cntxt).size.width * 0.4,
-              padding: EdgeInsets.all(10),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(cntxt).size.width * 0.1,
-          ),
-          Align(
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(50)),
-                    ),
-                    contentPadding: EdgeInsets.all(10)),
-              ),
-              width: MediaQuery.of(cntxt).size.width * 0.4,
-              padding: EdgeInsets.all(10),
-            ),
-          ),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-      Row(
-        children: <Widget>[
-          Align(
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(50)),
-                    ),
-                    contentPadding: EdgeInsets.all(10)),
-              ),
-              width: MediaQuery.of(cntxt).size.width * 0.4,
-              padding: EdgeInsets.all(10),
-            ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(cntxt).size.width * 0.1,
-          ),
-          Align(
-            child: Container(
-              child: TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(50)),
-                    ),
-                    contentPadding: EdgeInsets.all(10)),
-              ),
-              width: MediaQuery.of(cntxt).size.width * 0.4,
-              padding: EdgeInsets.all(10),
-            ),
-          ),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-      ),
-      Align(
-        child: Container(
-          child: TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(
-                  borderRadius:
-                      const BorderRadius.all(const Radius.circular(50)),
-                ),
-                contentPadding: EdgeInsets.all(10)),
-          ),
-          width: MediaQuery.of(cntxt).size.width * 0.4,
-          padding: EdgeInsets.all(10),
-        ),
-      ),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: 512.0,
+      height: 1024.0,
+      allowFontScaling: true,
+    )..init(context);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

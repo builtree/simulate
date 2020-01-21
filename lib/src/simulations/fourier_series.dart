@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 List<double> ys = [];
 
@@ -45,7 +46,7 @@ class _FourierSeriesState extends State<FourierSeries> {
     if (control == true) {
       setState(() {
         time -= f;
-        if (ys.length == MediaQuery.of(context).size.width.toInt()) {
+        if (ys.length == ScreenUtil.instance.width.toInt()) {
           ys.removeLast();
         }
       });
@@ -54,6 +55,11 @@ class _FourierSeriesState extends State<FourierSeries> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil(
+      width: 1024.0,
+      height: 512.0,
+      allowFontScaling: true,
+    )..init(context);
     WidgetsBinding.instance.addPostFrameCallback((_) => update());
     return Scaffold(
       appBar: AppBar(
@@ -67,26 +73,18 @@ class _FourierSeriesState extends State<FourierSeries> {
         centerTitle: true,
         title: Text(
           'Fourier Series',
-          style: TextStyle(
-            fontFamily: 'Ubuntu',
-            color: Colors.black,
-            fontSize: 20,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(
-          color: Colors.black,
+          style: Theme.of(context).textTheme.title,
         ),
       ),
       body: Row(
         children: <Widget>[
           Container(
-            width: 2 * MediaQuery.of(context).size.width / 3,
+            width: 2 * ScreenUtil.instance.width / 3,
             child: Transform.translate(
               offset:
                   Offset(radius, (4*MediaQuery.of(context).size.height) / 10),
               child: CustomPaint(
-                painter: FourierPainter(radius, time, _n, wave),
+                painter: FourierPainter(radius, time, _n, wave, context),
                 child: Container(),
               ),
             ),
@@ -95,18 +93,14 @@ class _FourierSeriesState extends State<FourierSeries> {
             child:Container(
               child: Material(
                 elevation: 30,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     DropdownButton<String>(
                       value: wave,
                       iconSize: 30,
-                      style: TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
-                        fontFamily: 'Ubuntu',
-                      ),
+                      style: Theme.of(context).textTheme.subtitle,
                       items: [
                         DropdownMenuItem(
                           value: 'Square Wave',
@@ -124,7 +118,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Slider(
                       min: 1,
                       max: 100,
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).accentColor,
                       inactiveColor: Colors.grey,
                       onChanged: (value) {
                         setState(() {
@@ -136,16 +130,13 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "N: ${_n.toInt()}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Ubuntu',
-                        ),
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ),
                     Slider(
                       min: 10,
                       max: 200,
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).accentColor,
                       inactiveColor: Colors.grey,
                       onChanged: (value) {
                         setState(() {
@@ -157,16 +148,13 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "Amplitude: ${radius.toInt()}",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Ubuntu',
-                        ),
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ),
                     Slider(
                       min: 0,
                       max: 1,
-                      activeColor: Colors.black,
+                      activeColor: Theme.of(context).accentColor,
                       inactiveColor: Colors.grey,
                       onChanged: (value) {
                         setState(() {
@@ -178,10 +166,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "- Frequency +",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontFamily: 'Ubuntu',
-                        ),
+                        style: Theme.of(context).textTheme.subtitle,
                       ),
                     ),
                   ],
@@ -202,14 +187,15 @@ class FourierPainter extends CustomPainter {
   Offset prevco;
   int n, _n;
   String wave;
+  BuildContext context;
   List<Offset> points = [];
 
-  FourierPainter(this.r, this.time, this._n, this.wave);
+  FourierPainter(this.r, this.time, this._n, this.wave, this.context);
 
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint();
-    paint.color = Colors.black;
+    paint.color = Theme.of(context).accentColor;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 2;
     for (int i = 0; i < _n; i++) {
@@ -233,7 +219,7 @@ class FourierPainter extends CustomPainter {
     paint.color = Colors.red;
     canvas.drawLine(coor, Offset(r, ys[0]), paint);
     int iterator = 0;
-    paint.color = Colors.black;
+    paint.color = Theme.of(context).accentColor;
     ys.forEach((value) {
       points.add(Offset(iterator.toDouble() + r, value));
       iterator++;
