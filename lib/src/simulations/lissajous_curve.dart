@@ -91,13 +91,11 @@ class _LissajousCurveState extends State<LissajousCurve> {
                       animating = !animating;
                     });
                   }),
-              FloatingActionButton.extended(
+              FloatingActionButton(
                 heroTag: 1,
-                label: Text(
-                  'Clear',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
+                child: Icon(
+                  Icons.highlight_off,
+                  color: Colors.black,
                 ),
                 backgroundColor: Colors.white,
                 onPressed: () {
@@ -118,15 +116,18 @@ class _LissajousCurveState extends State<LissajousCurve> {
           child: ListView(
             padding: EdgeInsets.all(8.0),
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               Slider(
                 min: 0,
                 max: 10,
-                divisions: 1000,
+                divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
-                    _a = double.parse(value.toStringAsFixed(2));
+                    _a = double.parse(value.toStringAsFixed(1));
                   });
                 },
                 value: _a,
@@ -140,12 +141,12 @@ class _LissajousCurveState extends State<LissajousCurve> {
               Slider(
                 min: 0,
                 max: 10,
-                divisions: 1000,
+                divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
-                    _b = double.parse(value.toStringAsFixed(2));
+                    _b = double.parse(value.toStringAsFixed(1));
                   });
                 },
                 value: _b,
@@ -367,7 +368,7 @@ class LissajousPainter extends CustomPainter {
     paint.strokeWidth = thickness;
     if (!animate) {
       this.points.clear();
-      for (double i = 0; i < 2 * pi; i += 0.01) {
+      for (double i = 0; i < 2 * pi + 0.01; i += 0.01) {
         this.points.add(Offset(r * sin(n * i + c), r * sin(d * i))
             .translate(transformx, transformy));
       }
