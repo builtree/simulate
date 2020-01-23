@@ -18,10 +18,8 @@ class _LissajousCurveState extends State<LissajousCurve> {
   double k = 0;
   double delta = 0;
   bool animate = false;
-  // bool doNotRefresh = f;
   bool animating = false;
   double thickness = 2;
-  // int denominator = 0;
 
   @override
   void initState() {
@@ -86,18 +84,15 @@ class _LissajousCurveState extends State<LissajousCurve> {
                           color: Colors.black,
                         ),
                   onPressed: () {
-                    // doNotRefresh = true;
                     setState(() {
                       animating = !animating;
                     });
                   }),
-              FloatingActionButton.extended(
+              FloatingActionButton(
                 heroTag: 1,
-                label: Text(
-                  'Clear',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
+                child: Icon(
+                  Icons.highlight_off,
+                  color: Colors.black,
                 ),
                 backgroundColor: Colors.white,
                 onPressed: () {
@@ -118,15 +113,18 @@ class _LissajousCurveState extends State<LissajousCurve> {
           child: ListView(
             padding: EdgeInsets.all(8.0),
             children: <Widget>[
+              SizedBox(
+                height: 20,
+              ),
               Slider(
                 min: 0,
                 max: 10,
-                divisions: 1000,
+                divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
-                    _a = double.parse(value.toStringAsFixed(2));
+                    _a = double.parse(value.toStringAsFixed(1));
                   });
                 },
                 value: _a,
@@ -140,12 +138,12 @@ class _LissajousCurveState extends State<LissajousCurve> {
               Slider(
                 min: 0,
                 max: 10,
-                divisions: 1000,
+                divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
-                    _b = double.parse(value.toStringAsFixed(2));
+                    _b = double.parse(value.toStringAsFixed(1));
                   });
                 },
                 value: _b,
@@ -165,7 +163,6 @@ class _LissajousCurveState extends State<LissajousCurve> {
                 onChanged: (value) {
                   setState(() {
                     delta = double.parse(value.toStringAsFixed(2));
-                    // denominator = delta~/0.628 != 0 ? 10~/(delta~/0.628) : 0;
                   });
                 },
                 value: delta,
@@ -235,7 +232,6 @@ class _LissajousCurveState extends State<LissajousCurve> {
                       });
                     },
                     value: animate,
-                    // tristate: true,
                     activeColor: Colors.red,
                   ),
                 ],
@@ -277,16 +273,6 @@ class _LissajousState extends State<Lissajous> {
   double loopi = 0;
   double r, n, d, c, transformx, transformy;
   double looplength = 2 * pi;
-
-  @override
-  // void initState() {
-  //   super.initState();
-  //   // r = (MediaQuery.of(context).size.width / 2.5).roundToDouble();
-  //   r = 200;
-  //   n = widget._a;
-  //   d = widget._b;
-  //   c = widget.delta;
-  // }
 
   void dispose() {
     super.dispose();
@@ -367,7 +353,7 @@ class LissajousPainter extends CustomPainter {
     paint.strokeWidth = thickness;
     if (!animate) {
       this.points.clear();
-      for (double i = 0; i < 2 * pi; i += 0.01) {
+      for (double i = 0; i <= 2 * pi; i += 0.01) {
         this.points.add(Offset(r * sin(n * i + c), r * sin(d * i))
             .translate(transformx, transformy));
       }

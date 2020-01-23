@@ -22,7 +22,7 @@ class Simulations with ChangeNotifier {
     2: "insertion sort algorithm sorting bars ",
     3: "rose pattern mathematics sequence ",
     4: "fourier series mathematics ",
-    5: "lissajous",
+    5: "lissajous curve mathematics ",
   };
 
   Simulations() {
@@ -83,7 +83,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 5,
         simulationName: 'Lissajous Curve',
-        image: theme.darkTheme ? 'images/FourierSeriesDark.png': 'images/FourierSeriesLight.png',
+        image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
