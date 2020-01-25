@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
-import 'package:simulate/src/simulations/pi_approximation.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
-import 'package:simulate/src/simulations/langton_ant.dart';
 import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simulate/src/simulations/lissajous_curve.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4];
+  final _mathematics = [3, 4, 5];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -24,6 +22,7 @@ class Simulations with ChangeNotifier {
     2: "insertion sort algorithm sorting bars ",
     3: "rose pattern mathematics sequence ",
     4: "fourier series mathematics ",
+    5: "lissajous curve mathematics ",
   };
 
   Simulations() {
@@ -80,6 +79,14 @@ class Simulations with ChangeNotifier {
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
+      ),
+      SimulationCard(
+        id: 5,
+        simulationName: 'Lissajous Curve',
+        image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
+        direct: LissajousCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
+        fav: _favorites[5],
       ),
     ];
   }
