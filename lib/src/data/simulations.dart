@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
-import 'package:simulate/src/simulations/epicycloid.dart';
+import 'package:simulate/src/simulations/epicycloid_pedal.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
@@ -24,7 +24,7 @@ class Simulations with ChangeNotifier {
     3: "rose pattern mathematics sequence ",
     4: "fourier series mathematics ",
     5: "lissajous curve mathematics ",
-    6: "hypercycloid epicycloid curve mathematics",
+    6: "hypercycloid epicycloid pedal curve mathematics",
   };
 
   Simulations() {
@@ -100,11 +100,11 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 6,
-        simulationName: 'Epicycloid Curve',
+        simulationName: 'Epicycloid Pedal Curve',
         image: theme.darkTheme
-            ? 'images/EpicycloidDark.png'
-            : 'images/Epicycloid.png',
-        direct: EpicycloidCurve(),
+            ? 'images/EpicycloidPedalDark.png'
+            : 'images/EpicycloidPedal.png',
+        direct: EpicycloidPedal(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[5],
       ),

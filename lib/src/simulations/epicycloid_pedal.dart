@@ -6,12 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 List<Offset> ys = [];
 
-class EpicycloidCurve extends StatefulWidget {
+class EpicycloidPedal extends StatefulWidget {
   @override
-  _EpicycloidCurveState createState() => _EpicycloidCurveState();
+  _EpicycloidPedalState createState() => _EpicycloidPedalState();
 }
 
-class _EpicycloidCurveState extends State<EpicycloidCurve> {
+class _EpicycloidPedalState extends State<EpicycloidPedal> {
   bool control = true;
   double time = 0;
   double amplitudeRadius = 50;
@@ -68,7 +68,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
         centerTitle: true,
         title: Text(
-          'Epicycloid Curve',
+          'Epicycloid Pedal Curve',
           style: Theme.of(context).textTheme.title,
         ),
       ),
@@ -81,8 +81,8 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                 offset: Offset(MediaQuery.of(context).size.width / 2,
                     (3 * MediaQuery.of(context).size.height) / 10),
                 child: CustomPaint(
-                  painter:
-                      EpicycloidPainter(amplitudeRadius, time, _k, context),
+                  painter: EpicycloidPedalPainter(
+                      amplitudeRadius, time, _k, context),
                   child: Container(),
                 ),
               ),
@@ -164,16 +164,16 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   }
 }
 
-class EpicycloidPainter extends CustomPainter {
+class EpicycloidPedalPainter extends CustomPainter {
   double radius, time, r;
   Offset coor = new Offset(0, 0);
   Offset prevco;
-  int n;
+  double n;
   double _k;
   BuildContext context;
   List<Offset> points = [];
 
-  EpicycloidPainter(this.r, this.time, this._k, this.context) {
+  EpicycloidPedalPainter(this.r, this.time, this._k, this.context) {
     radius = r / _k;
   }
 
@@ -185,21 +185,17 @@ class EpicycloidPainter extends CustomPainter {
     paint.strokeWidth = 2;
     paint.color = Colors.blue;
     canvas.drawCircle(coor, r.toDouble(), paint);
-    for (int i = 0; i < 1; i++) {
-      n = i + 1;
-      prevco =
-          Offset((r + radius) * cos(n * time), (r + radius) * sin(n * time));
-      coor += Offset(
-          ((radius * (_k + 1) * cos(n * time)) -
-              (radius * cos((_k + 1) * n * time))),
-          ((radius * (_k + 1) * sin(n * time)) -
-              (radius * sin((_k + 1) * n * time))));
-      paint.color = Theme.of(context).accentColor;
-      canvas.drawLine(prevco, coor, paint);
-      canvas.drawCircle(prevco, radius, paint);
-      prevco =
-          Offset((r + radius) * cos(n * time), (r + radius) * sin(n * time));
-    }
+    n = 0.1;
+    prevco = Offset((r + radius) * cos(n * time), (r + radius) * sin(n * time));
+    coor += Offset(
+        (0.5 * (r + (2 * radius)) * (cos(n * time) - cos((_k + 1) * n * time))),
+        (0.5 *
+            (r + (2 * radius)) *
+            (sin(n * time) - sin((_k + 1) * n * time))));
+    paint.color = Theme.of(context).accentColor;
+    canvas.drawLine(prevco, coor, paint);
+    canvas.drawCircle(prevco, radius, paint);
+    prevco = Offset((r + radius) * cos(n * time), (r + radius) * sin(n * time));
 
     ys.insert(0, coor);
     paint.color = Colors.red;
@@ -211,8 +207,8 @@ class EpicycloidPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(EpicycloidPainter oldDelegate) => true;
+  bool shouldRepaint(EpicycloidPedalPainter oldDelegate) => true;
 
   @override
-  bool shouldRebuildSemantics(EpicycloidPainter oldDelegate) => false;
+  bool shouldRebuildSemantics(EpicycloidPedalPainter oldDelegate) => false;
 }
