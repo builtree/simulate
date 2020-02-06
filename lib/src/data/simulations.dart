@@ -104,7 +104,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'images/EpicycloidPedalDark.png'
             : 'images/EpicycloidPedal.png',
-        direct: EpicycloidPedal(),
+        direct: EpicycloidPedalCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[5],
       ),
