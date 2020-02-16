@@ -32,8 +32,8 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
 
   @override
   void dispose() {
-    // ys.clear();
-    // time = 0;
+    ys.clear();
+    time = 0;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -75,15 +75,15 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
             children: <Widget>[
               FloatingActionButton(
                   heroTag: 0,
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: Colors.white,
                   child: (!animating)
                       ? Icon(
                           Icons.play_arrow,
-                          color: Theme.of(context).accentColor,
+                          color: Colors.black,
                         )
                       : Icon(
                           Icons.pause,
-                          color: Theme.of(context).accentColor,
+                          color: Colors.black,
                         ),
                   onPressed: () {
                     setState(() {
@@ -94,12 +94,12 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
                 heroTag: 1,
                 child: Icon(
                   Icons.highlight_off,
-                  color: Theme.of(context).accentColor,
+                  color: Colors.black,
                 ),
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Colors.white,
                 onPressed: () {
                   setState(() {
-                    globalKey.currentState.clearscreen();
+                    ys.clear();
                   });
                 },
               )
@@ -113,9 +113,11 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
           child: Material(
             elevation: 30,
             color: Theme.of(context).primaryColor,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: ListView(
               children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
                 Slider(
                   min: 1,
                   max: 5,
@@ -322,6 +324,7 @@ class EpicycloidPedalPainter extends CustomPainter {
     Offset coor = new Offset(transformx, transformy);
     if (!animate) {
       var paint = Paint();
+      paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
       this.points.clear();
       paint.color = Colors.blue;
@@ -338,13 +341,13 @@ class EpicycloidPedalPainter extends CustomPainter {
       Paint paint = new Paint();
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
-      paint.color = Colors.blue;
+      paint.color = Theme.of(context).accentColor;
       canvas.drawCircle(coor, r.toDouble(), paint);
       smallCenter = Offset((r + radius) * cos(time), (r + radius) * sin(time))
           .translate(transformx, transformy);
       coor += Offset((radius * (((_k + 1) * cos(time)) - cos((_k + 1) * time))),
           (radius * (((_k + 1) * sin(time)) - sin((_k + 1) * time))));
-      paint.color = Theme.of(context).accentColor;
+      paint.color = Colors.blue;
       canvas.drawCircle(smallCenter, radius, paint);
       canvas.drawLine(smallCenter, coor, paint);
       smallCenter = Offset((r + radius) * cos(time), (r + radius) * sin(time));
