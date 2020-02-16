@@ -23,8 +23,8 @@ class Simulations with ChangeNotifier {
     2: "insertion sort algorithm sorting bars ",
     3: "rose pattern mathematics sequence ",
     4: "fourier series mathematics ",
-    5: "lissajous curve mathematics animation ",
-    6: "epicycloid curve mathematics animation ",
+    5: "lissajous curve pattern mathematics animation ",
+    6: "epicycloid curve pattern mathematics animation pencil lines ",
   };
 
   Simulations() {
@@ -84,7 +84,7 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 5,
-        simulationName: 'Lissajous Curve',
+        simulationName: 'Lissajous Pattern',
         image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
@@ -92,7 +92,7 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 6,
-        simulationName: 'Epicycloid Curve',
+        simulationName: 'Epicycloid Pattern (Pencil of Lines)',
         image: theme.darkTheme ? 'images/Epicycloid1Dark.png': 'images/Epicycloid1Light.png',
         direct: EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',

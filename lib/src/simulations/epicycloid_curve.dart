@@ -42,8 +42,8 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-      width: 512.0,
-      height: 1024.0,
+      width: 434.0,
+      height: 924.0,
       allowFontScaling: true,
     )..init(context);
     return Scaffold(
@@ -56,7 +56,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           },
         ),
         title: Text(
-          'Epicycloid Pattern',
+          'Epicycloid Pattern (Pencil of Lines)',
           style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
@@ -70,7 +70,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
-                  heroTag: 0,
+                  heroTag: null,
                   backgroundColor: Colors.white,
                   child: (!animating)
                       ? Icon(
@@ -89,7 +89,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                     });
                   }),
               FloatingActionButton(
-                heroTag: 1,
+                heroTag: null,
                 child: Icon(
                   Icons.replay,
                   color: Colors.black,
@@ -202,9 +202,6 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         : (_) {
                             setState(() {
                               animatefactor = !animatefactor;
-                              if (animating) {
-                                animating = (animating && animatefactor);
-                              }
                             });
                           },
                     activeColor: Colors.red,
@@ -232,9 +229,6 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         : (_) {
                             setState(() {
                               animatepoints = !animatepoints;
-                              if (animating) {
-                                animating = (animating && animatepoints);
-                              }
                             });
                           },
                     activeColor: Colors.red,
@@ -274,14 +268,12 @@ class _EpicycloidState extends State<Epicycloid> {
   nextStep() {
     setState(() {
       sleep(Duration(milliseconds: 10));
-
       if (widget.animatefactor) {
         widget.factor += 0.01;
       }
       if (widget.animatepoints) {
         widget.total += 0.3;
       }
-
       if (widget.factor > 51) {
         widget.factor = 0;
       }
@@ -368,12 +360,10 @@ class EpicycloidPainter extends CustomPainter {
           Offset(radius * cos(angle), radius * sin(angle)).translate(tx, ty));
       angle = angle + x;
     }
-
     for (double i = 0; i < total; i += 1) {
       canvas.drawLine(points[(i % total).toInt()],
           points[((i * factor) % total).toInt()], paint2);
     }
-
     canvas.drawCircle(Offset(tx, ty), radius, paint);
   }
 
