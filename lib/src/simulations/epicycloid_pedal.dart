@@ -46,8 +46,8 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-      width: 512.0,
-      height: 1024.0,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       allowFontScaling: true,
     )..init(context);
     return Scaffold(
@@ -108,7 +108,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 5,
+        height: ScreenUtil.instance.height / 4,
         child: Container(
           child: Material(
             elevation: 30,
@@ -327,7 +327,7 @@ class EpicycloidPedalPainter extends CustomPainter {
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
       this.points.clear();
-      paint.color = Colors.blue;
+      paint.color = Theme.of(context).accentColor;
       canvas.drawCircle(Offset(transformx, transformy), r.toDouble(), paint);
       paint.color = Colors.red;
       for (double loopi = 0; loopi <= 50 * pi; loopi += 0.01) {
