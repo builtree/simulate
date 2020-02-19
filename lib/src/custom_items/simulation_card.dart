@@ -37,8 +37,7 @@ class _SimulationCardState extends State<SimulationCard> {
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
     return Container(
-      height: 100,
-      width: 150,
+      width: 180,
       child: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -56,9 +55,9 @@ class _SimulationCardState extends State<SimulationCard> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Flexible(
-                flex: 5,
+                flex: 10,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
+                  padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
                   child: Image.asset(
                     widget.image,
                     fit: BoxFit.fill,
@@ -66,17 +65,23 @@ class _SimulationCardState extends State<SimulationCard> {
                 ),
               ),
               Flexible(
-                flex: 1,
+                flex: 3,
                 child: Container(
-                  padding: EdgeInsets.all(3),
-                  child: Text(
-                    widget.simulationName,
-                    style: Theme.of(context).textTheme.subhead,
+                  padding: EdgeInsets.fromLTRB(3, 15, 3, 0),
+                  child: Center(
+                    child: FittedBox(
+                      alignment: Alignment.bottomCenter,
+                      fit: BoxFit.fitWidth,
+                      child: Text(
+                        widget.simulationName,
+                        style: Theme.of(context).textTheme.subhead,
+                      ),
+                    ),
                   ),
                 ),
               ),
               Flexible(
-                flex: 2,
+                flex: 4,
                 child: Container(
                   color: Colors.transparent,
                   child: Row(
