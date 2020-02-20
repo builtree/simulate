@@ -11,9 +11,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4, 5, 6];
+  final _mathematics = [3, 4, 5, 6, 7];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -99,14 +99,14 @@ class Simulations with ChangeNotifier {
         fav: _favorites[5],
       ),
       SimulationCard(
-        id: 6,
+        id: 7,
         simulationName: 'Epicycloid Pedal Curve',
         image: theme.darkTheme
             ? 'images/EpicycloidPedalDark.png'
             : 'images/EpicycloidPedal.png',
         direct: EpicycloidPedalCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
-        fav: _favorites[5],
+        fav: _favorites[7],
       ),
     ];
   }
