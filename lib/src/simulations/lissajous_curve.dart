@@ -72,7 +72,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
-                  heroTag: 0,
+                  heroTag: null,
                   backgroundColor: Colors.white,
                   child: (!animating)
                       ? Icon(
@@ -89,7 +89,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                     });
                   }),
               FloatingActionButton(
-                heroTag: 1,
+                heroTag: null,
                 child: Icon(
                   Icons.highlight_off,
                   color: Colors.black,
