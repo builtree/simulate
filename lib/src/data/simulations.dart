@@ -9,6 +9,7 @@ import 'package:simulate/src/simulations/toothpick.dart';
 import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
+import 'package:simulate/src/simulations/epicycloid_curve.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
@@ -23,8 +24,9 @@ class Simulations with ChangeNotifier {
     2: "insertion sort algorithm sorting bars ",
     3: "rose pattern mathematics sequence ",
     4: "fourier series mathematics ",
-    5: "lissajous curve mathematics ",
-    6: "hypercycloid epicycloid pedal curve mathematics",
+    5: "lissajous curve pattern mathematics animation ",
+    6: "epicycloid curve pattern mathematics animation pencil lines ",
+    7: "epicycloid pedal curve pattern mathematics animation ",
   };
 
   Simulations() {
@@ -90,13 +92,19 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 5,
-        simulationName: 'Lissajous Curve',
-        image: theme.darkTheme
-            ? 'images/LissajousCurveDark.png'
-            : 'images/LissajousCurveLight.png',
+        simulationName: 'Lissajous Pattern',
+        image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
+      ),
+      SimulationCard(
+              id: 6,
+        simulationName: 'Epicycloid Pattern (Pencil of Lines)',
+        image: theme.darkTheme ? 'images/Epicycloid1Dark.png': 'images/Epicycloid1Light.png',
+        direct: EpicycloidCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
+        fav: _favorites[6],
       ),
       SimulationCard(
         id: 7,
