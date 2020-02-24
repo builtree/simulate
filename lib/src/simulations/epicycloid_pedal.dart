@@ -46,8 +46,8 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.instance = ScreenUtil(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
+      width: 512.0,
+      height: 1024.0,
       allowFontScaling: true,
     )..init(context);
     return Scaffold(
@@ -91,7 +91,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
                     });
                   }),
               FloatingActionButton(
-                heroTag: 1,
+                heroTag: 0,
                 child: Icon(
                   Icons.highlight_off,
                   color: Colors.black,
