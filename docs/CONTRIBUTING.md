@@ -1,6 +1,6 @@
 # CONTRIBUTING
 
-> Before contributing, we highly recommend introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/community).
+> Before contributing, we highly recommend introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/simulate#).
 
 ### Setting Up Simulate:
 
@@ -21,7 +21,7 @@
 
 #### Fixing a bug:
 
-1. Open an issue or report on [gitter](https://gitter.im/codEd-org/community)
+1. Open an issue or report on [gitter](https://gitter.im/codEd-org/simulate#)
 2. Make a new branch
 ```console
 git checkout -b [BRANCH NAME]
@@ -30,7 +30,7 @@ git checkout -b [BRANCH NAME]
 
 #### Adding a new Simulation:
 
-1. Discuss the idea first on [gitter](https://gitter.im/codEd-org/community) or just open an issue with the template.
+1. Discuss the idea first on [gitter](https://gitter.im/codEd-org/simulate#) or just open an issue with the template.
 2. Discuss with the maintainers and get a simulation ID assigned.
 3. Build your simulation and open a PR!
 
