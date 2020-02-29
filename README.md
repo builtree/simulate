@@ -3,14 +3,14 @@
 
 Collection of simulations and visualizations in a cross platform app made using Flutter. Cross-platform development is the ability to build and deliver apps that can run across multiple device platforms, such as iOS, Android, and the Universal Windows Platform. The application displays a variety of simulation to understand the concepts visually.
 
-# Installaton
+# Installation
 
 This application works on Flutter, Google's UI toolkit for building beautiful, natively compiled applications from a single codebase which uses purely Dart here in the project.
 
 1) Make sure you have Flutter installed (https://flutter.dev/docs/get-started/install)
-2) Do not forget to connect your personal device or vitural device on whichever platform you are working from
-3) Run any test applications to check if it is working or not
-4) Clone the repository and download and run it on your local machine
+2) Do not forget to connect your personal device or virtual device on whichever platform you are working on
+3) Run any test application to check if it is working or not
+4) Clone the repository, download and run it on your local machine
 
 # Contributing
 
