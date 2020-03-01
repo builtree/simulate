@@ -79,10 +79,10 @@ class _FourierSeriesState extends State<FourierSeries> {
       body: Row(
         children: <Widget>[
           Container(
-            width: 2 * ScreenUtil.instance.width / 3,
+            width: 3 * ScreenUtil.instance.width / 5,
             child: Transform.translate(
               offset:
-                  Offset(radius, (4*MediaQuery.of(context).size.height) / 10),
+                  Offset(radius, (4 * MediaQuery.of(context).size.height) / 10),
               child: CustomPaint(
                 painter: FourierPainter(radius, time, _n, wave, context),
                 child: Container(),
@@ -90,7 +90,7 @@ class _FourierSeriesState extends State<FourierSeries> {
             ),
           ),
           Expanded(
-            child:Container(
+            child: Container(
               child: Material(
                 elevation: 30,
                 color: Theme.of(context).primaryColor,
