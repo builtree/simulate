@@ -1,0 +1,56 @@
+site_name: 'Simulate'
+site_description: 'Official site for Simulate'
+site_author: 'Yash Lamba'
+site_url: 'https://cod-ed.github.io/simulate/'
+
+# Repository
+repo_name: 'cod-ed/simulate'
+repo_url: 'https://github.com/cod-ed/simulate'
+
+# Copyright
+nav:
+  - Home: 'index.md'
+  - Contributing: 'contributing.md'
+  - Documentation: 
+    - Home: 'doc/index.md'
+  - Simulations: 
+    - All Simulations: 'simulations/index.md'
+# Configuration
+theme:
+  name: 'material'
+  feature:
+    tabs: true
+  palette:
+    primary: 'black'
+    accent: 'white'
+  font:
+    text: 'Ubuntu'
+    code: 'Ubuntu Mono'
+  logo:
+    icon: 'library_books'
+
+# Customization
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde

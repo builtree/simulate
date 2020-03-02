@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+/site/
 
 # IntelliJ related
 *.iml
@@ -26,6 +27,7 @@
 .pub-cache/
 .pub/
 /build/
+.flutter-plugins-dependencies
 
 # Android related
 **/android/**/gradle-wrapper.jar
