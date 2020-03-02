@@ -14,10 +14,10 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider<Simulations>(
-          builder: (context) => Simulations(),
+          create: (context) => Simulations(),
         ),
         ChangeNotifierProvider<ThemeProvider>(
-          builder: (context) => ThemeProvider(sharedPreferences),
+          create: (context) => ThemeProvider(sharedPreferences),
         ),
       ],
       child: HomeCall(),
