@@ -37,11 +37,13 @@ class _RosePatternState extends State<RosePattern> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    // ScreenUtil.instance = 
+    ScreenUtil.init(
+      context,
       width: 512.0,
       height: 1024.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -58,7 +60,7 @@ class _RosePatternState extends State<RosePattern> {
         centerTitle: true,
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 4,
+        height: ScreenUtil().setHeight(1024 / 4),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,

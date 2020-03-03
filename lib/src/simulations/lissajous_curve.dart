@@ -43,11 +43,13 @@ class _LissajousCurveState extends State<LissajousCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    // ScreenUtil.instance = 
+    ScreenUtil.init(
+      context,
       width: 512.0,
       height: 1024.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -106,7 +108,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 5,
+        height: ScreenUtil().setHeight(1024 / 5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
