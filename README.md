@@ -6,7 +6,7 @@ New to Simulate? Search for more information here https://cod-ed.github.io/simul
 
 # Contributing
 
-Before contributing, we highly recommend introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/simulate). You all can solve our [issues](https://github.com/cod-ed/simulate/issues) or help us find new to make this application more interesting and smooth.
+Before contributing, we highly recommend introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/simulate).
 
 Some pre-requisites:
 
@@ -14,6 +14,5 @@ Some pre-requisites:
 2. Try installing and experimenting with the development version on your phone
 3. Don't hesitate in asking questions, we'll be happy to help
 
-Hoping for your creative contributions.
 
 All further guidelines can be found in the [documentation](docs/).
