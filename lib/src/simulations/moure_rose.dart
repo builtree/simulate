@@ -131,7 +131,7 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
               ),
               Center(
                 child: Text(
-                  "A: $_n",
+                  "N: $_n",
                  // style: Theme.epicycloid_curveof(context).textTheme.subtitle,
                 ),
               ),
@@ -150,7 +150,7 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
               ),
               Center(
                 child: Text(
-                  "B: $_d",
+                  "D: $_d",
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
@@ -183,7 +183,6 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
             MoureRose(
               d: _d,
               n: _n,
-              
               animate: animate,
               animating: animating,
               key: globalKey,
@@ -193,7 +192,7 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
               top: 5,
               left: 5,
               child: Text(
-                'A:B ~ ${(_n / _d).toStringAsFixed(2)}',
+                'N:D ~ ${(_n / _d).toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.subtitle,
               ),
             ),
@@ -231,7 +230,6 @@ class MoureRose extends StatefulWidget {
     Key key,
     @required double d,
     @required double n,
-    
     @required this.animate,
     @required this.animating,
     @required this.thickness,
@@ -241,7 +239,6 @@ class MoureRose extends StatefulWidget {
 
   final double _d;
   final double _n;
-  
   final bool animate;
   final bool animating;
   final double thickness;
@@ -254,8 +251,10 @@ class _MoureRoseState extends State<MoureRose> {
   List<Offset> points = [];
   List<Offset> points2 = [];
   double loopi = 0;
+  double loopi2 = 0;
   double r, n, d, c, transformx, transformy;
   double looplength = 360;
+  double looplength2 = 360;
 
   void dispose() {
     super.dispose();
@@ -263,25 +262,32 @@ class _MoureRoseState extends State<MoureRose> {
 
   void clearscreen() {
     points.clear();
+    points2.clear();
     looplength = 360;
+    looplength2 = 360;
     looplength += loopi;
+    looplength2 += loopi2;
   }
 
   nextStep() {
     if (loopi >= looplength) {
       clearscreen();
       loopi = 0;
+      loopi2 = 0;
       looplength = 360;
+      looplength2 = 360;
     }
     setState(() {
       sleep(Duration(milliseconds: 10));
       loopi += 1;
-      r = (MediaQuery.of(context).size.width / 2.5).roundToDouble();
-      var k = loopi*d*pi/180;
-        var q= 300*sin(n*k);
-        var x = q*cos(k);
-        var y = q*sin(k);
-      points.add(Offset(x,y)
+      
+      points.add(Offset(300*sin(widget._n*loopi*widget._d*pi/180)*cos(loopi*widget._d*pi/180)/2,300*sin(widget._n*loopi*widget._d*pi/180)*sin(loopi*widget._d*pi/180)/2)
+          .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
+              (MediaQuery.of(context).size.height / 3).roundToDouble()));
+
+              sleep(Duration(milliseconds: 10));
+      loopi2 += 1;
+      points2.add(Offset(300*sin(widget._n*loopi2*pi/180)*cos(loopi2*pi/180)/2,300*sin(widget._n*loopi2*pi/180)*sin(loopi2*pi/180)/2)
           .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
               (MediaQuery.of(context).size.height / 3).roundToDouble()));
     });
@@ -300,10 +306,11 @@ class _MoureRoseState extends State<MoureRose> {
         widget._n,
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
         (MediaQuery.of(context).size.height / 3).roundToDouble(),
-        (MediaQuery.of(context).size.width / 2.5).roundToDouble(),
+        
         
         widget.animate,
         points,
+        points2,
         widget.thickness,
       ),
       child: Container(),
@@ -312,7 +319,7 @@ class _MoureRoseState extends State<MoureRose> {
 }
 
 class MoureRosePainter extends CustomPainter {
-  double d, r, n, c;
+  double d, n, c;
   double k, transformx, transformy;
   List<Offset> points = [];
   List<Offset> points2 = [];
@@ -323,13 +330,15 @@ class MoureRosePainter extends CustomPainter {
     this.n,
     this.transformx,
     this.transformy,
-    this.r,
+    
     
     this.animate,
     points,
+    points2,
     this.thickness,
   ) {
     this.points = new List<Offset>.from(points);
+    this.points2 = new List<Offset>.from(points2);
     k = n / d;
   }
 
@@ -358,7 +367,7 @@ class MoureRosePainter extends CustomPainter {
     ..strokeWidth = thickness;
 
     if (!animate) {
-      this.points.clear();
+      this.points2.clear();
       for (var theta=0; theta <= 360; theta++) {
         var k = theta*pi/180;
         var q= 300*sin(n*k);
