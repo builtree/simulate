@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-GlobalKey<_MoureRoseState> globalKey = GlobalKey<_MoureRoseState>();
+GlobalKey<_MourerRoseState> globalKey = GlobalKey<_MourerRoseState>();
 
-class MoureRoseCurve extends StatefulWidget {
+class MourerRoseCurve extends StatefulWidget {
   @override
-  _MoureRoseCurveState createState() => _MoureRoseCurveState();
+  _MourerRoseCurveState createState() => _MourerRoseCurveState();
 }
 
-class _MoureRoseCurveState extends State<MoureRoseCurve> {
+class _MourerRoseCurveState extends State<MourerRoseCurve> {
   double _n = 0;
   double _d = 0;
   double k = 0;
@@ -58,7 +58,7 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
           },
         ),
         title: Text(
-          'MoureRose Pattern',
+          'MourerRose Pattern',
           style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
@@ -180,7 +180,7 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
-            MoureRose(
+            MourerRose(
               d: _d,
               n: _n,
               animate: animate,
@@ -225,8 +225,8 @@ class _MoureRoseCurveState extends State<MoureRoseCurve> {
   }
 }
 
-class MoureRose extends StatefulWidget {
-  MoureRose({
+class MourerRose extends StatefulWidget {
+  MourerRose({
     Key key,
     @required double d,
     @required double n,
@@ -244,10 +244,10 @@ class MoureRose extends StatefulWidget {
   final double thickness;
 
   @override
-  _MoureRoseState createState() => _MoureRoseState();
+  _MourerRoseState createState() => _MourerRoseState();
 }
 
-class _MoureRoseState extends State<MoureRose> {
+class _MourerRoseState extends State<MourerRose> {
   List<Offset> points = [];
   List<Offset> points2 = [];
   double loopi = 0;
@@ -301,7 +301,7 @@ class _MoureRoseState extends State<MoureRose> {
       });
     }
     return CustomPaint(
-      painter: MoureRosePainter(
+      painter: MourerRosePainter(
         widget._d,
         widget._n,
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
@@ -318,14 +318,14 @@ class _MoureRoseState extends State<MoureRose> {
   }
 }
 
-class MoureRosePainter extends CustomPainter {
+class MourerRosePainter extends CustomPainter {
   double d, n, c;
   double k, transformx, transformy;
   List<Offset> points = [];
   List<Offset> points2 = [];
   bool animate;
   double thickness;
-  MoureRosePainter(
+  MourerRosePainter(
     this.d,
     this.n,
     this.transformx,
@@ -347,7 +347,7 @@ class MoureRosePainter extends CustomPainter {
     var paint = Paint()
     ..color = Colors.black
     ..style = PaintingStyle.stroke
-    ..strokeWidth = 1;
+    ..strokeWidth = thickness;
     if (!animate) {
       this.points.clear();
       for (var theta=0; theta <= 360; theta++) {
@@ -381,8 +381,8 @@ class MoureRosePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(MoureRosePainter oldDelegate) => true;
+  bool shouldRepaint(MourerRosePainter oldDelegate) => true;
 
   @override
-  bool shouldRebuildSemantics(MoureRosePainter oldDelegate) => false;
+  bool shouldRebuildSemantics(MourerRosePainter oldDelegate) => false;
 }

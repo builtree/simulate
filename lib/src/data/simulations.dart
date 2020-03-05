@@ -9,7 +9,7 @@ import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
-import 'package:simulate/src/simulations/moure_rose.dart';
+import 'package:simulate/src/simulations/mourer_rose.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
@@ -26,7 +26,7 @@ class Simulations with ChangeNotifier {
     4: "fourier series mathematics ",
     5: "lissajous curve pattern mathematics animation ",
     6: "epicycloid curve pattern mathematics animation pencil lines ",
-    7: "moure rose pattern"
+    7: "mourer rose pattern"
   };
 
   Simulations() {
@@ -102,9 +102,9 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 7,
-        simulationName: 'Moure Rose Pattern',
+        simulationName: 'Mourer Rose Pattern',
         image: 'images/Maurer_Rose.svg.png',
-        direct: MoureRoseCurve(),
+        direct: MourerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[7],
       ),
