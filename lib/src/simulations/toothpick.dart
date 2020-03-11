@@ -134,7 +134,6 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   Widget build(BuildContext context) {
     double defaultScreenWidth = 512.0;
     double defaultScreenHeight = 1024.0;
-    // ScreenUtil.instance = 
     ScreenUtil.init(
       context,
       width: defaultScreenWidth,

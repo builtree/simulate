@@ -55,7 +55,6 @@ class _FourierSeriesState extends State<FourierSeries> {
 
   @override
   Widget build(BuildContext context) {
-    // ScreenUtil.instance = 
     ScreenUtil.init(
       context,
       width: 1024.0,
@@ -81,7 +80,7 @@ class _FourierSeriesState extends State<FourierSeries> {
       body: Row(
         children: <Widget>[
           Container(
-            width: 2 * ScreenUtil().setWidth(1024 / 3),
+            width: 2 * ScreenUtil().setWidth(1024/3),
             child: Transform.translate(
               offset:
                   Offset(radius, (4*MediaQuery.of(context).size.height) / 10),

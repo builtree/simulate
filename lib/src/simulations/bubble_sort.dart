@@ -130,7 +130,6 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   Widget build(BuildContext context) {
-    // ScreenUtil.instance = 
     ScreenUtil.init(
       context,
       width: 512.0,

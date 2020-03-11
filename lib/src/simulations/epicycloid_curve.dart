@@ -41,7 +41,6 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
 
   @override
   Widget build(BuildContext context) {
-    // ScreenUtil.instance = 
     ScreenUtil.init(
       context,
       width: 434.0,
@@ -113,7 +112,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(924/ 5),
+        height: ScreenUtil().setHeight(924/5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
