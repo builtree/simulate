@@ -176,7 +176,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       bottomNavigationBar: Material(
         elevation: 10,
         child: Container(
-          height: ScreenUtil().setHeight(defaultScreenHeight/5.5),
+          height: ScreenUtil().setHeight(defaultScreenHeight/10),
           color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[

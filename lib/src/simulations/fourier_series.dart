@@ -46,7 +46,7 @@ class _FourierSeriesState extends State<FourierSeries> {
     if (control == true) {
       setState(() {
         time -= f;
-        if (ys.length == 1024.0) {
+        if (ys.length == ScreenUtil().uiWidthPx.toInt()) {
           ys.removeLast();
         }
       });
