@@ -18,6 +18,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
   double amplitudeRadius = 35;
   double _k = 1;
   double f = 0.01;
+  double _scaleAmount = 1;
   bool animate = false;
   bool animating = false;
 
@@ -45,11 +46,12 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
-      width: 512.0,
-      height: 1024.0,
+    ScreenUtil.init(
+      context,
+      width: 720.0,
+      height: 1600.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -74,7 +76,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
-                  heroTag: 0,
+                  heroTag: Null,
                   backgroundColor: Colors.white,
                   child: (!animating)
                       ? Icon(
@@ -91,7 +93,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
                     });
                   }),
               FloatingActionButton(
-                heroTag: 0,
+                heroTag: Null,
                 child: Icon(
                   Icons.highlight_off,
                   color: Colors.black,
@@ -108,7 +110,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 4,
+        height: ScreenUtil().setHeight(1600 / 4.0),
         child: Container(
           child: Material(
             elevation: 30,
@@ -158,6 +160,24 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
                   ),
                 ),
                 Slider(
+                  min: 0.01,
+                  max: 2,
+                  activeColor: Theme.of(context).accentColor,
+                  inactiveColor: Colors.grey,
+                  onChanged: (value) {
+                    setState(() {
+                      _scaleAmount = value;
+                    });
+                  },
+                  value: _scaleAmount,
+                ),
+                Center(
+                  child: Text(
+                    "- Scale +",
+                    style: Theme.of(context).textTheme.subtitle,
+                  ),
+                ),
+                Slider(
                   min: 0,
                   max: 0.1,
                   activeColor: Theme.of(context).accentColor,
@@ -188,6 +208,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
               k: _k,
               amplitudeRadius: amplitudeRadius,
               f: f,
+              scaleAmount: _scaleAmount,
               animate: animate,
               animating: animating,
               key: globalKey,
@@ -237,6 +258,7 @@ class EpicycloidPedal extends StatefulWidget {
     @required double k,
     @required double amplitudeRadius,
     @required double f,
+    @required double scaleAmount,
     @required this.animate,
     @required this.animating,
     Key key,
@@ -244,11 +266,13 @@ class EpicycloidPedal extends StatefulWidget {
   })  : _k = k,
         amplitudeRadius = amplitudeRadius,
         f = f,
+        _scaleAmount = scaleAmount,
         super(key: key);
 
   final double _k;
   final double amplitudeRadius;
   final double f;
+  final double _scaleAmount;
   final bool animate;
   final bool animating;
   final BuildContext context;
@@ -282,18 +306,23 @@ class _EpicycloidPedalState extends State<EpicycloidPedal> {
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) => update());
     }
-    return CustomPaint(
-      painter: EpicycloidPedalPainter(
-        widget._k,
-        widget.amplitudeRadius,
-        time,
-        (MediaQuery.of(context).size.width / 2).roundToDouble(),
-        (MediaQuery.of(context).size.height / 3).roundToDouble(),
-        widget.animate,
-        points,
-        context,
+    return Container(
+      child: Transform.scale(
+        scale: widget._scaleAmount,
+        child: CustomPaint(
+          painter: EpicycloidPedalPainter(
+            widget._k,
+            widget.amplitudeRadius,
+            time,
+            (MediaQuery.of(context).size.width / 2).roundToDouble(),
+            (MediaQuery.of(context).size.height / 3).roundToDouble(),
+            widget.animate,
+            points,
+            context,
+          ),
+          child: Container(),
+        ),
       ),
-      child: Container(),
     );
   }
 }
