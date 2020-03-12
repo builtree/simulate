@@ -130,11 +130,12 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: 512.0,
       height: 1024.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     _containerList();
     if (swap == true || finalIterator != 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
@@ -173,7 +174,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 6,
+        height: ScreenUtil().setHeight(1024/5.0),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,

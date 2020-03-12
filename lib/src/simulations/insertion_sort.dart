@@ -109,11 +109,12 @@ class _InsertionHomeState extends State<InsertionHome> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: 512.0,
       height: 1024.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     if (!colorGreen)
       makeContainers();
     else
@@ -164,7 +165,7 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: ScreenUtil.instance.height / 5.5,
+        height: ScreenUtil().setHeight(1024/5.5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,

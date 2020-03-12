@@ -41,11 +41,12 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: 434.0,
       height: 924.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -111,7 +112,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 5,
+        height: ScreenUtil().setHeight(924/5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,

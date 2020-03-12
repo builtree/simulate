@@ -46,7 +46,7 @@ class _FourierSeriesState extends State<FourierSeries> {
     if (control == true) {
       setState(() {
         time -= f;
-        if (ys.length == ScreenUtil.instance.width.toInt()) {
+        if (ys.length == ScreenUtil().uiWidthPx.toInt()) {
           ys.removeLast();
         }
       });
@@ -55,11 +55,12 @@ class _FourierSeriesState extends State<FourierSeries> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: 1024.0,
       height: 512.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) => update());
     return Scaffold(
       appBar: AppBar(
@@ -79,7 +80,7 @@ class _FourierSeriesState extends State<FourierSeries> {
       body: Row(
         children: <Widget>[
           Container(
-            width: 2 * ScreenUtil.instance.width / 3,
+            width: 2 * ScreenUtil().setWidth(1024/3),
             child: Transform.translate(
               offset:
                   Offset(radius, (4*MediaQuery.of(context).size.height) / 10),

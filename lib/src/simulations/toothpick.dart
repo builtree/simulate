@@ -134,11 +134,12 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   Widget build(BuildContext context) {
     double defaultScreenWidth = 512.0;
     double defaultScreenHeight = 1024.0;
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: defaultScreenWidth,
       height: defaultScreenHeight,
       allowFontScaling: true,
-    )..init(context);
+    );
     if (step == 1) {
       activeToothPicks.add(new Toothpick([
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
@@ -175,7 +176,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       bottomNavigationBar: Material(
         elevation: 10,
         child: Container(
-          height: ScreenUtil.instance.height / 10,
+          height: ScreenUtil().setHeight(defaultScreenHeight/10),
           color: Theme.of(context).primaryColor,
           child: Column(
             children: <Widget>[
