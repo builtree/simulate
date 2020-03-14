@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-GlobalKey<_MourerRoseState> globalKey = GlobalKey<_MourerRoseState>();
+GlobalKey<MaurerRoseState> globalKey = GlobalKey<MaurerRoseState>();
 
 class MourerRoseCurve extends StatefulWidget {
   @override
-  _MourerRoseCurveState createState() => _MourerRoseCurveState();
+  MaurerRoseCurveState createState() => MaurerRoseCurveState();
 }
 
-class _MourerRoseCurveState extends State<MourerRoseCurve> {
+class MaurerRoseCurveState extends State<MourerRoseCurve> {
   double _n = 0;
   double _d = 0;
   double k = 0;
@@ -244,10 +244,10 @@ class MourerRose extends StatefulWidget {
   final double thickness;
 
   @override
-  _MourerRoseState createState() => _MourerRoseState();
+  MaurerRoseState createState() => MaurerRoseState();
 }
 
-class _MourerRoseState extends State<MourerRose> {
+class MaurerRoseState extends State<MourerRose> {
   List<Offset> points = [];
   List<Offset> points2 = [];
   double loopi = 0;
