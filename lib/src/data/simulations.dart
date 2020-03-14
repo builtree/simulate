@@ -104,7 +104,7 @@ class Simulations with ChangeNotifier {
         id: 7,
         simulationName: 'Maurer Rose Pattern',
         image: 'images/Maurer_Rose.svg.png',
-        direct: MourerRoseCurve(),
+        direct: MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[7],
       ),

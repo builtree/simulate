@@ -7,12 +7,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<MaurerRoseState> globalKey = GlobalKey<MaurerRoseState>();
 
-class MourerRoseCurve extends StatefulWidget {
+class MaurerRoseCurve extends StatefulWidget {
   @override
   MaurerRoseCurveState createState() => MaurerRoseCurveState();
 }
 
-class MaurerRoseCurveState extends State<MourerRoseCurve> {
+class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   double _n = 0;
   double _d = 0;
   double k = 0;
@@ -58,7 +58,7 @@ class MaurerRoseCurveState extends State<MourerRoseCurve> {
           },
         ),
         title: Text(
-          'MourerRose Pattern',
+          'MaurerRose Pattern',
           style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
@@ -180,7 +180,7 @@ class MaurerRoseCurveState extends State<MourerRoseCurve> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
-            MourerRose(
+            MaurerRose(
               d: _d,
               n: _n,
               animate: animate,
@@ -225,8 +225,8 @@ class MaurerRoseCurveState extends State<MourerRoseCurve> {
   }
 }
 
-class MourerRose extends StatefulWidget {
-  MourerRose({
+class MaurerRose extends StatefulWidget {
+  MaurerRose({
     Key key,
     @required double d,
     @required double n,
@@ -247,7 +247,7 @@ class MourerRose extends StatefulWidget {
   MaurerRoseState createState() => MaurerRoseState();
 }
 
-class MaurerRoseState extends State<MourerRose> {
+class MaurerRoseState extends State<MaurerRose> {
   List<Offset> points = [];
   List<Offset> points2 = [];
   double loopi = 0;
@@ -301,7 +301,7 @@ class MaurerRoseState extends State<MourerRose> {
       });
     }
     return CustomPaint(
-      painter: MourerRosePainter(
+      painter: MaurerRosePainter(
         widget._d,
         widget._n,
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
@@ -318,14 +318,14 @@ class MaurerRoseState extends State<MourerRose> {
   }
 }
 
-class MourerRosePainter extends CustomPainter {
+class MaurerRosePainter extends CustomPainter {
   double d, n, c;
   double k, transformx, transformy;
   List<Offset> points = [];
   List<Offset> points2 = [];
   bool animate;
   double thickness;
-  MourerRosePainter(
+  MaurerRosePainter(
     this.d,
     this.n,
     this.transformx,
@@ -381,8 +381,8 @@ class MourerRosePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(MourerRosePainter oldDelegate) => true;
+  bool shouldRepaint(MaurerRosePainter oldDelegate) => true;
 
   @override
-  bool shouldRebuildSemantics(MourerRosePainter oldDelegate) => false;
+  bool shouldRebuildSemantics(MaurerRosePainter oldDelegate) => false;
 }
