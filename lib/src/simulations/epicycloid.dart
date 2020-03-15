@@ -4,19 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-GlobalKey<_EpicycloidPedalState> globalKey = GlobalKey<_EpicycloidPedalState>();
+GlobalKey<_NormalEpicycloidState> globalKey =
+    GlobalKey<_NormalEpicycloidState>();
 
 List<Offset> ys = [];
 
-class EpicycloidPedalCurve extends StatefulWidget {
+class NormalEpicycloidCurve extends StatefulWidget {
   @override
-  _EpicycloidPedalCurveState createState() => _EpicycloidPedalCurveState();
+  _NormalEpicycloidCurveState createState() => _NormalEpicycloidCurveState();
 }
 
-class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
+class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   double time = 0;
-  double amplitudeRadius = 35;
-  double _k = 1;
+  int innerRadius = 50;
+  int outerRadius = 50;
   double f = 0.01;
   double _scaleAmount = 1;
   bool animate = false;
@@ -63,7 +64,7 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
         ),
         centerTitle: true,
         title: Text(
-          'Epicycloid Pedal Curve',
+          'Epicycloid Curve',
           style: Theme.of(context).textTheme.title,
         ),
       ),
@@ -121,41 +122,41 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
                   height: 20,
                 ),
                 Slider(
-                  min: 1,
-                  max: 5,
-                  divisions: 100,
+                  min: (innerRadius ~/ 10).toDouble(),
+                  max: innerRadius.toDouble(),
                   activeColor: Theme.of(context).accentColor,
                   inactiveColor: Colors.grey,
                   onChanged: (value) {
                     setState(() {
-                      _k = double.parse(value.toStringAsFixed(1));
+                      outerRadius = value.toInt();
                     });
                     ys.clear();
                   },
-                  value: _k,
+                  value: outerRadius.toDouble(),
                 ),
                 Center(
                   child: Text(
-                    "k: " + _k.toString(),
+                    "r: " + outerRadius.toString(),
                     style: Theme.of(context).textTheme.subtitle,
                   ),
                 ),
                 Slider(
                   min: 10,
-                  max: 60,
+                  max: 100,
                   activeColor: Theme.of(context).accentColor,
                   inactiveColor: Colors.grey,
                   onChanged: (value) {
+                    outerRadius = value.toInt();
                     setState(() {
-                      amplitudeRadius = value.roundToDouble();
+                      innerRadius = value.toInt();
                     });
                     ys.clear();
                   },
-                  value: amplitudeRadius,
+                  value: innerRadius.toDouble(),
                 ),
                 Center(
                   child: Text(
-                    "Amplitude: ${amplitudeRadius.toInt()}",
+                    "R: " + innerRadius.toString(),
                     style: Theme.of(context).textTheme.subtitle,
                   ),
                 ),
@@ -204,9 +205,9 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
-            EpicycloidPedal(
-              k: _k,
-              amplitudeRadius: amplitudeRadius,
+            NormalEpicycloid(
+              outerRadius: outerRadius,
+              innerRadius: innerRadius,
               f: f,
               scaleAmount: _scaleAmount,
               animate: animate,
@@ -218,9 +219,8 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
               top: 5,
               left: 5,
               child: Visibility(
-                visible: animate,
                 child: Text(
-                  'radius ~ ${(amplitudeRadius / _k).toStringAsFixed(2)}',
+                  'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
@@ -253,36 +253,36 @@ class _EpicycloidPedalCurveState extends State<EpicycloidPedalCurve> {
   }
 }
 
-class EpicycloidPedal extends StatefulWidget {
-  EpicycloidPedal({
-    @required double k,
-    @required double amplitudeRadius,
+class NormalEpicycloid extends StatefulWidget {
+  NormalEpicycloid({
+    @required int outerRadius,
+    @required int innerRadius,
     @required double f,
     @required double scaleAmount,
     @required this.animate,
     @required this.animating,
     Key key,
     @required this.context,
-  })  : _k = k,
-        amplitudeRadius = amplitudeRadius,
+  })  : outerRadius = outerRadius,
+        innerRadius = innerRadius,
         f = f,
         _scaleAmount = scaleAmount,
         super(key: key);
 
-  final double _k;
-  final double amplitudeRadius;
+  final int outerRadius;
+  final int innerRadius;
   final double f;
   final double _scaleAmount;
   final bool animate;
   final bool animating;
   final BuildContext context;
   @override
-  _EpicycloidPedalState createState() => _EpicycloidPedalState();
+  _NormalEpicycloidState createState() => _NormalEpicycloidState();
 }
 
-class _EpicycloidPedalState extends State<EpicycloidPedal> {
+class _NormalEpicycloidState extends State<NormalEpicycloid> {
   List<Offset> points = [];
-  double r, transformx, transformy;
+  double transformx, transformy;
   double time = 0;
 
   void dispose() {
@@ -310,9 +310,9 @@ class _EpicycloidPedalState extends State<EpicycloidPedal> {
       child: Transform.scale(
         scale: widget._scaleAmount,
         child: CustomPaint(
-          painter: EpicycloidPedalPainter(
-            widget._k,
-            widget.amplitudeRadius,
+          painter: NormalEpicycloidPainter(
+            widget.outerRadius,
+            widget.innerRadius,
             time,
             (MediaQuery.of(context).size.width / 2).roundToDouble(),
             (MediaQuery.of(context).size.height / 3).roundToDouble(),
@@ -327,17 +327,17 @@ class _EpicycloidPedalState extends State<EpicycloidPedal> {
   }
 }
 
-class EpicycloidPedalPainter extends CustomPainter {
-  double radius, time, r;
+class NormalEpicycloidPainter extends CustomPainter {
+  int innerRadius, outerRadius;
   Offset smallCenter;
-  double _k, transformx, transformy;
+  double k, transformx, transformy, time;
   BuildContext context;
   List<Offset> points = [];
   bool animate;
 
-  EpicycloidPedalPainter(
-    this._k,
-    this.r,
+  NormalEpicycloidPainter(
+    this.outerRadius,
+    this.innerRadius,
     this.time,
     this.transformx,
     this.transformy,
@@ -345,7 +345,14 @@ class EpicycloidPedalPainter extends CustomPainter {
     points,
     this.context,
   ) {
-    radius = r / _k;
+    k = innerRadius / outerRadius;
+  }
+
+  int getGCD(int n1, int n2) {
+    if (n2 == 0) {
+      return n1;
+    }
+    return getGCD(n2, n1 % n2);
   }
 
   @override
@@ -357,12 +364,15 @@ class EpicycloidPedalPainter extends CustomPainter {
       paint.strokeWidth = 2;
       this.points.clear();
       paint.color = Theme.of(context).accentColor;
-      canvas.drawCircle(Offset(transformx, transformy), r.toDouble(), paint);
+      canvas.drawCircle(
+          Offset(transformx, transformy), innerRadius.toDouble(), paint);
       paint.color = Colors.red;
-      for (double loopi = 0; loopi <= 50 * pi; loopi += 0.01) {
+      for (double loopi = 0;
+          loopi <= (innerRadius / getGCD(innerRadius, outerRadius)) * 2 * pi;
+          loopi += 0.01) {
         this.points.add(Offset(
-                (radius * (((_k + 1) * cos(loopi)) - cos((_k + 1) * loopi))),
-                (radius * (((_k + 1) * sin(loopi)) - sin((_k + 1) * loopi))))
+                (outerRadius * (((k + 1) * cos(loopi)) - cos((k + 1) * loopi))),
+                (outerRadius * (((k + 1) * sin(loopi)) - sin((k + 1) * loopi))))
             .translate(transformx, transformy));
       }
       canvas.drawPoints(PointMode.polygon, points, paint);
@@ -371,15 +381,18 @@ class EpicycloidPedalPainter extends CustomPainter {
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
       paint.color = Theme.of(context).accentColor;
-      canvas.drawCircle(coor, r.toDouble(), paint);
-      smallCenter = Offset((r + radius) * cos(time), (r + radius) * sin(time))
+      canvas.drawCircle(coor, innerRadius.toDouble(), paint);
+      smallCenter = Offset((innerRadius + outerRadius) * cos(time),
+              (innerRadius + outerRadius) * sin(time))
           .translate(transformx, transformy);
-      coor += Offset((radius * (((_k + 1) * cos(time)) - cos((_k + 1) * time))),
-          (radius * (((_k + 1) * sin(time)) - sin((_k + 1) * time))));
+      coor += Offset(
+          (outerRadius * (((k + 1) * cos(time)) - cos((k + 1) * time))),
+          (outerRadius * (((k + 1) * sin(time)) - sin((k + 1) * time))));
       paint.color = Colors.blue;
-      canvas.drawCircle(smallCenter, radius, paint);
+      canvas.drawCircle(smallCenter, outerRadius.toDouble(), paint);
       canvas.drawLine(smallCenter, coor, paint);
-      smallCenter = Offset((r + radius) * cos(time), (r + radius) * sin(time));
+      smallCenter = Offset((innerRadius + outerRadius) * cos(time),
+          (innerRadius + outerRadius) * sin(time));
       ys.insert(0, coor);
       ys.forEach((value) {
         points.add(value);
@@ -390,8 +403,8 @@ class EpicycloidPedalPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(EpicycloidPedalPainter oldDelegate) => true;
+  bool shouldRepaint(NormalEpicycloidPainter oldDelegate) => true;
 
   @override
-  bool shouldRebuildSemantics(EpicycloidPedalPainter oldDelegate) => false;
+  bool shouldRebuildSemantics(NormalEpicycloidPainter oldDelegate) => false;
 }

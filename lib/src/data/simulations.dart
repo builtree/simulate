@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
-import 'package:simulate/src/simulations/epicycloid_pedal.dart';
+import 'package:simulate/src/simulations/epicycloid.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
@@ -26,7 +26,7 @@ class Simulations with ChangeNotifier {
     4: "fourier series mathematics ",
     5: "lissajous curve pattern mathematics animation ",
     6: "epicycloid curve pattern mathematics animation pencil lines ",
-    7: "epicycloid pedal curve pattern mathematics animation ",
+    7: "epicycloid curve pattern mathematics animation ",
   };
 
   Simulations() {
@@ -93,26 +93,30 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 5,
         simulationName: 'Lissajous Pattern',
-        image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
+        image: theme.darkTheme
+            ? 'images/LissajousCurveDark.png'
+            : 'images/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
       ),
       SimulationCard(
-              id: 6,
+        id: 6,
         simulationName: 'Epicycloid Pattern (Pencil of Lines)',
-        image: theme.darkTheme ? 'images/Epicycloid1Dark.png': 'images/Epicycloid1Light.png',
+        image: theme.darkTheme
+            ? 'images/Epicycloid1Dark.png'
+            : 'images/Epicycloid1Light.png',
         direct: EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
       ),
       SimulationCard(
         id: 7,
-        simulationName: 'Epicycloid Pedal Curve',
+        simulationName: 'Epicycloid Curve',
         image: theme.darkTheme
-            ? 'images/EpicycloidPedalDark.png'
-            : 'images/EpicycloidPedal.png',
-        direct: EpicycloidPedalCurve(),
+            ? 'images/EpicycloidDark.png'
+            : 'images/Epicycloid.png',
+        direct: NormalEpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[7],
       ),
