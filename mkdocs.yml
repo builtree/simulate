@@ -15,6 +15,7 @@ nav:
     - Home: 'doc/index.md'
   - Simulations: 
     - All Simulations: 'simulations/index.md'
+    - Bubble Sort: 'simulations/bubble sort/index.md'
 # Configuration
 theme:
   name: 'material'
