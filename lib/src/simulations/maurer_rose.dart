@@ -132,7 +132,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               Center(
                 child: Text(
                   "N: $_n",
-                 // style: Theme.epicycloid_curveof(context).textTheme.subtitle,
+                 
                 ),
               ),
               Slider(
@@ -154,24 +154,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
-              
-              Slider(
-                min: 2,
-                max: 6,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    thickness = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: thickness,
-              ),
-              Center(
-                child: Text("Thickness: $thickness",
-                    style: Theme.of(context).textTheme.subtitle),
-              ),
+             
             ],
           ),
         ),
@@ -281,13 +264,13 @@ class MaurerRoseState extends State<MaurerRose> {
       sleep(Duration(milliseconds: 10));
       loopi += 1;
       
-      points.add(Offset(300*sin(widget._n*loopi*widget._d*pi/180)*cos(loopi*widget._d*pi/180)/2,300*sin(widget._n*loopi*widget._d*pi/180)*sin(loopi*widget._d*pi/180)/2)
+      points.add(Offset(300*sin(widget._n*loopi*widget._d*pi/180)*cos(loopi*widget._d*pi/180)/1.5,300*sin(widget._n*loopi*widget._d*pi/180)*sin(loopi*widget._d*pi/180)/1.5)
           .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
               (MediaQuery.of(context).size.height / 3).roundToDouble()));
 
               sleep(Duration(milliseconds: 10));
       loopi2 += 1;
-      points2.add(Offset(300*sin(widget._n*loopi2*pi/180)*cos(loopi2*pi/180)/2,300*sin(widget._n*loopi2*pi/180)*sin(loopi2*pi/180)/2)
+      points2.add(Offset(300*sin(widget._n*loopi2*pi/180)*cos(loopi2*pi/180)/1.5,300*sin(widget._n*loopi2*pi/180)*sin(loopi2*pi/180)/1.5)
           .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
               (MediaQuery.of(context).size.height / 3).roundToDouble()));
     });
@@ -306,12 +289,11 @@ class MaurerRoseState extends State<MaurerRose> {
         widget._n,
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
         (MediaQuery.of(context).size.height / 3).roundToDouble(),
-        
-        
         widget.animate,
         points,
         points2,
-        widget.thickness,
+        Theme.of(context).accentColor,
+       
       ),
       child: Container(),
     );
@@ -324,7 +306,8 @@ class MaurerRosePainter extends CustomPainter {
   List<Offset> points = [];
   List<Offset> points2 = [];
   bool animate;
-  double thickness;
+  Color color;
+  
   MaurerRosePainter(
     this.d,
     this.n,
@@ -335,7 +318,8 @@ class MaurerRosePainter extends CustomPainter {
     this.animate,
     points,
     points2,
-    this.thickness,
+    this.color,
+    
   ) {
     this.points = new List<Offset>.from(points);
     this.points2 = new List<Offset>.from(points2);
@@ -345,9 +329,9 @@ class MaurerRosePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-    ..color = Colors.black
+    ..color = color
     ..style = PaintingStyle.stroke
-    ..strokeWidth = thickness;
+    ..strokeWidth = 1;
     if (!animate) {
       this.points.clear();
       for (var theta=0; theta <= 360; theta++) {
@@ -355,7 +339,7 @@ class MaurerRosePainter extends CustomPainter {
         var q= 300*sin(n*k);
         var x = q*cos(k) ;
         var y = q*sin(k) ;
-        this.points.add(Offset(x/2,y/2)
+        this.points.add(Offset(x/1.5,y/1.5)
             .translate(transformx, transformy));
       }
     }
@@ -364,7 +348,7 @@ class MaurerRosePainter extends CustomPainter {
     var paint2 = Paint()
     ..color = Colors.red
     ..style = PaintingStyle.stroke
-    ..strokeWidth = thickness;
+    ..strokeWidth = 2;
 
     if (!animate) {
       this.points2.clear();
@@ -373,7 +357,7 @@ class MaurerRosePainter extends CustomPainter {
         var q= 300*sin(n*k);
         var x = q*cos(k) ;
         var y = q*sin(k) ;
-        this.points2.add(Offset(x/2,y/2)
+        this.points2.add(Offset(x/1.5,y/1.5)
             .translate(transformx, transformy));
       }
     }
