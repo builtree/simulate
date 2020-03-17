@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -348,13 +349,6 @@ class NormalEpicycloidPainter extends CustomPainter {
     k = innerRadius / outerRadius;
   }
 
-  int getGCD(int n1, int n2) {
-    if (n2 == 0) {
-      return n1;
-    }
-    return getGCD(n2, n1 % n2);
-  }
-
   @override
   void paint(Canvas canvas, Size size) {
     Offset coor = new Offset(transformx, transformy);
@@ -368,7 +362,7 @@ class NormalEpicycloidPainter extends CustomPainter {
           Offset(transformx, transformy), innerRadius.toDouble(), paint);
       paint.color = Colors.red;
       for (double loopi = 0;
-          loopi <= (innerRadius / getGCD(innerRadius, outerRadius)) * 2 * pi;
+          loopi <= (innerRadius / innerRadius.gcd(outerRadius)) * 2 * pi;
           loopi += 0.01) {
         this.points.add(Offset(
                 (outerRadius * (((k + 1) * cos(loopi)) - cos((k + 1) * loopi))),
