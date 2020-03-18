@@ -300,6 +300,13 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
     setState(() {
       time -= widget.f;
     });
+    if (time <
+        (widget.innerRadius / widget.innerRadius.gcd(widget.outerRadius)) *
+            -2 *
+            pi) {
+      time = 0;
+      ys.clear();
+    }
   }
 
   @override
