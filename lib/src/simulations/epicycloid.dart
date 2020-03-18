@@ -147,7 +147,10 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                   activeColor: Theme.of(context).accentColor,
                   inactiveColor: Colors.grey,
                   onChanged: (value) {
-                    outerRadius = value.toInt();
+                    outerRadius = ((value.toInt() * outerRadius / innerRadius) >
+                            (innerRadius / 10))
+                        ? value.toInt() * outerRadius ~/ innerRadius
+                        : innerRadius ~/ 10;
                     setState(() {
                       innerRadius = value.toInt();
                     });
