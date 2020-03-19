@@ -123,8 +123,8 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                   height: 20,
                 ),
                 Slider(
-                  min: (innerRadius ~/ 10).toDouble(),
-                  max: innerRadius.toDouble(),
+                  min: 0,
+                  max: 50,
                   activeColor: Theme.of(context).accentColor,
                   inactiveColor: Colors.grey,
                   onChanged: (value) {
@@ -142,15 +142,11 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                   ),
                 ),
                 Slider(
-                  min: 10,
+                  min: 50,
                   max: 100,
                   activeColor: Theme.of(context).accentColor,
                   inactiveColor: Colors.grey,
                   onChanged: (value) {
-                    outerRadius = ((value.toInt() * outerRadius / innerRadius) >
-                            (innerRadius / 10))
-                        ? value.toInt() * outerRadius ~/ innerRadius
-                        : innerRadius ~/ 10;
                     setState(() {
                       innerRadius = value.toInt();
                     });
@@ -341,7 +337,7 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
 class NormalEpicycloidPainter extends CustomPainter {
   int innerRadius, outerRadius;
   Offset smallCenter;
-  double k, transformx, transformy, time;
+  double transformx, transformy, time;
   BuildContext context;
   List<Offset> points = [];
   bool animate;
@@ -355,9 +351,7 @@ class NormalEpicycloidPainter extends CustomPainter {
     this.animate,
     points,
     this.context,
-  ) {
-    k = innerRadius / outerRadius;
-  }
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -375,8 +369,12 @@ class NormalEpicycloidPainter extends CustomPainter {
           loopi <= (innerRadius / innerRadius.gcd(outerRadius)) * 2 * pi;
           loopi += 0.01) {
         this.points.add(Offset(
-                (outerRadius * (((k + 1) * cos(loopi)) - cos((k + 1) * loopi))),
-                (outerRadius * (((k + 1) * sin(loopi)) - sin((k + 1) * loopi))))
+                (((innerRadius + outerRadius) * cos(loopi)) -
+                    (outerRadius *
+                        cos(((innerRadius / outerRadius) + 1) * loopi))),
+                (((innerRadius + outerRadius) * sin(loopi)) -
+                    (outerRadius *
+                        sin(((innerRadius / outerRadius) + 1) * loopi))))
             .translate(transformx, transformy));
       }
       canvas.drawPoints(PointMode.polygon, points, paint);
@@ -390,8 +388,10 @@ class NormalEpicycloidPainter extends CustomPainter {
               (innerRadius + outerRadius) * sin(time))
           .translate(transformx, transformy);
       coor += Offset(
-          (outerRadius * (((k + 1) * cos(time)) - cos((k + 1) * time))),
-          (outerRadius * (((k + 1) * sin(time)) - sin((k + 1) * time))));
+          (((innerRadius + outerRadius) * cos(time)) -
+              (outerRadius * cos(((innerRadius / outerRadius) + 1) * time))),
+          (((innerRadius + outerRadius) * sin(time)) -
+              (outerRadius * sin(((innerRadius / outerRadius) + 1) * time))));
       paint.color = Colors.blue;
       canvas.drawCircle(smallCenter, outerRadius.toDouble(), paint);
       canvas.drawLine(smallCenter, coor, paint);
