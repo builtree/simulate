@@ -78,7 +78,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               FloatingActionButton(
-                  heroTag: Null,
+                  heroTag: null,
                   backgroundColor: Colors.white,
                   child: (!animating)
                       ? Icon(
@@ -95,7 +95,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                     });
                   }),
               FloatingActionButton(
-                heroTag: Null,
+                heroTag: null,
                 child: Icon(
                   Icons.highlight_off,
                   color: Colors.black,
@@ -161,24 +161,6 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                   ),
                 ),
                 Slider(
-                  min: 0.01,
-                  max: 2,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      _scaleAmount = value;
-                    });
-                  },
-                  value: _scaleAmount,
-                ),
-                Center(
-                  child: Text(
-                    "- Scale +",
-                    style: Theme.of(context).textTheme.subtitle,
-                  ),
-                ),
-                Slider(
                   min: 0,
                   max: 0.1,
                   activeColor: Theme.of(context).accentColor,
@@ -233,14 +215,14 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                 children: <Widget>[
                   Text('Animate: '),
                   Checkbox(
-                    onChanged: (_) {
-                      setState(() {
-                        animate = !animate;
-                        if (animating) {
-                          animating = (animating && animate);
-                        }
-                      });
-                    },
+                    onChanged: (animating)
+                        ? null
+                        : (_) {
+                            setState(() {
+                              animate = !animate;
+                            });
+                          },
+                    activeColor: Colors.red,
                     value: animate,
                   ),
                 ],
