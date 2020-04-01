@@ -13,13 +13,13 @@ class MaurerRoseCurve extends StatefulWidget {
 }
 
 class MaurerRoseCurveState extends State<MaurerRoseCurve> {
-  double _n = 0;
-  double _d = 0;
-  double k = 0;
-  
-  bool animate = false;
+  double n = 0;
+  double d = 0;
+  // double dn = 0.001;
+  // double dd = 0.001;
+  bool animate_N = false;
+  bool animate_D = false;
   bool animating = false;
-  double thickness = 2;
 
   @override
   void initState() {
@@ -67,7 +67,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Visibility(
-          visible: animate,
+          visible: animate_N || animate_D,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -86,6 +86,8 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                   onPressed: () {
                     setState(() {
                       animating = !animating;
+                      d = globalKey.currentState.widget.d;
+                      n = globalKey.currentState.widget.n;
                     });
                   }),
               FloatingActionButton(
@@ -97,7 +99,12 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                 backgroundColor: Colors.white,
                 onPressed: () {
                   setState(() {
-                    globalKey.currentState.clearscreen();
+                    if (animate_N) {
+                      n = 0;
+                    }
+                    if (animate_D) {
+                      d = 0;
+                    }
                   });
                 },
               )
@@ -118,21 +125,25 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               ),
               Slider(
                 min: 0,
-                max: 10,
-                divisions: 10,
+                max: 20,
+                divisions: 200,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _n = double.parse(value.toStringAsFixed(1));
-                  });
-                },
-                value: _n,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          n = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: n,
               ),
               Center(
                 child: Text(
-                  "N: $_n",
-                 
+                  (animating && animate_N)
+                      ? "N: Animating"
+                      : "N: ${n.toStringAsFixed(1)}",
+                  style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               Slider(
@@ -141,20 +152,61 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                 divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _d = double.parse(value.toStringAsFixed(1));
-                  });
-                },
-                value: _d,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          d = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: d,
               ),
               Center(
                 child: Text(
-                  "D: $_d",
+                  (animating && animate_D)
+                      ? "D: Animating"
+                      : "D: ${d.toStringAsFixed(1)}",
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
-             
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dn = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dn,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dn: ${dn.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle,
+              //   ),
+              // ),
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dd = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dd,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dd: ${dd.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -164,43 +216,69 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
         child: Stack(
           children: <Widget>[
             MaurerRose(
-              d: _d,
-              n: _n,
-              animate: animate,
+              d: d,
+              n: n,
+              // dd: dd,
+              // dn: dn,
+              animate_N: animate_N,
+              animate_D: animate_D,
               animating: animating,
               key: globalKey,
-              thickness: thickness,
             ),
             Positioned(
-              top: 5,
-              left: 5,
-              child: Text(
-                'N:D ~ ${(_n / _d).toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.subtitle,
+              top: 12,
+              left: 12,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    'Animate with N -',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  Checkbox(
+                    onChanged: (animating)
+                        ? null
+                        : (_) {
+                            setState(() {
+                              animate_N = !animate_N;
+                            });
+                          },
+                    activeColor: Colors.red,
+                    value: animate_N,
+                  ),
+                ],
               ),
             ),
             Positioned(
-              top: 0,
+              top: 12,
               right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  Text('Animate: '),
+                  Text(
+                    'Animate with D -',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                   Checkbox(
-                    onChanged: (_) {
-                      setState(() {
-                        animate = !animate;
-                        if (animating) {
-                          animating = (animating && animate);
-                        }
-                      });
-                    },
-                    value: animate,
+                    onChanged: (animating)
+                        ? null
+                        : (_) {
+                            setState(() {
+                              animate_D = !animate_D;
+                            });
+                          },
                     activeColor: Colors.red,
+                    value: animate_D,
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -211,68 +289,43 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
 class MaurerRose extends StatefulWidget {
   MaurerRose({
     Key key,
-    @required double d,
-    @required double n,
-    @required this.animate,
+    @required this.d,
+    @required this.n,
+    // @required this.dd,
+    // @required this.dn,
+    @required this.animate_N,
+    @required this.animate_D,
     @required this.animating,
-    @required this.thickness,
-  })  : _d = d,
-        _n = n,
-        super(key: key);
+  }) : super(key: key);
 
-  final double _d;
-  final double _n;
-  final bool animate;
+  double d;
+  double n;
+  // double dd;
+  // double dn;
+  final bool animate_N;
+  final bool animate_D;
   final bool animating;
-  final double thickness;
 
   @override
   MaurerRoseState createState() => MaurerRoseState();
 }
 
 class MaurerRoseState extends State<MaurerRose> {
-  List<Offset> points = [];
-  List<Offset> points2 = [];
-  double loopi = 0;
-  double loopi2 = 0;
-  double r, n, d, c, transformx, transformy;
-  double looplength = 360;
-  double looplength2 = 360;
-
-  void dispose() {
-    super.dispose();
-  }
-
-  void clearscreen() {
-    points.clear();
-    points2.clear();
-    looplength = 360;
-    looplength2 = 360;
-    looplength += loopi;
-    looplength2 += loopi2;
-  }
-
   nextStep() {
-    if (loopi >= looplength) {
-      clearscreen();
-      loopi = 0;
-      loopi2 = 0;
-      looplength = 360;
-      looplength2 = 360;
-    }
     setState(() {
       sleep(Duration(milliseconds: 10));
-      loopi += 1;
-      
-      points.add(Offset(300*sin(widget._n*loopi*widget._d*pi/180)*cos(loopi*widget._d*pi/180)/1.5,300*sin(widget._n*loopi*widget._d*pi/180)*sin(loopi*widget._d*pi/180)/1.5)
-          .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble()));
-
-              sleep(Duration(milliseconds: 10));
-      loopi2 += 1;
-      points2.add(Offset(300*sin(widget._n*loopi2*pi/180)*cos(loopi2*pi/180)/1.5,300*sin(widget._n*loopi2*pi/180)*sin(loopi2*pi/180)/1.5)
-          .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble()));
+      if (widget.animate_N) {
+        widget.n += 0.003;
+      }
+      if (widget.animate_D) {
+        widget.d += 0.005;
+      }
+      if (widget.n > 20) {
+        widget.n = 0;
+      }
+      if (widget.d > 100) {
+        widget.d = 0;
+      }
     });
   }
 
@@ -283,19 +336,34 @@ class MaurerRoseState extends State<MaurerRose> {
         nextStep();
       });
     }
-    return CustomPaint(
-      painter: MaurerRosePainter(
-        widget._d,
-        widget._n,
-        (MediaQuery.of(context).size.width / 2).roundToDouble(),
-        (MediaQuery.of(context).size.height / 3).roundToDouble(),
-        widget.animate,
-        points,
-        points2,
-        Theme.of(context).accentColor,
-       
-      ),
-      child: Container(),
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        CustomPaint(
+          painter: MaurerRosePainter(
+            widget.d,
+            widget.n,
+            (MediaQuery.of(context).size.width / 2).roundToDouble(),
+            (MediaQuery.of(context).size.height / 3).roundToDouble(),
+            Theme.of(context).accentColor,
+          ),
+          child: Container(),
+        ),
+        Visibility(
+          visible: widget.animate_N,
+          child: Positioned(
+            bottom: 60,
+            child: Text("N: ${widget.n.toStringAsFixed(1)}"),
+          ),
+        ),
+        Visibility(
+          visible: widget.animate_D,
+          child: Positioned(
+            bottom: 40,
+            child: Text("D: ${widget.d.toStringAsFixed(1)}"),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -305,61 +373,50 @@ class MaurerRosePainter extends CustomPainter {
   double k, transformx, transformy;
   List<Offset> points = [];
   List<Offset> points2 = [];
-  bool animate;
   Color color;
-  
+  double q, x, y;
+  int theta, r = 300;
+
   MaurerRosePainter(
     this.d,
     this.n,
     this.transformx,
     this.transformy,
-    
-    
-    this.animate,
-    points,
-    points2,
     this.color,
-    
   ) {
-    this.points = new List<Offset>.from(points);
-    this.points2 = new List<Offset>.from(points2);
     k = n / d;
   }
 
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-    ..color = color
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 1;
-    if (!animate) {
-      this.points.clear();
-      for (var theta=0; theta <= 360; theta++) {
-        var k = theta*d*pi/180;
-        var q= 300*sin(n*k);
-        var x = q*cos(k) ;
-        var y = q*sin(k) ;
-        this.points.add(Offset(x/1.5,y/1.5)
-            .translate(transformx, transformy));
-      }
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    for (theta = 0; theta <= 360; theta++) {
+      k = theta * d * pi / 180;
+      q = r * sin(n * k);
+      x = q * cos(k);
+      y = q * sin(k);
+      this
+          .points
+          .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
     }
     canvas.drawPoints(PointMode.polygon, points, paint);
 
     var paint2 = Paint()
-    ..color = Colors.red
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 2;
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3;
 
-    if (!animate) {
-      this.points2.clear();
-      for (var theta=0; theta <= 360; theta++) {
-        var k = theta*pi/180;
-        var q= 300*sin(n*k);
-        var x = q*cos(k) ;
-        var y = q*sin(k) ;
-        this.points2.add(Offset(x/1.5,y/1.5)
-            .translate(transformx, transformy));
-      }
+    for (theta = 0; theta <= 360; theta++) {
+      k = theta * pi / 180;
+      q = r * sin(n * k);
+      x = q * cos(k);
+      y = q * sin(k);
+      this
+          .points2
+          .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
     }
     canvas.drawPoints(PointMode.polygon, points2, paint2);
   }
