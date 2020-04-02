@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
+import 'package:simulate/src/simulations/epicycloid.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
 import 'package:simulate/src/simulations/toothpick.dart';
@@ -11,9 +12,9 @@ import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4, 5, 6];
+  final _mathematics = [3, 4, 5, 6, 7];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -25,6 +26,7 @@ class Simulations with ChangeNotifier {
     4: "fourier series mathematics ",
     5: "lissajous curve pattern mathematics animation ",
     6: "epicycloid curve pattern mathematics animation pencil lines ",
+    7: "epicycloid curve pattern mathematics animation ",
   };
 
   Simulations() {
@@ -45,7 +47,9 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 0,
         simulationName: 'ToothPick Pattern',
-        image: theme.darkTheme ? 'images/ToothpickPatternDark.png': 'images/ToothpickPatternLight.png',
+        image: theme.darkTheme
+            ? 'images/ToothpickPatternDark.png'
+            : 'images/ToothpickPatternLight.png',
         direct: ToothpickPattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
         fav: _favorites[0],
@@ -69,7 +73,9 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 3,
         simulationName: 'Rose Pattern',
-        image: theme.darkTheme ? 'images/RosePatternDark.png': 'images/RosePatternLight.png',
+        image: theme.darkTheme
+            ? 'images/RosePatternDark.png'
+            : 'images/RosePatternLight.png',
         direct: RosePattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[3],
@@ -77,7 +83,9 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 4,
         simulationName: 'Fourier Series',
-        image: theme.darkTheme ? 'images/FourierSeriesDark.png': 'images/FourierSeriesLight.png',
+        image: theme.darkTheme
+            ? 'images/FourierSeriesDark.png'
+            : 'images/FourierSeriesLight.png',
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
@@ -85,7 +93,9 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 5,
         simulationName: 'Lissajous Pattern',
-        image: theme.darkTheme ? 'images/LissajousCurveDark.png': 'images/LissajousCurveLight.png',
+        image: theme.darkTheme
+            ? 'images/LissajousCurveDark.png'
+            : 'images/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
@@ -93,10 +103,22 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 6,
         simulationName: 'Epicycloid Pattern (Pencil of Lines)',
-        image: theme.darkTheme ? 'images/Epicycloid1Dark.png': 'images/Epicycloid1Light.png',
+        image: theme.darkTheme
+            ? 'images/Epicycloid1Dark.png'
+            : 'images/Epicycloid1Light.png',
         direct: EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
+      ),
+      SimulationCard(
+        id: 7,
+        simulationName: 'Epicycloid Curve',
+        image: theme.darkTheme
+            ? 'images/EpicycloidDark.png'
+            : 'images/Epicycloid.png',
+        direct: NormalEpicycloidCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
+        fav: _favorites[7],
       ),
     ];
   }
