@@ -12,9 +12,9 @@ import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4, 5, 6, 7];
+  final _mathematics = [3, 4, 5, 6, 7, 8];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -26,7 +26,7 @@ class Simulations with ChangeNotifier {
     4: "fourier series mathematics ",
     5: "lissajous curve pattern mathematics animation ",
     6: "epicycloid curve pattern mathematics animation pencil lines ",
-    7: "maurer rose pattern"
+    8: "maurer rose pattern"
   };
 
   Simulations() {
@@ -101,7 +101,7 @@ class Simulations with ChangeNotifier {
         fav: _favorites[6],
       ),
       SimulationCard(
-        id: 7,
+        id: 8,
         simulationName: 'Maurer Rose Pattern',
         image: 'images/Maurer_Rose.svg.png',
         direct: MaurerRoseCurve(),
