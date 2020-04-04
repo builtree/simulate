@@ -125,7 +125,9 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 8,
         simulationName: 'Maurer Rose Pattern',
-        image: 'images/Maurer_Rose.svg.png',
+        image: theme.darkTheme
+        ? 'assets/simulations/MaurerRoseDark.png'
+        : 'assets/simulations/MaurerRoseLight.png',
         direct: MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[8],

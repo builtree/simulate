@@ -43,11 +43,12 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil(
+    ScreenUtil.init(
+      context,
       width: 512.0,
       height: 1024.0,
       allowFontScaling: true,
-    )..init(context);
+    );
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -113,7 +114,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil.instance.height / 5,
+        height: ScreenUtil().setHeight(1024 / 5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
@@ -226,17 +227,12 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               key: globalKey,
             ),
             Positioned(
-              top: 12,
               left: 12,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with N -',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    'Animate with N:',
                   ),
                   Checkbox(
                     onChanged: (animating)
@@ -253,17 +249,11 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               ),
             ),
             Positioned(
-              top: 12,
-              right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with D -',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    'Animate with D:',
                   ),
                   Checkbox(
                     onChanged: (animating)

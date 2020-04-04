@@ -112,7 +112,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(924/5),
+        height: ScreenUtil().setHeight(924 / 5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
@@ -185,17 +185,12 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
               key: globalKey,
             ),
             Positioned(
-              top: 12,
               left: 12,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with Factor -',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    'Animate with Factor:',
                   ),
                   Checkbox(
                     onChanged: (animating)
@@ -212,17 +207,11 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
               ),
             ),
             Positioned(
-              top: 12,
-              right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with Points -',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    'Animate with Points:',
                   ),
                   Checkbox(
                     onChanged: (animating)
@@ -301,8 +290,6 @@ class _EpicycloidState extends State<Epicycloid> {
               (MediaQuery.of(context).size.width / 2.4).roundToDouble(),
               (MediaQuery.of(context).size.width / 2).roundToDouble(),
               (MediaQuery.of(context).size.height / 3).roundToDouble(),
-              widget.animatefactor,
-              widget.animatepoints,
               Theme.of(context).accentColor),
           child: Container(),
         ),
@@ -329,7 +316,6 @@ class EpicycloidPainter extends CustomPainter {
   List<Offset> points = [];
   double total, factor;
   double radius, tx, ty;
-  bool animatefactor, animatepoints;
   Color color;
 
   EpicycloidPainter(
@@ -338,8 +324,6 @@ class EpicycloidPainter extends CustomPainter {
     this.radius,
     this.tx,
     this.ty,
-    this.animatefactor,
-    this.animatepoints,
     this.color,
   );
 
