@@ -112,7 +112,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1600 / 4.0),
+        height: animate ? ScreenUtil().setHeight(1600 / 4.0) : ScreenUtil().setHeight(1600 / 6.0),
         child: Container(
           child: Material(
             elevation: 30,
@@ -120,7 +120,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 Slider(
                   min: 0,
@@ -160,22 +160,29 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                     style: Theme.of(context).textTheme.subtitle,
                   ),
                 ),
-                Slider(
-                  min: 0,
-                  max: 0.1,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      f = value;
-                    });
-                  },
-                  value: f,
-                ),
-                Center(
-                  child: Text(
-                    "- Frequency +",
-                    style: Theme.of(context).textTheme.subtitle,
+                Visibility(
+                  visible: animate,
+                  child: Column(
+                    children: <Widget>[
+                      Slider(
+                        min: 0,
+                        max: 0.1,
+                        activeColor: Theme.of(context).accentColor,
+                        inactiveColor: Colors.grey,
+                        onChanged: (value) {
+                          setState(() {
+                            f = value;
+                          });
+                        },
+                        value: f,
+                      ),
+                      Center(
+                        child: Text(
+                          "- Frequency +",
+                          style: Theme.of(context).textTheme.subtitle,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
