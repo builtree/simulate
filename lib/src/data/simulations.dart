@@ -48,8 +48,8 @@ class Simulations with ChangeNotifier {
         id: 0,
         simulationName: 'ToothPick Pattern',
         image: theme.darkTheme
-            ? 'images/ToothpickPatternDark.png'
-            : 'images/ToothpickPatternLight.png',
+            ? 'assets/simulations/ToothpickPatternDark.png'
+            : 'assets/simulations/ToothpickPatternLight.png',
         direct: ToothpickPattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
         fav: _favorites[0],
@@ -57,7 +57,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 1,
         simulationName: 'Bubble Sort (Bars)',
-        image: 'images/Bubblesort.gif',
+        image: 'assets/simulations/Bubblesort.gif',
         direct: BubbleSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Bubble_sort',
         fav: _favorites[1],
@@ -65,7 +65,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 2,
         simulationName: 'Insertion Sort',
-        image: 'images/InsertionSort.gif',
+        image: 'assets/simulations/InsertionSort.gif',
         direct: InsertionHome(),
         infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
         fav: _favorites[2],
@@ -74,8 +74,8 @@ class Simulations with ChangeNotifier {
         id: 3,
         simulationName: 'Rose Pattern',
         image: theme.darkTheme
-            ? 'images/RosePatternDark.png'
-            : 'images/RosePatternLight.png',
+            ? 'assets/simulations/RosePatternDark.png'
+            : 'assets/simulations/RosePatternLight.png',
         direct: RosePattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[3],
@@ -84,8 +84,8 @@ class Simulations with ChangeNotifier {
         id: 4,
         simulationName: 'Fourier Series',
         image: theme.darkTheme
-            ? 'images/FourierSeriesDark.png'
-            : 'images/FourierSeriesLight.png',
+            ? 'assets/simulations/FourierSeriesDark.png'
+            : 'assets/simulations/FourierSeriesLight.png',
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
@@ -94,8 +94,8 @@ class Simulations with ChangeNotifier {
         id: 5,
         simulationName: 'Lissajous Pattern',
         image: theme.darkTheme
-            ? 'images/LissajousCurveDark.png'
-            : 'images/LissajousCurveLight.png',
+            ? 'assets/simulations/LissajousCurveDark.png'
+            : 'assets/simulations/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
@@ -104,8 +104,8 @@ class Simulations with ChangeNotifier {
         id: 6,
         simulationName: 'Epicycloid Pattern (Pencil of Lines)',
         image: theme.darkTheme
-            ? 'images/Epicycloid1Dark.png'
-            : 'images/Epicycloid1Light.png',
+            ? 'assets/simulations/Epicycloid1Dark.png'
+            : 'assets/simulations/Epicycloid1Light.png',
         direct: EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
@@ -114,8 +114,8 @@ class Simulations with ChangeNotifier {
         id: 7,
         simulationName: 'Epicycloid Curve',
         image: theme.darkTheme
-            ? 'images/EpicycloidDark.png'
-            : 'images/Epicycloid.png',
+            ? 'assets/simulations/EpicycloidDark.png'
+            : 'assets/simulations/Epicycloid.png',
         direct: NormalEpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[7],
