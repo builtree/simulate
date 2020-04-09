@@ -107,14 +107,13 @@ class _LissajousCurveState extends State<LissajousCurve> {
         ),
       ),
       bottomNavigationBar: 
-      Scrollbar(
-      child:
       Container(
         height: ScreenUtil().setHeight(1024/5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
-          child: ListView(
+          child: Scrollbar(child:
+          ListView(
             padding: EdgeInsets.all(8.0),
             children: <Widget>[
               SizedBox(
@@ -197,8 +196,9 @@ class _LissajousCurveState extends State<LissajousCurve> {
             ],
           ),
         ),
+        ),
       ),
-      ),
+      
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Stack(
