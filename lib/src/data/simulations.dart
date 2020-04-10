@@ -40,6 +40,10 @@ class Simulations with ChangeNotifier {
     List<String> myList = (prefs.getStringList('favorites') ?? List<String>());
     if (myList.length != 0) {
       _favorites = myList.map((i) => int.parse(i)).toList();
+      if(allSimulations().length>_favorites.length)
+      {
+        _favorites = List.from(_favorites)..addAll(List.filled(allSimulations().length-_favorites.length, -1));
+      }
     }
   }
 
