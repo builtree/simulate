@@ -107,6 +107,11 @@ class _LissajousCurveState extends State<LissajousCurve> {
         ),
       ),
       bottomNavigationBar: 
+<<<<<<< HEAD
+=======
+      Scrollbar(
+      child:
+>>>>>>> 525000556d54adacb7d0c7c461aa008b71d5eefd
       Container(
         height: ScreenUtil().setHeight(1024/5),
         child: Material(
@@ -198,7 +203,11 @@ class _LissajousCurveState extends State<LissajousCurve> {
         ),
         ),
       ),
+<<<<<<< HEAD
       
+=======
+      ),
+>>>>>>> 525000556d54adacb7d0c7c461aa008b71d5eefd
       body: Container(
         width: MediaQuery.of(context).size.width,
         child: Stack(
