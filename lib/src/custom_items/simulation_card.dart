@@ -106,6 +106,9 @@ class _SimulationCardState extends State<SimulationCard> {
                           setState(() {
                             appState.toggleFavorite(widget.id);
                           });
+
+                          appState.listKey.currentState.insertItem(widget.id,
+                              duration: Duration(milliseconds: 300)); // Trigger AnimatedList On adding items to favourite
                         },
                       ),
                     ],

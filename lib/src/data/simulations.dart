@@ -19,6 +19,7 @@ class Simulations with ChangeNotifier {
   final _physics = [];
   final _chemistry = [];
   var prefs;
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
   final _searchTags = {
     0: "toothpick pattern algorithm sequence ",
     1: "bubble sort algorithm sorting bars ",
@@ -112,26 +113,26 @@ class Simulations with ChangeNotifier {
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
       ),
-      SimulationCard(
-        id: 7,
-        simulationName: 'Epicycloid Curve',
-        image: theme.darkTheme
-            ? 'assets/simulations/EpicycloidDark.png'
-            : 'assets/simulations/Epicycloid.png',
-        direct: NormalEpicycloidCurve(),
-        infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
-        fav: _favorites[7],
-      ),
-      SimulationCard(
-        id: 8,
-        simulationName: 'Maurer Rose Pattern',
-        image: theme.darkTheme
-        ? 'assets/simulations/MaurerRoseDark.png'
-        : 'assets/simulations/MaurerRoseLight.png',
-        direct: MaurerRoseCurve(),
-        infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
-        fav: _favorites[8],
-      ),
+      // SimulationCard(
+      //   id: 7,
+      //   simulationName: 'Epicycloid Curve',
+      //   image: theme.darkTheme
+      //       ? 'assets/simulations/EpicycloidDark.png'
+      //       : 'assets/simulations/Epicycloid.png',
+      //   direct: NormalEpicycloidCurve(),
+      //   infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
+      //   fav: _favorites[7],
+      // ),
+      // SimulationCard(
+      //   id: 8,
+      //   simulationName: 'Maurer Rose Pattern',
+      //   image: theme.darkTheme
+      //   ? 'assets/simulations/MaurerRoseDark.png'
+      //   : 'assets/simulations/MaurerRoseLight.png',
+      //   direct: MaurerRoseCurve(),
+      //   infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
+      //   fav: _favorites[8],
+      // ),
     ];
   }
 
@@ -199,6 +200,8 @@ class Simulations with ChangeNotifier {
 
   void toggleFavorite(int index) async {
     _favorites[index] *= -1;
+
+    // listKey.currentState.insertItem(index);
     List<String> favorites = _favorites.map((i) => i.toString()).toList();
     await prefs.setStringList('favorites', favorites);
     notifyListeners();
