@@ -99,7 +99,7 @@ class HomeHorizontalListAnimate extends StatelessWidget {
           ),
           Container(
             height: 215,
-            child: AnimatedList(
+            child: AnimatedList(   //Implementation of AnimtedList to toggle Favourites
                 initialItemCount: elements.length,
                 key: appState.listKey,
                 scrollDirection: Axis.horizontal,

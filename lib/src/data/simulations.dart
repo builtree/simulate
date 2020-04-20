@@ -113,26 +113,26 @@ class Simulations with ChangeNotifier {
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
       ),
-      // SimulationCard(
-      //   id: 7,
-      //   simulationName: 'Epicycloid Curve',
-      //   image: theme.darkTheme
-      //       ? 'assets/simulations/EpicycloidDark.png'
-      //       : 'assets/simulations/Epicycloid.png',
-      //   direct: NormalEpicycloidCurve(),
-      //   infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
-      //   fav: _favorites[7],
-      // ),
-      // SimulationCard(
-      //   id: 8,
-      //   simulationName: 'Maurer Rose Pattern',
-      //   image: theme.darkTheme
-      //   ? 'assets/simulations/MaurerRoseDark.png'
-      //   : 'assets/simulations/MaurerRoseLight.png',
-      //   direct: MaurerRoseCurve(),
-      //   infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
-      //   fav: _favorites[8],
-      // ),
+      SimulationCard(
+        id: 7,
+        simulationName: 'Epicycloid Curve',
+        image: theme.darkTheme
+            ? 'assets/simulations/EpicycloidDark.png'
+            : 'assets/simulations/Epicycloid.png',
+        direct: NormalEpicycloidCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
+        fav: _favorites[7],
+      ),
+      SimulationCard(
+        id: 8,
+        simulationName: 'Maurer Rose Pattern',
+        image: theme.darkTheme
+        ? 'assets/simulations/MaurerRoseDark.png'
+        : 'assets/simulations/MaurerRoseLight.png',
+        direct: MaurerRoseCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
+        fav: _favorites[8],
+      ),
     ];
   }
 
