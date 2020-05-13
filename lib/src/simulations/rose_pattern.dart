@@ -106,13 +106,13 @@ class _RosePatternState extends State<RosePattern> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024/4),
+        height: ScreenUtil().setHeight(1024/5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
-          child: Column(
+          child: ListView(
+            padding: EdgeInsets.all(8.0),
             children: <Widget>[
-              Spacer(flex: 2),
               Slider(
                 min: 0,
                 max: 10,
@@ -131,9 +131,6 @@ class _RosePatternState extends State<RosePattern> {
                   "Numerator: $_n",
                   style: Theme.of(context).textTheme.subtitle,
                 ),
-              ),
-              Spacer(
-                flex: 1,
               ),
               Slider(
                 min: 0,
@@ -154,7 +151,6 @@ class _RosePatternState extends State<RosePattern> {
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
-              Spacer(),
               Slider(
                 min: 0,
                 max: 1,
@@ -174,7 +170,6 @@ class _RosePatternState extends State<RosePattern> {
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
-              Spacer(),
             ],
           ),
         ),
@@ -260,7 +255,7 @@ class _RoseState extends State<Rose> {
   void clearScreen() {
     points.clear();
     looplength = 2 * pi * widget.d;
-    loopi=0;
+    looplength+=loopi;
   }
 
   nextStep()
@@ -268,14 +263,15 @@ class _RoseState extends State<Rose> {
     if(loopi>=looplength)
     {
       clearScreen();
-      looplength = 2 * pi * widget.d;
-      loopi = 0;
+      loopi=0;
     }
 
     setState(() {
       if(!(widget.d==0)&&!(widget.d==0&&widget.n==0)){
-        sleep(Duration(milliseconds: 1));
-        loopi += 0.01;
+        if(loopi == 0) {
+          looplength = 2 * pi * widget.d;
+        }
+        loopi += 0.04;
         k = widget.n / widget.d;
         r = (MediaQuery.of(context).size.width / 4).roundToDouble();
         points.add(Offset(r * (cos(k * loopi) + widget.c) * cos(loopi), r * (cos(k * loopi) + widget.c) * sin(loopi))
