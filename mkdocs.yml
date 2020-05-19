@@ -14,20 +14,23 @@ nav:
   - Documentation: 
     - Home: 'doc/index.md'
   - Simulations: 
-    - All Simulations: 'simulations/index.md'
+    - Algorithms: simulations/algorithms.md
+    - Mathematics: simulations/mathematics.md
+    # - All Simulations: 'simulations/index.md'
 # Configuration
 theme:
   name: 'material'
-  feature:
-    tabs: true
+  features:
+    - tabs
   palette:
     primary: 'black'
     accent: 'white'
   font:
     text: 'Ubuntu'
     code: 'Ubuntu Mono'
-  logo:
-    icon: 'library_books'
+  icon:
+    logo: material/atom
+    repo: octicons/mark-github
 
 # Customization
 

@@ -40,9 +40,9 @@ git checkout -b [BRANCH NAME]
 
 ## Setting Up Docs
 
-1. Install mkdocs
+1. Install mkdocs and its requirements
 ```bash
-python3 -m pip install mkdocs
+python3 -m  pip install mkdocs pymdown-extensions mkdocs-material
 ```
 2. Check the installations by:
 ```bash
@@ -54,7 +54,7 @@ mkdocs --version
 
 3. Use the below command to host the documentation on local server
 ```bash
-mkdocs serve
+mkdocs serve --dev-addr 127.0.0.1:8000
 ```
 {== MkDocs supports live reload so you don't have to run the server again and again. Just make your changes in the docs and you'll see the change immediately. ==}
 4. All the documentation is present in the `docs` directory.
