@@ -5,18 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-GlobalKey<_EpicycloidState> globalKey = GlobalKey<_EpicycloidState>();
+GlobalKey<MaurerRoseState> globalKey = GlobalKey<MaurerRoseState>();
 
-class EpicycloidCurve extends StatefulWidget {
+class MaurerRoseCurve extends StatefulWidget {
   @override
-  _EpicycloidCurveState createState() => _EpicycloidCurveState();
+  MaurerRoseCurveState createState() => MaurerRoseCurveState();
 }
 
-class _EpicycloidCurveState extends State<EpicycloidCurve> {
-  double factor = 0;
-  double total = 0;
-  bool animatefactor = false;
-  bool animatepoints = false;
+class MaurerRoseCurveState extends State<MaurerRoseCurve> {
+  double n = 0;
+  double d = 0;
+  // double dn = 0.001;
+  // double dd = 0.001;
+  bool animate_N = false;
+  bool animate_D = false;
   bool animating = false;
 
   @override
@@ -43,8 +45,8 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      width: 434.0,
-      height: 924.0,
+      width: 512.0,
+      height: 1024.0,
       allowFontScaling: true,
     );
     return Scaffold(
@@ -57,7 +59,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           },
         ),
         title: Text(
-          'Epicycloid Pattern (Pencil of Lines)',
+          'MaurerRose Pattern',
           style: Theme.of(context).textTheme.title,
         ),
         centerTitle: true,
@@ -66,7 +68,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Visibility(
-          visible: animatefactor || animatepoints,
+          visible: animate_N || animate_D,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -85,24 +87,24 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                   onPressed: () {
                     setState(() {
                       animating = !animating;
-                      factor = globalKey.currentState.widget.factor;
-                      total = globalKey.currentState.widget.total;
+                      d = globalKey.currentState.widget.d;
+                      n = globalKey.currentState.widget.n;
                     });
                   }),
               FloatingActionButton(
                 heroTag: null,
                 child: Icon(
-                  Icons.replay,
+                  Icons.highlight_off,
                   color: Colors.black,
                 ),
                 backgroundColor: Colors.white,
                 onPressed: () {
                   setState(() {
-                    if (animatefactor) {
-                      factor = 0;
+                    if (animate_N) {
+                      n = 0;
                     }
-                    if (animatepoints) {
-                      total = 0;
+                    if (animate_D) {
+                      d = 0;
                     }
                   });
                 },
@@ -112,7 +114,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(924 / 5),
+        height: ScreenUtil().setHeight(1024 / 5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
@@ -120,54 +122,92 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
             padding: EdgeInsets.all(8.0),
             children: <Widget>[
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               Slider(
                 min: 0,
-                max: 500,
-                divisions: 500,
+                max: 20,
+                divisions: 200,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
                     : (value) {
                         setState(() {
-                          total = double.parse(value.toStringAsFixed(1));
+                          n = double.parse(value.toStringAsFixed(1));
                         });
                       },
-                value: total,
+                value: n,
               ),
               Center(
                 child: Text(
-                  (animating && animatepoints)
-                      ? "Points: Animating"
-                      : "Points: ${total.toInt()}",
+                  (animating && animate_N)
+                      ? "N: Animating"
+                      : "N: ${n.toStringAsFixed(1)}",
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
               Slider(
                 min: 0,
-                max: 51,
-                divisions: 510,
+                max: 100,
+                divisions: 100,
                 activeColor: Theme.of(context).accentColor,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
                     : (value) {
                         setState(() {
-                          factor = double.parse(value.toStringAsFixed(1));
+                          d = double.parse(value.toStringAsFixed(1));
                         });
                       },
-                value: factor,
+                value: d,
               ),
               Center(
                 child: Text(
-                  (animating && animatefactor)
-                      ? "Factor: Animating"
-                      : "Factor: ${factor.toStringAsFixed(1)}",
+                  (animating && animate_D)
+                      ? "D: Animating"
+                      : "D: ${d.toStringAsFixed(1)}",
                   style: Theme.of(context).textTheme.subtitle,
                 ),
               ),
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dn = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dn,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dn: ${dn.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle,
+              //   ),
+              // ),
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dd = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dd,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dd: ${dd.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle,
+              //   ),
+              // ),
             ],
           ),
         ),
@@ -176,11 +216,13 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: <Widget>[
-            Epicycloid(
-              factor: factor,
-              total: total,
-              animatefactor: animatefactor,
-              animatepoints: animatepoints,
+            MaurerRose(
+              d: d,
+              n: n,
+              // dd: dd,
+              // dn: dn,
+              animate_N: animate_N,
+              animate_D: animate_D,
               animating: animating,
               key: globalKey,
             ),
@@ -190,18 +232,18 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with Factor:',
+                    'Animate with N:',
                   ),
                   Checkbox(
                     onChanged: (animating)
                         ? null
                         : (_) {
                             setState(() {
-                              animatefactor = !animatefactor;
+                              animate_N = !animate_N;
                             });
                           },
                     activeColor: Colors.red,
-                    value: animatefactor,
+                    value: animate_N,
                   ),
                 ],
               ),
@@ -211,22 +253,22 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
-                    'Animate with Points:',
+                    'Animate with D:',
                   ),
                   Checkbox(
                     onChanged: (animating)
                         ? null
                         : (_) {
                             setState(() {
-                              animatepoints = !animatepoints;
+                              animate_D = !animate_D;
                             });
                           },
                     activeColor: Colors.red,
-                    value: animatepoints,
+                    value: animate_D,
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -234,41 +276,45 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   }
 }
 
-class Epicycloid extends StatefulWidget {
-  Epicycloid({
+class MaurerRose extends StatefulWidget {
+  MaurerRose({
     Key key,
-    @required this.factor,
-    @required this.total,
-    @required this.animatefactor,
-    @required this.animatepoints,
+    @required this.d,
+    @required this.n,
+    // @required this.dd,
+    // @required this.dn,
+    @required this.animate_N,
+    @required this.animate_D,
     @required this.animating,
   }) : super(key: key);
 
-  double factor;
-  double total;
-  final bool animatefactor;
-  final bool animatepoints;
+  double d;
+  double n;
+  // double dd;
+  // double dn;
+  final bool animate_N;
+  final bool animate_D;
   final bool animating;
 
   @override
-  _EpicycloidState createState() => _EpicycloidState();
+  MaurerRoseState createState() => MaurerRoseState();
 }
 
-class _EpicycloidState extends State<Epicycloid> {
+class MaurerRoseState extends State<MaurerRose> {
   nextStep() {
     setState(() {
       sleep(Duration(milliseconds: 10));
-      if (widget.animatefactor) {
-        widget.factor += 0.01;
+      if (widget.animate_N) {
+        widget.n += 0.003;
       }
-      if (widget.animatepoints) {
-        widget.total += 0.3;
+      if (widget.animate_D) {
+        widget.d += 0.005;
       }
-      if (widget.factor > 51) {
-        widget.factor = 0;
+      if (widget.n > 20) {
+        widget.n = 0;
       }
-      if (widget.total > 500) {
-        widget.total = 0;
+      if (widget.d > 100) {
+        widget.d = 0;
       }
     });
   }
@@ -284,27 +330,27 @@ class _EpicycloidState extends State<Epicycloid> {
       alignment: Alignment.center,
       children: <Widget>[
         CustomPaint(
-          painter: EpicycloidPainter(
-              widget.factor,
-              widget.total,
-              (MediaQuery.of(context).size.width / 2.4).roundToDouble(),
-              (MediaQuery.of(context).size.width / 2).roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble(),
-              Theme.of(context).accentColor),
+          painter: MaurerRosePainter(
+            widget.d,
+            widget.n,
+            (MediaQuery.of(context).size.width / 2).roundToDouble(),
+            (MediaQuery.of(context).size.height / 3).roundToDouble(),
+            Theme.of(context).accentColor,
+          ),
           child: Container(),
         ),
         Visibility(
-          visible: widget.animatepoints,
+          visible: widget.animate_N,
           child: Positioned(
             bottom: 60,
-            child: Text("Points: ${widget.total.toInt()}"),
+            child: Text("N: ${widget.n.toStringAsFixed(1)}"),
           ),
         ),
         Visibility(
-          visible: widget.animatefactor,
+          visible: widget.animate_D,
           child: Positioned(
             bottom: 40,
-            child: Text("Factor: ${widget.factor.toStringAsFixed(1)}"),
+            child: Text("D: ${widget.d.toStringAsFixed(1)}"),
           ),
         ),
       ],
@@ -312,49 +358,62 @@ class _EpicycloidState extends State<Epicycloid> {
   }
 }
 
-class EpicycloidPainter extends CustomPainter {
+class MaurerRosePainter extends CustomPainter {
+  double d, n, c;
+  double k, transformx, transformy;
   List<Offset> points = [];
-  double total, factor;
-  double radius, tx, ty;
+  List<Offset> points2 = [];
   Color color;
+  double q, x, y;
+  int theta, r = 300;
 
-  EpicycloidPainter(
-    this.factor,
-    this.total,
-    this.radius,
-    this.tx,
-    this.ty,
+  MaurerRosePainter(
+    this.d,
+    this.n,
+    this.transformx,
+    this.transformy,
     this.color,
-  );
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = Colors.red;
-    paint.strokeWidth = 3;
-    paint.style = PaintingStyle.stroke;
-
-    var paint2 = Paint();
-    paint2.color = color;
-    paint2.strokeWidth = 1;
-    double x = 2 * pi / total;
-    double angle = pi;
-
-    for (int i = 0; i < total; ++i) {
-      points.add(
-          Offset(radius * cos(angle), radius * sin(angle)).translate(tx, ty));
-      angle = angle + x;
-    }
-    for (double i = 0; i < total; i += 1) {
-      canvas.drawLine(points[(i % total).toInt()],
-          points[((i * factor) % total).toInt()], paint2);
-    }
-    canvas.drawCircle(Offset(tx, ty), radius, paint);
+  ) {
+    k = n / d;
   }
 
   @override
-  bool shouldRepaint(EpicycloidPainter oldDelegate) => true;
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    for (theta = 0; theta <= 360; theta++) {
+      k = theta * d * pi / 180;
+      q = r * sin(n * k);
+      x = q * cos(k);
+      y = q * sin(k);
+      this
+          .points
+          .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
+    }
+    canvas.drawPoints(PointMode.polygon, points, paint);
+
+    var paint2 = Paint()
+      ..color = Colors.red
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 3;
+
+    for (theta = 0; theta <= 360; theta++) {
+      k = theta * pi / 180;
+      q = r * sin(n * k);
+      x = q * cos(k);
+      y = q * sin(k);
+      this
+          .points2
+          .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
+    }
+    canvas.drawPoints(PointMode.polygon, points2, paint2);
+  }
 
   @override
-  bool shouldRebuildSemantics(EpicycloidPainter oldDelegate) => false;
+  bool shouldRepaint(MaurerRosePainter oldDelegate) => true;
+
+  @override
+  bool shouldRebuildSemantics(MaurerRosePainter oldDelegate) => false;
 }

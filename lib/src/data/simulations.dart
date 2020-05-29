@@ -10,11 +10,12 @@ import 'package:simulate/src/simulations/insertion_sort.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
+import 'package:simulate/src/simulations/maurer_rose.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4, 5, 6, 7];
+  final _mathematics = [3, 4, 5, 6, 7, 8];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -27,6 +28,7 @@ class Simulations with ChangeNotifier {
     5: "lissajous curve pattern mathematics animation ",
     6: "epicycloid curve pattern mathematics animation pencil lines ",
     7: "epicycloid curve pattern mathematics animation ",
+    8: "maurer rose pattern mathematics animation",
   };
 
   Simulations() {
@@ -38,6 +40,10 @@ class Simulations with ChangeNotifier {
     List<String> myList = (prefs.getStringList('favorites') ?? List<String>());
     if (myList.length != 0) {
       _favorites = myList.map((i) => int.parse(i)).toList();
+      if(allSimulations().length>_favorites.length)
+      {
+        _favorites = List.from(_favorites)..addAll(List.filled(allSimulations().length-_favorites.length, -1));
+      }
     }
   }
 
@@ -119,6 +125,16 @@ class Simulations with ChangeNotifier {
         direct: NormalEpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[7],
+      ),
+      SimulationCard(
+        id: 8,
+        simulationName: 'Maurer Rose Pattern',
+        image: theme.darkTheme
+        ? 'assets/simulations/MaurerRoseDark.png'
+        : 'assets/simulations/MaurerRoseLight.png',
+        direct: MaurerRoseCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
+        fav: _favorites[8],
       ),
     ];
   }
