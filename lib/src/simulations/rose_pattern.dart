@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_RoseState> globalKey = GlobalKey<_RoseState>();
+
 class RosePattern extends StatefulWidget {
   @override
   _RosePatternState createState() => _RosePatternState();
@@ -62,7 +63,7 @@ class _RosePatternState extends State<RosePattern> {
         ),
         centerTitle: true,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
         padding: EdgeInsets.all(8.0),
         child: Visibility(
@@ -75,27 +76,27 @@ class _RosePatternState extends State<RosePattern> {
                 backgroundColor: Colors.white,
                 child: (!animating)
                     ? Icon(
-                  Icons.play_arrow,
-                  color: Colors.black,
-                )
+                        Icons.play_arrow,
+                        color: Colors.black,
+                      )
                     : Icon(
-                  Icons.pause,
-                  color: Colors.black,
-                ),
-                onPressed: (){
+                        Icons.pause,
+                        color: Colors.black,
+                      ),
+                onPressed: () {
                   setState(() {
                     animating = !animating;
                   });
                 },
-              )
-              ,FloatingActionButton(
+              ),
+              FloatingActionButton(
                 heroTag: null,
                 backgroundColor: Colors.white,
                 child: Icon(
                   Icons.highlight_off,
                   color: Colors.black,
                 ),
-                onPressed: (){
+                onPressed: () {
                   setState(() {
                     globalKey.currentState.clearScreen();
                   });
@@ -106,13 +107,16 @@ class _RosePatternState extends State<RosePattern> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024/5),
+        height: ScreenUtil().setHeight(1024 / 5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
           child: ListView(
             padding: EdgeInsets.all(8.0),
             children: <Widget>[
+              SizedBox(
+                height: 30,
+              ),
               Slider(
                 min: 0,
                 max: 10,
@@ -179,11 +183,11 @@ class _RosePatternState extends State<RosePattern> {
         child: Stack(
           children: <Widget>[
             Rose(
-              d:_d,
-              n:_n,
-              c:offset,
-              animate:animate,
-              animating:animating,
+              d: _d,
+              n: _n,
+              c: offset,
+              animate: animate,
+              animating: animating,
               key: globalKey,
             ),
             Positioned(
@@ -202,11 +206,10 @@ class _RosePatternState extends State<RosePattern> {
                 children: <Widget>[
                   Text("Animate"),
                   Checkbox(
-                    onChanged: (_){
+                    onChanged: (_) {
                       setState(() {
-                        animate=!animate;
-                        if(animating)
-                          animating = (animating && animate);
+                        animate = !animate;
+                        if (animating) animating = (animating && animate);
                       });
                     },
                     value: animate,
@@ -223,14 +226,14 @@ class _RosePatternState extends State<RosePattern> {
 }
 
 class Rose extends StatefulWidget {
-  Rose({
-    Key key,
-    @required this.d,
-    @required this.n,
-    @required this.c,
-    @required this.animate,
-    @required this.animating
-  }) :super(key:key);
+  Rose(
+      {Key key,
+      @required this.d,
+      @required this.n,
+      @required this.c,
+      @required this.animate,
+      @required this.animating})
+      : super(key: key);
 
   final double d;
   final double n;
@@ -247,7 +250,6 @@ class _RoseState extends State<Rose> {
   double r, k;
   double looplength = 2 * pi;
 
-
   void dispose() {
     super.dispose();
   }
@@ -255,34 +257,34 @@ class _RoseState extends State<Rose> {
   void clearScreen() {
     points.clear();
     looplength = 2 * pi * widget.d;
-    looplength+=loopi;
+    looplength += loopi;
   }
 
-  nextStep()
-  {
-    if(loopi>=looplength)
-    {
+  nextStep() {
+    if (loopi >= looplength) {
       clearScreen();
-      loopi=0;
+      loopi = 0;
     }
 
     setState(() {
-      if(!(widget.d==0)&&!(widget.d==0&&widget.n==0)){
-        if(loopi == 0) {
+      if (!(widget.d == 0) && !(widget.d == 0 && widget.n == 0)) {
+        if (loopi == 0) {
           looplength = 2 * pi * widget.d;
         }
         loopi += 0.04;
         k = widget.n / widget.d;
         r = (MediaQuery.of(context).size.width / 4).roundToDouble();
-        points.add(Offset(r * (cos(k * loopi) + widget.c) * cos(loopi), r * (cos(k * loopi) + widget.c) * sin(loopi))
-            .translate((MediaQuery.of(context).size.width / 2).roundToDouble(), (MediaQuery.of(context).size.height / 3).roundToDouble()));
+        points.add(Offset(r * (cos(k * loopi) + widget.c) * cos(loopi),
+                r * (cos(k * loopi) + widget.c) * sin(loopi))
+            .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
+                (MediaQuery.of(context).size.height / 3).roundToDouble()));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if(widget.animating) {
+    if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         nextStep();
       });
@@ -303,14 +305,13 @@ class _RoseState extends State<Rose> {
   }
 }
 
-
 class RosePainter extends CustomPainter {
   double d, r, n, c;
   double k, transformx, transformy;
   List<Offset> points = [];
   bool animate;
-  RosePainter(
-      this.d, this.n, this.transformx, this.transformy, this.r, this.c,this.animate, points) {
+  RosePainter(this.d, this.n, this.transformx, this.transformy, this.r, this.c,
+      this.animate, points) {
     k = n / d;
     this.points = new List<Offset>.from(points);
   }
@@ -320,7 +321,7 @@ class RosePainter extends CustomPainter {
     var paint = Paint();
     paint.color = Colors.red;
     paint.strokeWidth = 2;
-    if(!animate) {
+    if (!animate) {
       this.points.clear();
       for (double i = 0; i < 2 * d * pi; i += 0.01) {
         points.add(
