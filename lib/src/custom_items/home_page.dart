@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 import 'package:simulate/src/data/simulations.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
+    ScreenUtil.init(context);
     return Container(
       child: ListView(
         children: <Widget>[
@@ -15,7 +17,7 @@ class HomePage extends StatelessWidget {
                 ? appState.favorites
                 : [
                     Container(
-                      width: MediaQuery.of(context).size.width - 20,
+                      width: ScreenUtil.screenWidthDp - 20,
                       child: Center(
                         child: Text(
                           "No favorites yet!",
@@ -45,13 +47,14 @@ class HomeHorizontalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return Container(
       margin: EdgeInsets.fromLTRB(10, 10, 0, 10),
       child: Column(
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(5),
-            width: MediaQuery.of(context).size.width,
+            width: ScreenUtil.screenWidth,
             child: Text(
               listName,
               style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: 17),
@@ -59,7 +62,7 @@ class HomeHorizontalList extends StatelessWidget {
             ),
           ),
           Container(
-            height: 215,
+            height: ScreenUtil().setHeight(520),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,
