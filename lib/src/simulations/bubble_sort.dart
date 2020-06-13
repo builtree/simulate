@@ -153,7 +153,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
         centerTitle: true,
         title: Text(
           'Bubble Sort',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       floatingActionButton: FloatingActionButton(

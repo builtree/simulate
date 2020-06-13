@@ -157,7 +157,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         ),
         title: Text(
           "ToothPick Pattern",
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),

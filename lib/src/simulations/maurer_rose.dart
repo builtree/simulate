@@ -60,7 +60,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
         ),
         title: Text(
           'MaurerRose Pattern',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),
@@ -144,7 +144,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                   (animating && animate_N)
                       ? "N: Animating"
                       : "N: ${n.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -167,7 +167,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                   (animating && animate_D)
                       ? "D: Animating"
                       : "D: ${d.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               // Slider(

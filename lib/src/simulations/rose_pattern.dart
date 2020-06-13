@@ -59,7 +59,7 @@ class _RosePatternState extends State<RosePattern> {
         ),
         title: Text(
           'Rose Pattern',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),
@@ -133,7 +133,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Numerator: $_n",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -152,7 +152,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Denominator: $_d",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -171,7 +171,7 @@ class _RosePatternState extends State<RosePattern> {
               Center(
                 child: Text(
                   "Offset: $offset",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
             ],
@@ -195,7 +195,7 @@ class _RosePatternState extends State<RosePattern> {
               left: 5,
               child: Text(
                 'k ~ ${(_n / _d).toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.subtitle,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
             Positioned(

@@ -76,7 +76,7 @@ class _SimulationCardState extends State<SimulationCard> {
                       fit: BoxFit.fitWidth,
                       child: Text(
                         widget.simulationName,
-                        style: Theme.of(context).textTheme.subhead,
+                        style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
                   ),

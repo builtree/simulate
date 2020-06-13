@@ -57,7 +57,7 @@ class HomeHorizontalList extends StatelessWidget {
             width: ScreenUtil.screenWidth,
             child: Text(
               listName,
-              style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: 17),
+              style: Theme.of(context).textTheme.subtitle2.copyWith(fontSize: 17),
               textAlign: TextAlign.left,
             ),
           ),

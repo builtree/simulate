@@ -74,7 +74,7 @@ class _FourierSeriesState extends State<FourierSeries> {
         centerTitle: true,
         title: Text(
           'Fourier Series',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: Row(
@@ -101,7 +101,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     DropdownButton<String>(
                       value: wave,
                       iconSize: 30,
-                      style: Theme.of(context).textTheme.subtitle,
+                      style: Theme.of(context).textTheme.subtitle2,
                       items: [
                         DropdownMenuItem(
                           value: 'Square Wave',
@@ -131,7 +131,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "N: ${_n.toInt()}",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
                     Slider(
@@ -149,7 +149,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "Amplitude: ${radius.toInt()}",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
                     Slider(
@@ -167,7 +167,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     Center(
                       child: Text(
                         "- Frequency +",
-                        style: Theme.of(context).textTheme.subtitle,
+                        style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ),
                   ],

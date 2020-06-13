@@ -51,7 +51,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         centerTitle: true,
         title: Text(
           'Simulate',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         actions: <Widget>[
           IconButton(
@@ -78,7 +78,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               child: Center(
                 child: Text(
                   'Simulate',
-                  style: Theme.of(context).textTheme.title.copyWith(
+                        style: Theme.of(context).textTheme.headline6.copyWith(
                         fontSize: 40,
                       ),
                 ),
@@ -90,7 +90,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             ListTile(
               leading: Text(
                 "Dark Mode",
-                style: Theme.of(context).textTheme.subtitle.copyWith(
+                style: Theme.of(context).textTheme.subtitle2.copyWith(
                       fontSize: 20,
                     ),
               ),
