@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/data/simulations.dart';
@@ -37,7 +38,7 @@ class _SimulationCardState extends State<SimulationCard> {
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
     return Container(
-      width: 180,
+      width: ScreenUtil().setWidth(200),
       child: GestureDetector(
         onTap: () {
           Navigator.push(

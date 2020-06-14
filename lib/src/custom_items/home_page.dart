@@ -62,7 +62,7 @@ class HomeHorizontalList extends StatelessWidget {
             ),
           ),
           Container(
-            height: ScreenUtil().setHeight(220),
+            height: ScreenUtil().setHeight(240),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,
