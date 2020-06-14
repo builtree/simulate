@@ -17,8 +17,8 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   double d = 0;
   // double dn = 0.001;
   // double dd = 0.001;
-  bool animate_N = false;
-  bool animate_D = false;
+  bool animateN = false;
+  bool animateD = false;
   bool animating = false;
 
   @override
@@ -60,7 +60,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
         ),
         title: Text(
           'MaurerRose Pattern',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),
@@ -68,7 +68,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Visibility(
-          visible: animate_N || animate_D,
+          visible: animateN || animateD,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -100,10 +100,10 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                 backgroundColor: Colors.white,
                 onPressed: () {
                   setState(() {
-                    if (animate_N) {
+                    if (animateN) {
                       n = 0;
                     }
-                    if (animate_D) {
+                    if (animateD) {
                       d = 0;
                     }
                   });
@@ -141,10 +141,10 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               ),
               Center(
                 child: Text(
-                  (animating && animate_N)
+                  (animating && animateN)
                       ? "N: Animating"
                       : "N: ${n.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -164,10 +164,10 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               ),
               Center(
                 child: Text(
-                  (animating && animate_D)
+                  (animating && animateD)
                       ? "D: Animating"
                       : "D: ${d.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               // Slider(
@@ -186,7 +186,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               // Center(
               //   child: Text(
               //     "dn: ${dn.toStringAsFixed(3)}",
-              //     style: Theme.of(context).textTheme.subtitle,
+              //     style: Theme.of(context).textTheme.subtitle2,
               //   ),
               // ),
               // Slider(
@@ -205,7 +205,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               // Center(
               //   child: Text(
               //     "dd: ${dd.toStringAsFixed(3)}",
-              //     style: Theme.of(context).textTheme.subtitle,
+              //     style: Theme.of(context).textTheme.subtitle2,
               //   ),
               // ),
             ],
@@ -221,8 +221,8 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               n: n,
               // dd: dd,
               // dn: dn,
-              animate_N: animate_N,
-              animate_D: animate_D,
+              animateN: animateN,
+              animateD: animateD,
               animating: animating,
               key: globalKey,
             ),
@@ -239,11 +239,11 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         ? null
                         : (_) {
                             setState(() {
-                              animate_N = !animate_N;
+                              animateN = !animateN;
                             });
                           },
                     activeColor: Colors.red,
-                    value: animate_N,
+                    value: animateN,
                   ),
                 ],
               ),
@@ -260,11 +260,11 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         ? null
                         : (_) {
                             setState(() {
-                              animate_D = !animate_D;
+                              animateD = !animateD;
                             });
                           },
                     activeColor: Colors.red,
-                    value: animate_D,
+                    value: animateD,
                   ),
                 ],
               ),
@@ -283,8 +283,8 @@ class MaurerRose extends StatefulWidget {
     @required this.n,
     // @required this.dd,
     // @required this.dn,
-    @required this.animate_N,
-    @required this.animate_D,
+    @required this.animateN,
+    @required this.animateD,
     @required this.animating,
   }) : super(key: key);
 
@@ -292,8 +292,8 @@ class MaurerRose extends StatefulWidget {
   double n;
   // double dd;
   // double dn;
-  final bool animate_N;
-  final bool animate_D;
+  final bool animateN;
+  final bool animateD;
   final bool animating;
 
   @override
@@ -304,10 +304,10 @@ class MaurerRoseState extends State<MaurerRose> {
   nextStep() {
     setState(() {
       sleep(Duration(milliseconds: 10));
-      if (widget.animate_N) {
+      if (widget.animateN) {
         widget.n += 0.003;
       }
-      if (widget.animate_D) {
+      if (widget.animateD) {
         widget.d += 0.005;
       }
       if (widget.n > 20) {
@@ -340,14 +340,14 @@ class MaurerRoseState extends State<MaurerRose> {
           child: Container(),
         ),
         Visibility(
-          visible: widget.animate_N,
+          visible: widget.animateN,
           child: Positioned(
             bottom: 60,
             child: Text("N: ${widget.n.toStringAsFixed(1)}"),
           ),
         ),
         Visibility(
-          visible: widget.animate_D,
+          visible: widget.animateD,
           child: Positioned(
             bottom: 40,
             child: Text("D: ${widget.d.toStringAsFixed(1)}"),

@@ -60,7 +60,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
         ),
         title: Text(
           'Lissajous Pattern',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),
@@ -133,7 +133,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
               Center(
                 child: Text(
                   "A: $_a",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -152,7 +152,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
               Center(
                 child: Text(
                   "B: $_b",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -171,7 +171,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
               Center(
                 child: Text(
                   "Delta: $delta",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -189,7 +189,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
               ),
               Center(
                 child: Text("Thickness: $thickness",
-                    style: Theme.of(context).textTheme.subtitle),
+                    style: Theme.of(context).textTheme.subtitle2),
               ),
             ],
           ),
@@ -213,7 +213,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
               left: 5,
               child: Text(
                 'A:B ~ ${(_a / _b).toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.subtitle,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
             Positioned(
