@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simulate/src/data/simulations.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, width: 512, height: 1005, allowFontScaling: false);
     final appState = Provider.of<Simulations>(context);
     return Container(
       child: ListView(
@@ -54,12 +56,12 @@ class HomeHorizontalList extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Text(
               listName,
-              style: Theme.of(context).textTheme.subtitle.copyWith(fontSize: 17),
+              style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.left,
             ),
           ),
           Container(
-            height: 215,
+            height: ScreenUtil().setHeight(240),
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,

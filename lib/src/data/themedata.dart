@@ -25,11 +25,11 @@ class ThemeProvider with ChangeNotifier {
       indicatorColor: _counterColor,
       primaryColor: _primaryColor,
       textTheme: TextTheme(
-        title: TextStyle(
+        headline6: TextStyle(
           color: _counterColor,
           fontFamily: 'Ubuntu',
         ),
-        subhead: TextStyle(
+        subtitle1: TextStyle(
           color: _counterColor,
           fontFamily: 'Ubuntu',
         ),

@@ -58,7 +58,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         ),
         title: Text(
           'Epicycloid Pattern (Pencil of Lines)',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
       ),
@@ -142,7 +142,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                   (animating && animatepoints)
                       ? "Points: Animating"
                       : "Points: ${total.toInt()}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Slider(
@@ -165,7 +165,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                   (animating && animatefactor)
                       ? "Factor: Animating"
                       : "Factor: ${factor.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
             ],

@@ -132,7 +132,7 @@ class _InsertionHomeState extends State<InsertionHome> {
         centerTitle: true,
         title: Text(
           "Insertion Sort",
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: Stack(
@@ -192,7 +192,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Text(
                 "Elements: $sliderValue",
-                style: Theme.of(context).textTheme.subtitle,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
               Slider(
                 min: 0,
@@ -226,7 +226,7 @@ class _InsertionHomeState extends State<InsertionHome> {
               ),
               Text(
                 "Delay (milliseconds): $sleepDuration",
-                style: Theme.of(context).textTheme.subtitle,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
               Spacer(),
             ],

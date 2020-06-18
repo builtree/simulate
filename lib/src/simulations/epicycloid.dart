@@ -66,7 +66,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
         centerTitle: true,
         title: Text(
           'Epicycloid Curve',
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -138,7 +138,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                 Center(
                   child: Text(
                     "r: " + outerRadius.toString(),
-                    style: Theme.of(context).textTheme.subtitle,
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ),
                 Slider(
@@ -157,7 +157,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                 Center(
                   child: Text(
                     "R: " + innerRadius.toString(),
-                    style: Theme.of(context).textTheme.subtitle,
+                    style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ),
                 Visibility(
@@ -179,7 +179,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                       Center(
                         child: Text(
                           "- Frequency +",
-                          style: Theme.of(context).textTheme.subtitle,
+                          style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
                     ],
@@ -210,7 +210,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
               child: Visibility(
                 child: Text(
                   'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.subtitle,
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
             ),
