@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // print(MediaQuery.of(context).size.height);
     ScreenUtil.init(context, width: 512, height: 1005, allowFontScaling: false);
     final appState = Provider.of<Simulations>(context);
     return Container(
@@ -57,7 +56,7 @@ class HomeHorizontalList extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Text(
               listName,
-              style: Theme.of(context).textTheme.subtitle1,//.copyWith(fontSize: 17),
+              style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.left,
             ),
           ),
