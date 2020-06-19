@@ -61,7 +61,7 @@ class HomeHorizontalList extends StatelessWidget {
             ),
           ),
           Container(
-            height: ScreenUtil().setHeight(240),
+            height: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? ScreenUtil().setHeight(260) : 250,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,
