@@ -38,7 +38,7 @@ class _SimulationCardState extends State<SimulationCard> {
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
     return Container(
-      width: ScreenUtil().setWidth(200),
+      width: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? ScreenUtil().setWidth(200) : 200,
       child: GestureDetector(
         onTap: () {
           Navigator.push(
