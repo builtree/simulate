@@ -14,9 +14,11 @@ nav:
   - Documentation: 
     - Home: 'doc/index.md'
   - Simulations: 
-    - Algorithms: simulations/algorithms.md
-    - Mathematics: simulations/mathematics.md
-    # - All Simulations: 'simulations/index.md'
+    - All Simulations: 'simulations/index.md'
+    - Algorithms: 'simulations/algorithms.md'
+    - Mathematics: 
+      - Toothpick Pattern: 'simulations/mathematics/ToothpickPattern.md'
+
 # Configuration
 theme:
   name: 'material'
@@ -54,6 +56,16 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - footnotes
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.tabbed
   - pymdownx.tilde
+  - attr_list
+
+  # Plugins
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: date
+
