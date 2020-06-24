@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://cod-ed.github.io/simulate/</loc>
-     <lastmod>2020-05-19</lastmod>
+     <lastmod>2020-06-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://cod-ed.github.io/simulate/contributing/</loc>
-     <lastmod>2020-05-19</lastmod>
+     <lastmod>2020-06-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://cod-ed.github.io/simulate/doc/</loc>
-     <lastmod>2020-05-19</lastmod>
+     <lastmod>2020-06-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://cod-ed.github.io/simulate/simulations/</loc>
+     <lastmod>2020-06-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://cod-ed.github.io/simulate/simulations/algorithms/</loc>
-     <lastmod>2020-05-19</lastmod>
+     <lastmod>2020-06-24</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://cod-ed.github.io/simulate/simulations/mathematics/</loc>
-     <lastmod>2020-05-19</lastmod>
+     <loc>https://cod-ed.github.io/simulate/simulations/mathematics/ToothpickPattern/</loc>
+     <lastmod>2020-06-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

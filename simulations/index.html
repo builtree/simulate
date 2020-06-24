@@ -21,7 +21,7 @@
     
     
       
-        <title>Simulations - Simulate</title>
+        <title>All Simulations - Simulate</title>
       
     
     
@@ -91,7 +91,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Simulations
+              All Simulations
             
           </span>
         </div>
@@ -153,14 +153,16 @@
         
           
 
-<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href=".." class="md-tabs__link md-tabs__link--active">
+      <a href=".." class="md-tabs__link">
         Home
       </a>
     
@@ -187,7 +189,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="algorithms/" class="md-tabs__link">
+        <a href="./" class="md-tabs__link md-tabs__link--active">
           Simulations
         </a>
       
@@ -303,10 +305,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Simulations
@@ -328,6 +332,27 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="All Simulations" class="md-nav__link md-nav__link--active">
+      All Simulations
+    </a>
+    
+  </li>
+
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
     <a href="algorithms/" title="Algorithms" class="md-nav__link">
@@ -341,10 +366,40 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="mathematics/" title="Mathematics" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+    
+    <label class="md-nav__link" for="nav-4-3">
       Mathematics
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Mathematics" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-3">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Mathematics
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="mathematics/ToothpickPattern/" title="Toothpick Pattern" class="md-nav__link">
+      Toothpick Pattern
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -392,57 +447,82 @@
 <table>
 <thead>
 <tr>
-<th align="center">Simulation ID</th>
-<th align="center">Simulation Name</th>
-<th align="center">Infolink</th>
-<th align="center">Preview</th>
+<th align="center">Simulation</th>
+<th align="center">Category</th>
+<th align="center">Description</th>
+<th align="center">Image</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">0</td>
-<td align="center">Toothpick Pattern</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Toothpick_sequence">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/ToothpickPattern.gif" /></td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">Langton's Ant</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Langton%27s_ant">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/LangtonsAnt.gif" /></td>
-</tr>
-<tr>
-<td align="center">2</td>
 <td align="center">Bubble Sort (Bars)</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Bubble_sort">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/BubbleSortBars.gif" /></td>
+<td align="center">Algorithms</td>
+<td align="center">Bubble sort is a sorting algorithm that repeatedly steps through the list by comparing adjacent elements and swaps them if they are in the wrong order</td>
+<td align="center"><img alt="Bubble Sort" src="https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/Bubblesort.gif" /></td>
 </tr>
 <tr>
-<td align="center">3</td>
-<td align="center">Insertion Sort (Bars)</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Insertion_sort">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/InsertionSortBars.gif" /></td>
+<td align="center">Epicycloid Pattern(Pencil of Lines)</td>
+<td align="center">Mathematics</td>
+<td align="center">a.k.a hypercycloid, is a plane curve created by tracing a chosen point on the edge of a circle of radius r rolling on the outside of a circle of radius R</td>
+<td align="center"><img alt="Epicycloid Pattern" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/Epicycloid1Light.png" /></td>
 </tr>
 <tr>
-<td align="center">4</td>
-<td align="center">Rose Pattern</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Rose_(mathematics)">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/RosePattern.gif" /></td>
+<td align="center">Epicycloid Curve</td>
+<td align="center">Mathematics</td>
+<td align="center">a.k.a hypercycloid, is a plane curve created by tracing a chosen point on the edge of a circle of radius r rolling on the outside of a circle of radius R</td>
+<td align="center"><img alt="Epicycloid Curve" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/EpicycloidLight.png" /></td>
 </tr>
 <tr>
-<td align="center">5</td>
 <td align="center">Fourier Series</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Fourier_series">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/FourierSeries.gif" /></td>
+<td align="center">Mathematics</td>
+<td align="center">A Fourier series is an expansion of a periodic function in terms of an infinite sum of sines and cosines</td>
+<td align="center"><img alt="Fourier Series" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/FourierSeriesLight.png" /></td>
 </tr>
 <tr>
-<td align="center">6</td>
-<td align="center">Pi Approximation (Monte Carlo Method)</td>
-<td align="center"><a href="https://en.wikipedia.org/wiki/Monte_Carlo_method">Link</a></td>
-<td align="center"><img alt="" src="https://raw.githubusercontent.com/cod-ed/simulate/assets/previews/gifs/PiMonteCarlo.gif" /></td>
+<td align="center">Insertion Sort (Bars)</td>
+<td align="center">Algorithms</td>
+<td align="center">Insertion sort is a sorting algorithm that builds the final list one item at a time</td>
+<td align="center"><img alt="Insertion Sort" src="https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/InsertionSort.gif" /></td>
+</tr>
+<tr>
+<td align="center">Lissajous Pattern</td>
+<td align="center">Mathematics</td>
+<td align="center">Lissajous pattern is generated by the junction of a pair of sinusoidal waves with axes that are perpendicular to one another</td>
+<td align="center"><img alt="Lissajous Pattern" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/LissajousCurveLight.png" /></td>
+</tr>
+<tr>
+<td align="center">Maurer Rose Pattern</td>
+<td align="center">Mathematics</td>
+<td align="center">A Maurer Rose is a polygonal curve with vertices on a rose and can be described as a closed route in the polar plane</td>
+<td align="center"><img alt="MaurerRose Pattern" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/MaurerRoseLight.png" /></td>
+</tr>
+<tr>
+<td align="center">Rose Pattern</td>
+<td align="center">Mathematics</td>
+<td align="center">A Rose pattern is generated by the junction of sinusoids plotted in polar coordinates</td>
+<td align="center"><img alt="Rose Pattern" src="https://raw.githubusercontent.com/cod-ed/assets/simulate/icons/RosePatternLight.png" /></td>
+</tr>
+<tr>
+<td align="center"><a href="mathematics/ToothpickPattern/">Toothpick Pattern</a></td>
+<td align="center">Algorithms</td>
+<td align="center">A Toothpick pattern is a sequence of 2D patterns formed by repeatedly adding line segments or <em>toothpicks</em> to the previous pattern in the sequence. It starts with a single line segment</td>
+<td align="center"><img alt="Toothpick Pattern" src="https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png" /></td>
 </tr>
 </tbody>
 </table>
+                
+                  
+                    
+
+<hr>
+<div class="md-source-date">
+  <small>
+    
+      Last update: June 24, 2020
+    
+  </small>
+</div>
+                  
                 
               
               
@@ -457,6 +537,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../doc/" title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="algorithms/" title="Algorithms" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Algorithms
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
