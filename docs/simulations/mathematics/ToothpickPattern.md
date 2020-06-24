@@ -22,18 +22,11 @@ forms a square at the powers of 2. The current stage in the simulation is also r
 different colour than the rest of the pattern.
 [^1]: https://en.wikipedia.org/wiki/Ulam%E2%80%93Warburton_automaton
 
-
 === "Light Mode"
     ![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/ToothpickPatternLight.png){: style="width:300px"}
   
-
 === "Dark Mode"
     ![ToothpickPatternDark](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/ToothpickPatternDark.png){: style="width:300px"}
-
-
-
-
-
 
 !!! tip  "Fun Fact"
     The toothpick is considered such an essential that even Swiss Army knives - a popular brand of multi-function tools - have included one in their product
