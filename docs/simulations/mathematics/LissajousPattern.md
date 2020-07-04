@@ -14,7 +14,7 @@ $y = B sin(bt)$
 </center>
   
 These curves/patterns are highly sensitive to the values of $a$ and $b$, particularly to the ratio
-$a:b$.For a ratio of $1$, and $δ = \frac{π}{2} radians$, the figure is a *circle*. Similarly, for $a = b$ and $δ = 0$, the figure is a *line*.  
+$a:b$. For a ratio of $1$, and $δ = \frac{π}{2} radians$, the figure is a *circle*. Similarly, for $a = b$ and $δ = 0$, the figure is a *line*.  
 Another simple Lissajous figure is the *parabola* $(\frac{b}{a} = 2, δ = \frac{π}{4})$. 
 
 === "Light Mode"
