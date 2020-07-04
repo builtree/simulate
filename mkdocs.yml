@@ -15,9 +15,11 @@ nav:
     - Home: 'doc/index.md'
   - Simulations: 
     - All Simulations: 'simulations/index.md'
-    - Algorithms: 'simulations/algorithms.md'
+    - Algorithms: 
+      - Toothpick Pattern: 'simulations/algorithms/ToothpickPattern.md'
     - Mathematics: 
-      - Toothpick Pattern: 'simulations/mathematics/ToothpickPattern.md'
+      - Lissajous Pattern: 'simulations/mathematics/LissajousPattern.md'
+      - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
 
 # Configuration
 theme:
@@ -68,4 +70,7 @@ plugins:
   - search
   - git-revision-date-localized:
       type: date
+  
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
 
