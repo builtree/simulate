@@ -15,7 +15,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   List<int> _elements = [];
   int i = 0, counter = 0;
   int n = 5;
-  int delay = 500, delay2 = 500;
+  int delay = 1000;
   bool animating = false;
   bool sorted = false;
   double barwidth = 0;
@@ -39,6 +39,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   dispose() {
+    animating = false;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -66,45 +67,47 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   }
 
   nextStep() async {
-    await Future.delayed(Duration(milliseconds: delay));
-    setState(() {
-      barColor.clear();
-      for (int j = 0; j < _elements.length; j++) {
-        if (n == 1)
-          barColor.add(Colors.greenAccent[400]);
-        else
-          barColor.add(Theme.of(context).primaryColor);
-        if (resetIndex) _index[j] = j;
-      }
-      if (n == 1) {
-        animating = false;
-        return;
-      }
-      counter++;
-      if (i == n - 1) {
-        i = 0;
-        n--;
-      }
-      barColor[i] = Colors.blue;
-      if (_elements[i] > _elements[i + 1]) {
-        if (resetIndex) {
-          resetIndex = false;
-        } else {
-          barColor[i] = Colors.red;
-          barColor[i + 1] = Colors.red;
-          final temp = _index[i];
-          _index[i] = _index[i + 1];
-          _index[i + 1] = temp;
-          final tmp = _elements[i];
-          _elements[i] = _elements[i + 1];
-          _elements[i + 1] = tmp;
-          i++;
-          resetIndex = true;
+    await Future.delayed(Duration(milliseconds: 3 * delay));
+    if (this.mounted) {
+      setState(() {
+        barColor.clear();
+        for (int j = 0; j < _elements.length; j++) {
+          if (n == 1)
+            barColor.add(Colors.greenAccent[400]);
+          else
+            barColor.add(Theme.of(context).primaryColor);
+          if (resetIndex) _index[j] = j;
         }
-      } else {
-        i++;
-      }
-    });
+        if (n == 1) {
+          animating = false;
+          return;
+        }
+        counter++;
+        if (i == n - 1) {
+          i = 0;
+          n--;
+        }
+        barColor[i] = Colors.blue;
+        if (_elements[i] > _elements[i + 1]) {
+          if (resetIndex) {
+            resetIndex = false;
+          } else {
+            barColor[i] = Colors.red;
+            barColor[i + 1] = Colors.red;
+            final temp = _index[i];
+            _index[i] = _index[i + 1];
+            _index[i + 1] = temp;
+            final tmp = _elements[i];
+            _elements[i] = _elements[i + 1];
+            _elements[i + 1] = tmp;
+            i++;
+            resetIndex = true;
+          }
+        } else {
+          i++;
+        }
+      });
+    }
   }
 
   @override
@@ -224,20 +227,14 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
-                    delay2 = value.toInt();
-                  });
-                },
-                onChangeEnd: (value) {
-                  setState(() {
-                    refresh = false;
                     delay = value.toInt();
                   });
                 },
-                value: delay2.roundToDouble(),
+                value: delay.roundToDouble(),
               ),
               Center(
                 child: Text(
-                  "Delay: ${delay2 / 1000.toInt()} s",
+                  "Delay: ${delay / 1000.toInt()} s",
                   style: TextStyle(
                     fontSize: 18,
                     fontFamily: 'Ubuntu',
@@ -251,12 +248,12 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
       body: Stack(
         children: <Widget>[
           Container(
-            color: Theme.of(context).accentColor,
+            color: Colors.grey[900],
             child: Stack(
               children: <Widget>[
                 for (var k = 0; k < _elements.length; k++)
                   AnimatedPositioned(
-                    duration: Duration(milliseconds: delay),
+                    duration: Duration(milliseconds: 2 * delay),
                     left: _index[k] * barwidth +
                         ((_index[k] + 1) * barwidth / (_numberOfElements + 1)),
                     curve: Curves.elasticOut,
