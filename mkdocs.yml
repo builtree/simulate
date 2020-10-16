@@ -14,9 +14,13 @@ nav:
   - Documentation: 
     - Home: 'doc/index.md'
   - Simulations: 
-    - Algorithms: simulations/algorithms.md
-    - Mathematics: simulations/mathematics.md
-    # - All Simulations: 'simulations/index.md'
+    - All Simulations: 'simulations/index.md'
+    - Algorithms: 
+      - Toothpick Pattern: 'simulations/algorithms/ToothpickPattern.md'
+    - Mathematics: 
+      - Lissajous Pattern: 'simulations/mathematics/LissajousPattern.md'
+      - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
+
 # Configuration
 theme:
   name: 'material'
@@ -54,6 +58,19 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
+  - footnotes
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.tabbed
   - pymdownx.tilde
+  - attr_list
+
+  # Plugins
+plugins:
+  - search
+  - git-revision-date-localized:
+      type: date
+  
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+
