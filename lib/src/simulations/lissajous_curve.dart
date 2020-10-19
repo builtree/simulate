@@ -22,26 +22,6 @@ class _LissajousCurveState extends State<LissajousCurve> {
   double thickness = 2;
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
@@ -106,138 +86,169 @@ class _LissajousCurveState extends State<LissajousCurve> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024/5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: ListView(
-            padding: EdgeInsets.all(8.0),
-            children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Slider(
-                min: 0,
-                max: 10,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _a = double.parse(value.toStringAsFixed(1));
-                  });
-                },
-                value: _a,
-              ),
-              Center(
-                child: Text(
-                  "A: $_a",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              Slider(
-                min: 0,
-                max: 10,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _b = double.parse(value.toStringAsFixed(1));
-                  });
-                },
-                value: _b,
-              ),
-              Center(
-                child: Text(
-                  "B: $_b",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              Slider(
-                min: 0,
-                max: 6.28,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    delta = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: delta,
-              ),
-              Center(
-                child: Text(
-                  "Delta: $delta",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              Slider(
-                min: 2,
-                max: 6,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    thickness = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: thickness,
-              ),
-              Center(
-                child: Text("Thickness: $thickness",
-                    style: Theme.of(context).textTheme.subtitle2),
-              ),
-            ],
-          ),
+      bottomNavigationBar: Visibility(
+        visible: !isLandscape(),
+        child: parameters(
+          context,
+          ScreenUtil().setHeight(1024 / 5),
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: <Widget>[
-            Lissajous(
-              b: _b,
-              a: _a,
-              delta: delta,
-              animate: animate,
-              animating: animating,
-              key: globalKey,
-              thickness: thickness,
+      body: Row(
+        children: [
+          Container(
+            width: isLandscape()
+                ? 2 * MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width,
+            child: Stack(
+              children: <Widget>[
+                Lissajous(
+                  b: _b,
+                  a: _a,
+                  delta: delta,
+                  animate: animate,
+                  animating: animating,
+                  key: globalKey,
+                  thickness: thickness,
+                  isLandscape: isLandscape(),
+                ),
+                Positioned(
+                  top: 5,
+                  left: 5,
+                  child: Text(
+                    'A:B ~ ${(_a / _b).toStringAsFixed(2)}',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text('Animate: '),
+                      Checkbox(
+                        onChanged: (_) {
+                          setState(() {
+                            animate = !animate;
+                            if (animating) {
+                              animating = (animating && animate);
+                            }
+                          });
+                        },
+                        value: animate,
+                        activeColor: Colors.red,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            Positioned(
-              top: 5,
-              left: 5,
+          ),
+          Visibility(
+            visible: isLandscape(),
+            child: Expanded(
+              child: parameters(
+                context,
+                MediaQuery.of(context).size.height,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLandscape() {
+    return MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height;
+  }
+
+  Container parameters(BuildContext context, num height) {
+    return Container(
+      height: height,
+      child: Material(
+        elevation: 30,
+        color: Theme.of(context).primaryColor,
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Slider(
+              min: 0,
+              max: 10,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  _a = double.parse(value.toStringAsFixed(1));
+                });
+              },
+              value: _a,
+            ),
+            Center(
               child: Text(
-                'A:B ~ ${(_a / _b).toStringAsFixed(2)}',
+                "A: $_a",
                 style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text('Animate: '),
-                  Checkbox(
-                    onChanged: (_) {
-                      setState(() {
-                        animate = !animate;
-                        if (animating) {
-                          animating = (animating && animate);
-                        }
-                      });
-                    },
-                    value: animate,
-                    activeColor: Colors.red,
-                  ),
-                ],
+            Slider(
+              min: 0,
+              max: 10,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  _b = double.parse(value.toStringAsFixed(1));
+                });
+              },
+              value: _b,
+            ),
+            Center(
+              child: Text(
+                "B: $_b",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
-            )
+            ),
+            Slider(
+              min: 0,
+              max: 6.28,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  delta = double.parse(value.toStringAsFixed(2));
+                });
+              },
+              value: delta,
+            ),
+            Center(
+              child: Text(
+                "Delta: $delta",
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            Slider(
+              min: 2,
+              max: 6,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  thickness = double.parse(value.toStringAsFixed(2));
+                });
+              },
+              value: thickness,
+            ),
+            Center(
+              child: Text("Thickness: $thickness",
+                  style: Theme.of(context).textTheme.subtitle2),
+            ),
           ],
         ),
       ),
@@ -254,6 +265,7 @@ class Lissajous extends StatefulWidget {
     @required this.animate,
     @required this.animating,
     @required this.thickness,
+    @required this.isLandscape,
   })  : _b = b,
         _a = a,
         super(key: key);
@@ -264,6 +276,7 @@ class Lissajous extends StatefulWidget {
   final bool animate;
   final bool animating;
   final double thickness;
+  final bool isLandscape;
 
   @override
   _LissajousState createState() => _LissajousState();
@@ -309,19 +322,28 @@ class _LissajousState extends State<Lissajous> {
         nextStep();
       });
     }
-    return CustomPaint(
-      painter: LissajousPainter(
-        widget._b,
-        widget._a,
-        (MediaQuery.of(context).size.width / 2).roundToDouble(),
-        (MediaQuery.of(context).size.height / 3).roundToDouble(),
-        (MediaQuery.of(context).size.width / 2.5).roundToDouble(),
-        widget.delta,
-        widget.animate,
-        points,
-        widget.thickness,
+    return Transform.scale(
+      scale: widget.isLandscape ? 0.7 : 1,
+      child: CustomPaint(
+        painter: LissajousPainter(
+          widget._b,
+          widget._a,
+          (widget.isLandscape
+                  ? MediaQuery.of(context).size.width / 3
+                  : MediaQuery.of(context).size.width / 2)
+              .roundToDouble(),
+          (MediaQuery.of(context).size.height / 3).roundToDouble(),
+          (widget.isLandscape
+                  ? MediaQuery.of(context).size.width / 4
+                  : MediaQuery.of(context).size.width / 2.5)
+              .roundToDouble(),
+          widget.delta,
+          widget.animate,
+          points,
+          widget.thickness,
+        ),
+        child: Container(),
       ),
-      child: Container(),
     );
   }
 }

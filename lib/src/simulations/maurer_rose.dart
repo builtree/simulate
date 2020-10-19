@@ -22,26 +22,6 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   bool animating = false;
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
@@ -113,162 +93,193 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024 / 5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: ListView(
-            padding: EdgeInsets.all(8.0),
-            children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Slider(
-                min: 0,
-                max: 20,
-                divisions: 200,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (animating)
-                    ? null
-                    : (value) {
-                        setState(() {
-                          n = double.parse(value.toStringAsFixed(1));
-                        });
-                      },
-                value: n,
-              ),
-              Center(
-                child: Text(
-                  (animating && animateN)
-                      ? "N: Animating"
-                      : "N: ${n.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              Slider(
-                min: 0,
-                max: 100,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (animating)
-                    ? null
-                    : (value) {
-                        setState(() {
-                          d = double.parse(value.toStringAsFixed(1));
-                        });
-                      },
-                value: d,
-              ),
-              Center(
-                child: Text(
-                  (animating && animateD)
-                      ? "D: Animating"
-                      : "D: ${d.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              // Slider(
-              //   min: 0.001,
-              //   max: 0.01,
-              //   divisions: 9,
-              //   activeColor: Theme.of(context).accentColor,
-              //   inactiveColor: Colors.grey,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       dn = double.parse(value.toStringAsFixed(3));
-              //     });
-              //   },
-              //   value: dn,
-              // ),
-              // Center(
-              //   child: Text(
-              //     "dn: ${dn.toStringAsFixed(3)}",
-              //     style: Theme.of(context).textTheme.subtitle2,
-              //   ),
-              // ),
-              // Slider(
-              //   min: 0.001,
-              //   max: 0.01,
-              //   divisions: 9,
-              //   activeColor: Theme.of(context).accentColor,
-              //   inactiveColor: Colors.grey,
-              //   onChanged: (value) {
-              //     setState(() {
-              //       dd = double.parse(value.toStringAsFixed(3));
-              //     });
-              //   },
-              //   value: dd,
-              // ),
-              // Center(
-              //   child: Text(
-              //     "dd: ${dd.toStringAsFixed(3)}",
-              //     style: Theme.of(context).textTheme.subtitle2,
-              //   ),
-              // ),
-            ],
-          ),
+      bottomNavigationBar: Visibility(
+        visible: !isLandscape(),
+        child: parameters(
+          context,
+          ScreenUtil().setHeight(1024 / 5),
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
+      body: Row(
+        children: [
+          Container(
+            width: isLandscape()
+                ? 2 * MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width,
+            child: Stack(
+              children: <Widget>[
+                MaurerRose(
+                  d: d,
+                  n: n,
+                  // dd: dd,
+                  // dn: dn,
+                  animateN: animateN,
+                  animateD: animateD,
+                  animating: animating,
+                  key: globalKey,
+                  isLandscape: isLandscape(),
+                ),
+                Positioned(
+                  left: 12,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'Animate with N:',
+                      ),
+                      Checkbox(
+                        onChanged: (animating)
+                            ? null
+                            : (_) {
+                                setState(() {
+                                  animateN = !animateN;
+                                });
+                              },
+                        activeColor: Colors.red,
+                        value: animateN,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'Animate with D:',
+                      ),
+                      Checkbox(
+                        onChanged: (animating)
+                            ? null
+                            : (_) {
+                                setState(() {
+                                  animateD = !animateD;
+                                });
+                              },
+                        activeColor: Colors.red,
+                        value: animateD,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Visibility(
+            visible: isLandscape(),
+            child: Expanded(
+              child: parameters(
+                context,
+                MediaQuery.of(context).size.height,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLandscape() {
+    return MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height;
+  }
+
+  Container parameters(BuildContext context, num height) {
+    return Container(
+      height: height,
+      child: Material(
+        elevation: 30,
+        color: Theme.of(context).primaryColor,
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
           children: <Widget>[
-            MaurerRose(
-              d: d,
-              n: n,
-              // dd: dd,
-              // dn: dn,
-              animateN: animateN,
-              animateD: animateD,
-              animating: animating,
-              key: globalKey,
+            SizedBox(
+              height: isLandscape() ? 90 : 20,
             ),
-            Positioned(
-              left: 12,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'Animate with N:',
-                  ),
-                  Checkbox(
-                    onChanged: (animating)
-                        ? null
-                        : (_) {
-                            setState(() {
-                              animateN = !animateN;
-                            });
-                          },
-                    activeColor: Colors.red,
-                    value: animateN,
-                  ),
-                ],
+            Slider(
+              min: 0,
+              max: 20,
+              divisions: 200,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (animating)
+                  ? null
+                  : (value) {
+                      setState(() {
+                        n = double.parse(value.toStringAsFixed(1));
+                      });
+                    },
+              value: n,
+            ),
+            Center(
+              child: Text(
+                (animating && animateN)
+                    ? "N: Animating"
+                    : "N: ${n.toStringAsFixed(1)}",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
-            Positioned(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'Animate with D:',
-                  ),
-                  Checkbox(
-                    onChanged: (animating)
-                        ? null
-                        : (_) {
-                            setState(() {
-                              animateD = !animateD;
-                            });
-                          },
-                    activeColor: Colors.red,
-                    value: animateD,
-                  ),
-                ],
+            Slider(
+              min: 0,
+              max: 100,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (animating)
+                  ? null
+                  : (value) {
+                      setState(() {
+                        d = double.parse(value.toStringAsFixed(1));
+                      });
+                    },
+              value: d,
+            ),
+            Center(
+              child: Text(
+                (animating && animateD)
+                    ? "D: Animating"
+                    : "D: ${d.toStringAsFixed(1)}",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
+            // Slider(
+            //   min: 0.001,
+            //   max: 0.01,
+            //   divisions: 9,
+            //   activeColor: Theme.of(context).accentColor,
+            //   inactiveColor: Colors.grey,
+            //   onChanged: (value) {
+            //     setState(() {
+            //       dn = double.parse(value.toStringAsFixed(3));
+            //     });
+            //   },
+            //   value: dn,
+            // ),
+            // Center(
+            //   child: Text(
+            //     "dn: ${dn.toStringAsFixed(3)}",
+            //     style: Theme.of(context).textTheme.subtitle2,
+            //   ),
+            // ),
+            // Slider(
+            //   min: 0.001,
+            //   max: 0.01,
+            //   divisions: 9,
+            //   activeColor: Theme.of(context).accentColor,
+            //   inactiveColor: Colors.grey,
+            //   onChanged: (value) {
+            //     setState(() {
+            //       dd = double.parse(value.toStringAsFixed(3));
+            //     });
+            //   },
+            //   value: dd,
+            // ),
+            // Center(
+            //   child: Text(
+            //     "dd: ${dd.toStringAsFixed(3)}",
+            //     style: Theme.of(context).textTheme.subtitle2,
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -286,6 +297,7 @@ class MaurerRose extends StatefulWidget {
     @required this.animateN,
     @required this.animateD,
     @required this.animating,
+    @required this.isLandscape,
   }) : super(key: key);
 
   double d;
@@ -295,6 +307,7 @@ class MaurerRose extends StatefulWidget {
   final bool animateN;
   final bool animateD;
   final bool animating;
+  final bool isLandscape;
 
   @override
   MaurerRoseState createState() => MaurerRoseState();
@@ -329,27 +342,33 @@ class MaurerRoseState extends State<MaurerRose> {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        CustomPaint(
-          painter: MaurerRosePainter(
-            widget.d,
-            widget.n,
-            (MediaQuery.of(context).size.width / 2).roundToDouble(),
-            (MediaQuery.of(context).size.height / 3).roundToDouble(),
-            Theme.of(context).accentColor,
+        Transform.scale(
+          scale: widget.isLandscape ? 0.7 : 1,
+          child: CustomPaint(
+            painter: MaurerRosePainter(
+              widget.d,
+              widget.n,
+              (widget.isLandscape
+                      ? MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width / 2)
+                  .roundToDouble(),
+              (MediaQuery.of(context).size.height / 3).roundToDouble(),
+              Theme.of(context).accentColor,
+            ),
+            child: Container(),
           ),
-          child: Container(),
         ),
         Visibility(
           visible: widget.animateN,
           child: Positioned(
-            bottom: 60,
+            bottom: 40,
             child: Text("N: ${widget.n.toStringAsFixed(1)}"),
           ),
         ),
         Visibility(
           visible: widget.animateD,
           child: Positioned(
-            bottom: 40,
+            bottom: 20,
             child: Text("D: ${widget.d.toStringAsFixed(1)}"),
           ),
         ),

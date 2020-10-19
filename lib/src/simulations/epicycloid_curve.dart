@@ -20,26 +20,6 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   bool animating = false;
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
@@ -111,122 +91,153 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(924 / 5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: ListView(
-            padding: EdgeInsets.all(8.0),
-            children: <Widget>[
-              SizedBox(
-                height: 30,
-              ),
-              Slider(
-                min: 0,
-                max: 500,
-                divisions: 500,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (animating)
-                    ? null
-                    : (value) {
-                        setState(() {
-                          total = double.parse(value.toStringAsFixed(1));
-                        });
-                      },
-                value: total,
-              ),
-              Center(
-                child: Text(
-                  (animating && animatepoints)
-                      ? "Points: Animating"
-                      : "Points: ${total.toInt()}",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-              Slider(
-                min: 0,
-                max: 51,
-                divisions: 510,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (animating)
-                    ? null
-                    : (value) {
-                        setState(() {
-                          factor = double.parse(value.toStringAsFixed(1));
-                        });
-                      },
-                value: factor,
-              ),
-              Center(
-                child: Text(
-                  (animating && animatefactor)
-                      ? "Factor: Animating"
-                      : "Factor: ${factor.toStringAsFixed(1)}",
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
-              ),
-            ],
-          ),
+      bottomNavigationBar: Visibility(
+        visible: !isLandscape(),
+        child: parameters(
+          context,
+          ScreenUtil().setHeight(924 / 5),
         ),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
+      body: Row(
+        children: [
+          Container(
+            width: isLandscape()
+                ? 2 * MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width,
+            child: Stack(
+              children: <Widget>[
+                Epicycloid(
+                  factor: factor,
+                  total: total,
+                  animatefactor: animatefactor,
+                  animatepoints: animatepoints,
+                  animating: animating,
+                  key: globalKey,
+                  isLandscape: isLandscape(),
+                ),
+                Positioned(
+                  left: 12,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'Animate with Factor:',
+                      ),
+                      Checkbox(
+                        onChanged: (animating)
+                            ? null
+                            : (_) {
+                                setState(() {
+                                  animatefactor = !animatefactor;
+                                });
+                              },
+                        activeColor: Colors.red,
+                        value: animatefactor,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        'Animate with Points:',
+                      ),
+                      Checkbox(
+                        onChanged: (animating)
+                            ? null
+                            : (_) {
+                                setState(() {
+                                  animatepoints = !animatepoints;
+                                });
+                              },
+                        activeColor: Colors.red,
+                        value: animatepoints,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Visibility(
+            visible: isLandscape(),
+            child: Expanded(
+              child: parameters(
+                context,
+                MediaQuery.of(context).size.height,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLandscape() {
+    return MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height;
+  }
+
+  Container parameters(BuildContext context, num height) {
+    return Container(
+      height: height,
+      child: Material(
+        elevation: 30,
+        color: Theme.of(context).primaryColor,
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
           children: <Widget>[
-            Epicycloid(
-              factor: factor,
-              total: total,
-              animatefactor: animatefactor,
-              animatepoints: animatepoints,
-              animating: animating,
-              key: globalKey,
+            SizedBox(
+              height: isLandscape() ? 90 : 20,
             ),
-            Positioned(
-              left: 12,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'Animate with Factor:',
-                  ),
-                  Checkbox(
-                    onChanged: (animating)
-                        ? null
-                        : (_) {
-                            setState(() {
-                              animatefactor = !animatefactor;
-                            });
-                          },
-                    activeColor: Colors.red,
-                    value: animatefactor,
-                  ),
-                ],
+            Slider(
+              min: 0,
+              max: 500,
+              divisions: 500,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (animating)
+                  ? null
+                  : (value) {
+                      setState(() {
+                        total = double.parse(value.toStringAsFixed(1));
+                      });
+                    },
+              value: total,
+            ),
+            Center(
+              child: Text(
+                (animating && animatepoints)
+                    ? "Points: Animating"
+                    : "Points: ${total.toInt()}",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
-            Positioned(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text(
-                    'Animate with Points:',
-                  ),
-                  Checkbox(
-                    onChanged: (animating)
-                        ? null
-                        : (_) {
-                            setState(() {
-                              animatepoints = !animatepoints;
-                            });
-                          },
-                    activeColor: Colors.red,
-                    value: animatepoints,
-                  ),
-                ],
+            Slider(
+              min: 0,
+              max: 51,
+              divisions: 510,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (animating)
+                  ? null
+                  : (value) {
+                      setState(() {
+                        factor = double.parse(value.toStringAsFixed(1));
+                      });
+                    },
+              value: factor,
+            ),
+            Center(
+              child: Text(
+                (animating && animatefactor)
+                    ? "Factor: Animating"
+                    : "Factor: ${factor.toStringAsFixed(1)}",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -242,6 +253,7 @@ class Epicycloid extends StatefulWidget {
     @required this.animatefactor,
     @required this.animatepoints,
     @required this.animating,
+    @required this.isLandscape,
   }) : super(key: key);
 
   double factor;
@@ -249,6 +261,7 @@ class Epicycloid extends StatefulWidget {
   final bool animatefactor;
   final bool animatepoints;
   final bool animating;
+  final bool isLandscape;
 
   @override
   _EpicycloidState createState() => _EpicycloidState();
@@ -283,27 +296,36 @@ class _EpicycloidState extends State<Epicycloid> {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
-        CustomPaint(
-          painter: EpicycloidPainter(
-              widget.factor,
-              widget.total,
-              (MediaQuery.of(context).size.width / 2.4).roundToDouble(),
-              (MediaQuery.of(context).size.width / 2).roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble(),
-              Theme.of(context).accentColor),
-          child: Container(),
+        Transform.scale(
+          scale: widget.isLandscape ? 0.7 : 1,
+          child: CustomPaint(
+            painter: EpicycloidPainter(
+                widget.factor,
+                widget.total,
+                (widget.isLandscape
+                        ? MediaQuery.of(context).size.width / 5
+                        : MediaQuery.of(context).size.width / 2.4)
+                    .roundToDouble(),
+                (widget.isLandscape
+                        ? MediaQuery.of(context).size.width / 3
+                        : MediaQuery.of(context).size.width / 2)
+                    .roundToDouble(),
+                (MediaQuery.of(context).size.height / 3).roundToDouble(),
+                Theme.of(context).accentColor),
+            child: Container(),
+          ),
         ),
         Visibility(
           visible: widget.animatepoints,
           child: Positioned(
-            bottom: 60,
+            bottom: 40,
             child: Text("Points: ${widget.total.toInt()}"),
           ),
         ),
         Visibility(
           visible: widget.animatefactor,
           child: Positioned(
-            bottom: 40,
+            bottom: 20,
             child: Text("Factor: ${widget.factor.toStringAsFixed(1)}"),
           ),
         ),

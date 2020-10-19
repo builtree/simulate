@@ -25,28 +25,6 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   bool animating = false;
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    ys.clear();
-    time = 0;
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
@@ -111,130 +89,162 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: animate ? ScreenUtil().setHeight(1600 / 4.0) : ScreenUtil().setHeight(1600 / 6.0),
-        child: Container(
-          child: Material(
-            elevation: 30,
-            color: Theme.of(context).primaryColor,
-            child: ListView(
+      bottomNavigationBar: Visibility(
+        visible: !isLandscape(),
+        child: parameters(
+          context,
+          animate
+              ? ScreenUtil().setHeight(1600 / 4.0)
+              : ScreenUtil().setHeight(1600 / 6.0),
+        ),
+      ),
+      body: Row(
+        children: [
+          Container(
+            width: isLandscape()
+                ? 2 * MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width,
+            child: Stack(
               children: <Widget>[
-                SizedBox(
-                  height: 30,
+                NormalEpicycloid(
+                  outerRadius: outerRadius,
+                  innerRadius: innerRadius,
+                  f: f,
+                  scaleAmount: _scaleAmount,
+                  animate: animate,
+                  animating: animating,
+                  key: globalKey,
+                  context: context,
+                  isLandscape: isLandscape(),
                 ),
-                Slider(
-                  min: 0,
-                  max: 50,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      outerRadius = value.toInt();
-                    });
-                    ys.clear();
-                  },
-                  value: outerRadius.toDouble(),
-                ),
-                Center(
-                  child: Text(
-                    "r: " + outerRadius.toString(),
-                    style: Theme.of(context).textTheme.subtitle2,
+                Positioned(
+                  top: 5,
+                  left: 5,
+                  child: Visibility(
+                    child: Text(
+                      'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
                   ),
                 ),
-                Slider(
-                  min: 50,
-                  max: 100,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      innerRadius = value.toInt();
-                    });
-                    ys.clear();
-                  },
-                  value: innerRadius.toDouble(),
-                ),
-                Center(
-                  child: Text(
-                    "R: " + innerRadius.toString(),
-                    style: Theme.of(context).textTheme.subtitle2,
-                  ),
-                ),
-                Visibility(
-                  visible: animate,
-                  child: Column(
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Slider(
-                        min: 0,
-                        max: 0.1,
-                        activeColor: Theme.of(context).accentColor,
-                        inactiveColor: Colors.grey,
-                        onChanged: (value) {
-                          setState(() {
-                            f = value;
-                          });
-                        },
-                        value: f,
-                      ),
-                      Center(
-                        child: Text(
-                          "- Frequency +",
-                          style: Theme.of(context).textTheme.subtitle2,
-                        ),
+                      Text('Animate: '),
+                      Checkbox(
+                        onChanged: (animating)
+                            ? null
+                            : (_) {
+                                setState(() {
+                                  animate = !animate;
+                                });
+                              },
+                        activeColor: Colors.red,
+                        value: animate,
                       ),
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),
-        ),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: <Widget>[
-            NormalEpicycloid(
-              outerRadius: outerRadius,
-              innerRadius: innerRadius,
-              f: f,
-              scaleAmount: _scaleAmount,
-              animate: animate,
-              animating: animating,
-              key: globalKey,
-              context: context,
-            ),
-            Positioned(
-              top: 5,
-              left: 5,
-              child: Visibility(
-                child: Text(
-                  'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
-                  style: Theme.of(context).textTheme.subtitle2,
-                ),
+          Visibility(
+            visible: isLandscape(),
+            child: Expanded(
+              child: parameters(
+                context,
+                MediaQuery.of(context).size.height,
               ),
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLandscape() {
+    return MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height;
+  }
+
+  Container parameters(BuildContext context, num height) {
+    return Container(
+      height: height,
+      child: Material(
+        elevation: 30,
+        color: Theme.of(context).primaryColor,
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: <Widget>[
+            SizedBox(
+              height: isLandscape() ? 60 : 30,
+            ),
+            Slider(
+              min: 0,
+              max: 50,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  outerRadius = value.toInt();
+                });
+                ys.clear();
+              },
+              value: outerRadius.toDouble(),
+            ),
+            Center(
+              child: Text(
+                "r: " + outerRadius.toString(),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            Slider(
+              min: 50,
+              max: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  innerRadius = value.toInt();
+                });
+                ys.clear();
+              },
+              value: innerRadius.toDouble(),
+            ),
+            Center(
+              child: Text(
+                "R: " + innerRadius.toString(),
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            Visibility(
+              visible: animate,
+              child: Column(
                 children: <Widget>[
-                  Text('Animate: '),
-                  Checkbox(
-                    onChanged: (animating)
-                        ? null
-                        : (_) {
-                            setState(() {
-                              animate = !animate;
-                            });
-                          },
-                    activeColor: Colors.red,
-                    value: animate,
+                  Slider(
+                    min: 0,
+                    max: 0.1,
+                    activeColor: Theme.of(context).accentColor,
+                    inactiveColor: Colors.grey,
+                    onChanged: (value) {
+                      setState(() {
+                        f = value;
+                      });
+                    },
+                    value: f,
+                  ),
+                  Center(
+                    child: Text(
+                      "- Frequency +",
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -252,6 +262,7 @@ class NormalEpicycloid extends StatefulWidget {
     @required this.animating,
     Key key,
     @required this.context,
+    @required this.isLandscape,
   })  : outerRadius = outerRadius,
         innerRadius = innerRadius,
         f = f,
@@ -265,6 +276,8 @@ class NormalEpicycloid extends StatefulWidget {
   final bool animate;
   final bool animating;
   final BuildContext context;
+  final bool isLandscape;
+
   @override
   _NormalEpicycloidState createState() => _NormalEpicycloidState();
 }
@@ -305,18 +318,24 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
     return Container(
       child: Transform.scale(
         scale: widget._scaleAmount,
-        child: CustomPaint(
-          painter: NormalEpicycloidPainter(
-            widget.outerRadius,
-            widget.innerRadius,
-            time,
-            (MediaQuery.of(context).size.width / 2).roundToDouble(),
-            (MediaQuery.of(context).size.height / 3).roundToDouble(),
-            widget.animate,
-            points,
-            context,
+        child: Transform.scale(
+          scale: widget.isLandscape ? 0.7 : 1,
+          child: CustomPaint(
+            painter: NormalEpicycloidPainter(
+              widget.outerRadius,
+              widget.innerRadius,
+              time,
+              (widget.isLandscape
+                      ? MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width / 2)
+                  .roundToDouble(),
+              (MediaQuery.of(context).size.height / 3).roundToDouble(),
+              widget.animate,
+              points,
+              context,
+            ),
+            child: Container(),
           ),
-          child: Container(),
         ),
       ),
     );
