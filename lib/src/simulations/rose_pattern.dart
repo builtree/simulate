@@ -306,15 +306,9 @@ class _RoseState extends State<Rose> {
         nextStep();
       });
     }
-    if (widget.isLandscape && orientationChanged) {
+    if (!(widget.isLandscape ^ orientationChanged)) {
       clearScreen();
-      loopi = 0;
-      orientationChanged = false;
-    }
-    if (!widget.isLandscape && !orientationChanged) {
-      clearScreen();
-      loopi = 0;
-      orientationChanged = true;
+      orientationChanged = !orientationChanged;
     }
 
     return Transform.scale(

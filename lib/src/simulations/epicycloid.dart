@@ -316,13 +316,9 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) => update());
     }
-    if (widget.isLandscape && orientationChanged) {
+    if (!(widget.isLandscape ^ orientationChanged)) {
       clearscreen();
-      orientationChanged = false;
-    }
-    if (!widget.isLandscape && !orientationChanged) {
-      clearscreen();
-      orientationChanged = true;
+      orientationChanged = !orientationChanged;
     }
 
     return Container(

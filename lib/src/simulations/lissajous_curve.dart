@@ -335,17 +335,13 @@ class _LissajousState extends State<Lissajous> {
         nextStep();
       });
     }
-    if (widget.isLandscape && orientationChanged) {
+    if (!(widget.isLandscape ^ orientationChanged)) {
       clear();
-      orientationChanged = false;
-    }
-    if (!widget.isLandscape && !orientationChanged) {
-      clear();
-      orientationChanged = true;
+      orientationChanged = !orientationChanged;
     }
 
     return Transform.scale(
-      scale: widget.isLandscape ? 0.7 : 1,
+      scale: widget.isLandscape ? 0.5 : 1,
       child: CustomPaint(
         painter: LissajousPainter(
           widget._b,
