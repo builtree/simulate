@@ -287,6 +287,8 @@ class _LissajousState extends State<Lissajous> {
   double loopi = 0;
   double r, n, d, c, transformx, transformy;
   double looplength = 2 * pi;
+  double tx, ty;
+  bool orientationChanged = true;
 
   void dispose() {
     super.dispose();
@@ -298,45 +300,59 @@ class _LissajousState extends State<Lissajous> {
     looplength += loopi;
   }
 
+  void clear() {
+    clearscreen();
+    loopi = 0;
+    looplength = 2 * pi;
+  }
+
   nextStep() {
     if (loopi >= looplength) {
-      clearscreen();
-      loopi = 0;
-      looplength = 2 * pi;
+      clear();
     }
     setState(() {
       sleep(Duration(milliseconds: 10));
       loopi += 0.01;
-      r = (MediaQuery.of(context).size.width / 2.5).roundToDouble();
       points.add(Offset(r * sin(widget._a * loopi + widget.delta),
               r * sin(widget._b * loopi))
-          .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble()));
+          .translate(tx.roundToDouble(), ty.roundToDouble()));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    tx = widget.isLandscape
+        ? MediaQuery.of(context).size.width / 3
+        : MediaQuery.of(context).size.width / 2;
+    ty = MediaQuery.of(context).size.height / 3;
+    r = (widget.isLandscape
+            ? MediaQuery.of(context).size.width / 4
+            : MediaQuery.of(context).size.width / 2.5)
+        .roundToDouble();
+
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         nextStep();
       });
     }
+    if (widget.isLandscape && orientationChanged) {
+      clear();
+      orientationChanged = false;
+    }
+    if (!widget.isLandscape && !orientationChanged) {
+      clear();
+      orientationChanged = true;
+    }
+
     return Transform.scale(
       scale: widget.isLandscape ? 0.7 : 1,
       child: CustomPaint(
         painter: LissajousPainter(
           widget._b,
           widget._a,
-          (widget.isLandscape
-                  ? MediaQuery.of(context).size.width / 3
-                  : MediaQuery.of(context).size.width / 2)
-              .roundToDouble(),
-          (MediaQuery.of(context).size.height / 3).roundToDouble(),
-          (widget.isLandscape
-                  ? MediaQuery.of(context).size.width / 4
-                  : MediaQuery.of(context).size.width / 2.5)
-              .roundToDouble(),
+          tx.roundToDouble(),
+          ty.roundToDouble(),
+          r,
           widget.delta,
           widget.animate,
           points,

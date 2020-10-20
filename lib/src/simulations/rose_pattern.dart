@@ -258,6 +258,7 @@ class _RoseState extends State<Rose> {
   double r, k;
   double looplength = 2 * pi;
   double tx, ty;
+  bool orientationChanged = true;
 
   void dispose() {
     super.dispose();
@@ -284,8 +285,7 @@ class _RoseState extends State<Rose> {
         k = widget.n / widget.d;
         points.add(Offset(r * (cos(k * loopi) + widget.c) * cos(loopi),
                 r * (cos(k * loopi) + widget.c) * sin(loopi))
-            .translate(tx.roundToDouble(),
-                ty.roundToDouble()));
+            .translate(tx.roundToDouble(), ty.roundToDouble()));
       }
     });
   }
@@ -297,14 +297,24 @@ class _RoseState extends State<Rose> {
         : MediaQuery.of(context).size.width / 2;
     ty = MediaQuery.of(context).size.height / 3;
     r = (widget.isLandscape
-                ? MediaQuery.of(context).size.width / 6.2
-                : MediaQuery.of(context).size.width / 4)
-            .roundToDouble();
+            ? MediaQuery.of(context).size.width / 6.2
+            : MediaQuery.of(context).size.width / 4)
+        .roundToDouble();
 
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         nextStep();
       });
+    }
+    if (widget.isLandscape && orientationChanged) {
+      clearScreen();
+      loopi = 0;
+      orientationChanged = false;
+    }
+    if (!widget.isLandscape && !orientationChanged) {
+      clearScreen();
+      loopi = 0;
+      orientationChanged = true;
     }
 
     return Transform.scale(

@@ -286,6 +286,7 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
   List<Offset> points = [];
   double transformx, transformy;
   double time = 0;
+  bool orientationChanged = true;
 
   void dispose() {
     super.dispose();
@@ -315,27 +316,35 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) => update());
     }
+    if (widget.isLandscape && orientationChanged) {
+      clearscreen();
+      orientationChanged = false;
+    }
+    if (!widget.isLandscape && !orientationChanged) {
+      clearscreen();
+      orientationChanged = true;
+    }
+
     return Container(
       child: Transform.scale(
-        scale: widget._scaleAmount,
-        child: Transform.scale(
-          scale: widget.isLandscape ? 0.7 : 1,
-          child: CustomPaint(
-            painter: NormalEpicycloidPainter(
-              widget.outerRadius,
-              widget.innerRadius,
-              time,
-              (widget.isLandscape
-                      ? MediaQuery.of(context).size.width / 3
-                      : MediaQuery.of(context).size.width / 2)
-                  .roundToDouble(),
-              (MediaQuery.of(context).size.height / 3).roundToDouble(),
-              widget.animate,
-              points,
-              context,
-            ),
-            child: Container(),
+        scale: widget.isLandscape
+            ? 0.7 * widget._scaleAmount
+            : widget._scaleAmount,
+        child: CustomPaint(
+          painter: NormalEpicycloidPainter(
+            widget.outerRadius,
+            widget.innerRadius,
+            time,
+            (widget.isLandscape
+                    ? MediaQuery.of(context).size.width / 3
+                    : MediaQuery.of(context).size.width / 2)
+                .roundToDouble(),
+            (MediaQuery.of(context).size.height / 3).roundToDouble(),
+            widget.animate,
+            points,
+            context,
           ),
+          child: Container(),
         ),
       ),
     );
