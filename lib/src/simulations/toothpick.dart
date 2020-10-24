@@ -144,7 +144,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
           },
         ),
         title: Text(
-          "ToothPick Pattern",
+          "Toothpick Pattern",
           style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
@@ -164,7 +164,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
       bottomNavigationBar: Material(
         elevation: 30,
         child: Container(
-          height: ScreenUtil().setHeight(1024 / 10),
+          height: ScreenUtil().setHeight(1024 / 9),
           color: Theme.of(context).primaryColor,
           child: ListView(
             children: <Widget>[
@@ -187,8 +187,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
               ),
               Row(
                 children: [
-                  Icon(
-                    Icons.zoom_out,
+                  IconButton(
+                    icon: Icon(Icons.zoom_out),
+                    onPressed: () {
+                      setState(() {
+                        _scaleAmount -= _scaleAmount - 0.1 <= 0.01 ? 0 : 0.1;
+                      });
+                    },
                   ),
                   Expanded(
                     child: Slider(
@@ -204,8 +209,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                       },
                     ),
                   ),
-                  Icon(
-                    Icons.zoom_in,
+                  IconButton(
+                    icon: Icon(Icons.zoom_in),
+                    onPressed: () {
+                      setState(() {
+                        _scaleAmount += _scaleAmount + 0.1 > 2 ? 0 : 0.1;
+                      });
+                    },
                   ),
                 ],
               ),
