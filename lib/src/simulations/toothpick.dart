@@ -112,32 +112,20 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     super.initState();
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    double defaultScreenWidth = 512.0;
-    double defaultScreenHeight = 1024.0;
     ScreenUtil.init(
       context,
-      width: defaultScreenWidth,
-      height: defaultScreenHeight,
+      width: 512.0,
+      height: 1024.0,
       allowFontScaling: true,
     );
     if (step == 1) {
@@ -174,11 +162,11 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         backgroundColor: Colors.red,
       ),
       bottomNavigationBar: Material(
-        elevation: 10,
+        elevation: 30,
         child: Container(
-          height: ScreenUtil().setHeight(defaultScreenHeight/10),
+          height: ScreenUtil().setHeight(1024 / 10),
           color: Theme.of(context).primaryColor,
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,17 +185,29 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                   ),
                 ],
               ),
-              Slider(
-                value: _scaleAmount,
-                activeColor: Colors.red,
-                min: 0.01,
-                max: 2,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _scaleAmount = value;
-                  });
-                },
+              Row(
+                children: [
+                  Icon(
+                    Icons.zoom_out,
+                  ),
+                  Expanded(
+                    child: Slider(
+                      value: _scaleAmount,
+                      activeColor: Colors.red,
+                      min: 0.01,
+                      max: 2,
+                      inactiveColor: Colors.grey,
+                      onChanged: (value) {
+                        setState(() {
+                          _scaleAmount = value;
+                        });
+                      },
+                    ),
+                  ),
+                  Icon(
+                    Icons.zoom_in,
+                  ),
+                ],
               ),
             ],
           ),
