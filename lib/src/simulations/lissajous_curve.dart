@@ -22,6 +22,16 @@ class _LissajousCurveState extends State<LissajousCurve> {
   double thickness = 2;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,

@@ -22,6 +22,16 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   bool animating = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,

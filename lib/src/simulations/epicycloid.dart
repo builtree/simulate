@@ -25,6 +25,18 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   bool animating = false;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ys.clear();
+    time = 0;
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
