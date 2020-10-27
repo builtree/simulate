@@ -364,7 +364,9 @@ class RosePainter extends CustomPainter {
                 .translate(transformx, transformy));
       }
     }
-    canvas.drawPoints(PointMode.polygon, points, paint);
+    if (points.length > 0) {
+      canvas.drawPoints(PointMode.polygon, points, paint);
+    }
   }
 
   @override
