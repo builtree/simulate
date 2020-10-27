@@ -40,9 +40,10 @@ class Simulations with ChangeNotifier {
     List<String> myList = (prefs.getStringList('favorites') ?? List<String>());
     if (myList.length != 0) {
       _favorites = myList.map((i) => int.parse(i)).toList();
-      if(allSimulations().length>_favorites.length)
-      {
-        _favorites = List.from(_favorites)..addAll(List.filled(allSimulations().length-_favorites.length, -1));
+      if (allSimulations().length > _favorites.length) {
+        _favorites = List.from(_favorites)
+          ..addAll(
+              List.filled(allSimulations().length - _favorites.length, -1));
       }
     }
   }
@@ -57,7 +58,8 @@ class Simulations with ChangeNotifier {
             ? 'assets/simulations/ToothpickPatternDark.png'
             : 'assets/simulations/ToothpickPatternLight.png',
         direct: ToothpickPattern(),
-        infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
+        infoLink:
+            'https://cod-ed.github.io/simulate/simulations/algorithms/ToothpickPattern',
         fav: _favorites[0],
       ),
       SimulationCard(
@@ -103,7 +105,8 @@ class Simulations with ChangeNotifier {
             ? 'assets/simulations/LissajousCurveDark.png'
             : 'assets/simulations/LissajousCurveLight.png',
         direct: LissajousCurve(),
-        infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
+        infoLink:
+            'https://cod-ed.github.io/simulate/simulations/mathematics/LissajousPattern',
         fav: _favorites[5],
       ),
       SimulationCard(
@@ -130,10 +133,11 @@ class Simulations with ChangeNotifier {
         id: 8,
         simulationName: 'Maurer Rose Pattern',
         image: theme.darkTheme
-        ? 'assets/simulations/MaurerRoseDark.png'
-        : 'assets/simulations/MaurerRoseLight.png',
+            ? 'assets/simulations/MaurerRoseDark.png'
+            : 'assets/simulations/MaurerRoseLight.png',
         direct: MaurerRoseCurve(),
-        infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
+        infoLink:
+            'https://cod-ed.github.io/simulate/simulations/mathematics/MaurerRosePattern',
         fav: _favorites[8],
       ),
     ];
