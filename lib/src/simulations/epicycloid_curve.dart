@@ -200,7 +200,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
             SizedBox(
-              height: isLandscape() ? 90 : 20,
+              height: 20,
             ),
             Slider(
               min: 0,
@@ -328,14 +328,16 @@ class _EpicycloidState extends State<Epicycloid> {
         Visibility(
           visible: widget.animatepoints,
           child: Positioned(
-            bottom: 40,
+            right: 15,
+            top: 40,
             child: Text("Points: ${widget.total.toInt()}"),
           ),
         ),
         Visibility(
           visible: widget.animatefactor,
           child: Positioned(
-            bottom: 20,
+            left: 12,
+            top: 40,
             child: Text("Factor: ${widget.factor.toStringAsFixed(1)}"),
           ),
         ),

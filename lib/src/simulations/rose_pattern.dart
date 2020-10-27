@@ -174,7 +174,7 @@ class _RosePatternState extends State<RosePattern> {
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
             SizedBox(
-              height: 30,
+              height: 20,
             ),
             Slider(
               min: 0,

@@ -192,7 +192,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
             SizedBox(
-              height: isLandscape() ? 60 : 30,
+              height: 20,
             ),
             Slider(
               min: 0,

@@ -204,7 +204,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
           padding: EdgeInsets.all(8.0),
           children: <Widget>[
             SizedBox(
-              height: isLandscape() ? 90 : 20,
+              height: 20,
             ),
             Slider(
               min: 0,
@@ -371,14 +371,16 @@ class MaurerRoseState extends State<MaurerRose> {
         Visibility(
           visible: widget.animateN,
           child: Positioned(
-            bottom: 40,
+            left: 12,
+            top: 40,
             child: Text("N: ${widget.n.toStringAsFixed(1)}"),
           ),
         ),
         Visibility(
           visible: widget.animateD,
           child: Positioned(
-            bottom: 20,
+            right: 15,
+            top: 40,
             child: Text("D: ${widget.d.toStringAsFixed(1)}"),
           ),
         ),
