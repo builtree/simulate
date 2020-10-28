@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_LissajousState> globalKey = GlobalKey<_LissajousState>();
@@ -316,17 +314,19 @@ class _LissajousState extends State<Lissajous> {
     looplength = 2 * pi;
   }
 
-  nextStep() {
+  nextStep() async {
     if (loopi >= looplength) {
       clear();
     }
-    setState(() {
-      sleep(Duration(milliseconds: 10));
-      loopi += 0.01;
-      points.add(Offset(r * sin(widget._a * loopi + widget.delta),
-              r * sin(widget._b * loopi))
-          .translate(tx.roundToDouble(), ty.roundToDouble()));
-    });
+    await Future.delayed(Duration(milliseconds: 10));
+    if (this.mounted) {
+      setState(() {
+        loopi += 0.01;
+        points.add(Offset(r * sin(widget._a * loopi + widget.delta),
+                r * sin(widget._b * loopi))
+            .translate(tx.roundToDouble(), ty.roundToDouble()));
+      });
+    }
   }
 
   @override

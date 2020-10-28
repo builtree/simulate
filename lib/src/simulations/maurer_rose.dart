@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<MaurerRoseState> globalKey = GlobalKey<MaurerRoseState>();
@@ -324,22 +322,24 @@ class MaurerRose extends StatefulWidget {
 }
 
 class MaurerRoseState extends State<MaurerRose> {
-  nextStep() {
-    setState(() {
-      sleep(Duration(milliseconds: 10));
-      if (widget.animateN) {
-        widget.n += 0.003;
-      }
-      if (widget.animateD) {
-        widget.d += 0.005;
-      }
-      if (widget.n > 20) {
-        widget.n = 0;
-      }
-      if (widget.d > 100) {
-        widget.d = 0;
-      }
-    });
+  nextStep() async {
+    await Future.delayed(Duration(milliseconds: 10));
+    if (this.mounted) {
+      setState(() {
+        if (widget.animateN) {
+          widget.n += 0.003;
+        }
+        if (widget.animateD) {
+          widget.d += 0.005;
+        }
+        if (widget.n > 20) {
+          widget.n = 0;
+        }
+        if (widget.d > 100) {
+          widget.d = 0;
+        }
+      });
+    }
   }
 
   @override
