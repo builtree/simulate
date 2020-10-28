@@ -53,7 +53,7 @@ class Simulations with ChangeNotifier {
     return <Widget>[
       SimulationCard(
         id: 0,
-        simulationName: 'ToothPick Pattern',
+        simulationName: 'Toothpick Pattern',
         image: theme.darkTheme
             ? 'assets/simulations/ToothpickPatternDark.png'
             : 'assets/simulations/ToothpickPatternLight.png',

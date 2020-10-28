@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_RoseState> globalKey = GlobalKey<_RoseState>();
@@ -21,21 +20,11 @@ class _RosePatternState extends State<RosePattern> {
 
   @override
   void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     super.initState();
   }
 
   @override
-  dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+  void dispose() {
     super.dispose();
   }
 
@@ -105,116 +94,143 @@ class _RosePatternState extends State<RosePattern> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024 / 5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: ListView(
-            padding: EdgeInsets.all(8.0),
-            children: <Widget>[
-              SizedBox(
-                height: 30,
-              ),
-              Slider(
-                min: 0,
-                max: 10,
-                divisions: 1000,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _n = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: _n,
-              ),
-              Center(
-                child: Text(
-                  "Numerator: $_n",
-                  style: Theme.of(context).textTheme.subtitle2,
+      bottomNavigationBar: Visibility(
+          visible: !isLandscape(),
+          child: parameters(context, ScreenUtil().setHeight(1024 / 5))),
+      body: Row(
+        children: [
+          Container(
+            width: isLandscape()
+                ? 2 * MediaQuery.of(context).size.width / 3
+                : MediaQuery.of(context).size.width,
+            child: Stack(
+              children: <Widget>[
+                Rose(
+                  d: _d,
+                  n: _n,
+                  c: offset,
+                  animate: animate,
+                  animating: animating,
+                  key: globalKey,
+                  isLandscape: isLandscape(),
                 ),
-              ),
-              Slider(
-                min: 0,
-                max: 10,
-                divisions: 1000,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _d = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: _d,
-              ),
-              Center(
-                child: Text(
-                  "Denominator: $_d",
-                  style: Theme.of(context).textTheme.subtitle2,
+                Positioned(
+                  top: 5,
+                  left: 5,
+                  child: Text(
+                    'k ~ ${(_n / _d).toStringAsFixed(2)}',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
                 ),
-              ),
-              Slider(
-                min: 0,
-                max: 1,
-                divisions: 100,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    offset = double.parse(value.toStringAsFixed(2));
-                  });
-                },
-                value: offset,
-              ),
-              Center(
-                child: Text(
-                  "Offset: $offset",
-                  style: Theme.of(context).textTheme.subtitle2,
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text("Animate"),
+                      Checkbox(
+                        onChanged: (_) {
+                          setState(() {
+                            animate = !animate;
+                            if (animating) animating = (animating && animate);
+                          });
+                        },
+                        value: animate,
+                        activeColor: Colors.red,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Stack(
-          children: <Widget>[
-            Rose(
-              d: _d,
-              n: _n,
-              c: offset,
-              animate: animate,
-              animating: animating,
-              key: globalKey,
+              ],
             ),
-            Positioned(
-              top: 5,
-              left: 5,
+          ),
+          Visibility(
+            visible: isLandscape(),
+            child: Expanded(
+              child: parameters(
+                context,
+                MediaQuery.of(context).size.height,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  bool isLandscape() {
+    return MediaQuery.of(context).size.width >
+        MediaQuery.of(context).size.height;
+  }
+
+  Container parameters(BuildContext context, num height) {
+    return Container(
+      height: height,
+      child: Material(
+        elevation: 30,
+        color: Theme.of(context).primaryColor,
+        child: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Slider(
+              min: 0,
+              max: 10,
+              divisions: 1000,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  _n = double.parse(value.toStringAsFixed(2));
+                });
+              },
+              value: _n,
+            ),
+            Center(
               child: Text(
-                'k ~ ${(_n / _d).toStringAsFixed(2)}',
+                "Numerator: $_n",
                 style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Text("Animate"),
-                  Checkbox(
-                    onChanged: (_) {
-                      setState(() {
-                        animate = !animate;
-                        if (animating) animating = (animating && animate);
-                      });
-                    },
-                    value: animate,
-                    activeColor: Colors.red,
-                  )
-                ],
+            Slider(
+              min: 0,
+              max: 10,
+              divisions: 1000,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  _d = double.parse(value.toStringAsFixed(2));
+                });
+              },
+              value: _d,
+            ),
+            Center(
+              child: Text(
+                "Denominator: $_d",
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            Slider(
+              min: 0,
+              max: 1,
+              divisions: 100,
+              activeColor: Theme.of(context).accentColor,
+              inactiveColor: Colors.grey,
+              onChanged: (value) {
+                setState(() {
+                  offset = double.parse(value.toStringAsFixed(2));
+                });
+              },
+              value: offset,
+            ),
+            Center(
+              child: Text(
+                "Offset: $offset",
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
           ],
@@ -225,20 +241,23 @@ class _RosePatternState extends State<RosePattern> {
 }
 
 class Rose extends StatefulWidget {
-  Rose(
-      {Key key,
-      @required this.d,
-      @required this.n,
-      @required this.c,
-      @required this.animate,
-      @required this.animating})
-      : super(key: key);
+  Rose({
+    Key key,
+    @required this.d,
+    @required this.n,
+    @required this.c,
+    @required this.animate,
+    @required this.animating,
+    @required this.isLandscape,
+  }) : super(key: key);
 
   final double d;
   final double n;
   final double c;
   final bool animate;
   final bool animating;
+  final bool isLandscape;
+
   @override
   _RoseState createState() => _RoseState();
 }
@@ -248,6 +267,8 @@ class _RoseState extends State<Rose> {
   double loopi = 0;
   double r, k;
   double looplength = 2 * pi;
+  double tx, ty;
+  bool orientationChanged = true;
 
   void dispose() {
     super.dispose();
@@ -272,34 +293,49 @@ class _RoseState extends State<Rose> {
         }
         loopi += 0.04;
         k = widget.n / widget.d;
-        r = (MediaQuery.of(context).size.width / 4).roundToDouble();
         points.add(Offset(r * (cos(k * loopi) + widget.c) * cos(loopi),
                 r * (cos(k * loopi) + widget.c) * sin(loopi))
-            .translate((MediaQuery.of(context).size.width / 2).roundToDouble(),
-                (MediaQuery.of(context).size.height / 3).roundToDouble()));
+            .translate(tx.roundToDouble(), ty.roundToDouble()));
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    tx = widget.isLandscape
+        ? MediaQuery.of(context).size.width / 3
+        : MediaQuery.of(context).size.width / 2;
+    ty = MediaQuery.of(context).size.height / 3;
+    r = (widget.isLandscape
+            ? MediaQuery.of(context).size.width / 6.2
+            : MediaQuery.of(context).size.width / 4)
+        .roundToDouble();
+
     if (widget.animating) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         nextStep();
       });
     }
+    if (!(widget.isLandscape ^ orientationChanged)) {
+      clearScreen();
+      orientationChanged = !orientationChanged;
+    }
 
-    return CustomPaint(
-      painter: RosePainter(
+    return Transform.scale(
+      scale: widget.isLandscape ? 0.5 : 1,
+      child: CustomPaint(
+        painter: RosePainter(
           widget.d,
           widget.n,
-          (MediaQuery.of(context).size.width / 2).roundToDouble(),
-          (MediaQuery.of(context).size.height / 3).roundToDouble(),
-          (MediaQuery.of(context).size.width / 4).roundToDouble(),
+          tx.roundToDouble(),
+          ty.roundToDouble(),
+          r,
           widget.c,
           widget.animate,
-          points),
-      child: Container(),
+          points,
+        ),
+        child: Container(),
+      ),
     );
   }
 }
@@ -328,7 +364,9 @@ class RosePainter extends CustomPainter {
                 .translate(transformx, transformy));
       }
     }
-    canvas.drawPoints(PointMode.polygon, points, paint);
+    if (points.length > 0) {
+      canvas.drawPoints(PointMode.polygon, points, paint);
+    }
   }
 
   @override

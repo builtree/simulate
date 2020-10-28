@@ -132,12 +132,10 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
-    double defaultScreenWidth = 512.0;
-    double defaultScreenHeight = 1024.0;
     ScreenUtil.init(
       context,
-      width: defaultScreenWidth,
-      height: defaultScreenHeight,
+      width: 512.0,
+      height: 1024.0,
       allowFontScaling: true,
     );
     if (step == 1) {
@@ -156,7 +154,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
           },
         ),
         title: Text(
-          "ToothPick Pattern",
+          "Toothpick Pattern",
           style: Theme.of(context).textTheme.headline6,
         ),
         centerTitle: true,
@@ -174,11 +172,11 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         backgroundColor: Colors.red,
       ),
       bottomNavigationBar: Material(
-        elevation: 10,
+        elevation: 30,
         child: Container(
-          height: ScreenUtil().setHeight(defaultScreenHeight/10),
+          height: ScreenUtil().setHeight(1024 / 9),
           color: Theme.of(context).primaryColor,
-          child: Column(
+          child: ListView(
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,17 +195,39 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                   ),
                 ],
               ),
-              Slider(
-                value: _scaleAmount,
-                activeColor: Colors.red,
-                min: 0.01,
-                max: 2,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    _scaleAmount = value;
-                  });
-                },
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.zoom_out),
+                    onPressed: () {
+                      setState(() {
+                        _scaleAmount -= _scaleAmount - 0.1 <= 0.01 ? 0 : 0.1;
+                      });
+                    },
+                  ),
+                  Expanded(
+                    child: Slider(
+                      value: _scaleAmount,
+                      activeColor: Colors.red,
+                      min: 0.01,
+                      max: 2,
+                      inactiveColor: Colors.grey,
+                      onChanged: (value) {
+                        setState(() {
+                          _scaleAmount = value;
+                        });
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.zoom_in),
+                    onPressed: () {
+                      setState(() {
+                        _scaleAmount += _scaleAmount + 0.1 > 2 ? 0 : 0.1;
+                      });
+                    },
+                  ),
+                ],
               ),
             ],
           ),
