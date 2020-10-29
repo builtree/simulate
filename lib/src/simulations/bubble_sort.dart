@@ -19,6 +19,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
   List<Widget> containerList = [];
   bool doNotRefresh = false;
   int finalIterator = 0;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -179,66 +180,73 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
-          child: Column(
-            children: <Widget>[
-              Spacer(flex: 2),
-              Slider(
-                min: 2,
-                max: 200,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  doNotRefresh = false;
-                  counter = 0;
-                  swap = false;
-                  setState(() {
-                    _numberOfElements = value.toInt();
-                  });
-                },
-                value: _numberOfElements.toDouble(),
-              ),
-              Center(
-                child: Text(
-                  "Elements: ${_numberOfElements.toInt()}",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
+          child: Scrollbar(
+            controller: _scrollController,
+            isAlwaysShown: true,
+            child: ListView(
+              controller: _scrollController,
+              padding: EdgeInsets.all(8.0),
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Slider(
+                  min: 2,
+                  max: 200,
+                  activeColor: Theme.of(context).accentColor,
+                  inactiveColor: Colors.grey,
+                  onChanged: (value) {
+                    doNotRefresh = false;
+                    counter = 0;
+                    swap = false;
+                    setState(() {
+                      _numberOfElements = value.toInt();
+                    });
+                  },
+                  value: _numberOfElements.toDouble(),
+                ),
+                Center(
+                  child: Text(
+                    "Elements: ${_numberOfElements.toInt()}",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Ubuntu',
+                    ),
                   ),
                 ),
-              ),
-              Spacer(
-                flex: 1,
-              ),
-              Slider(
-                min: 0,
-                max: 100,
-                divisions: 10,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    delay2 = value.toInt();
-                  });
-                },
-                onChangeEnd: (value) {
-                  setState(() {
-                    doNotRefresh = true;
-                    delay = value.toInt();
-                  });
-                },
-                value: delay2.roundToDouble(),
-              ),
-              Center(
-                child: Text(
-                  "Delay: ${delay2.toInt()} ms",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
+                SizedBox(
+                  height: 20,
+                ),
+                Slider(
+                  min: 0,
+                  max: 100,
+                  divisions: 10,
+                  activeColor: Theme.of(context).accentColor,
+                  inactiveColor: Colors.grey,
+                  onChanged: (value) {
+                    setState(() {
+                      delay2 = value.toInt();
+                    });
+                  },
+                  onChangeEnd: (value) {
+                    setState(() {
+                      doNotRefresh = true;
+                      delay = value.toInt();
+                    });
+                  },
+                  value: delay2.roundToDouble(),
+                ),
+                Center(
+                  child: Text(
+                    "Delay: ${delay2.toInt()} ms",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Ubuntu',
+                    ),
                   ),
                 ),
-              ),
-              Spacer(),
-            ],
+              ],
+            ),
           ),
         ),
       ),

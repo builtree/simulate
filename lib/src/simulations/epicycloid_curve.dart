@@ -16,6 +16,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   bool animatefactor = false;
   bool animatepoints = false;
   bool animating = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -194,59 +195,64 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
       child: Material(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          padding: EdgeInsets.all(8.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Slider(
-              min: 0,
-              max: 500,
-              divisions: 500,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (animating)
-                  ? null
-                  : (value) {
-                      setState(() {
-                        total = double.parse(value.toStringAsFixed(1));
-                      });
-                    },
-              value: total,
-            ),
-            Center(
-              child: Text(
-                (animating && animatepoints)
-                    ? "Points: Animating"
-                    : "Points: ${total.toInt()}",
-                style: Theme.of(context).textTheme.subtitle2,
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: ListView(
+            controller: _scrollController,
+            padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 51,
-              divisions: 510,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (animating)
-                  ? null
-                  : (value) {
-                      setState(() {
-                        factor = double.parse(value.toStringAsFixed(1));
-                      });
-                    },
-              value: factor,
-            ),
-            Center(
-              child: Text(
-                (animating && animatefactor)
-                    ? "Factor: Animating"
-                    : "Factor: ${factor.toStringAsFixed(1)}",
-                style: Theme.of(context).textTheme.subtitle2,
+              Slider(
+                min: 0,
+                max: 500,
+                divisions: 500,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          total = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: total,
               ),
-            ),
-          ],
+              Center(
+                child: Text(
+                  (animating && animatepoints)
+                      ? "Points: Animating"
+                      : "Points: ${total.toInt()}",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 0,
+                max: 51,
+                divisions: 510,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          factor = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: factor,
+              ),
+              Center(
+                child: Text(
+                  (animating && animatefactor)
+                      ? "Factor: Animating"
+                      : "Factor: ${factor.toStringAsFixed(1)}",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
