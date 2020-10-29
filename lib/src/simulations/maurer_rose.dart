@@ -18,6 +18,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   bool animateN = false;
   bool animateD = false;
   bool animating = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -198,97 +199,102 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
       child: Material(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          padding: EdgeInsets.all(8.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Slider(
-              min: 0,
-              max: 20,
-              divisions: 200,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (animating)
-                  ? null
-                  : (value) {
-                      setState(() {
-                        n = double.parse(value.toStringAsFixed(1));
-                      });
-                    },
-              value: n,
-            ),
-            Center(
-              child: Text(
-                (animating && animateN)
-                    ? "N: Animating"
-                    : "N: ${n.toStringAsFixed(1)}",
-                style: Theme.of(context).textTheme.subtitle2,
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: ListView(
+            controller: _scrollController,
+            padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 100,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (animating)
-                  ? null
-                  : (value) {
-                      setState(() {
-                        d = double.parse(value.toStringAsFixed(1));
-                      });
-                    },
-              value: d,
-            ),
-            Center(
-              child: Text(
-                (animating && animateD)
-                    ? "D: Animating"
-                    : "D: ${d.toStringAsFixed(1)}",
-                style: Theme.of(context).textTheme.subtitle2,
+              Slider(
+                min: 0,
+                max: 20,
+                divisions: 200,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          n = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: n,
               ),
-            ),
-            // Slider(
-            //   min: 0.001,
-            //   max: 0.01,
-            //   divisions: 9,
-            //   activeColor: Theme.of(context).accentColor,
-            //   inactiveColor: Colors.grey,
-            //   onChanged: (value) {
-            //     setState(() {
-            //       dn = double.parse(value.toStringAsFixed(3));
-            //     });
-            //   },
-            //   value: dn,
-            // ),
-            // Center(
-            //   child: Text(
-            //     "dn: ${dn.toStringAsFixed(3)}",
-            //     style: Theme.of(context).textTheme.subtitle2,
-            //   ),
-            // ),
-            // Slider(
-            //   min: 0.001,
-            //   max: 0.01,
-            //   divisions: 9,
-            //   activeColor: Theme.of(context).accentColor,
-            //   inactiveColor: Colors.grey,
-            //   onChanged: (value) {
-            //     setState(() {
-            //       dd = double.parse(value.toStringAsFixed(3));
-            //     });
-            //   },
-            //   value: dd,
-            // ),
-            // Center(
-            //   child: Text(
-            //     "dd: ${dd.toStringAsFixed(3)}",
-            //     style: Theme.of(context).textTheme.subtitle2,
-            //   ),
-            // ),
-          ],
+              Center(
+                child: Text(
+                  (animating && animateN)
+                      ? "N: Animating"
+                      : "N: ${n.toStringAsFixed(1)}",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 0,
+                max: 100,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (animating)
+                    ? null
+                    : (value) {
+                        setState(() {
+                          d = double.parse(value.toStringAsFixed(1));
+                        });
+                      },
+                value: d,
+              ),
+              Center(
+                child: Text(
+                  (animating && animateD)
+                      ? "D: Animating"
+                      : "D: ${d.toStringAsFixed(1)}",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dn = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dn,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dn: ${dn.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle2,
+              //   ),
+              // ),
+              // Slider(
+              //   min: 0.001,
+              //   max: 0.01,
+              //   divisions: 9,
+              //   activeColor: Theme.of(context).accentColor,
+              //   inactiveColor: Colors.grey,
+              //   onChanged: (value) {
+              //     setState(() {
+              //       dd = double.parse(value.toStringAsFixed(3));
+              //     });
+              //   },
+              //   value: dd,
+              // ),
+              // Center(
+              //   child: Text(
+              //     "dd: ${dd.toStringAsFixed(3)}",
+              //     style: Theme.of(context).textTheme.subtitle2,
+              //   ),
+              // ),
+            ],
+          ),
         ),
       ),
     );

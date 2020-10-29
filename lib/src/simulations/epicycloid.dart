@@ -22,6 +22,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   double _scaleAmount = 1;
   bool animate = false;
   bool animating = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -187,76 +188,81 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
       child: Material(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          padding: EdgeInsets.all(8.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Slider(
-              min: 0,
-              max: 50,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  outerRadius = value.toInt();
-                });
-                ys.clear();
-              },
-              value: outerRadius.toDouble(),
-            ),
-            Center(
-              child: Text(
-                "r: " + outerRadius.toString(),
-                style: Theme.of(context).textTheme.subtitle2,
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: ListView(
+            controller: _scrollController,
+            padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Slider(
-              min: 50,
-              max: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  innerRadius = value.toInt();
-                });
-                ys.clear();
-              },
-              value: innerRadius.toDouble(),
-            ),
-            Center(
-              child: Text(
-                "R: " + innerRadius.toString(),
-                style: Theme.of(context).textTheme.subtitle2,
+              Slider(
+                min: 0,
+                max: 50,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    outerRadius = value.toInt();
+                  });
+                  ys.clear();
+                },
+                value: outerRadius.toDouble(),
               ),
-            ),
-            Visibility(
-              visible: animate,
-              child: Column(
-                children: <Widget>[
-                  Slider(
-                    min: 0,
-                    max: 0.1,
-                    activeColor: Theme.of(context).accentColor,
-                    inactiveColor: Colors.grey,
-                    onChanged: (value) {
-                      setState(() {
-                        f = value;
-                      });
-                    },
-                    value: f,
-                  ),
-                  Center(
-                    child: Text(
-                      "- Frequency +",
-                      style: Theme.of(context).textTheme.subtitle2,
+              Center(
+                child: Text(
+                  "r: " + outerRadius.toString(),
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 50,
+                max: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    innerRadius = value.toInt();
+                  });
+                  ys.clear();
+                },
+                value: innerRadius.toDouble(),
+              ),
+              Center(
+                child: Text(
+                  "R: " + innerRadius.toString(),
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Visibility(
+                visible: animate,
+                child: Column(
+                  children: <Widget>[
+                    Slider(
+                      min: 0,
+                      max: 0.1,
+                      activeColor: Theme.of(context).accentColor,
+                      inactiveColor: Colors.grey,
+                      onChanged: (value) {
+                        setState(() {
+                          f = value;
+                        });
+                      },
+                      value: f,
                     ),
-                  ),
-                ],
+                    Center(
+                      child: Text(
+                        "- Frequency +",
+                        style: Theme.of(context).textTheme.subtitle2,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

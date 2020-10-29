@@ -23,6 +23,7 @@ class _InsertionHomeState extends State<InsertionHome> {
   var randomVar = Random();
   List<int> barValuesList = [];
   List<Container> barsList = [];
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -165,71 +166,82 @@ class _InsertionHomeState extends State<InsertionHome> {
       ),
       bottomNavigationBar: Container(
         color: Colors.transparent,
-        height: ScreenUtil().setHeight(1024/5.5),
+        height: ScreenUtil().setHeight(1024 / 5.5),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,
-          child: Column(
-            children: <Widget>[
-              Spacer(),
-              Slider(
-                min: 2,
-                max: 149,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChanged: (value) {
-                  setState(() {
-                    colorGreen = false;
-                    isWorking = false;
-                    doNotRefresh = false;
-                    sliderValue = value.toInt();
-                    iterator = -1;
-                    i = -1;
-                    numSteps = 0;
-                  });
-                },
-                value: sliderValue.toDouble(),
-              ),
-              Text(
-                "Elements: $sliderValue",
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              Slider(
-                min: 0,
-                max: 500,
-                activeColor: Theme.of(context).accentColor,
-                inactiveColor: Colors.grey,
-                onChangeStart: (value) {
-                  setState(() {
-                    if (isWorking) wasAlreadyWorking = true;
-                    doNotRefresh = true;
-                    isWorking = false;
-                  });
-                },
-                onChanged: (value) {
-                  setState(() {
-                    doNotRefresh = true;
-                    sleepDuration = value.toInt();
-                  });
-                },
-                onChangeEnd: (value) {
-                  setState(() {
-                    doNotRefresh = true;
-                    if (wasAlreadyWorking) {
-                      isWorking = true;
-                      wasAlreadyWorking = false;
-                    }
-                    sleepDuration = value.toInt();
-                  });
-                },
-                value: sleepDuration.toDouble(),
-              ),
-              Text(
-                "Delay (milliseconds): $sleepDuration",
-                style: Theme.of(context).textTheme.subtitle2,
-              ),
-              Spacer(),
-            ],
+          child: Scrollbar(
+            controller: _scrollController,
+            isAlwaysShown: true,
+            child: ListView(
+              controller: _scrollController,
+              padding: EdgeInsets.all(8.0),
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Slider(
+                  min: 2,
+                  max: 149,
+                  activeColor: Theme.of(context).accentColor,
+                  inactiveColor: Colors.grey,
+                  onChanged: (value) {
+                    setState(() {
+                      colorGreen = false;
+                      isWorking = false;
+                      doNotRefresh = false;
+                      sliderValue = value.toInt();
+                      iterator = -1;
+                      i = -1;
+                      numSteps = 0;
+                    });
+                  },
+                  value: sliderValue.toDouble(),
+                ),
+                Center(
+                  child: Text(
+                    "Elements: $sliderValue",
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                ),
+                Slider(
+                  min: 0,
+                  max: 500,
+                  activeColor: Theme.of(context).accentColor,
+                  inactiveColor: Colors.grey,
+                  onChangeStart: (value) {
+                    setState(() {
+                      if (isWorking) wasAlreadyWorking = true;
+                      doNotRefresh = true;
+                      isWorking = false;
+                    });
+                  },
+                  onChanged: (value) {
+                    setState(() {
+                      doNotRefresh = true;
+                      sleepDuration = value.toInt();
+                    });
+                  },
+                  onChangeEnd: (value) {
+                    setState(() {
+                      doNotRefresh = true;
+                      if (wasAlreadyWorking) {
+                        isWorking = true;
+                        wasAlreadyWorking = false;
+                      }
+                      sleepDuration = value.toInt();
+                    });
+                  },
+                  value: sleepDuration.toDouble(),
+                ),
+                Center(
+                  child: Text(
+                    "Delay (milliseconds): $sleepDuration",
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
