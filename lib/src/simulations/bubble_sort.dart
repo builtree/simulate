@@ -200,10 +200,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               Center(
                 child: Text(
                   "Elements: ${_numberOfElements.toInt()}",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Spacer(
@@ -231,10 +228,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
               Center(
                 child: Text(
                   "Delay: ${delay2.toInt()} ms",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontFamily: 'Ubuntu',
-                  ),
+                  style: Theme.of(context).textTheme.subtitle2,
                 ),
               ),
               Spacer(),
@@ -262,10 +256,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
             left: 5,
             child: Text(
               "Comparisons: $counter \nMax: ${_elements[i]} \nArray Iteration: ${_elements.length - n + 1}",
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Ubuntu',
-              ),
+              style: Theme.of(context).textTheme.subtitle2,
             ),
           ),
         ],

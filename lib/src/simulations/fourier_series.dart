@@ -80,10 +80,10 @@ class _FourierSeriesState extends State<FourierSeries> {
       body: Row(
         children: <Widget>[
           Container(
-            width: 2 * ScreenUtil().setWidth(1024/3),
+            width: 2 * ScreenUtil().setWidth(1024 / 3),
             child: Transform.translate(
               offset:
-                  Offset(radius, (4*MediaQuery.of(context).size.height) / 10),
+                  Offset(radius, (4 * MediaQuery.of(context).size.height) / 10),
               child: CustomPaint(
                 painter: FourierPainter(radius, time, _n, wave, context),
                 child: Container(),
@@ -91,7 +91,7 @@ class _FourierSeriesState extends State<FourierSeries> {
             ),
           ),
           Expanded(
-            child:Container(
+            child: Container(
               child: Material(
                 elevation: 30,
                 color: Theme.of(context).primaryColor,
@@ -154,7 +154,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                     ),
                     Slider(
                       min: 0,
-                      max: 1,
+                      max: 0.3,
                       activeColor: Theme.of(context).accentColor,
                       inactiveColor: Colors.grey,
                       onChanged: (value) {
