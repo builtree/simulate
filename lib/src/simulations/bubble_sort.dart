@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,27 +104,29 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
     }
   }
 
-  nextStep() {
-    sleep(Duration(milliseconds: delay));
-    setState(() {
-      if (n == 1) {
-        swap = false;
-        return;
-      }
-      counter++;
-      if (i == n - 1) {
-        i = 0;
-        n--;
-      }
-      if (_elements[i] > _elements[i + 1]) {
-        tmp = _elements[i];
-        _elements[i] = _elements[i + 1];
-        _elements[i + 1] = tmp;
-        i++;
-      } else {
-        i++;
-      }
-    });
+  nextStep() async {
+    await Future.delayed(Duration(milliseconds: delay));
+    if (this.mounted) {
+      setState(() {
+        if (n == 1) {
+          swap = false;
+          return;
+        }
+        counter++;
+        if (i == n - 1) {
+          i = 0;
+          n--;
+        }
+        if (_elements[i] > _elements[i + 1]) {
+          tmp = _elements[i];
+          _elements[i] = _elements[i + 1];
+          _elements[i + 1] = tmp;
+          i++;
+        } else {
+          i++;
+        }
+      });
+    }
   }
 
   @override
@@ -174,7 +175,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
           }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024/5.0),
+        height: ScreenUtil().setHeight(1024 / 5.0),
         child: Material(
           elevation: 30,
           color: Theme.of(context).primaryColor,

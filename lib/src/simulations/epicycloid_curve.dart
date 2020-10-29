@@ -1,8 +1,6 @@
-import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_EpicycloidState> globalKey = GlobalKey<_EpicycloidState>();
@@ -278,22 +276,24 @@ class Epicycloid extends StatefulWidget {
 }
 
 class _EpicycloidState extends State<Epicycloid> {
-  nextStep() {
-    setState(() {
-      sleep(Duration(milliseconds: 10));
-      if (widget.animatefactor) {
-        widget.factor += 0.01;
-      }
-      if (widget.animatepoints) {
-        widget.total += 0.3;
-      }
-      if (widget.factor > 51) {
-        widget.factor = 0;
-      }
-      if (widget.total > 500) {
-        widget.total = 0;
-      }
-    });
+  nextStep() async {
+    await Future.delayed(Duration(milliseconds: 10));
+    if (this.mounted) {
+      setState(() {
+        if (widget.animatefactor) {
+          widget.factor += 0.01;
+        }
+        if (widget.animatepoints) {
+          widget.total += 0.3;
+        }
+        if (widget.factor > 51) {
+          widget.factor = 0;
+        }
+        if (widget.total > 500) {
+          widget.total = 0;
+        }
+      });
+    }
   }
 
   @override

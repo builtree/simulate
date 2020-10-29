@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:core';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_NormalEpicycloidState> globalKey =
