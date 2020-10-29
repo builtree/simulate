@@ -18,6 +18,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
   bool animate = false;
   bool animating = false;
   double thickness = 2;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -177,87 +178,92 @@ class _LissajousCurveState extends State<LissajousCurve> {
       child: Material(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          padding: EdgeInsets.all(8.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Slider(
-              min: 0,
-              max: 10,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  _a = double.parse(value.toStringAsFixed(1));
-                });
-              },
-              value: _a,
-            ),
-            Center(
-              child: Text(
-                "A: $_a",
-                style: Theme.of(context).textTheme.subtitle2,
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: ListView(
+            controller: _scrollController,
+            padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 10,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  _b = double.parse(value.toStringAsFixed(1));
-                });
-              },
-              value: _b,
-            ),
-            Center(
-              child: Text(
-                "B: $_b",
-                style: Theme.of(context).textTheme.subtitle2,
+              Slider(
+                min: 0,
+                max: 10,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    _a = double.parse(value.toStringAsFixed(1));
+                  });
+                },
+                value: _a,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 6.28,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  delta = double.parse(value.toStringAsFixed(2));
-                });
-              },
-              value: delta,
-            ),
-            Center(
-              child: Text(
-                "Delta: $delta",
-                style: Theme.of(context).textTheme.subtitle2,
+              Center(
+                child: Text(
+                  "A: $_a",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
               ),
-            ),
-            Slider(
-              min: 2,
-              max: 6,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  thickness = double.parse(value.toStringAsFixed(2));
-                });
-              },
-              value: thickness,
-            ),
-            Center(
-              child: Text("Thickness: $thickness",
-                  style: Theme.of(context).textTheme.subtitle2),
-            ),
-          ],
+              Slider(
+                min: 0,
+                max: 10,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    _b = double.parse(value.toStringAsFixed(1));
+                  });
+                },
+                value: _b,
+              ),
+              Center(
+                child: Text(
+                  "B: $_b",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 0,
+                max: 6.28,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    delta = double.parse(value.toStringAsFixed(2));
+                  });
+                },
+                value: delta,
+              ),
+              Center(
+                child: Text(
+                  "Delta: $delta",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 2,
+                max: 6,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    thickness = double.parse(value.toStringAsFixed(2));
+                  });
+                },
+                value: thickness,
+              ),
+              Center(
+                child: Text("Thickness: $thickness",
+                    style: Theme.of(context).textTheme.subtitle2),
+              ),
+            ],
+          ),
         ),
       ),
     );

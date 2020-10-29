@@ -17,6 +17,7 @@ class _RosePatternState extends State<RosePattern> {
   double offset = 0;
   bool animate = false;
   bool animating = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -170,70 +171,75 @@ class _RosePatternState extends State<RosePattern> {
       child: Material(
         elevation: 30,
         color: Theme.of(context).primaryColor,
-        child: ListView(
-          padding: EdgeInsets.all(8.0),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Slider(
-              min: 0,
-              max: 10,
-              divisions: 1000,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  _n = double.parse(value.toStringAsFixed(2));
-                });
-              },
-              value: _n,
-            ),
-            Center(
-              child: Text(
-                "Numerator: $_n",
-                style: Theme.of(context).textTheme.subtitle2,
+        child: Scrollbar(
+          controller: _scrollController,
+          isAlwaysShown: true,
+          child: ListView(
+            controller: _scrollController,
+            padding: EdgeInsets.all(8.0),
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 10,
-              divisions: 1000,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  _d = double.parse(value.toStringAsFixed(2));
-                });
-              },
-              value: _d,
-            ),
-            Center(
-              child: Text(
-                "Denominator: $_d",
-                style: Theme.of(context).textTheme.subtitle2,
+              Slider(
+                min: 0,
+                max: 10,
+                divisions: 1000,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    _n = double.parse(value.toStringAsFixed(2));
+                  });
+                },
+                value: _n,
               ),
-            ),
-            Slider(
-              min: 0,
-              max: 1,
-              divisions: 100,
-              activeColor: Theme.of(context).accentColor,
-              inactiveColor: Colors.grey,
-              onChanged: (value) {
-                setState(() {
-                  offset = double.parse(value.toStringAsFixed(2));
-                });
-              },
-              value: offset,
-            ),
-            Center(
-              child: Text(
-                "Offset: $offset",
-                style: Theme.of(context).textTheme.subtitle2,
+              Center(
+                child: Text(
+                  "Numerator: $_n",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
               ),
-            ),
-          ],
+              Slider(
+                min: 0,
+                max: 10,
+                divisions: 1000,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    _d = double.parse(value.toStringAsFixed(2));
+                  });
+                },
+                value: _d,
+              ),
+              Center(
+                child: Text(
+                  "Denominator: $_d",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+              Slider(
+                min: 0,
+                max: 1,
+                divisions: 100,
+                activeColor: Theme.of(context).accentColor,
+                inactiveColor: Colors.grey,
+                onChanged: (value) {
+                  setState(() {
+                    offset = double.parse(value.toStringAsFixed(2));
+                  });
+                },
+                value: offset,
+              ),
+              Center(
+                child: Text(
+                  "Offset: $offset",
+                  style: Theme.of(context).textTheme.subtitle2,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
