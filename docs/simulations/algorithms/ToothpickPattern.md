@@ -1,8 +1,6 @@
 # Toothpick Pattern
 ---
-<div style="float:right">
-  ![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png)
-</div>
+![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png){: style="height:200px";: align=right}
 
 <p align="justify">
 The toothpick sequence in geometry is a 2D pattern sequence which is based on the previous

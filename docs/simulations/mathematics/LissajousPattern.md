@@ -1,8 +1,6 @@
 # Lissajous Pattern
 ---
-<div style="float:right">
-  ![LissajousPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/LissajousCurveLight.png){: style="height:200px";}
-</div>
+![LissajousPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/LissajousCurveLight.png){: style="height:200px";: align=right}
 
 <p align="justify">
 A Lissajous curve in mathematics, also known as Lissajous Figure or Bowditch curve is the
