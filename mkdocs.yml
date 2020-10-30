@@ -20,6 +20,7 @@ nav:
     - Mathematics: 
       - Lissajous Pattern: 'simulations/mathematics/LissajousPattern.md'
       - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
+      - Fourier Series: 'simulations/mathematics/FourierSeries.md'
 
 # Configuration
 theme:
