@@ -25,7 +25,7 @@ nav:
 theme:
   name: 'material'
   features:
-    - tabs
+    - navigation.tabs
   palette:
     primary: 'black'
     accent: 'white'
