@@ -1,8 +1,6 @@
 # Maurer Rose Pattern
 ---
-<div style="float:right">
-  ![MaurerRoseLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/MaurerRoseLight.png){: style="height:200px";}
-</div>
+![MaurerRoseLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/MaurerRoseLight.png){: style="height:200px";: align=right}
 
 A Maurer rose of the rose $r = sin(nθ)$ consists of the 360 lines successively connecting the mentioned below
 361 points, where $n$ is a positive integer. The rose has $n$ petals if $n$ is odd, and $2n$ petals if $n$ is even.  
