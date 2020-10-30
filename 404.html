@@ -147,6 +147,54 @@
       
       
         
+          
+
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="/simulate/." class="md-tabs__link md-tabs__link--active">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="/simulate/doc/" class="md-tabs__link">
+          Documentation
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="/simulate/simulations/" class="md-tabs__link">
+          Simulations
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
       
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
@@ -419,7 +467,7 @@
       <script>
         app = initialize({
           base: "/simulate/",
-          features: ['tabs'],
+          features: ['navigation.tabs'],
           search: Object.assign({
             worker: "/simulate/assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)

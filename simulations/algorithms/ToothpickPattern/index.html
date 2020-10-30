@@ -154,6 +154,56 @@
       
       
         
+          
+
+  
+
+<nav class="md-tabs md-tabs--active" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        Home
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../doc/" class="md-tabs__link">
+          Documentation
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          Simulations
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+        
       
       <main class="md-main" data-md-component="main">
         <div class="md-main__inner md-grid">
@@ -425,10 +475,7 @@
                 
                 <h1 id="toothpick-pattern">Toothpick Pattern<a class="headerlink" href="#toothpick-pattern" title="Permanent link">&para;</a></h1>
 <hr />
-<div style="float:right">
-  ![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png)
-</div>
-
+<p><img _:=";:" align="right" alt="ToothpickPatternLight" src="https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png" style="height:200px" /></p>
 <p align="justify">
 The toothpick sequence in geometry is a 2D pattern sequence which is based on the previous
 state of the pattern for the next stage. This is done by repeating addition of new line segments to free ends of line segments in the previous stage of the pattern. These line segments are referred to as “Toothpicks”.</p>
@@ -549,7 +596,7 @@ different colour than the rest of the pattern.</p>
       <script>
         app = initialize({
           base: "../../..",
-          features: ['tabs'],
+          features: ['navigation.tabs'],
           search: Object.assign({
             worker: "../../../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
