@@ -34,7 +34,7 @@ theme:
     code: 'Ubuntu Mono'
   icon:
     logo: material/atom
-    repo: octicons/mark-github
+    repo: octicons/mark-github-16
 
 # Customization
 
