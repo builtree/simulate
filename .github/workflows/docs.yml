@@ -26,5 +26,5 @@ jobs:
         run: mkdocs build
       - name: Add latest web build and deploy
         run: |
-          git clone -b web https://github.com/cod-ed/simulate site/
+          git clone -b web https://github.com/cod-ed/simulate site/web/
           mkdocs gh-deploy --dirty
