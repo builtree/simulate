@@ -20,7 +20,6 @@ jobs:
           python3 -m pip install mkdocs-git-revision-date-localized-plugin
       - name: Git setup and update
         run: |
-          git config user.name "yashlamba" && git config user.email "yashlamba2000@gmail.com"
           git fetch origin
       - name: Build Docs
         run: mkdocs build
