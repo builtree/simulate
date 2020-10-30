@@ -1,0 +1,31 @@
+name: Docs
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip  
+          python3 -m pip install mkdocs      
+          python3 -m pip install mkdocs-material
+          python3 -m pip install pymdown-extensions
+          python3 -m pip install mkdocs-git-revision-date-localized-plugin
+      - name: Git setup and update
+        run: |
+          git config user.name "yashlamba" && git config user.email "yashlamba2000@gmail.com"
+          git fetch origin
+      - name: Build Docs
+        run: mkdocs build
+      - name: Add latest web build and deploy
+        run: |
+          git clone -b web https://github.com/cod-ed/simulate web
+          mv web/web/ site/
+          mkdocs gh-deploy --dirty
