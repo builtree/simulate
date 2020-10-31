@@ -408,8 +408,8 @@ class NormalEpicycloidPainter extends CustomPainter {
                           sin(((innerRadius / outerRadius) + 1) * loopi))))
               .translate(transformx, transformy));
         }
+        canvas.drawPoints(PointMode.polygon, points, paint);
       }
-      canvas.drawPoints(PointMode.polygon, points, paint);
     } else {
       Paint paint = new Paint();
       paint.style = PaintingStyle.stroke;
@@ -430,13 +430,13 @@ class NormalEpicycloidPainter extends CustomPainter {
         canvas.drawLine(smallCenter, coor, paint);
         smallCenter = Offset((innerRadius + outerRadius) * cos(time),
             (innerRadius + outerRadius) * sin(time));
+        ys.insert(0, coor);
+        ys.forEach((value) {
+          points.add(value);
+        });
+        paint.color = Colors.red;
+        canvas.drawPoints(PointMode.polygon, points, paint);
       }
-      ys.insert(0, coor);
-      ys.forEach((value) {
-        points.add(value);
-      });
-      paint.color = Colors.red;
-      canvas.drawPoints(PointMode.polygon, points, paint);
     }
   }
 
