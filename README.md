@@ -9,7 +9,7 @@ Welcome to Simulate! Simulate is a collection of simulations and visualizations 
 
 <p align="center">
     <a href="https://cod-ed.github.io/simulate/web">
-        <img src="https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/LaunchWebApp.svg" width=150px>
+        <img src="https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/LaunchWebApp.svg" width=200px>
         </img>
     </a>
 </p>
