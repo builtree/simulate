@@ -21,6 +21,7 @@ nav:
       - Lissajous Pattern: 'simulations/mathematics/LissajousPattern.md'
       - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
       - Fourier Series: 'simulations/mathematics/FourierSeries.md'
+  - Check out the web app!: 'https://cod-ed.github.io/simulate/web'
 
 # Configuration
 theme:
