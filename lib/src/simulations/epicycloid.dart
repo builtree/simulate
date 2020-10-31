@@ -395,17 +395,19 @@ class NormalEpicycloidPainter extends CustomPainter {
       canvas.drawCircle(
           Offset(transformx, transformy), innerRadius.toDouble(), paint);
       paint.color = Colors.red;
-      for (double loopi = 0;
-          loopi <= (innerRadius / innerRadius.gcd(outerRadius)) * 2 * pi;
-          loopi += 0.01) {
-        this.points.add(Offset(
-                (((innerRadius + outerRadius) * cos(loopi)) -
-                    (outerRadius *
-                        cos(((innerRadius / outerRadius) + 1) * loopi))),
-                (((innerRadius + outerRadius) * sin(loopi)) -
-                    (outerRadius *
-                        sin(((innerRadius / outerRadius) + 1) * loopi))))
-            .translate(transformx, transformy));
+      if (outerRadius != 0) {
+        for (double loopi = 0;
+            loopi <= (innerRadius / innerRadius.gcd(outerRadius)) * 2 * pi;
+            loopi += 0.01) {
+          this.points.add(Offset(
+                  (((innerRadius + outerRadius) * cos(loopi)) -
+                      (outerRadius *
+                          cos(((innerRadius / outerRadius) + 1) * loopi))),
+                  (((innerRadius + outerRadius) * sin(loopi)) -
+                      (outerRadius *
+                          sin(((innerRadius / outerRadius) + 1) * loopi))))
+              .translate(transformx, transformy));
+        }
       }
       canvas.drawPoints(PointMode.polygon, points, paint);
     } else {
@@ -417,16 +419,18 @@ class NormalEpicycloidPainter extends CustomPainter {
       smallCenter = Offset((innerRadius + outerRadius) * cos(time),
               (innerRadius + outerRadius) * sin(time))
           .translate(transformx, transformy);
-      coor += Offset(
-          (((innerRadius + outerRadius) * cos(time)) -
-              (outerRadius * cos(((innerRadius / outerRadius) + 1) * time))),
-          (((innerRadius + outerRadius) * sin(time)) -
-              (outerRadius * sin(((innerRadius / outerRadius) + 1) * time))));
-      paint.color = Colors.blue;
-      canvas.drawCircle(smallCenter, outerRadius.toDouble(), paint);
-      canvas.drawLine(smallCenter, coor, paint);
-      smallCenter = Offset((innerRadius + outerRadius) * cos(time),
-          (innerRadius + outerRadius) * sin(time));
+      if (outerRadius != 0) {
+        coor += Offset(
+            (((innerRadius + outerRadius) * cos(time)) -
+                (outerRadius * cos(((innerRadius / outerRadius) + 1) * time))),
+            (((innerRadius + outerRadius) * sin(time)) -
+                (outerRadius * sin(((innerRadius / outerRadius) + 1) * time))));
+        paint.color = Colors.blue;
+        canvas.drawCircle(smallCenter, outerRadius.toDouble(), paint);
+        canvas.drawLine(smallCenter, coor, paint);
+        smallCenter = Offset((innerRadius + outerRadius) * cos(time),
+            (innerRadius + outerRadius) * sin(time));
+      }
       ys.insert(0, coor);
       ys.forEach((value) {
         points.add(value);
