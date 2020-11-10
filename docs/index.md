@@ -1,7 +1,7 @@
 # Simulate 
 [![Gitter](https://badges.gitter.im/codEd-org/simulate.svg)](https://gitter.im/codEd-org/simulate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-Welcome to Simulate! Simulate is a collection of simulations and visualizations from various domains like mathematics, physics, computer science etc. in a cross platform app made using Flutter. The outcomes of these simulations mostly are really smooth (thanks to Flutter) and extremely beautiful (thanks to mathematics/sciences behind it).
+Welcome to Simulate! Simulate aims to be a collection of simulations and visualizations from various domains like mathematics, physics, computer science etc. in a cross platform app made using [Flutter](https://flutter.dev/). The outcomes of these simulations mostly are really smooth (thanks to Flutter) and extremely beautiful (thanks to mathematics/sciences behind it).
 
 <center>
 [![Simulate for Web](https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/LaunchWebApp.svg){: style="width:300px"}](https://cod-ed.github.io/simulate/web){: target="_blank"}
@@ -11,8 +11,6 @@ Welcome to Simulate! Simulate is a collection of simulations and visualizations 
 
 ## New to Simulate?
 
-You can start by introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/simulate).
+You can start by introducing yourself and your ideas/doubts on [gitter](https://gitter.im/codEd-org/simulate).
 
 Interested in Contributing? Check the guidelines [here](contributing/).
-   
-All further information about the can be found in the [documentation](doc/).
