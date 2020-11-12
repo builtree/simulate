@@ -32,9 +32,9 @@ git checkout -b [BRANCH NAME]
 
 #### Adding a new Simulation:
 
-1. Discuss the idea first on [gitter](https://gitter.im/codEd-org/simulate#) or just open an issue with the template.
-2. Discuss with the maintainers and get a simulation ID assigned.
-3. Build your simulation and open a PR!
+1. Got an idea? Discuss the idea on [gitter](https://gitter.im/codEd-org/simulate#) or just open an issue with this [template](https://github.com/cod-ed/simulate/issues/new?assignees=&labels=enhancement%2C+new+simulation%2C+simulations&template=simulation-request.md&title=simulation%3A+%5BSIMULATION+TITLE%5D). If the maintainers find it interesting, the issue will be labeled accepted. If you want to work on it and don't know how to implement it yet, we'll help you get it done.
+2. Even if you don't have an idea but are interested in working on one, checkout the [accepted simulation ideas](https://github.com/cod-ed/simulate/issues?q=is%3Aopen+is%3Aissue+label%3Aaccepted+label%3A%22new+simulation%22) and get assigned.
+3. You can start working now! Make sure you ask for help when needed, it's okay to get stuck.
 
 ---
 
