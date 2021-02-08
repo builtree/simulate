@@ -42,7 +42,7 @@ git checkout -b [BRANCH NAME]
 
 1. Install mkdocs and its requirements
 ```bash
-python3 -m  pip install mkdocs pymdown-extensions mkdocs-material
+python3 -m  pip install mkdocs pymdown-extensions mkdocs-material mkdocs-git-revision-date-localized-plugin
 ```
 2. Check the installations by:
 ```bash
