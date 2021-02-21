@@ -31,132 +31,140 @@ class _RosePatternState extends State<RosePattern> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 512.0,
-      height: 1024.0,
-      allowFontScaling: true,
-    );
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'Rose Pattern',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: true,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Visibility(
-          visible: animate,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                heroTag: null,
-                backgroundColor: Colors.white,
-                child: (!animating)
-                    ? Icon(
-                        Icons.play_arrow,
-                        color: Colors.black,
-                      )
-                    : Icon(
-                        Icons.pause,
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 1024.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text(
+                'Rose Pattern',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              centerTitle: true,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: animate,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    FloatingActionButton(
+                      heroTag: null,
+                      backgroundColor: Colors.white,
+                      child: (!animating)
+                          ? Icon(
+                              Icons.play_arrow,
+                              color: Colors.black,
+                            )
+                          : Icon(
+                              Icons.pause,
+                              color: Colors.black,
+                            ),
+                      onPressed: () {
+                        setState(() {
+                          animating = !animating;
+                        });
+                      },
+                    ),
+                    FloatingActionButton(
+                      heroTag: null,
+                      backgroundColor: Colors.white,
+                      child: Icon(
+                        Icons.highlight_off,
                         color: Colors.black,
                       ),
-                onPressed: () {
-                  setState(() {
-                    animating = !animating;
-                  });
-                },
-              ),
-              FloatingActionButton(
-                heroTag: null,
-                backgroundColor: Colors.white,
-                child: Icon(
-                  Icons.highlight_off,
-                  color: Colors.black,
+                      onPressed: () {
+                        setState(() {
+                          globalKey.currentState.clearScreen();
+                        });
+                      },
+                    ),
+                  ],
                 ),
-                onPressed: () {
-                  setState(() {
-                    globalKey.currentState.clearScreen();
-                  });
-                },
               ),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Visibility(
-          visible: !isLandscape(),
-          child: parameters(context, ScreenUtil().setHeight(1024 / 5))),
-      body: Row(
-        children: [
-          Container(
-            width: isLandscape()
-                ? 2 * MediaQuery.of(context).size.width / 3
-                : MediaQuery.of(context).size.width,
-            child: Stack(
-              children: <Widget>[
-                Rose(
-                  d: _d,
-                  n: _n,
-                  c: offset,
-                  animate: animate,
-                  animating: animating,
-                  key: globalKey,
-                  isLandscape: isLandscape(),
-                ),
-                Positioned(
-                  top: 5,
-                  left: 5,
-                  child: Text(
-                    'k ~ ${(_n / _d).toStringAsFixed(2)}',
-                    style: Theme.of(context).textTheme.subtitle2,
+            ),
+            bottomNavigationBar: Visibility(
+                visible: !isLandscape(),
+                child: parameters(context, ScreenUtil().setHeight(1024 / 5))),
+            body: Row(
+              children: [
+                Container(
+                  width: isLandscape()
+                      ? 2 * MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: <Widget>[
+                      Rose(
+                        d: _d,
+                        n: _n,
+                        c: offset,
+                        animate: animate,
+                        animating: animating,
+                        key: globalKey,
+                        isLandscape: isLandscape(),
+                      ),
+                      Positioned(
+                        top: 5,
+                        left: 5,
+                        child: Text(
+                          'k ~ ${(_n / _d).toStringAsFixed(2)}',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text("Animate"),
+                            Checkbox(
+                              onChanged: (_) {
+                                setState(() {
+                                  animate = !animate;
+                                  if (animating)
+                                    animating = (animating && animate);
+                                });
+                              },
+                              value: animate,
+                              activeColor: Colors.red,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text("Animate"),
-                      Checkbox(
-                        onChanged: (_) {
-                          setState(() {
-                            animate = !animate;
-                            if (animating) animating = (animating && animate);
-                          });
-                        },
-                        value: animate,
-                        activeColor: Colors.red,
-                      )
-                    ],
+                Visibility(
+                  visible: isLandscape(),
+                  child: Expanded(
+                    child: parameters(
+                      context,
+                      MediaQuery.of(context).size.height,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-          Visibility(
-            visible: isLandscape(),
-            child: Expanded(
-              child: parameters(
-                context,
-                MediaQuery.of(context).size.height,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 

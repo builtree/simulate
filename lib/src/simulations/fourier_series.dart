@@ -46,7 +46,7 @@ class _FourierSeriesState extends State<FourierSeries> {
     if (control == true) {
       setState(() {
         time -= f;
-        if (ys.length == ScreenUtil().uiWidthPx.toInt()) {
+        if (ys.length == ScreenUtil().uiSize.width.toInt()) {
           ys.removeLast();
         }
       });
@@ -55,128 +55,134 @@ class _FourierSeriesState extends State<FourierSeries> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 1024.0,
-      height: 512.0,
-      allowFontScaling: true,
-    );
     WidgetsBinding.instance.addPostFrameCallback((_) => update());
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          'Fourier Series',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      body: Row(
-        children: <Widget>[
-          Container(
-            width: 2 * ScreenUtil().setWidth(1024 / 3),
-            child: Transform.translate(
-              offset:
-                  Offset(radius, (4 * MediaQuery.of(context).size.height) / 10),
-              child: CustomPaint(
-                painter: FourierPainter(radius, time, _n, wave, context),
-                child: Container(),
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(1024.0, 512.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              centerTitle: true,
+              title: Text(
+                'Fourier Series',
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: Material(
-                elevation: 30,
-                color: Theme.of(context).primaryColor,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    DropdownButton<String>(
-                      value: wave,
-                      iconSize: 30,
-                      style: Theme.of(context).textTheme.subtitle2,
-                      items: [
-                        DropdownMenuItem(
-                          value: 'Square Wave',
-                          child: Text('Square Wave'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'SawTooth Wave',
-                          child: Text('SawTooth Wave'),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        wave = value;
-                      },
+            body: Row(
+              children: <Widget>[
+                Container(
+                  width: 2 * ScreenUtil().setWidth(1024 / 3),
+                  child: Transform.translate(
+                    offset: Offset(
+                        radius, (4 * MediaQuery.of(context).size.height) / 10),
+                    child: CustomPaint(
+                      painter: FourierPainter(radius, time, _n, wave, context),
+                      child: Container(),
                     ),
-                    Slider(
-                      min: 1,
-                      max: 100,
-                      activeColor: Theme.of(context).accentColor,
-                      inactiveColor: Colors.grey,
-                      onChanged: (value) {
-                        setState(() {
-                          _n = value.toInt();
-                        });
-                      },
-                      value: _n.toDouble(),
-                    ),
-                    Center(
-                      child: Text(
-                        "N: ${_n.toInt()}",
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ),
-                    Slider(
-                      min: 10,
-                      max: 200,
-                      activeColor: Theme.of(context).accentColor,
-                      inactiveColor: Colors.grey,
-                      onChanged: (value) {
-                        setState(() {
-                          radius = value.roundToDouble();
-                        });
-                      },
-                      value: radius,
-                    ),
-                    Center(
-                      child: Text(
-                        "Amplitude: ${radius.toInt()}",
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ),
-                    Slider(
-                      min: 0,
-                      max: 0.3,
-                      activeColor: Theme.of(context).accentColor,
-                      inactiveColor: Colors.grey,
-                      onChanged: (value) {
-                        setState(() {
-                          f = value;
-                        });
-                      },
-                      value: f,
-                    ),
-                    Center(
-                      child: Text(
-                        "- Frequency +",
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    child: Material(
+                      elevation: 30,
+                      color: Theme.of(context).primaryColor,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          DropdownButton<String>(
+                            value: wave,
+                            iconSize: 30,
+                            style: Theme.of(context).textTheme.subtitle2,
+                            items: [
+                              DropdownMenuItem(
+                                value: 'Square Wave',
+                                child: Text('Square Wave'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'SawTooth Wave',
+                                child: Text('SawTooth Wave'),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              wave = value;
+                            },
+                          ),
+                          Slider(
+                            min: 1,
+                            max: 100,
+                            activeColor: Theme.of(context).accentColor,
+                            inactiveColor: Colors.grey,
+                            onChanged: (value) {
+                              setState(() {
+                                _n = value.toInt();
+                              });
+                            },
+                            value: _n.toDouble(),
+                          ),
+                          Center(
+                            child: Text(
+                              "N: ${_n.toInt()}",
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                          ),
+                          Slider(
+                            min: 10,
+                            max: 200,
+                            activeColor: Theme.of(context).accentColor,
+                            inactiveColor: Colors.grey,
+                            onChanged: (value) {
+                              setState(() {
+                                radius = value.roundToDouble();
+                              });
+                            },
+                            value: radius,
+                          ),
+                          Center(
+                            child: Text(
+                              "Amplitude: ${radius.toInt()}",
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                          ),
+                          Slider(
+                            min: 0,
+                            max: 0.3,
+                            activeColor: Theme.of(context).accentColor,
+                            inactiveColor: Colors.grey,
+                            onChanged: (value) {
+                              setState(() {
+                                f = value;
+                              });
+                            },
+                            value: f,
+                          ),
+                          Center(
+                            child: Text(
+                              "- Frequency +",
+                              style: Theme.of(context).textTheme.subtitle2,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }

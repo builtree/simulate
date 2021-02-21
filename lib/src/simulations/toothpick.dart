@@ -132,120 +132,128 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 512.0,
-      height: 1024.0,
-      allowFontScaling: true,
-    );
     if (step == 1) {
       activeToothPicks.add(new Toothpick([
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
         (MediaQuery.of(context).size.height / 2 - 100).roundToDouble()
       ], true));
     }
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          "Toothpick Pattern",
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: true,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: null,
-        elevation: 10,
-        label: Text(
-          'Step: $step',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.red,
-      ),
-      bottomNavigationBar: Material(
-        elevation: 30,
-        child: Container(
-          height: ScreenUtil().setHeight(1024 / 9),
-          color: Theme.of(context).primaryColor,
-          child: ListView(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: () {
-                      subtract();
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      addStep();
-                    },
-                  ),
-                ],
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 1024.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.zoom_out),
-                    onPressed: () {
-                      setState(() {
-                        _scaleAmount -= _scaleAmount - 0.1 <= 0.01 ? 0 : 0.1;
-                      });
-                    },
-                  ),
-                  Expanded(
-                    child: Slider(
-                      value: _scaleAmount,
-                      activeColor: Colors.red,
-                      min: 0.01,
-                      max: 2,
-                      inactiveColor: Colors.grey,
-                      onChanged: (value) {
-                        setState(() {
-                          _scaleAmount = value;
-                        });
-                      },
-                    ),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.zoom_in),
-                    onPressed: () {
-                      setState(() {
-                        _scaleAmount += _scaleAmount + 0.1 > 2 ? 0 : 0.1;
-                      });
-                    },
-                  ),
-                ],
+              title: Text(
+                "Toothpick Pattern",
+                style: Theme.of(context).textTheme.headline6,
               ),
-            ],
-          ),
-        ),
-      ),
-      body: Container(
-        child: Transform.scale(
-          scale: _scaleAmount,
-          child: CustomPaint(
-            painter: ToothpickPainter(
-              activeToothPicks,
-              toothPicks,
-              Theme.of(context).accentColor,
+              centerTitle: true,
             ),
-            child: Container(),
-          ),
-        ),
-      ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: FloatingActionButton.extended(
+              onPressed: null,
+              elevation: 10,
+              label: Text(
+                'Step: $step',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              backgroundColor: Colors.red,
+            ),
+            bottomNavigationBar: Material(
+              elevation: 30,
+              child: Container(
+                height: ScreenUtil().setHeight(1024 / 9),
+                color: Theme.of(context).primaryColor,
+                child: ListView(
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(Icons.remove),
+                          onPressed: () {
+                            subtract();
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () {
+                            addStep();
+                          },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.zoom_out),
+                          onPressed: () {
+                            setState(() {
+                              _scaleAmount -=
+                                  _scaleAmount - 0.1 <= 0.01 ? 0 : 0.1;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: Slider(
+                            value: _scaleAmount,
+                            activeColor: Colors.red,
+                            min: 0.01,
+                            max: 2,
+                            inactiveColor: Colors.grey,
+                            onChanged: (value) {
+                              setState(() {
+                                _scaleAmount = value;
+                              });
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.zoom_in),
+                          onPressed: () {
+                            setState(() {
+                              _scaleAmount += _scaleAmount + 0.1 > 2 ? 0 : 0.1;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            body: Container(
+              child: Transform.scale(
+                scale: _scaleAmount,
+                child: CustomPaint(
+                  painter: ToothpickPainter(
+                    activeToothPicks,
+                    toothPicks,
+                    Theme.of(context).accentColor,
+                  ),
+                  child: Container(),
+                ),
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

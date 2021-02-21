@@ -38,142 +38,149 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 720.0,
-      height: 1600.0,
-      allowFontScaling: true,
-    );
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          'Epicycloid Curve',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Visibility(
-          visible: animate,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.white,
-                  child: (!animating)
-                      ? Icon(
-                          Icons.play_arrow,
-                          color: Colors.black,
-                        )
-                      : Icon(
-                          Icons.pause,
-                          color: Colors.black,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      animating = !animating;
-                    });
-                  }),
-              FloatingActionButton(
-                heroTag: null,
-                child: Icon(
-                  Icons.highlight_off,
-                  color: Colors.black,
-                ),
-                backgroundColor: Colors.white,
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(720.0, 1600.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  setState(() {
-                    ys.clear();
-                  });
+                  Navigator.pop(context);
                 },
-              )
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Visibility(
-        visible: !isLandscape(),
-        child: parameters(
-          context,
-          animate
-              ? ScreenUtil().setHeight(1600 / 4.0)
-              : ScreenUtil().setHeight(1600 / 6.0),
-        ),
-      ),
-      body: Row(
-        children: [
-          Container(
-            width: isLandscape()
-                ? 2 * MediaQuery.of(context).size.width / 3
-                : MediaQuery.of(context).size.width,
-            child: Stack(
-              children: <Widget>[
-                NormalEpicycloid(
-                  outerRadius: outerRadius,
-                  innerRadius: innerRadius,
-                  f: f,
-                  scaleAmount: _scaleAmount,
-                  animate: animate,
-                  animating: animating,
-                  key: globalKey,
-                  context: context,
-                  isLandscape: isLandscape(),
+              ),
+              centerTitle: true,
+              title: Text(
+                'Epicycloid Curve',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: animate,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white,
+                        child: (!animating)
+                            ? Icon(
+                                Icons.play_arrow,
+                                color: Colors.black,
+                              )
+                            : Icon(
+                                Icons.pause,
+                                color: Colors.black,
+                              ),
+                        onPressed: () {
+                          setState(() {
+                            animating = !animating;
+                          });
+                        }),
+                    FloatingActionButton(
+                      heroTag: null,
+                      child: Icon(
+                        Icons.highlight_off,
+                        color: Colors.black,
+                      ),
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          ys.clear();
+                        });
+                      },
+                    )
+                  ],
                 ),
-                Positioned(
-                  top: 5,
-                  left: 5,
-                  child: Visibility(
-                    child: Text(
-                      'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
-                      style: Theme.of(context).textTheme.subtitle2,
+              ),
+            ),
+            bottomNavigationBar: Visibility(
+              visible: !isLandscape(),
+              child: parameters(
+                context,
+                animate
+                    ? ScreenUtil().setHeight(1600 / 4.0)
+                    : ScreenUtil().setHeight(1600 / 6.0),
+              ),
+            ),
+            body: Row(
+              children: [
+                Container(
+                  width: isLandscape()
+                      ? 2 * MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: <Widget>[
+                      NormalEpicycloid(
+                        outerRadius: outerRadius,
+                        innerRadius: innerRadius,
+                        f: f,
+                        scaleAmount: _scaleAmount,
+                        animate: animate,
+                        animating: animating,
+                        key: globalKey,
+                        context: context,
+                        isLandscape: isLandscape(),
+                      ),
+                      Positioned(
+                        top: 5,
+                        left: 5,
+                        child: Visibility(
+                          child: Text(
+                            'k ~ ${(innerRadius / outerRadius).toStringAsFixed(2)}',
+                            style: Theme.of(context).textTheme.subtitle2,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text('Animate: '),
+                            Checkbox(
+                              onChanged: (animating)
+                                  ? null
+                                  : (_) {
+                                      setState(() {
+                                        animate = !animate;
+                                      });
+                                    },
+                              activeColor: Colors.red,
+                              value: animate,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Visibility(
+                  visible: isLandscape(),
+                  child: Expanded(
+                    child: parameters(
+                      context,
+                      MediaQuery.of(context).size.height,
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text('Animate: '),
-                      Checkbox(
-                        onChanged: (animating)
-                            ? null
-                            : (_) {
-                                setState(() {
-                                  animate = !animate;
-                                });
-                              },
-                        activeColor: Colors.red,
-                        value: animate,
-                      ),
-                    ],
-                  ),
-                )
               ],
             ),
-          ),
-          Visibility(
-            visible: isLandscape(),
-            child: Expanded(
-              child: parameters(
-                context,
-                MediaQuery.of(context).size.height,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 

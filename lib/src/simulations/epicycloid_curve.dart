@@ -30,157 +30,164 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 434.0,
-      height: 924.0,
-      allowFontScaling: true,
-    );
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'Epicycloid Pattern (Pencil of Lines)',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: true,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Visibility(
-          visible: animatefactor || animatepoints,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.white,
-                  child: (!animating)
-                      ? Icon(
-                          Icons.play_arrow,
-                          color: Colors.black,
-                        )
-                      : Icon(
-                          Icons.pause,
-                          color: Colors.black,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      animating = !animating;
-                      factor = globalKey.currentState.widget.factor;
-                      total = globalKey.currentState.widget.total;
-                    });
-                  }),
-              FloatingActionButton(
-                heroTag: null,
-                child: Icon(
-                  Icons.replay,
-                  color: Colors.black,
-                ),
-                backgroundColor: Colors.white,
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(434.0, 924.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  setState(() {
-                    if (animatefactor) {
-                      factor = 0;
-                    }
-                    if (animatepoints) {
-                      total = 0;
-                    }
-                  });
+                  Navigator.pop(context);
                 },
-              )
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Visibility(
-        visible: !isLandscape(),
-        child: parameters(
-          context,
-          ScreenUtil().setHeight(924 / 5),
-        ),
-      ),
-      body: Row(
-        children: [
-          Container(
-            width: isLandscape()
-                ? 2 * MediaQuery.of(context).size.width / 3
-                : MediaQuery.of(context).size.width,
-            child: Stack(
-              children: <Widget>[
-                Epicycloid(
-                  factor: factor,
-                  total: total,
-                  animatefactor: animatefactor,
-                  animatepoints: animatepoints,
-                  animating: animating,
-                  key: globalKey,
-                  isLandscape: isLandscape(),
-                ),
-                Positioned(
-                  left: 12,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Animate with Factor:',
+              ),
+              title: Text(
+                'Epicycloid Pattern (Pencil of Lines)',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              centerTitle: true,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: animatefactor || animatepoints,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white,
+                        child: (!animating)
+                            ? Icon(
+                                Icons.play_arrow,
+                                color: Colors.black,
+                              )
+                            : Icon(
+                                Icons.pause,
+                                color: Colors.black,
+                              ),
+                        onPressed: () {
+                          setState(() {
+                            animating = !animating;
+                            factor = globalKey.currentState.widget.factor;
+                            total = globalKey.currentState.widget.total;
+                          });
+                        }),
+                    FloatingActionButton(
+                      heroTag: null,
+                      child: Icon(
+                        Icons.replay,
+                        color: Colors.black,
                       ),
-                      Checkbox(
-                        onChanged: (animating)
-                            ? null
-                            : (_) {
-                                setState(() {
-                                  animatefactor = !animatefactor;
-                                });
-                              },
-                        activeColor: Colors.red,
-                        value: animatefactor,
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          if (animatefactor) {
+                            factor = 0;
+                          }
+                          if (animatepoints) {
+                            total = 0;
+                          }
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+            bottomNavigationBar: Visibility(
+              visible: !isLandscape(),
+              child: parameters(
+                context,
+                ScreenUtil().setHeight(924 / 5),
+              ),
+            ),
+            body: Row(
+              children: [
+                Container(
+                  width: isLandscape()
+                      ? 2 * MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: <Widget>[
+                      Epicycloid(
+                        factor: factor,
+                        total: total,
+                        animatefactor: animatefactor,
+                        animatepoints: animatepoints,
+                        animating: animating,
+                        key: globalKey,
+                        isLandscape: isLandscape(),
+                      ),
+                      Positioned(
+                        left: 12,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'Animate with Factor:',
+                            ),
+                            Checkbox(
+                              onChanged: (animating)
+                                  ? null
+                                  : (_) {
+                                      setState(() {
+                                        animatefactor = !animatefactor;
+                                      });
+                                    },
+                              activeColor: Colors.red,
+                              value: animatefactor,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'Animate with Points:',
+                            ),
+                            Checkbox(
+                              onChanged: (animating)
+                                  ? null
+                                  : (_) {
+                                      setState(() {
+                                        animatepoints = !animatepoints;
+                                      });
+                                    },
+                              activeColor: Colors.red,
+                              value: animatepoints,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Positioned(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Animate with Points:',
-                      ),
-                      Checkbox(
-                        onChanged: (animating)
-                            ? null
-                            : (_) {
-                                setState(() {
-                                  animatepoints = !animatepoints;
-                                });
-                              },
-                        activeColor: Colors.red,
-                        value: animatepoints,
-                      ),
-                    ],
+                Visibility(
+                  visible: isLandscape(),
+                  child: Expanded(
+                    child: parameters(
+                      context,
+                      MediaQuery.of(context).size.height,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-          Visibility(
-            visible: isLandscape(),
-            child: Expanded(
-              child: parameters(
-                context,
-                MediaQuery.of(context).size.height,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 

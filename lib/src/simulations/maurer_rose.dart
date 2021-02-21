@@ -32,159 +32,166 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 512.0,
-      height: 1024.0,
-      allowFontScaling: true,
-    );
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'MaurerRose Pattern',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        centerTitle: true,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Visibility(
-          visible: animateN || animateD,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              FloatingActionButton(
-                  heroTag: null,
-                  backgroundColor: Colors.white,
-                  child: (!animating)
-                      ? Icon(
-                          Icons.play_arrow,
-                          color: Colors.black,
-                        )
-                      : Icon(
-                          Icons.pause,
-                          color: Colors.black,
-                        ),
-                  onPressed: () {
-                    setState(() {
-                      animating = !animating;
-                      d = globalKey.currentState.widget.d;
-                      n = globalKey.currentState.widget.n;
-                    });
-                  }),
-              FloatingActionButton(
-                heroTag: null,
-                child: Icon(
-                  Icons.highlight_off,
-                  color: Colors.black,
-                ),
-                backgroundColor: Colors.white,
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 1024.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {
-                  setState(() {
-                    if (animateN) {
-                      n = 0;
-                    }
-                    if (animateD) {
-                      d = 0;
-                    }
-                  });
+                  Navigator.pop(context);
                 },
-              )
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: Visibility(
-        visible: !isLandscape(),
-        child: parameters(
-          context,
-          ScreenUtil().setHeight(1024 / 5),
-        ),
-      ),
-      body: Row(
-        children: [
-          Container(
-            width: isLandscape()
-                ? 2 * MediaQuery.of(context).size.width / 3
-                : MediaQuery.of(context).size.width,
-            child: Stack(
-              children: <Widget>[
-                MaurerRose(
-                  d: d,
-                  n: n,
-                  // dd: dd,
-                  // dn: dn,
-                  animateN: animateN,
-                  animateD: animateD,
-                  animating: animating,
-                  key: globalKey,
-                  isLandscape: isLandscape(),
-                ),
-                Positioned(
-                  left: 12,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Animate with N:',
+              ),
+              title: Text(
+                'MaurerRose Pattern',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+              centerTitle: true,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: animateN || animateD,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    FloatingActionButton(
+                        heroTag: null,
+                        backgroundColor: Colors.white,
+                        child: (!animating)
+                            ? Icon(
+                                Icons.play_arrow,
+                                color: Colors.black,
+                              )
+                            : Icon(
+                                Icons.pause,
+                                color: Colors.black,
+                              ),
+                        onPressed: () {
+                          setState(() {
+                            animating = !animating;
+                            d = globalKey.currentState.widget.d;
+                            n = globalKey.currentState.widget.n;
+                          });
+                        }),
+                    FloatingActionButton(
+                      heroTag: null,
+                      child: Icon(
+                        Icons.highlight_off,
+                        color: Colors.black,
                       ),
-                      Checkbox(
-                        onChanged: (animating)
-                            ? null
-                            : (_) {
-                                setState(() {
-                                  animateN = !animateN;
-                                });
-                              },
-                        activeColor: Colors.red,
-                        value: animateN,
+                      backgroundColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          if (animateN) {
+                            n = 0;
+                          }
+                          if (animateD) {
+                            d = 0;
+                          }
+                        });
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
+            bottomNavigationBar: Visibility(
+              visible: !isLandscape(),
+              child: parameters(
+                context,
+                ScreenUtil().setHeight(1024 / 5),
+              ),
+            ),
+            body: Row(
+              children: [
+                Container(
+                  width: isLandscape()
+                      ? 2 * MediaQuery.of(context).size.width / 3
+                      : MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: <Widget>[
+                      MaurerRose(
+                        d: d,
+                        n: n,
+                        // dd: dd,
+                        // dn: dn,
+                        animateN: animateN,
+                        animateD: animateD,
+                        animating: animating,
+                        key: globalKey,
+                        isLandscape: isLandscape(),
+                      ),
+                      Positioned(
+                        left: 12,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'Animate with N:',
+                            ),
+                            Checkbox(
+                              onChanged: (animating)
+                                  ? null
+                                  : (_) {
+                                      setState(() {
+                                        animateN = !animateN;
+                                      });
+                                    },
+                              activeColor: Colors.red,
+                              value: animateN,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              'Animate with D:',
+                            ),
+                            Checkbox(
+                              onChanged: (animating)
+                                  ? null
+                                  : (_) {
+                                      setState(() {
+                                        animateD = !animateD;
+                                      });
+                                    },
+                              activeColor: Colors.red,
+                              value: animateD,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Positioned(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        'Animate with D:',
-                      ),
-                      Checkbox(
-                        onChanged: (animating)
-                            ? null
-                            : (_) {
-                                setState(() {
-                                  animateD = !animateD;
-                                });
-                              },
-                        activeColor: Colors.red,
-                        value: animateD,
-                      ),
-                    ],
+                Visibility(
+                  visible: isLandscape(),
+                  child: Expanded(
+                    child: parameters(
+                      context,
+                      MediaQuery.of(context).size.height,
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-          Visibility(
-            visible: isLandscape(),
-            child: Expanded(
-              child: parameters(
-                context,
-                MediaQuery.of(context).size.height,
-              ),
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 
