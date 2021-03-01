@@ -6,33 +6,44 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, width: 512, height: 1005, allowFontScaling: false);
     final appState = Provider.of<Simulations>(context);
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          HomeHorizontalList(
-            listName: 'Favorites',
-            elements: (appState.favorites.length != 0)
-                ? appState.favorites
-                : [
-                    Container(
-                      width: MediaQuery.of(context).size.width - 20,
-                      child: Center(
-                        child: Text(
-                          "No favorites yet!",
-                          style: Theme.of(context).textTheme.caption,
-                        ),
-                      ),
-                    ),
-                  ],
-          ),
-          HomeHorizontalList(
-            listName: 'All',
-            elements: appState.all,
-          ),
-        ],
-      ),
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 850.0),
+            allowFontScaling: false,
+          );
+          return Container(
+            child: ListView(
+              children: <Widget>[
+                HomeHorizontalList(
+                  listName: 'Favorites',
+                  elements: (appState.favorites.length != 0)
+                      ? appState.favorites
+                      : [
+                          Container(
+                            width: MediaQuery.of(context).size.width - 20,
+                            child: Center(
+                              child: Text(
+                                "No favorites yet!",
+                                style: Theme.of(context).textTheme.caption,
+                              ),
+                            ),
+                          ),
+                        ],
+                ),
+                HomeHorizontalList(
+                  listName: 'All',
+                  elements: appState.all,
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }
@@ -61,7 +72,10 @@ class HomeHorizontalList extends StatelessWidget {
             ),
           ),
           Container(
-            height: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? ScreenUtil().setHeight(260) : 250,
+            height: MediaQuery.of(context).size.height >
+                    MediaQuery.of(context).size.width
+                ? ScreenUtil().setHeight(260)
+                : 250,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: elements,

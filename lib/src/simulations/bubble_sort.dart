@@ -132,143 +132,150 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 512.0,
-      height: 1024.0,
-      allowFontScaling: true,
-    );
     _containerList();
     if (swap == true || finalIterator != 0) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          'Bubble Sort',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          child: (!swap)
-              ? Icon(
-                  Icons.play_arrow,
-                  color: Colors.black,
-                )
-              : Icon(
-                  Icons.pause,
-                  color: Colors.black,
-                ),
-          onPressed: () {
-            doNotRefresh = true;
-            swap = !swap;
-            setState(() {});
-          }),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: Container(
-        height: ScreenUtil().setHeight(1024 / 5.5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: Scrollbar(
-            controller: _scrollController,
-            isAlwaysShown: true,
-            child: ListView(
-              controller: _scrollController,
-              padding: EdgeInsets.all(8.0),
-              children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Slider(
-                  min: 2,
-                  max: 200,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    doNotRefresh = false;
-                    counter = 0;
-                    swap = false;
-                    setState(() {
-                      _numberOfElements = value.toInt();
-                    });
-                  },
-                  value: _numberOfElements.toDouble(),
-                ),
-                Center(
-                  child: Text(
-                    "Elements: ${_numberOfElements.toInt()}",
-                    style: Theme.of(context).textTheme.subtitle2,
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 1024.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              centerTitle: true,
+              title: Text(
+                'Bubble Sort',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.white,
+                child: (!swap)
+                    ? Icon(
+                        Icons.play_arrow,
+                        color: Colors.black,
+                      )
+                    : Icon(
+                        Icons.pause,
+                        color: Colors.black,
+                      ),
+                onPressed: () {
+                  doNotRefresh = true;
+                  swap = !swap;
+                  setState(() {});
+                }),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            bottomNavigationBar: Container(
+              height: ScreenUtil().setHeight(1024 / 5.5),
+              child: Material(
+                elevation: 30,
+                color: Theme.of(context).primaryColor,
+                child: Scrollbar(
+                  controller: _scrollController,
+                  isAlwaysShown: true,
+                  child: ListView(
+                    controller: _scrollController,
+                    padding: EdgeInsets.all(8.0),
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Slider(
+                        min: 2,
+                        max: 200,
+                        activeColor: Theme.of(context).accentColor,
+                        inactiveColor: Colors.grey,
+                        onChanged: (value) {
+                          doNotRefresh = false;
+                          counter = 0;
+                          swap = false;
+                          setState(() {
+                            _numberOfElements = value.toInt();
+                          });
+                        },
+                        value: _numberOfElements.toDouble(),
+                      ),
+                      Center(
+                        child: Text(
+                          "Elements: ${_numberOfElements.toInt()}",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Slider(
+                        min: 0,
+                        max: 100,
+                        divisions: 10,
+                        activeColor: Theme.of(context).accentColor,
+                        inactiveColor: Colors.grey,
+                        onChanged: (value) {
+                          setState(() {
+                            delay2 = value.toInt();
+                          });
+                        },
+                        onChangeEnd: (value) {
+                          setState(() {
+                            doNotRefresh = true;
+                            delay = value.toInt();
+                          });
+                        },
+                        value: delay2.roundToDouble(),
+                      ),
+                      Center(
+                        child: Text(
+                          "Delay: ${delay2.toInt()} ms",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: 20,
+              ),
+            ),
+            body: Stack(
+              children: <Widget>[
+                Container(
+                  color: Colors.grey[900],
+                  child: Column(
+                    children: <Widget>[
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: containerList,
+                      ),
+                      Spacer(),
+                    ],
+                  ),
                 ),
-                Slider(
-                  min: 0,
-                  max: 100,
-                  divisions: 10,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      delay2 = value.toInt();
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    setState(() {
-                      doNotRefresh = true;
-                      delay = value.toInt();
-                    });
-                  },
-                  value: delay2.roundToDouble(),
-                ),
-                Center(
+                Positioned(
+                  top: 5,
+                  left: 5,
                   child: Text(
-                    "Delay: ${delay2.toInt()} ms",
+                    "Comparisons: $counter \nMax: ${_elements[i]} \nArray Iteration: ${_elements.length - n + 1}",
                     style: Theme.of(context).textTheme.subtitle2,
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            color: Colors.grey[900],
-            child: Column(
-              children: <Widget>[
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: containerList,
-                ),
-                Spacer(),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-            child: Text(
-              "Comparisons: $counter \nMax: ${_elements[i]} \nArray Iteration: ${_elements.length - n + 1}",
-              style: Theme.of(context).textTheme.subtitle2,
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+      },
     );
   }
 }

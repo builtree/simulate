@@ -110,12 +110,6 @@ class _InsertionHomeState extends State<InsertionHome> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      width: 512.0,
-      height: 1024.0,
-      allowFontScaling: true,
-    );
     if (!colorGreen)
       makeContainers();
     else
@@ -123,151 +117,164 @@ class _InsertionHomeState extends State<InsertionHome> {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           doNotRefresh = true;
         }));
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => Navigator.pop(context),
-        ),
-        elevation: 5,
-        centerTitle: true,
-        title: Text(
-          "Insertion Sort",
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            color: Colors.grey[900],
-            child: Column(
-              children: <Widget>[
-                Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: barsList,
-                ),
-                Spacer(),
-              ],
-            ),
-          ),
-          Positioned(
-            top: 5,
-            left: 5,
-            child: Text(
-              "Counter: $numSteps",
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Ubuntu',
+    return LayoutBuilder(
+      // ignore: missing_return
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          ScreenUtil.init(
+            constraints,
+            designSize: Size(512.0, 1024.0),
+            allowFontScaling: true,
+          );
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () => Navigator.pop(context),
+              ),
+              elevation: 5,
+              centerTitle: true,
+              title: Text(
+                "Insertion Sort",
+                style: Theme.of(context).textTheme.headline6,
               ),
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        color: Colors.transparent,
-        height: ScreenUtil().setHeight(1024 / 5.5),
-        child: Material(
-          elevation: 30,
-          color: Theme.of(context).primaryColor,
-          child: Scrollbar(
-            controller: _scrollController,
-            isAlwaysShown: true,
-            child: ListView(
-              controller: _scrollController,
-              padding: EdgeInsets.all(8.0),
+            body: Stack(
               children: <Widget>[
-                SizedBox(
-                  height: 20,
-                ),
-                Slider(
-                  min: 2,
-                  max: 149,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChanged: (value) {
-                    setState(() {
-                      colorGreen = false;
-                      isWorking = false;
-                      doNotRefresh = false;
-                      sliderValue = value.toInt();
-                      iterator = -1;
-                      i = -1;
-                      numSteps = 0;
-                    });
-                  },
-                  value: sliderValue.toDouble(),
-                ),
-                Center(
-                  child: Text(
-                    "Elements: $sliderValue",
-                    style: Theme.of(context).textTheme.subtitle2,
+                Container(
+                  color: Colors.grey[900],
+                  child: Column(
+                    children: <Widget>[
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: barsList,
+                      ),
+                      Spacer(),
+                    ],
                   ),
                 ),
-                Slider(
-                  min: 0,
-                  max: 500,
-                  activeColor: Theme.of(context).accentColor,
-                  inactiveColor: Colors.grey,
-                  onChangeStart: (value) {
-                    setState(() {
-                      if (isWorking) wasAlreadyWorking = true;
-                      doNotRefresh = true;
-                      isWorking = false;
-                    });
-                  },
-                  onChanged: (value) {
-                    setState(() {
-                      doNotRefresh = true;
-                      sleepDuration = value.toInt();
-                    });
-                  },
-                  onChangeEnd: (value) {
-                    setState(() {
-                      doNotRefresh = true;
-                      if (wasAlreadyWorking) {
-                        isWorking = true;
-                        wasAlreadyWorking = false;
-                      }
-                      sleepDuration = value.toInt();
-                    });
-                  },
-                  value: sleepDuration.toDouble(),
-                ),
-                Center(
+                Positioned(
+                  top: 5,
+                  left: 5,
                   child: Text(
-                    "Delay (milliseconds): $sleepDuration",
-                    style: Theme.of(context).textTheme.subtitle2,
+                    "Counter: $numSteps",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Ubuntu',
+                    ),
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            doNotRefresh = true;
-            isWorking = !isWorking;
-            (iterator == -1) ? iterator = 1 : iterator = iterator;
-          });
-        },
-        child: (!isWorking || colorGreen)
-            ? Icon(
-                Icons.play_arrow,
-                size: 30,
-                color: Colors.black,
-              )
-            : Icon(
-                Icons.pause,
-                size: 30,
-                color: Colors.black,
+            bottomNavigationBar: Container(
+              color: Colors.transparent,
+              height: ScreenUtil().setHeight(1024 / 5.5),
+              child: Material(
+                elevation: 30,
+                color: Theme.of(context).primaryColor,
+                child: Scrollbar(
+                  controller: _scrollController,
+                  isAlwaysShown: true,
+                  child: ListView(
+                    controller: _scrollController,
+                    padding: EdgeInsets.all(8.0),
+                    children: <Widget>[
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Slider(
+                        min: 2,
+                        max: 149,
+                        activeColor: Theme.of(context).accentColor,
+                        inactiveColor: Colors.grey,
+                        onChanged: (value) {
+                          setState(() {
+                            colorGreen = false;
+                            isWorking = false;
+                            doNotRefresh = false;
+                            sliderValue = value.toInt();
+                            iterator = -1;
+                            i = -1;
+                            numSteps = 0;
+                          });
+                        },
+                        value: sliderValue.toDouble(),
+                      ),
+                      Center(
+                        child: Text(
+                          "Elements: $sliderValue",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      Slider(
+                        min: 0,
+                        max: 500,
+                        activeColor: Theme.of(context).accentColor,
+                        inactiveColor: Colors.grey,
+                        onChangeStart: (value) {
+                          setState(() {
+                            if (isWorking) wasAlreadyWorking = true;
+                            doNotRefresh = true;
+                            isWorking = false;
+                          });
+                        },
+                        onChanged: (value) {
+                          setState(() {
+                            doNotRefresh = true;
+                            sleepDuration = value.toInt();
+                          });
+                        },
+                        onChangeEnd: (value) {
+                          setState(() {
+                            doNotRefresh = true;
+                            if (wasAlreadyWorking) {
+                              isWorking = true;
+                              wasAlreadyWorking = false;
+                            }
+                            sleepDuration = value.toInt();
+                          });
+                        },
+                        value: sleepDuration.toDouble(),
+                      ),
+                      Center(
+                        child: Text(
+                          "Delay (milliseconds): $sleepDuration",
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-        backgroundColor: Colors.white,
-        elevation: 8,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  doNotRefresh = true;
+                  isWorking = !isWorking;
+                  (iterator == -1) ? iterator = 1 : iterator = iterator;
+                });
+              },
+              child: (!isWorking || colorGreen)
+                  ? Icon(
+                      Icons.play_arrow,
+                      size: 30,
+                      color: Colors.black,
+                    )
+                  : Icon(
+                      Icons.pause,
+                      size: 30,
+                      color: Colors.black,
+                    ),
+              backgroundColor: Colors.white,
+              elevation: 8,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+          );
+        }
+      },
     );
   }
 
