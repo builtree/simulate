@@ -16,6 +16,7 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
   int n;
   int tmp, delay = 0, delay2 = 0;
   bool swap = false;
+  bool findingMin = false;
   double barwidth;
   List<Widget> containerList = [];
   bool doNotRefresh = false;
@@ -26,8 +27,10 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
   void initState() {
     _numberOfElements = 2;
     i = 0;
+    j = 1;
     counter = 0;
     swap = false;
+    findingMin = false;
     doNotRefresh = false;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -52,6 +55,7 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
     if (!doNotRefresh) {
       _elements.clear();
       i = 0;
+      j = 1;
       var rng = new Random();
       for (int i = 0; i < _numberOfElements; i++) {
         _elements.add(rng.nextInt(400));
@@ -106,6 +110,20 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
     }
   }
 
+  findMin() {
+    findingMin = true;
+    j = i + 1;
+    while (j < n) {
+      setState(() {
+        if (_elements[minIdx] > _elements[j]) {
+          minIdx = j;
+        }
+        j++;
+      });
+    }
+    findingMin = false;
+  }
+
   nextStep() async {
     await Future.delayed(Duration(milliseconds: delay));
     if (!doNotRefresh) return;
@@ -122,12 +140,7 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
           swap = false;
         }
         minIdx = i;
-        for (j = i + 1; j < n; j++) {
-          if (_elements[minIdx] > _elements[j]) {
-            minIdx = j;
-          }
-        }
-
+        findMin();
         tmp = _elements[i];
         _elements[i] = _elements[minIdx];
         _elements[minIdx] = tmp;
@@ -139,7 +152,7 @@ class _SelectionSortBarsState extends State<SelectionSortBars> {
   @override
   Widget build(BuildContext context) {
     _containerList();
-    if (swap == true || finalIterator != 0) {
+    if ((swap == true || finalIterator != 0) && (findingMin == false)) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextStep());
     }
 
