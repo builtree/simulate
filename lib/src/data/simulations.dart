@@ -89,8 +89,8 @@ class Simulations with ChangeNotifier {
         direct: PigeonholeSort(),
         //TODO: change the image below
         image: theme.darkTheme
-            ? 'assets/simulations/InsertionSortDark.png'
-            : 'assets/simulations/InsertionSortLight.png',
+            ? 'assets/simulations/pigeonhole_dark.png'
+            : 'assets/simulations/pigeonhole_light.png',
         infoLink: 'https://en.wikipedia.org/wiki/Pigeonhole_sort',
         fav: _favorites[3],
       ),

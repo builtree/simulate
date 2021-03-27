@@ -13,22 +13,24 @@ class PigeonholeSort extends StatefulWidget {
 class _PigeonholeSortState extends State<PigeonholeSort> {
   int _numberOfElements = 2;
   final ScrollController _scrollController = ScrollController();
+
   int delay2 = 0;
   bool sort = false;
-  // List<Widget> containerList = [];
-  // bool pauseSort = false;
   List<int> elements = [];
   bool doNotRefresh = false;
   int n;
   double barwidth;
-  StreamController<List<int>> streamController = StreamController();
-
+  StreamController<List<Container>> streamContainer = StreamController();
+  List<int> pHole = [];
+  List<Container> containers = [];
   @override
   void initState() {
-    _numberOfElements = 2;
-    doNotRefresh = false;
-    _randomize();
     super.initState();
+    Future.delayed(Duration.zero, () {
+      _numberOfElements = 2;
+      doNotRefresh = false;
+      _randomize();
+    });
   }
 
   @override
@@ -39,7 +41,7 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-    streamController.close();
+    streamContainer.close();
     super.dispose();
   }
 
@@ -55,7 +57,7 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
         }
       }
       range = max - min + 1;
-      List<int> pHole = List.generate(range, (i) => 0);
+      pHole = List.generate(range, (i) => 0);
       for (i = 0; i < elements.length; i++) {
         pHole[elements[i] - min]++;
       }
@@ -65,12 +67,43 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
           while (pHole[j]-- > 0) {
             if (sort) {
               elements[index++] = j + min;
+              this.barwidth =
+                  MediaQuery.of(context).size.width / (elements.length + 1);
+              for (int zz = 0; zz < _numberOfElements; zz++) {
+                if (zz == index) {
+                  containers[zz] = Container(
+                    color: Colors.blue,
+                    height: (elements[zz] + 0.5),
+                    width: barwidth,
+                  );
+                } else {
+                  containers[zz] = Container(
+                    color: Colors.white,
+                    height: (elements[zz] + 0.5),
+                    width: barwidth,
+                  );
+                }
+              }
               await Future.delayed(Duration(milliseconds: delay2));
-              streamController.add(elements);
+
+              streamContainer.add(containers);
             }
           }
         }
       }
+    }
+  }
+
+  makeGreen() async {
+    for (var i = 0; i < _numberOfElements; i++) {
+      await Future.delayed(Duration(milliseconds: delay2));
+
+      containers[i] = Container(
+        color: Colors.greenAccent[400],
+        height: (elements[i] + 0.5),
+        width: barwidth,
+      );
+      streamContainer.add(containers);
     }
   }
 
@@ -82,15 +115,26 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
     setState(() {
       sort = false;
     });
+    makeGreen();
   }
 
   _randomize() {
     elements = [];
+    containers = [];
+    pHole = [];
     for (int i = 0; i < _numberOfElements; i++) {
       elements.add(Random().nextInt(400));
     }
+    for (int i = 0; i < _numberOfElements; i++) {
+      containers.add(Container(
+        color: Colors.white,
+        height: (elements[i] + 0.5),
+        width: MediaQuery.of(context).size.width / (elements.length + 1),
+      ));
+    }
+
     sort = false;
-    streamController.add(elements);
+    streamContainer.add(containers);
   }
 
   @override
@@ -105,6 +149,7 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
             allowFontScaling: true,
           );
           return Scaffold(
+            backgroundColor: Colors.white,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
@@ -217,20 +262,14 @@ class _PigeonholeSortState extends State<PigeonholeSort> {
                     children: [
                       Spacer(),
                       StreamBuilder<Object>(
-                        initialData: elements,
-                        stream: streamController.stream,
+                        initialData: containers,
+                        stream: streamContainer.stream,
                         builder: (context, snapshot) {
-                          List<int> numbers = snapshot.data;
-                          this.barwidth = MediaQuery.of(context).size.width /
-                              (elements.length + 1);
+                          List<Container> numbers = snapshot.data;
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: numbers.map((e) {
-                              return Container(
-                                color: Theme.of(context).primaryColor,
-                                height: e + 0.5,
-                                width: barwidth,
-                              );
+                              return e;
                             }).toList(),
                           );
                         },
