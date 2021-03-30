@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
+import  'package:simulate/src/simulations/Hypocycloid.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
@@ -29,6 +30,7 @@ class Simulations with ChangeNotifier {
     6: "epicycloid curve pattern mathematics animation pencil lines ",
     7: "epicycloid curve pattern mathematics animation ",
     8: "maurer rose pattern mathematics animation",
+    9: "hypocycloid cycloid curve mathematics epicycloid animation",
   };
 
   Simulations() {
@@ -140,6 +142,16 @@ class Simulations with ChangeNotifier {
         direct: MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[8],
+      ),
+      SimulationCard(
+        id: 9,
+        simulationName: 'Hypocycloid curve',
+        image: theme.darkTheme
+            ? 'assets/simulations/Epicycloid1Dark.png'
+            : 'assets/simulations/Epicycloid1Light.png',
+         direct: NormalHypoCycloidCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Hypocycloid',
+        fav: _favorites[9],
       ),
     ];
   }
