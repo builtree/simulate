@@ -30,3 +30,13 @@ Some pre-requisites:
 
 
 All further guidelines can be found [here](https://cod-ed.github.io/simulate/contributing).
+
+
+
+## Our Contributors  !! ✨
+### Thanks go to these wonderfull peoples: ✨
+
+
+<a href="https://github.com/cod-ed/simulate/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cod-ed/simulate" />
+</a>
