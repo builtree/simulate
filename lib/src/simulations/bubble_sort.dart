@@ -107,6 +107,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
 
   nextStep() async {
     await Future.delayed(Duration(milliseconds: delay));
+    if (!doNotRefresh) return;
     if (this.mounted) {
       setState(() {
         if (n == 1) {
@@ -203,6 +204,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
                           doNotRefresh = false;
                           counter = 0;
                           swap = false;
+                          finalIterator = 0;
                           setState(() {
                             _numberOfElements = value.toInt();
                           });
