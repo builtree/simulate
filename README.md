@@ -33,8 +33,7 @@ All further guidelines can be found [here](https://cod-ed.github.io/simulate/con
 
 
 
-## Our Contributors  !! ✨
-### Thanks go to these wonderfull peoples: ✨
+## Our Contributors  !! 
 
 
 <a href="https://github.com/cod-ed/simulate/graphs/contributors">
