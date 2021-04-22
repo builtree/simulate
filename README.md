@@ -7,10 +7,10 @@
 
 <div align="center">
 
-![Forks](https://img.shields.io/github/forks/himanshusharma89/relic_bazaar)
-![Stars](https://img.shields.io/github/stars/himanshusharma89/relic_bazaar)
-![Issues](https://img.shields.io/github/issues/himanshusharma89/relic_bazaar)
-![Pull Requests](https://img.shields.io/github/issues-pr/himanshusharma89/relic_bazaar?)
+![Forks](https://img.shields.io/github/forks/cod-ed/simulate)
+![Stars](https://img.shields.io/github/stars/cod-ed/simulate)
+![Issues](https://img.shields.io/github/issues/cod-ed/simulate)
+![Pull Requests](https://img.shields.io/github/issues-pr/cod-ed/simulate?)
 [![Gitter](https://badges.gitter.im/codEd-org/simulate.svg)](https://gitter.im/codEd-org/simulate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 </div>
@@ -26,7 +26,7 @@ You can find out more about Simulate and how it works or how you can share ideas
     </a>
 </p>
 
-# Features📢
+# Features
 
 * It has a data-sorting visualizer.
 * It can generate various mathematical patterns.
@@ -34,28 +34,20 @@ You can find out more about Simulate and how it works or how you can share ideas
 * The data sorting visualizer helps you understand how a sorting algorithm works by focusing on each step.
 
 
-#  Tech Stack⚙️
+#  Tech Stack
 * Flutter
 * Dart
 
 
-# Geeks behind this initiative🔬
+# Geeks behind this initiative
 
-## Our Hard Working Project Maintainer👨‍🏫🦾
-
-<p align="center">
-<img width=20% src="https://avatars.githubusercontent.com/u/53790154?v=4">&ensp;&ensp;&ensp;
-
-<a href="https://github.com/yashugarg">
-<h5 align="center"><b>Yashu Garg</b></a>&ensp;&ensp;&ensp;
-
-## Our Valuable Contributors👨‍💻
+### Valuable Contributors👨‍💻
 <a href="https://github.com/cod-ed/simulate/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=cod-ed/simulate" />
 </a>
 
 
-# Contributing Guidelines⚠️
+# Contributing Guidelines
 
 Before contributing, we highly recommend introducing yourself and your ideas on [gitter](https://gitter.im/codEd-org/simulate).
 
