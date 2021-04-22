@@ -41,7 +41,7 @@ You can find out more about Simulate and how it works or how you can share ideas
 
 # Geeks behind this initiative
 
-### Valuable Contributors👨‍💻
+### Valuable Contributors
 <a href="https://github.com/cod-ed/simulate/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=cod-ed/simulate" />
 </a>
