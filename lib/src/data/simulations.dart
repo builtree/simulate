@@ -78,7 +78,7 @@ class Simulations with ChangeNotifier {
       SimulationCard(
         id: 3,
         simulationName: 'Merge Sort',
-        image: theme.darkTheme ? 'assets/simulations/InsertionSortDark.png' : 'assets/simulations/InsertionSortLight.png',
+        image: theme.darkTheme ? 'assets/simulations/MergeSortDark.png' : 'assets/simulations/MergeSortLight.png',
         direct: MergeSort(),
         infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
         fav: _favorites[3],

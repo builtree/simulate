@@ -109,22 +109,23 @@ class _MergeSortState extends State<MergeSort> {
       int middleIndex = (rightIndex + leftIndex) ~/ 2;
       if (sort) await _mergeSort(leftIndex, middleIndex);
       if (sort) await _mergeSort(middleIndex + 1, rightIndex);
-      if (sort) await addContainer(barwidth, Colors.white, 0, _numberOfElements - 1);
+      if (sort) await addContainer(barwidth, Theme.of(context).primaryColor, 0, _numberOfElements - 1);
       if (sort) await merge(leftIndex, middleIndex, rightIndex);
     }
   }
 
   makeGreen() async {
-    for (var i = 0; i < _numberOfElements; i++) {
-      await Future.delayed(Duration(milliseconds: delay2));
+    if (pause)
+      for (var i = 0; i < _numberOfElements; i++) {
+        await Future.delayed(Duration(milliseconds: delay2));
 
-      containers[i] = Container(
-        color: Colors.greenAccent[400],
-        height: (elements[i] + 0.5),
-        width: barwidth,
-      );
-      streamContainer.add(containers);
-    }
+        containers[i] = Container(
+          color: Colors.greenAccent[400],
+          height: (elements[i] + 0.5),
+          width: barwidth,
+        );
+        streamContainer.add(containers);
+      }
   }
 
   _sort() async {
@@ -146,7 +147,7 @@ class _MergeSortState extends State<MergeSort> {
     }
     for (int i = 0; i < _numberOfElements; i++) {
       containers.add(Container(
-        color: Colors.white,
+        color: Theme.of(context).primaryColor,
         height: (elements[i] + 0.5),
         width: MediaQuery.of(context).size.width / (elements.length + 1),
       ));
@@ -168,7 +169,6 @@ class _MergeSortState extends State<MergeSort> {
             allowFontScaling: true,
           );
           return Scaffold(
-            backgroundColor: Colors.white,
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
