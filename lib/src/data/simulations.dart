@@ -65,7 +65,7 @@ class Simulations with ChangeNotifier {
       ),
       SimulationCard(
         id: 1,
-        simulationName: 'Selection Sort (Bars)',
+        simulationName: 'Selection Sort',
         image: theme.darkTheme
             ? 'assets/simulations/SelectionSortDark.png'
             : 'assets/simulations/SelectionSortLight.png',
