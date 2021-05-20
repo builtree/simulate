@@ -423,8 +423,8 @@ class NormalHypoCycloidPainter extends CustomPainter {
       paint.strokeWidth = 2;
       paint.color = Theme.of(context).accentColor;
       canvas.drawCircle(coor, innerRadius.toDouble(), paint);
-      smallCenter = Offset((innerRadius + outerRadius) * cos(time),
-              (innerRadius + outerRadius) * sin(time))
+      smallCenter = Offset((innerRadius - outerRadius) * cos(time),
+              (innerRadius -outerRadius) * sin(time))
           .translate(transformx, transformy);
       if (outerRadius != 0) {
         coor += Offset(
