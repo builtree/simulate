@@ -14,9 +14,9 @@ import 'package:simulate/src/simulations/maurer_rose.dart';
 import  'package:simulate/src/simulations/Hypocycloid.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2];
-  final _mathematics = [3, 4, 5, 6, 7, 8];
+  final _mathematics = [3, 4, 5, 6, 7, 8, 9];
   final _physics = [];
   final _chemistry = [];
   var prefs;
