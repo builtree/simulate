@@ -147,8 +147,8 @@ class Simulations with ChangeNotifier {
         id: 9,
         simulationName: 'Hypocycloid curve',
         image: theme.darkTheme
-            ? 'assets/simulations/Epicycloid1Dark.png'
-            : 'assets/simulations/Epicycloid1Light.png',
+            ? 'assets/simulations/HypocycloidDark.jpg'
+            : 'assets/simulations/Hypocycloid.jpg',
          direct: NormalHypoCycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Hypocycloid',
         fav: _favorites[9],
