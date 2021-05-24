@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
+import 'package:simulate/src/simulations/selection_sort.dart';
 import 'package:simulate/src/simulations/epicycloid.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
 import 'package:simulate/src/simulations/rose_pattern.dart';
@@ -13,8 +14,8 @@ import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
-  final _algorithm = [0, 1, 2];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+  final _algorithm = [0, 1, 2, 9];
   final _mathematics = [3, 4, 5, 6, 7, 8];
   final _physics = [];
   final _chemistry = [];
@@ -29,6 +30,7 @@ class Simulations with ChangeNotifier {
     6: "epicycloid curve pattern mathematics animation pencil lines ",
     7: "epicycloid curve pattern mathematics animation ",
     8: "maurer rose pattern mathematics animation",
+    9: "selection sort algorithm sorting bars "
   };
 
   Simulations() {
@@ -140,6 +142,16 @@ class Simulations with ChangeNotifier {
         direct: MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[8],
+      ),
+      SimulationCard(
+        id: 9,
+        simulationName: 'Selection Sort',
+        image: theme.darkTheme
+            ? 'assets/simulations/InsertionSortDark.png'
+            : 'assets/simulations/InsertionSortLight.png',
+        direct: SelectionSortBars(),
+        infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
+        fav: _favorites[9],
       ),
     ];
   }
