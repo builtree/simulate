@@ -22,10 +22,15 @@ class _MergeSortState extends State<MergeSort> {
   int n;
   double barwidth;
   StreamController<List<Container>> streamContainer = StreamController();
+  // ignore: close_sinks
+  StreamController<int> mergeController = StreamController();
+  int merged = 0;
   List<Container> containers = [];
+
   @override
   void initState() {
     super.initState();
+    mergeController.add(0);
     Future.delayed(Duration.zero, () {
       _numberOfElements = 2;
       doNotRefresh = false;
@@ -42,6 +47,7 @@ class _MergeSortState extends State<MergeSort> {
       DeviceOrientation.landscapeRight,
     ]);
     streamContainer.close();
+    mergeController.close();
     super.dispose();
   }
 
@@ -68,8 +74,10 @@ class _MergeSortState extends State<MergeSort> {
         List leftList = new List(leftSize);
         List rightList = new List(rightSize);
 
-        for (int i = 0; i < leftSize; i++) leftList[i] = elements[leftIndex + i];
-        for (int j = 0; j < rightSize; j++) rightList[j] = elements[middleIndex + j + 1];
+        for (int i = 0; i < leftSize; i++)
+          leftList[i] = elements[leftIndex + i];
+        for (int j = 0; j < rightSize; j++)
+          rightList[j] = elements[middleIndex + j + 1];
 
         int i = 0, j = 0;
         int k = leftIndex;
@@ -82,7 +90,6 @@ class _MergeSortState extends State<MergeSort> {
               elements[k] = rightList[j];
               j++;
             }
-
             await addContainer(barwidth, Colors.blue, leftIndex, rightIndex);
             k++;
           }
@@ -91,7 +98,6 @@ class _MergeSortState extends State<MergeSort> {
             elements[k] = leftList[i];
             i++;
             k++;
-
             await addContainer(barwidth, Colors.blue, leftIndex, rightIndex);
           }
         if (sort)
@@ -99,7 +105,6 @@ class _MergeSortState extends State<MergeSort> {
             elements[k] = rightList[j];
             j++;
             k++;
-
             await addContainer(barwidth, Colors.blue, leftIndex, rightIndex);
           }
       }
@@ -107,10 +112,16 @@ class _MergeSortState extends State<MergeSort> {
 
     if (sort) if (leftIndex < rightIndex) {
       int middleIndex = (rightIndex + leftIndex) ~/ 2;
+
       if (sort) await _mergeSort(leftIndex, middleIndex);
+
       if (sort) await _mergeSort(middleIndex + 1, rightIndex);
-      if (sort) await addContainer(barwidth, Theme.of(context).primaryColor, 0, _numberOfElements - 1);
+      if (sort)
+        await addContainer(
+            barwidth, Theme.of(context).primaryColor, 0, _numberOfElements - 1);
       if (sort) await merge(leftIndex, middleIndex, rightIndex);
+      ++merged;
+      mergeController.add(merged);
     }
   }
 
@@ -206,7 +217,8 @@ class _MergeSortState extends State<MergeSort> {
                   });
               },
             ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: Container(
               height: ScreenUtil().setHeight(1024 / 5.5),
               child: Material(
@@ -300,14 +312,17 @@ class _MergeSortState extends State<MergeSort> {
                     ],
                   ),
                 ),
-                // Positioned(
-                //   top: 5,
-                //   left: 5,
-                //   child: Text(
-                //     "Comparisons: $counter \nMax: ${_elements[i]} \nArray Iteration: ${_elements.length - n + 1}",
-                //     style: Theme.of(context).textTheme.subtitle2,
-                //   ),
-                // ),
+                Positioned(
+                  top: 5,
+                  left: 5,
+                  child: StreamBuilder<Object>(
+                    stream: mergeController.stream,
+                    builder: (context, snapshot) => Text(
+                      "Merged: ${snapshot.data} ",
+                      style: Theme.of(context).textTheme.subtitle2,
+                    ),
+                  ),
+                ),
               ],
             ),
           );
