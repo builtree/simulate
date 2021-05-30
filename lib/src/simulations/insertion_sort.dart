@@ -82,11 +82,11 @@ class _InsertionHomeState extends State<InsertionHome> {
     });
   }
 
-  sortBars() {
+  sortBars() async {
+    await Future.delayed(Duration(milliseconds: sleepDuration));
     setState(() {
       if (!isWorking) return;
       colorGreen = false;
-      sleep(Duration(milliseconds: sleepDuration));
       if (iterator < barValuesList.length) {
         for (i = 0; i < iterator; i++) {
           ++numSteps;
