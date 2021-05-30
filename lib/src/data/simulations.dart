@@ -155,7 +155,7 @@ class Simulations with ChangeNotifier {
         infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
         fav: _favorites[9],
       ),
-      SimulationCard(
+     SimulationCard(
         id: 10,
          simulationName: 'Hypocycloid curve',
         image: theme.darkTheme
