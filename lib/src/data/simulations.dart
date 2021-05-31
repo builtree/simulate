@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simulate/src/custom_items/simulation_card.dart';
 import 'package:simulate/src/data/themedata.dart';
 import 'package:simulate/src/simulations/bubble_sort.dart';
+import 'package:simulate/src/simulations/quicksort.dart';
 import 'package:simulate/src/simulations/selection_sort.dart';
 import 'package:simulate/src/simulations/epicycloid.dart';
 import 'package:simulate/src/simulations/fourier_series.dart';
@@ -14,8 +15,8 @@ import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
-  final _algorithm = [0, 1, 2, 9];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+  final _algorithm = [0, 1, 2, 9, 10];
   final _mathematics = [3, 4, 5, 6, 7, 8];
   final _physics = [];
   final _chemistry = [];
@@ -30,7 +31,8 @@ class Simulations with ChangeNotifier {
     6: "epicycloid curve pattern mathematics animation pencil lines ",
     7: "epicycloid curve pattern mathematics animation ",
     8: "maurer rose pattern mathematics animation",
-    9: "selection sort algorithm sorting bars "
+    9: "selection sort algorithm sorting bars ",
+    10: "quick sort algorithm sorting bars"
   };
 
   Simulations() {
@@ -152,6 +154,16 @@ class Simulations with ChangeNotifier {
         direct: SelectionSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
         fav: _favorites[9],
+      ),
+      SimulationCard(
+        id: 10,
+        simulationName: 'Quick Sort',
+        image: theme.darkTheme
+            ? 'assets/simulations/QuickSortDark.png'
+            : 'assets/simulations/QuickSortLight.png',
+        direct: QuickSort(),
+        infoLink: 'https://en.wikipedia.org/wiki/Quicksort',
+        fav: _favorites[10],
       ),
     ];
   }
