@@ -12,11 +12,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
+import  'package:simulate/src/simulations/Hypocycloid.dart';
 
 class Simulations with ChangeNotifier {
-  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+  static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
   final _algorithm = [0, 1, 2, 9];
-  final _mathematics = [3, 4, 5, 6, 7, 8];
+  final _mathematics = [3, 4, 5, 6, 7, 8, 10];
   final _physics = [];
   final _chemistry = [];
   var prefs;
@@ -30,7 +31,8 @@ class Simulations with ChangeNotifier {
     6: "epicycloid curve pattern mathematics animation pencil lines ",
     7: "epicycloid curve pattern mathematics animation ",
     8: "maurer rose pattern mathematics animation",
-    9: "selection sort algorithm sorting bars "
+    9: "selection sort algorithm sorting bars ",
+    10: "hypocycloid cycloid curve mathematics epicycloid animation",
   };
 
   Simulations() {
@@ -152,6 +154,16 @@ class Simulations with ChangeNotifier {
         direct: SelectionSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
         fav: _favorites[9],
+      ),
+     SimulationCard(
+        id: 10,
+         simulationName: 'Hypocycloid curve',
+        image: theme.darkTheme
+            ? 'assets/simulations/HypocycloidDark.jpg'
+            : 'assets/simulations/Hypocycloid.jpg',
+         direct: NormalHypoCycloidCurve(),
+        infoLink: 'https://en.wikipedia.org/wiki/Hypocycloid',
+        fav: _favorites[10],
       ),
     ];
   }
