@@ -153,8 +153,8 @@ class _LangtonAntState extends State<LangtonAnt> {
           size: 24,
         ),
         onPressed: () => setState(() {
-              shouldWork = !shouldWork;
-            }),
+          shouldWork = !shouldWork;
+        }),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
