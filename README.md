@@ -26,22 +26,12 @@ You can find out more about Simulate and how it works or how you can share ideas
     </a>
 </p>
 
-# Features
-
-* It has a data-sorting visualizer.
-* It can generate various mathematical patterns.
-* Understanding the formation of various symmetrical and non-symmetrical mathematical patterns is tough but with this app, you can visualize them very easily.
-* The data sorting visualizer helps you understand how a sorting algorithm works by focusing on each step.
-
-
 #  Tech Stack
 * Flutter
 * Dart
 
 
-# Geeks behind this initiative
-
-### Valuable Contributors
+# Contributors
 <a href="https://github.com/cod-ed/simulate/graphs/contributors">
   <img src="https://contributors-img.web.app/image?repo=cod-ed/simulate" />
 </a>
