@@ -3,39 +3,39 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": "423773f7ed9beb6161d3ee3fd6447bb1",
-"assets/AssetManifest.json": "a9458a2c01ad9b9815749de8af67c477",
-"assets/assets/simulations/BubbleSortDark.png": "4b85f2c087e39c517bdc104df334eaae",
-"assets/assets/simulations/BubbleSortLight.png": "261c56778d34cb57023e3556e3caf86e",
+  "favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"main.dart.js": "462054de2ec84362eb8dd3ee77ed9705",
+"index.html": "b359ce602518d0c91c6ce94b689b2571",
+"/": "b359ce602518d0c91c6ce94b689b2571",
+"manifest.json": "a2b0ace2b69a7f377a6fc400508411ff",
+"assets/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": "423773f7ed9beb6161d3ee3fd6447bb1",
+"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
+"assets/NOTICES": "d9687338768b847e8235ee9259b1ee53",
+"assets/FontManifest.json": "dd2f2ccfd341cc28c6f1ca3e7c357837",
+"assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
+"assets/fonts/Ubuntu-Regular.ttf": "238c32cd050af8099eeaa8f50dd04ec9",
 "assets/assets/simulations/Epicycloid.png": "84d9a376ec1c7b3c0c0a69bdbeba7b1b",
-"assets/assets/simulations/Epicycloid1Dark.png": "d69869e8f0a1cc3e871e7ebb16173655",
+"assets/assets/simulations/MaurerRoseDark.png": "6319224310a535e31ddb70ae8c05dc25",
+"assets/assets/simulations/ToothpickPatternDark.png": "3171fd88c38962336c24cc6ca27207d9",
 "assets/assets/simulations/Epicycloid1Light.png": "7f566a19db5026b0aed628104a8e74b7",
+"assets/assets/simulations/InsertionSortLight.png": "93c2287045fcb47d1434748a8264392f",
+"assets/assets/simulations/BubbleSortLight.png": "261c56778d34cb57023e3556e3caf86e",
+"assets/assets/simulations/RosePatternDark.png": "545a511f6228795db69c917303b4a685",
+"assets/assets/simulations/LissajousCurveLight.png": "22417f10aa006f85be0663c00a08a903",
 "assets/assets/simulations/EpicycloidDark.png": "a1006098a040c78c59cae9a7fa96aaf6",
 "assets/assets/simulations/FourierSeriesDark.png": "fcbc72e1190ddddef1f8f8a47adb35d9",
-"assets/assets/simulations/FourierSeriesLight.png": "ea8aa43a41ba783ea24ca100654e8dba",
-"assets/assets/simulations/InsertionSortDark.png": "46227946b3b7d87cb38c6b3205b20f5e",
-"assets/assets/simulations/InsertionSortLight.png": "93c2287045fcb47d1434748a8264392f",
 "assets/assets/simulations/LissajousCurveDark.png": "a18a1f3b7f99ae24919b2ce30aa5447f",
-"assets/assets/simulations/LissajousCurveLight.png": "22417f10aa006f85be0663c00a08a903",
-"assets/assets/simulations/MaurerRoseDark.png": "6319224310a535e31ddb70ae8c05dc25",
 "assets/assets/simulations/MaurerRoseLight.png": "b8a1169f80a42b6c7feaa389b2130345",
-"assets/assets/simulations/RosePatternDark.png": "545a511f6228795db69c917303b4a685",
 "assets/assets/simulations/RosePatternLight.png": "3d02b0057f145e4f9307c6dff510521e",
-"assets/assets/simulations/ToothpickPatternDark.png": "3171fd88c38962336c24cc6ca27207d9",
+"assets/assets/simulations/FourierSeriesLight.png": "ea8aa43a41ba783ea24ca100654e8dba",
+"assets/assets/simulations/BubbleSortDark.png": "4b85f2c087e39c517bdc104df334eaae",
+"assets/assets/simulations/Epicycloid1Dark.png": "d69869e8f0a1cc3e871e7ebb16173655",
+"assets/assets/simulations/InsertionSortDark.png": "46227946b3b7d87cb38c6b3205b20f5e",
 "assets/assets/simulations/ToothpickPatternLight.png": "2a91cb57480962637463a3674dc6af94",
-"assets/FontManifest.json": "dd2f2ccfd341cc28c6f1ca3e7c357837",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/fonts/Ubuntu-Regular.ttf": "238c32cd050af8099eeaa8f50dd04ec9",
-"assets/NOTICES": "66be0920d1d6dbce12cb701f0c25c5a9",
-"assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"favicon.png": "5dcef449791fa27946b3d35ad8803796",
+"assets/AssetManifest.json": "a9458a2c01ad9b9815749de8af67c477",
+"version.json": "8b3a49201a4c47e0e9f339605c8b0bb6",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
-"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "f2527a2b1927cac13cc02ba25d8ad1bf",
-"/": "f2527a2b1927cac13cc02ba25d8ad1bf",
-"main.dart.js": "2c108c75b7a61717e5ac61bee072d50d",
-"manifest.json": "41c33a197e4e5037db683980f9d75cc5",
-"version.json": "8b3a49201a4c47e0e9f339605c8b0bb6"
+"icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1"
 };
 
 // The application shell files that are downloaded before a service worker can
@@ -53,7 +53,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });
