@@ -1,4 +1,4 @@
-name: Docs
+name: Build docs with Simulate for Web
 on:
   workflow_dispatch:
 jobs:
@@ -11,6 +11,11 @@ jobs:
         with:
           python-version: '3.7'
           architecture: 'x64'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter build web --release
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip  
@@ -26,6 +31,5 @@ jobs:
         run: mkdocs build
       - name: Add latest web build and deploy
         run: |
-          git clone -b web https://github.com/cod-ed/simulate web
-          mv web/web/ site/
+          mv build/web/ site/
           mkdocs gh-deploy --dirty
