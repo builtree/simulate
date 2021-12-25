@@ -1,4 +1,4 @@
 [submodule "site"]
 	path = site
-	url = https://github.com/cod-ed/simulate.git
+	url = https://github.com/builtree/simulate.git
 	branch = gh-pages

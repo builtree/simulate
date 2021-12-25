@@ -1,6 +1,6 @@
 # Toothpick Pattern
 ---
-![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/ToothpickPatternLight.png){: style="height:200px", align=right}
+![ToothpickPatternLight](https://raw.githubusercontent.com/builtree/simulate/master/assets/simulations/ToothpickPatternLight.png){: style="height:200px", align=right}
 
 <p align="justify">
 The toothpick sequence in geometry is a 2D pattern sequence which is based on the previous
@@ -21,10 +21,10 @@ different colour than the rest of the pattern.
 [^1]: https://en.wikipedia.org/wiki/Ulam%E2%80%93Warburton_automaton
 
 === "Light Mode"
-    ![ToothpickPatternLight](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/ToothpickPatternLight.png){: style="width:300px"}
+    ![ToothpickPatternLight](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/ToothpickPatternLight.png){: style="width:300px"}
   
 === "Dark Mode"
-    ![ToothpickPatternDark](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/ToothpickPatternDark.png){: style="width:300px"}
+    ![ToothpickPatternDark](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/ToothpickPatternDark.png){: style="width:300px"}
 
 !!! tip  "Fun Fact"
     The toothpick is considered such an essential that even Swiss Army knives - a popular brand of multi-function tools - have included one in their product

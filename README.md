@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://github.com/cod-ed/simulate">
-        <img src="https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/SimulateTitle.svg" width=40%>
+    <a href="https://github.com/builtree/simulate">
+        <img src="https://raw.githubusercontent.com/builtree/assets/simulate/documentation/SimulateTitle.svg" width=40%>
         </img>
     </a>
 </p>
@@ -9,11 +9,11 @@
 
 Welcome to Simulate! Simulate aims to be a collection of simulations and visualizations from various domains like mathematics, physics, computer science etc. in a cross platform app made using [Flutter](https://flutter.dev/).
 
-You can find out more about Simulate and how it works or how you can share ideas and contribute to the project [here](https://cod-ed.github.io/simulate/).
+You can find out more about Simulate and how it works or how you can share ideas and contribute to the project [here](https://builtree.github.io/simulate/).
 
 <p align="center">
-    <a href="https://cod-ed.github.io/simulate/web">
-        <img src="https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/LaunchWebApp.svg" width=200px>
+    <a href="https://builtree.github.io/simulate/web">
+        <img src="https://raw.githubusercontent.com/builtree/assets/simulate/documentation/LaunchWebApp.svg" width=200px>
         </img>
     </a>
 </p>
@@ -29,4 +29,4 @@ Some pre-requisites:
 3. Don't hesitate in asking questions, we'll be happy to help
 
 
-All further guidelines can be found [here](https://cod-ed.github.io/simulate/contributing).
+All further guidelines can be found [here](https://builtree.github.io/simulate/contributing).

@@ -4,7 +4,7 @@
 Welcome to Simulate! Simulate aims to be a collection of simulations and visualizations from various domains like mathematics, physics, computer science etc. in a cross platform app made using [Flutter](https://flutter.dev/). The outcomes of these simulations mostly are really smooth (thanks to Flutter) and extremely beautiful (thanks to mathematics/sciences behind it).
 
 <center>
-[![Simulate for Web](https://raw.githubusercontent.com/cod-ed/assets/simulate/documentation/LaunchWebApp.svg){: style="width:300px"}](https://cod-ed.github.io/simulate/web){: target="_blank"}
+[![Simulate for Web](https://raw.githubusercontent.com/builtree/assets/simulate/documentation/LaunchWebApp.svg){: style="width:300px"}](https://builtree.github.io/simulate/web){: target="_blank"}
 </center>
 
 ---

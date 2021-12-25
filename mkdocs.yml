@@ -1,11 +1,11 @@
 site_name: 'Simulate'
 site_description: 'Official site for Simulate'
 site_author: 'Yash Lamba'
-site_url: 'https://cod-ed.github.io/simulate/'
+site_url: 'https://builtree.github.io/simulate/'
 
 # Repository
-repo_name: 'cod-ed/simulate'
-repo_url: 'https://github.com/cod-ed/simulate'
+repo_name: 'builtree/simulate'
+repo_url: 'https://github.com/builtree/simulate'
 
 # Copyright
 nav:
@@ -22,7 +22,7 @@ nav:
       - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
       - Fourier Series: 'simulations/mathematics/FourierSeries.md'
   - Simulate Web:
-    - Home: 'https://cod-ed.github.io/simulate/web'
+    - Home: 'https://builtree.github.io/simulate/web'
 
 # Configuration
 theme:

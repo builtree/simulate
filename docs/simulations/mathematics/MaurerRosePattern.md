@@ -1,6 +1,6 @@
 # Maurer Rose Pattern
 ---
-![MaurerRoseLight](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/MaurerRoseLight.png){: style="height:200px", align=right}
+![MaurerRoseLight](https://raw.githubusercontent.com/builtree/simulate/master/assets/simulations/MaurerRoseLight.png){: style="height:200px", align=right}
 
 A Maurer rose of the rose $r = sin(nθ)$ consists of the 360 lines successively connecting the mentioned below
 361 points, where $n$ is a positive integer. The rose has $n$ petals if $n$ is odd, and $2n$ petals if $n$ is even.  
@@ -18,7 +18,7 @@ A Maurer rose can be described as a closed route in the polar plane.
 A Maurer rose is a closed curve since the starting point, $(0, 0)$ and the ending point, $(sin(n·360d), 360d)$, coincide.
 
 === "Light Mode"
-    ![MaurerRoseLight](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/MaurerRoseLight.png){: style="width:300px"}
+    ![MaurerRoseLight](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/MaurerRoseLight.png){: style="width:300px"}
   
 === "Dark Mode"
-    ![MaurerRoseDark](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/MaurerRoseDark.png){: style="width:300px"}
+    ![MaurerRoseDark](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/MaurerRoseDark.png){: style="width:300px"}

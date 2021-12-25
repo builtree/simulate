@@ -1,6 +1,6 @@
 # Fourier Series
 ---
-![FourierSeries](https://raw.githubusercontent.com/cod-ed/simulate/master/assets/simulations/FourierSeriesLight.png){: style="height:200px", align=right}
+![FourierSeries](https://raw.githubusercontent.com/builtree/simulate/master/assets/simulations/FourierSeriesLight.png){: style="height:200px", align=right}
 
 <p align="justify">
 A Fourier transform is a way of breaking down a complex function into (infinite) sums of sine and cosine waves. In short, given a smoothie, it finds its recipe. Fourier series is the Fourier transform of a periodic function and it aims to represent the periodic function as a sum of sinusoidal waves. It is analogous to the Taylor series, which represents functions as an infinite sum of monomial terms.</p>
@@ -31,8 +31,8 @@ We have the flexibility to fiddle with the following parameters:
 [^2]: https://upload.wikimedia.org/wikipedia/commons/1/1e/Fourier_series_sawtooth_wave_circles_animation.svg
 
 === "Light Mode"
-    ![FourierSeriesLight](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/FourierSeriesLight.png){: style="width:600px"}
+    ![FourierSeriesLight](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/FourierSeriesLight.png){: style="width:600px"}
   
 === "Dark Mode"
-    ![FourierSeriesDark](https://raw.githubusercontent.com/cod-ed/assets/simulate/simulations/FourierSeriesDark.png){: style="width:600px"}
+    ![FourierSeriesDark](https://raw.githubusercontent.com/builtree/assets/simulate/simulations/FourierSeriesDark.png){: style="width:600px"}
     
