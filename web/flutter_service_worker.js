@@ -37,8 +37,8 @@ const RESOURCES = {
 "assets/fonts/Ubuntu-Regular.ttf": "238c32cd050af8099eeaa8f50dd04ec9",
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"index.html": "16dd4097427950908b32f101608b1dec",
-"/": "16dd4097427950908b32f101608b1dec",
+"index.html": "65a1692959ff9dd6097de13351000dd3",
+"/": "65a1692959ff9dd6097de13351000dd3",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796"
 };
 
