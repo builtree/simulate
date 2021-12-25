@@ -15,7 +15,7 @@ jobs:
         with:
           channel: 'stable'
       - run: flutter pub get
-      - run: flutter build web --release
+      - run: flutter build web --release --base-href /simulate/web/
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip  
