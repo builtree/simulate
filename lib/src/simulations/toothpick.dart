@@ -245,7 +245,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                   painter: ToothpickPainter(
                     activeToothPicks,
                     toothPicks,
-                    Theme.of(context).accentColor,
+                    Theme.of(context).colorScheme.secondary,
                   ),
                   child: Container(),
                 ),
