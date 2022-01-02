@@ -7,13 +7,13 @@ const RESOURCES = {
 "canvaskit/profiling/canvaskit.js": "f3bfccc993a1e0bfdd3440af60d99df4",
 "canvaskit/profiling/canvaskit.wasm": "a9610cf39260f60fbe7524a785c66101",
 "canvaskit/canvaskit.wasm": "04ed3c745ff1dee16504be01f9623498",
-"main.dart.js": "5c362896ea095d1b6d85015ac71fbe8c",
+"main.dart.js": "4a840bb48d4081d2a204f541a51f19e2",
 "version.json": "f91490e18e79302bd6fb3992c63bd532",
 "manifest.json": "a2b0ace2b69a7f377a6fc400508411ff",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "assets/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": "423773f7ed9beb6161d3ee3fd6447bb1",
-"assets/NOTICES": "679ec67f78502661a9bb5a5753a7bc9b",
+"assets/NOTICES": "9726b8e38e88d47b279eeb38a152ab2c",
 "assets/AssetManifest.json": "a9458a2c01ad9b9815749de8af67c477",
 "assets/FontManifest.json": "dd2f2ccfd341cc28c6f1ca3e7c357837",
 "assets/assets/simulations/InsertionSortDark.png": "46227946b3b7d87cb38c6b3205b20f5e",
@@ -37,8 +37,8 @@ const RESOURCES = {
 "assets/fonts/Ubuntu-Regular.ttf": "238c32cd050af8099eeaa8f50dd04ec9",
 "assets/fonts/MaterialIcons-Regular.otf": "4e6447691c9509f7acdbf8a931a85ca1",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
-"index.html": "65a1692959ff9dd6097de13351000dd3",
-"/": "65a1692959ff9dd6097de13351000dd3",
+"index.html": "94262af383382dcec90f07368b330ca4",
+"/": "94262af383382dcec90f07368b330ca4",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796"
 };
 
