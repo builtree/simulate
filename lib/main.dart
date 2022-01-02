@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:simulate/src/home.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/data/simulations.dart';
