@@ -199,7 +199,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                 min: 0,
                 max: 10,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -218,7 +218,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                 min: 0,
                 max: 10,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -237,7 +237,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                 min: 0,
                 max: 6.28,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -256,7 +256,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                 min: 2,
                 max: 6,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {

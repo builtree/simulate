@@ -39,7 +39,7 @@ class Simulations with ChangeNotifier {
 
   getFavorites() async {
     prefs = await SharedPreferences.getInstance();
-    List<String> myList = (prefs.getStringList('favorites') ?? List<String>());
+    List<String> myList = (prefs.getStringList('favorites') ?? <String>[]);
     if (myList.length != 0) {
       _favorites = myList.map((i) => int.parse(i)).toList();
       if (allSimulations().length > _favorites.length) {

@@ -220,7 +220,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                 min: 0,
                 max: 20,
                 divisions: 200,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
@@ -243,7 +243,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                 min: 0,
                 max: 100,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
@@ -266,7 +266,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               //   min: 0.001,
               //   max: 0.01,
               //   divisions: 9,
-              //   activeColor: Theme.of(context).accentColor,
+              //   activeColor: Theme.of(context).colorScheme.secondary,
               //   inactiveColor: Colors.grey,
               //   onChanged: (value) {
               //     setState(() {
@@ -285,7 +285,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
               //   min: 0.001,
               //   max: 0.01,
               //   divisions: 9,
-              //   activeColor: Theme.of(context).accentColor,
+              //   activeColor: Theme.of(context).colorScheme.secondary,
               //   inactiveColor: Colors.grey,
               //   onChanged: (value) {
               //     setState(() {
@@ -376,7 +376,7 @@ class MaurerRoseState extends State<MaurerRose> {
                       : MediaQuery.of(context).size.width / 2)
                   .roundToDouble(),
               (MediaQuery.of(context).size.height / 3).roundToDouble(),
-              Theme.of(context).accentColor,
+              Theme.of(context).colorScheme.secondary,
             ),
             child: Container(),
           ),

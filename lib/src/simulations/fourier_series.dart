@@ -122,7 +122,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 1,
                             max: 100,
-                            activeColor: Theme.of(context).accentColor,
+                            activeColor: Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {
@@ -140,7 +140,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 10,
                             max: 200,
-                            activeColor: Theme.of(context).accentColor,
+                            activeColor: Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {
@@ -158,7 +158,7 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 0,
                             max: 0.3,
-                            activeColor: Theme.of(context).accentColor,
+                            activeColor: Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {
@@ -202,7 +202,7 @@ class FourierPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint();
-    paint.color = Theme.of(context).accentColor;
+    paint.color = Theme.of(context).colorScheme.secondary;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 2;
     for (int i = 0; i < _n; i++) {
@@ -226,7 +226,7 @@ class FourierPainter extends CustomPainter {
     paint.color = Colors.red;
     canvas.drawLine(coor, Offset(r, ys[0]), paint);
     int iterator = 0;
-    paint.color = Theme.of(context).accentColor;
+    paint.color = Theme.of(context).colorScheme.secondary;
     ys.forEach((value) {
       points.add(Offset(iterator.toDouble() + r, value));
       iterator++;

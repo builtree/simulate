@@ -208,7 +208,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
               Slider(
                 min: 0,
                 max: 50,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -227,7 +227,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
               Slider(
                 min: 50,
                 max: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -250,7 +250,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                     Slider(
                       min: 0,
                       max: 0.1,
-                      activeColor: Theme.of(context).accentColor,
+                      activeColor: Theme.of(context).colorScheme.secondary,
                       inactiveColor: Colors.grey,
                       onChanged: (value) {
                         setState(() {
@@ -398,7 +398,7 @@ class NormalEpicycloidPainter extends CustomPainter {
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
       this.points.clear();
-      paint.color = Theme.of(context).accentColor;
+      paint.color = Theme.of(context).colorScheme.secondary;
       canvas.drawCircle(
           Offset(transformx, transformy), innerRadius.toDouble(), paint);
       paint.color = Colors.red;
@@ -421,7 +421,7 @@ class NormalEpicycloidPainter extends CustomPainter {
       Paint paint = new Paint();
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
-      paint.color = Theme.of(context).accentColor;
+      paint.color = Theme.of(context).colorScheme.secondary;
       canvas.drawCircle(coor, innerRadius.toDouble(), paint);
       smallCenter = Offset((innerRadius + outerRadius) * cos(time),
               (innerRadius + outerRadius) * sin(time))

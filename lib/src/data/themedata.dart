@@ -18,9 +18,8 @@ class ThemeProvider with ChangeNotifier {
   }
 
   ThemeData themeData() {
-    return ThemeData(
+    final ThemeData _theme = ThemeData(
       brightness: _darkTheme ? Brightness.dark : Brightness.light,
-      accentColor: _counterColor,
       fontFamily: 'Ubuntu',
       indicatorColor: _counterColor,
       primaryColor: _primaryColor,
@@ -49,6 +48,10 @@ class ThemeProvider with ChangeNotifier {
         labelColor: _counterColor,
         unselectedLabelColor: _counterColor.withOpacity(0.3),
       ),
+    );
+
+    return _theme.copyWith(
+      colorScheme: _theme.colorScheme.copyWith(secondary: _counterColor),
     );
   }
 

@@ -193,7 +193,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 10,
                 divisions: 1000,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -212,7 +212,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 10,
                 divisions: 1000,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {
@@ -231,7 +231,7 @@ class _RosePatternState extends State<RosePattern> {
                 min: 0,
                 max: 1,
                 divisions: 100,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (value) {
                   setState(() {

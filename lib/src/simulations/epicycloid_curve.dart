@@ -216,7 +216,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                 min: 0,
                 max: 500,
                 divisions: 500,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
@@ -239,7 +239,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                 min: 0,
                 max: 51,
                 divisions: 510,
-                activeColor: Theme.of(context).accentColor,
+                activeColor: Theme.of(context).colorScheme.secondary,
                 inactiveColor: Colors.grey,
                 onChanged: (animating)
                     ? null
@@ -334,7 +334,7 @@ class _EpicycloidState extends State<Epicycloid> {
                         : MediaQuery.of(context).size.width / 2)
                     .roundToDouble(),
                 (MediaQuery.of(context).size.height / 3).roundToDouble(),
-                Theme.of(context).accentColor),
+                Theme.of(context).colorScheme.secondary),
             child: Container(),
           ),
         ),

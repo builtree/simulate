@@ -198,7 +198,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
                       Slider(
                         min: 2,
                         max: 200,
-                        activeColor: Theme.of(context).accentColor,
+                        activeColor: Theme.of(context).colorScheme.secondary,
                         inactiveColor: Colors.grey,
                         onChanged: (value) {
                           doNotRefresh = false;
@@ -224,7 +224,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
                         min: 0,
                         max: 100,
                         divisions: 10,
-                        activeColor: Theme.of(context).accentColor,
+                        activeColor: Theme.of(context).colorScheme.secondary,
                         inactiveColor: Colors.grey,
                         onChanged: (value) {
                           setState(() {

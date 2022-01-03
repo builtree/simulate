@@ -186,7 +186,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                       Slider(
                         min: 2,
                         max: 149,
-                        activeColor: Theme.of(context).accentColor,
+                        activeColor: Theme.of(context).colorScheme.secondary,
                         inactiveColor: Colors.grey,
                         onChanged: (value) {
                           setState(() {
@@ -210,7 +210,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                       Slider(
                         min: 0,
                         max: 500,
-                        activeColor: Theme.of(context).accentColor,
+                        activeColor: Theme.of(context).colorScheme.secondary,
                         inactiveColor: Colors.grey,
                         onChangeStart: (value) {
                           setState(() {
