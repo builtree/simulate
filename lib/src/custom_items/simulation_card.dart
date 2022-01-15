@@ -12,7 +12,7 @@ class SimulationCard extends StatefulWidget {
   final String infoLink;
   final int fav;
   final int id;
-  SimulationCard(
+  const SimulationCard(
       {Key key,
       @required this.id,
       @required this.simulationName,
@@ -22,6 +22,7 @@ class SimulationCard extends StatefulWidget {
       @required this.fav})
       : super(key: key);
 
+  @override
   _SimulationCardState createState() => _SimulationCardState();
 }
 
@@ -37,7 +38,7 @@ class _SimulationCardState extends State<SimulationCard> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.height > MediaQuery.of(context).size.width ? ScreenUtil().setWidth(200) : 200,
       child: GestureDetector(
         onTap: () {
@@ -58,7 +59,7 @@ class _SimulationCardState extends State<SimulationCard> {
               Flexible(
                 flex: 10,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
+                  padding: const EdgeInsets.fromLTRB(5, 10, 5, 0),
                   child: Image.asset(
                     widget.image,
                     fit: BoxFit.fill,
@@ -68,7 +69,7 @@ class _SimulationCardState extends State<SimulationCard> {
               Flexible(
                 flex: 3,
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(3, 15, 3, 0),
+                  padding: const EdgeInsets.fromLTRB(3, 15, 3, 0),
                   child: Center(
                     child: FittedBox(
                       alignment: Alignment.bottomCenter,
@@ -89,7 +90,7 @@ class _SimulationCardState extends State<SimulationCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.info_outline),
+                        icon: const Icon(Icons.info_outline),
                         onPressed: () async {
                           final url = widget.infoLink;
                           if (await canLaunch(url)) {
@@ -101,8 +102,8 @@ class _SimulationCardState extends State<SimulationCard> {
                       ),
                       IconButton(
                         icon: (widget.fav == 1)
-                            ? Icon(Icons.favorite)
-                            : Icon(Icons.favorite_border),
+                            ? const Icon(Icons.favorite)
+                            : const Icon(Icons.favorite_border),
                         onPressed: () {
                           setState(() {
                             appState.toggleFavorite(widget.id);

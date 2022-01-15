@@ -3,23 +3,25 @@ import 'package:flutter/services.dart';
 import 'dart:math' as math;
 
 double pi = 0, total = 0, insideCircle = 0;
-List<List<double>> coordinates = List();
+List<List<double>> coordinates = [];
 
 class PiApproximation extends StatelessWidget {
+  const PiApproximation({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Pi Approximation (Monte Carlo Method)",
           style: TextStyle(
             color: Colors.black,
@@ -38,7 +40,7 @@ class PiApproximation extends StatelessWidget {
               child: Container(),
             ),
           ),
-          MakeDots(),
+          const MakeDots(),
           Positioned(
             bottom: 0,
             child: Container(
@@ -48,19 +50,19 @@ class PiApproximation extends StatelessWidget {
             ),
           ),
           Align(
-            alignment: Alignment(0, 0.5),
+            alignment: const Alignment(0, 0.5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const <Widget>[
                 Values(),
               ],
             ),
           ),
           Align(
-            alignment: Alignment(0, 0.9),
+            alignment: const Alignment(0, 0.9),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
+              children: const <Widget>[
                 Text(
                   "Pi (approx): ",
                   style: TextStyle(
@@ -114,6 +116,9 @@ class BackgroundPainter extends CustomPainter {
 }
 
 class Values extends StatefulWidget {
+  const Values({Key key}) : super(key: key);
+
+  @override
   _ValuesState createState() => _ValuesState();
 }
 
@@ -124,7 +129,7 @@ class _ValuesState extends State<Values> {
     return Text(
       "\tDots inside circle (Red): ${insideCircle.toInt()}\n"
       "Total dots (Red + Green): ${total.toInt()}",
-      style: TextStyle(
+      style: const TextStyle(
         fontFamily: 'Ubuntu',
         fontSize: 20,
         color: Colors.white,
@@ -134,6 +139,9 @@ class _ValuesState extends State<Values> {
 }
 
 class PiValue extends StatefulWidget {
+  const PiValue({Key key}) : super(key: key);
+
+  @override
   _PiValueState createState() => _PiValueState();
 }
 
@@ -142,8 +150,8 @@ class _PiValueState extends State<PiValue> {
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
     return Text(
-      "${pi.toStringAsFixed(20)}",
-      style: TextStyle(
+      pi.toStringAsFixed(20),
+      style: const TextStyle(
         fontFamily: 'Ubuntu',
         fontSize: 20,
         color: Colors.black,
@@ -153,6 +161,9 @@ class _PiValueState extends State<PiValue> {
 }
 
 class MakeDots extends StatefulWidget {
+  const MakeDots({Key key}) : super(key: key);
+
+  @override
   _MakeDotsState createState() => _MakeDotsState();
 }
 
@@ -209,7 +220,7 @@ class DotPainter extends CustomPainter {
       ++total;
     }
 
-    coordinates.forEach((coordinate) {
+    for (var coordinate in coordinates) {
       x = coordinate[0];
       y = coordinate[1];
 
@@ -222,7 +233,7 @@ class DotPainter extends CustomPainter {
         1,
         brush,
       );
-    });
+    }
 
     pi = 4 * insideCircle / total;
   }

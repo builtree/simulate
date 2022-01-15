@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'data/simulations.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
@@ -10,16 +9,18 @@ import 'package:simulate/src/data/themedata.dart';
 
 class Home extends StatefulWidget {
   final List<Widget> _categoryTabs = [
-    Tab(
+    const Tab(
       child: Text('Home'),
     ),
-    Tab(
+    const Tab(
       child: Text('Algorithms'),
     ),
-    Tab(
+    const Tab(
       child: Text('Mathematics'),
     ),
   ];
+
+  Home({Key key}) : super(key: key);
   @override
   _HomeState createState() => _HomeState();
 }
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             onPressed: () {
               showSearch(
                 context: context,
@@ -105,7 +106,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       body: TabBarView(
         controller: _categoryController,
-        children: <Widget>[
+        children: const <Widget>[
           HomePage(),
           AlgorithmsPage(),
           MathematicsPage(),
@@ -125,7 +126,7 @@ class SimulationSearch extends SearchDelegate<SimulationCard> {
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
-        icon: Icon(Icons.clear),
+        icon: const Icon(Icons.clear),
         onPressed: () {
           query = '';
         },
@@ -136,7 +137,7 @@ class SimulationSearch extends SearchDelegate<SimulationCard> {
   @override
   Widget buildLeading(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.arrow_back),
+      icon: const Icon(Icons.arrow_back),
       onPressed: () {
         close(context, null);
       },
@@ -152,28 +153,24 @@ class SimulationSearch extends SearchDelegate<SimulationCard> {
   Widget buildSuggestions(BuildContext context) {
     final appState = Provider.of<Simulations>(context);
     return (query != '')
-        ? (appState.searchSims(query).length != 0)
+        ? (appState.searchSims(query).isNotEmpty)
             ? GridView.count(
                 crossAxisCount: (MediaQuery.of(context).size.width < 600)
                     ? 2
                     : (MediaQuery.of(context).size.width / 200).floor(),
                 children: appState.searchSims(query),
               )
-            : Container(
-                child: Center(
-                  child: Text(
-                    "Sorry, couldn't find a simulation",
-                    style: Theme.of(context).textTheme.caption,
-                  ),
-                ),
-              )
-        : Container(
-            child: Center(
+            : Center(
               child: Text(
-                'Search for Simulations',
+                "Sorry, couldn't find a simulation",
                 style: Theme.of(context).textTheme.caption,
               ),
-            ),
-          );
+            )
+        : Center(
+          child: Text(
+            'Search for Simulations',
+            style: Theme.of(context).textTheme.caption,
+          ),
+        );
   }
 }

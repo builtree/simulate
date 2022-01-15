@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 List<double> ys = [];
 
 class FourierSeries extends StatefulWidget {
+  const FourierSeries({Key key}) : super(key: key);
+
   @override
   _FourierSeriesState createState() => _FourierSeriesState();
 }
@@ -62,14 +64,14 @@ class _FourierSeriesState extends State<FourierSeries> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(1024.0, 512.0),
+            designSize: const Size(1024.0, 512.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -82,7 +84,7 @@ class _FourierSeriesState extends State<FourierSeries> {
             ),
             body: Row(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: 2 * ScreenUtil().setWidth(1024 / 3),
                   child: Transform.translate(
                     offset: Offset(
@@ -94,87 +96,85 @@ class _FourierSeriesState extends State<FourierSeries> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    child: Material(
-                      elevation: 30,
-                      color: Theme.of(context).primaryColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          DropdownButton<String>(
-                            value: wave,
-                            iconSize: 30,
+                  child: Material(
+                    elevation: 30,
+                    color: Theme.of(context).primaryColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: wave,
+                          iconSize: 30,
+                          style: Theme.of(context).textTheme.subtitle2,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'Square Wave',
+                              child: Text('Square Wave'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'SawTooth Wave',
+                              child: Text('SawTooth Wave'),
+                            ),
+                          ],
+                          onChanged: (value) {
+                            wave = value;
+                          },
+                        ),
+                        Slider(
+                          min: 1,
+                          max: 100,
+                          activeColor: Theme.of(context).colorScheme.secondary,
+                          inactiveColor: Colors.grey,
+                          onChanged: (value) {
+                            setState(() {
+                              _n = value.toInt();
+                            });
+                          },
+                          value: _n.toDouble(),
+                        ),
+                        Center(
+                          child: Text(
+                            "N: ${_n.toInt()}",
                             style: Theme.of(context).textTheme.subtitle2,
-                            items: [
-                              DropdownMenuItem(
-                                value: 'Square Wave',
-                                child: Text('Square Wave'),
-                              ),
-                              DropdownMenuItem(
-                                value: 'SawTooth Wave',
-                                child: Text('SawTooth Wave'),
-                              ),
-                            ],
-                            onChanged: (value) {
-                              wave = value;
-                            },
                           ),
-                          Slider(
-                            min: 1,
-                            max: 100,
-                            activeColor: Theme.of(context).colorScheme.secondary,
-                            inactiveColor: Colors.grey,
-                            onChanged: (value) {
-                              setState(() {
-                                _n = value.toInt();
-                              });
-                            },
-                            value: _n.toDouble(),
+                        ),
+                        Slider(
+                          min: 10,
+                          max: 200,
+                          activeColor: Theme.of(context).colorScheme.secondary,
+                          inactiveColor: Colors.grey,
+                          onChanged: (value) {
+                            setState(() {
+                              radius = value.roundToDouble();
+                            });
+                          },
+                          value: radius,
+                        ),
+                        Center(
+                          child: Text(
+                            "Amplitude: ${radius.toInt()}",
+                            style: Theme.of(context).textTheme.subtitle2,
                           ),
-                          Center(
-                            child: Text(
-                              "N: ${_n.toInt()}",
-                              style: Theme.of(context).textTheme.subtitle2,
-                            ),
+                        ),
+                        Slider(
+                          min: 0,
+                          max: 0.3,
+                          activeColor: Theme.of(context).colorScheme.secondary,
+                          inactiveColor: Colors.grey,
+                          onChanged: (value) {
+                            setState(() {
+                              f = value;
+                            });
+                          },
+                          value: f,
+                        ),
+                        Center(
+                          child: Text(
+                            "- Frequency +",
+                            style: Theme.of(context).textTheme.subtitle2,
                           ),
-                          Slider(
-                            min: 10,
-                            max: 200,
-                            activeColor: Theme.of(context).colorScheme.secondary,
-                            inactiveColor: Colors.grey,
-                            onChanged: (value) {
-                              setState(() {
-                                radius = value.roundToDouble();
-                              });
-                            },
-                            value: radius,
-                          ),
-                          Center(
-                            child: Text(
-                              "Amplitude: ${radius.toInt()}",
-                              style: Theme.of(context).textTheme.subtitle2,
-                            ),
-                          ),
-                          Slider(
-                            min: 0,
-                            max: 0.3,
-                            activeColor: Theme.of(context).colorScheme.secondary,
-                            inactiveColor: Colors.grey,
-                            onChanged: (value) {
-                              setState(() {
-                                f = value;
-                              });
-                            },
-                            value: f,
-                          ),
-                          Center(
-                            child: Text(
-                              "- Frequency +",
-                              style: Theme.of(context).textTheme.subtitle2,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -190,8 +190,9 @@ class _FourierSeriesState extends State<FourierSeries> {
 class FourierPainter extends CustomPainter {
   double radius;
   double time, r;
-  Offset coor = new Offset(0, 0);
+  Offset coor = const Offset(0, 0);
   Offset prevco;
+  // ignore: prefer_final_fields
   int n, _n;
   String wave;
   BuildContext context;
@@ -201,7 +202,7 @@ class FourierPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Paint paint = new Paint();
+    Paint paint = Paint();
     paint.color = Theme.of(context).colorScheme.secondary;
     paint.style = PaintingStyle.stroke;
     paint.strokeWidth = 2;
@@ -227,10 +228,10 @@ class FourierPainter extends CustomPainter {
     canvas.drawLine(coor, Offset(r, ys[0]), paint);
     int iterator = 0;
     paint.color = Theme.of(context).colorScheme.secondary;
-    ys.forEach((value) {
+    for (var value in ys) {
       points.add(Offset(iterator.toDouble() + r, value));
       iterator++;
-    });
+    }
 
     canvas.drawPoints(PointMode.polygon, points, paint);
   }

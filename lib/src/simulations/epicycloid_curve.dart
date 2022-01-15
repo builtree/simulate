@@ -1,11 +1,12 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 GlobalKey<_EpicycloidState> globalKey = GlobalKey<_EpicycloidState>();
 
 class EpicycloidCurve extends StatefulWidget {
+  const EpicycloidCurve({Key key}) : super(key: key);
+
   @override
   _EpicycloidCurveState createState() => _EpicycloidCurveState();
 }
@@ -36,14 +37,14 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(434.0, 924.0),
+            designSize: const Size(434.0, 924.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -67,11 +68,11 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         heroTag: null,
                         backgroundColor: Colors.white,
                         child: (!animating)
-                            ? Icon(
+                            ? const Icon(
                                 Icons.play_arrow,
                                 color: Colors.black,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.pause,
                                 color: Colors.black,
                               ),
@@ -84,7 +85,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         }),
                     FloatingActionButton(
                       heroTag: null,
-                      child: Icon(
+                      child: const Icon(
                         Icons.replay,
                         color: Colors.black,
                       ),
@@ -113,7 +114,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
             ),
             body: Row(
               children: [
-                Container(
+                SizedBox(
                   width: isLandscape()
                       ? 2 * MediaQuery.of(context).size.width / 3
                       : MediaQuery.of(context).size.width,
@@ -133,7 +134,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               'Animate with Factor:',
                             ),
                             Checkbox(
@@ -154,7 +155,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               'Animate with Points:',
                             ),
                             Checkbox(
@@ -197,6 +198,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   }
 
   Container parameters(BuildContext context, num height) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: height,
       child: Material(
@@ -207,9 +209,9 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           isAlwaysShown: true,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Slider(
@@ -266,6 +268,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
   }
 }
 
+// ignore: must_be_immutable
 class Epicycloid extends StatefulWidget {
   Epicycloid({
     Key key,
@@ -290,8 +293,8 @@ class Epicycloid extends StatefulWidget {
 
 class _EpicycloidState extends State<Epicycloid> {
   nextStep() async {
-    await Future.delayed(Duration(milliseconds: 10));
-    if (this.mounted) {
+    await Future.delayed(const Duration(milliseconds: 10));
+    if (mounted) {
       setState(() {
         if (widget.animatefactor) {
           widget.factor += 0.01;

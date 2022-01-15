@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-final size = 29;
+const size = 29;
 var colorsList =
     List<List<int>>.generate(size, (i) => List<int>.generate(size, (j) => 0));
 enum direction { up, right, down, left }
@@ -12,6 +12,9 @@ int steps = 0;
 bool shouldWork = false;
 
 class LangtonAnt extends StatefulWidget {
+  const LangtonAnt({Key key}) : super(key: key);
+
+  @override
   _LangtonAntState createState() => _LangtonAntState();
 }
 
@@ -35,49 +38,57 @@ class _LangtonAntState extends State<LangtonAnt> {
       if (colorsList[x][y] == 0) {
         colorsList[x][y] = 1;
         if (headDir == direction.up) {
-          if (x == 0)
+          if (x == 0) {
             x = size - 1;
-          else
+          } else {
             --x;
+          }
         } else if (headDir == direction.right) {
-          if (y == 0)
+          if (y == 0) {
             y = size - 1;
-          else
+          } else {
             --y;
+          }
         } else if (headDir == direction.down) {
-          if (x == size - 1)
+          if (x == size - 1) {
             x = 0;
-          else
+          } else {
             ++x;
+          }
         } else {
-          if (y == size - 1)
+          if (y == size - 1) {
             y = 0;
-          else
+          } else {
             ++y;
+          }
         }
         headDir = direction.values[(direction.values.indexOf(headDir) - 1) % 4];
       } else {
         colorsList[x][y] = 0;
         if (headDir == direction.up) {
-          if (x == size - 1)
+          if (x == size - 1) {
             x = 0;
-          else
+          } else {
             ++x;
+          }
         } else if (headDir == direction.right) {
-          if (y == size - 1)
+          if (y == size - 1) {
             y = 0;
-          else
+          } else {
             ++y;
+          }
         } else if (headDir == direction.down) {
-          if (x == 0)
+          if (x == 0) {
             x = size - 1;
-          else
+          } else {
             --x;
+          }
         } else {
-          if (y == 0)
+          if (y == 0) {
             y = size - 1;
-          else
+          } else {
             --y;
+          }
         }
         headDir = direction.values[(direction.values.indexOf(headDir) + 1) % 4];
       }
@@ -86,8 +97,9 @@ class _LangtonAntState extends State<LangtonAnt> {
 
   @override
   Widget build(BuildContext context) {
-    if (shouldWork)
+    if (shouldWork) {
       WidgetsBinding.instance.addPostFrameCallback((_) => nextPixel());
+    }
     setupX = 0;
     setupY = 0;
     return Scaffold(
@@ -95,12 +107,12 @@ class _LangtonAntState extends State<LangtonAnt> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           "Langton's Ant",
           style: TextStyle(
             color: Colors.black,
@@ -108,7 +120,7 @@ class _LangtonAntState extends State<LangtonAnt> {
             fontSize: 20,
           ),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black,
         ),
         backgroundColor: Colors.white,
@@ -117,26 +129,26 @@ class _LangtonAntState extends State<LangtonAnt> {
       body: Stack(
         children: <Widget>[
           Align(
-            alignment: Alignment(0, -0.2),
+            alignment: const Alignment(0, -0.2),
             child: Container(
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.height / 2,
               child: GridView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: size,
                 ),
                 itemCount: size * size,
                 itemBuilder: buildItem,
-                padding: EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(5.0),
               ),
             ),
           ),
           Align(
-            alignment: Alignment(0, -0.85),
+            alignment: const Alignment(0, -0.85),
             child: Text(
               "Steps: $steps",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontFamily: 'Ubuntu',
                 fontSize: 18,
@@ -165,8 +177,9 @@ class _LangtonAntState extends State<LangtonAnt> {
       if (setupY == size - 1) {
         setupY = 0;
         ++setupX;
-      } else
+      } else {
         ++setupY;
+      }
       return GridTile(
         child: Container(
           decoration: BoxDecoration(
@@ -182,8 +195,9 @@ class _LangtonAntState extends State<LangtonAnt> {
       if (setupY == size - 1) {
         setupY = 0;
         ++setupX;
-      } else
+      } else {
         ++setupY;
+      }
       return GridTile(
         child: Container(
           decoration: BoxDecoration(

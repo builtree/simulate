@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 GlobalKey<MaurerRoseState> globalKey = GlobalKey<MaurerRoseState>();
 
 class MaurerRoseCurve extends StatefulWidget {
+  const MaurerRoseCurve({Key key}) : super(key: key);
+
   @override
   MaurerRoseCurveState createState() => MaurerRoseCurveState();
 }
@@ -38,14 +40,14 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(512.0, 1024.0),
+            designSize: const Size(512.0, 1024.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -69,11 +71,11 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         heroTag: null,
                         backgroundColor: Colors.white,
                         child: (!animating)
-                            ? Icon(
+                            ? const Icon(
                                 Icons.play_arrow,
                                 color: Colors.black,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.pause,
                                 color: Colors.black,
                               ),
@@ -86,7 +88,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         }),
                     FloatingActionButton(
                       heroTag: null,
-                      child: Icon(
+                      child: const Icon(
                         Icons.highlight_off,
                         color: Colors.black,
                       ),
@@ -115,7 +117,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
             ),
             body: Row(
               children: [
-                Container(
+                SizedBox(
                   width: isLandscape()
                       ? 2 * MediaQuery.of(context).size.width / 3
                       : MediaQuery.of(context).size.width,
@@ -137,7 +139,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               'Animate with N:',
                             ),
                             Checkbox(
@@ -158,7 +160,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text(
+                            const Text(
                               'Animate with D:',
                             ),
                             Checkbox(
@@ -201,6 +203,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   }
 
   Container parameters(BuildContext context, num height) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: height,
       child: Material(
@@ -211,9 +214,9 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
           isAlwaysShown: true,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Slider(
@@ -308,6 +311,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
   }
 }
 
+// ignore: must_be_immutable
 class MaurerRose extends StatefulWidget {
   MaurerRose({
     Key key,
@@ -336,8 +340,8 @@ class MaurerRose extends StatefulWidget {
 
 class MaurerRoseState extends State<MaurerRose> {
   nextStep() async {
-    await Future.delayed(Duration(milliseconds: 10));
-    if (this.mounted) {
+    await Future.delayed(const Duration(milliseconds: 10));
+    if (mounted) {
       setState(() {
         if (widget.animateN) {
           widget.n += 0.003;
@@ -432,8 +436,7 @@ class MaurerRosePainter extends CustomPainter {
       q = r * sin(n * k);
       x = q * cos(k);
       y = q * sin(k);
-      this
-          .points
+      points
           .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
     }
     canvas.drawPoints(PointMode.polygon, points, paint);
@@ -448,8 +451,7 @@ class MaurerRosePainter extends CustomPainter {
       q = r * sin(n * k);
       x = q * cos(k);
       y = q * sin(k);
-      this
-          .points2
+      points2
           .add(Offset(x / 1.5, y / 1.5).translate(transformx, transformy));
     }
     canvas.drawPoints(PointMode.polygon, points2, paint2);

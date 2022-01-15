@@ -19,6 +19,7 @@ class Simulations with ChangeNotifier {
   final _mathematics = [3, 4, 5, 6, 7, 8];
   final _physics = [];
   final _chemistry = [];
+  // ignore: prefer_typing_uninitialized_variables
   var prefs;
   final _searchTags = {
     0: "toothpick pattern algorithm sequence ",
@@ -40,7 +41,7 @@ class Simulations with ChangeNotifier {
   getFavorites() async {
     prefs = await SharedPreferences.getInstance();
     List<String> myList = (prefs.getStringList('favorites') ?? <String>[]);
-    if (myList.length != 0) {
+    if (myList.isNotEmpty) {
       _favorites = myList.map((i) => int.parse(i)).toList();
       if (allSimulations().length > _favorites.length) {
         _favorites = List.from(_favorites)
@@ -59,7 +60,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/ToothpickPatternDark.png'
             : 'assets/simulations/ToothpickPatternLight.png',
-        direct: ToothpickPattern(),
+        direct: const ToothpickPattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
         fav: _favorites[0],
       ),
@@ -69,7 +70,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/BubbleSortDark.png'
             : 'assets/simulations/BubbleSortLight.png',
-        direct: BubbleSortBars(),
+        direct: const BubbleSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Bubble_sort',
         fav: _favorites[1],
       ),
@@ -79,7 +80,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/InsertionSortDark.png'
             : 'assets/simulations/InsertionSortLight.png',
-        direct: InsertionHome(),
+        direct: const InsertionHome(),
         infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
         fav: _favorites[2],
       ),
@@ -89,7 +90,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/RosePatternDark.png'
             : 'assets/simulations/RosePatternLight.png',
-        direct: RosePattern(),
+        direct: const RosePattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[3],
       ),
@@ -99,7 +100,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/FourierSeriesDark.png'
             : 'assets/simulations/FourierSeriesLight.png',
-        direct: FourierSeries(),
+        direct: const FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
       ),
@@ -109,7 +110,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/LissajousCurveDark.png'
             : 'assets/simulations/LissajousCurveLight.png',
-        direct: LissajousCurve(),
+        direct: const LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
       ),
@@ -119,7 +120,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/Epicycloid1Dark.png'
             : 'assets/simulations/Epicycloid1Light.png',
-        direct: EpicycloidCurve(),
+        direct: const EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
       ),
@@ -129,7 +130,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/EpicycloidDark.png'
             : 'assets/simulations/Epicycloid.png',
-        direct: NormalEpicycloidCurve(),
+        direct: const NormalEpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[7],
       ),
@@ -139,7 +140,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/MaurerRoseDark.png'
             : 'assets/simulations/MaurerRoseLight.png',
-        direct: MaurerRoseCurve(),
+        direct: const MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[8],
       ),
@@ -149,7 +150,7 @@ class Simulations with ChangeNotifier {
         image: theme.darkTheme
             ? 'assets/simulations/InsertionSortDark.png'
             : 'assets/simulations/InsertionSortLight.png',
-        direct: SelectionSortBars(),
+        direct: const SelectionSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
         fav: _favorites[9],
       ),
@@ -165,7 +166,9 @@ class Simulations with ChangeNotifier {
     getFavorites();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    _algorithm.forEach((index) => widgets.add(allWidgets[index]));
+    for (var index in _algorithm) {
+      widgets.add(allWidgets[index]);
+    }
     return widgets;
   }
 
@@ -173,7 +176,9 @@ class Simulations with ChangeNotifier {
     getFavorites();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    _physics.forEach((index) => widgets.add(allWidgets[index]));
+    for (var index in _physics) {
+      widgets.add(allWidgets[index]);
+    }
     return widgets;
   }
 
@@ -181,7 +186,9 @@ class Simulations with ChangeNotifier {
     getFavorites();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    _mathematics.forEach((index) => widgets.add(allWidgets[index]));
+    for (var index in _mathematics) {
+      widgets.add(allWidgets[index]);
+    }
     return widgets;
   }
 
@@ -189,7 +196,9 @@ class Simulations with ChangeNotifier {
     getFavorites();
     List<Widget> widgets = [];
     List<Widget> allWidgets = allSimulations();
-    _chemistry.forEach((index) => widgets.add(allWidgets[index]));
+    for (var index in _chemistry) {
+      widgets.add(allWidgets[index]);
+    }
     return widgets;
   }
 

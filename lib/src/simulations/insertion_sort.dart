@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +15,9 @@ bool isWorking = false,
     wasAlreadyWorking = false;
 
 class InsertionHome extends StatefulWidget {
+  const InsertionHome({Key key}) : super(key: key);
+
+  @override
   _InsertionHomeState createState() => _InsertionHomeState();
 }
 
@@ -35,17 +37,18 @@ class _InsertionHomeState extends State<InsertionHome> {
   }
 
   makeContainers() {
-    if (!doNotRefresh || barValuesList.length == 0) {
+    if (!doNotRefresh || barValuesList.isEmpty) {
       barValuesList = List.generate(
           sliderValue.toInt(),
           (idx) =>
               randomVar.nextInt(MediaQuery.of(context).size.height ~/ 1.7));
-    } else
+    } else {
       doNotRefresh = false;
+    }
     int temp = 0;
     barsList.clear();
     greenIterator = 0;
-    barValuesList.forEach((value) {
+    for (var value in barValuesList) {
       barsList.add(
         Container(
           width: MediaQuery.of(context).size.width / sliderValue * 0.9,
@@ -60,7 +63,7 @@ class _InsertionHomeState extends State<InsertionHome> {
         ),
       );
       ++temp;
-    });
+    }
     sortBars();
   }
 
@@ -110,10 +113,11 @@ class _InsertionHomeState extends State<InsertionHome> {
 
   @override
   Widget build(BuildContext context) {
-    if (!colorGreen)
+    if (!colorGreen) {
       makeContainers();
-    else
+    } else {
       makeGreen();
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
           doNotRefresh = true;
         }));
@@ -123,13 +127,13 @@ class _InsertionHomeState extends State<InsertionHome> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(512.0, 1024.0),
+            designSize: const Size(512.0, 1024.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () => Navigator.pop(context),
               ),
               elevation: 5,
@@ -145,12 +149,12 @@ class _InsertionHomeState extends State<InsertionHome> {
                   color: Colors.grey[900],
                   child: Column(
                     children: <Widget>[
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: barsList,
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -159,7 +163,7 @@ class _InsertionHomeState extends State<InsertionHome> {
                   left: 5,
                   child: Text(
                     "Counter: $numSteps",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontFamily: 'Ubuntu',
                     ),
@@ -178,9 +182,9 @@ class _InsertionHomeState extends State<InsertionHome> {
                   isAlwaysShown: true,
                   child: ListView(
                     controller: _scrollController,
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     children: <Widget>[
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Slider(
@@ -257,12 +261,12 @@ class _InsertionHomeState extends State<InsertionHome> {
                 });
               },
               child: (!isWorking || colorGreen)
-                  ? Icon(
+                  ? const Icon(
                       Icons.play_arrow,
                       size: 30,
                       color: Colors.black,
                     )
-                  : Icon(
+                  : const Icon(
                       Icons.pause,
                       size: 30,
                       color: Colors.black,

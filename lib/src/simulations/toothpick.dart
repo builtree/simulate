@@ -7,30 +7,30 @@ Function listEq = const DeepCollectionEquality().equals;
 
 class Toothpick {
   bool alignment;
-  var end1 = new List(2);
-  var end2 = new List(2);
-  var center = new List(2);
+  var end1 = List.filled(2, 0.0);
+  var end2 = List.filled(2, 0.0);
+  var center = List.filled(2, 0.0);
   Toothpick(this.center, this.alignment) {
     if (alignment == true) {
-      this.end1[0] = center[0];
-      this.end1[1] = center[1] - 20;
-      this.end2[0] = center[0];
-      this.end2[1] = center[1] + 20;
+      end1[0] = center[0];
+      end1[1] = center[1] - 20;
+      end2[0] = center[0];
+      end2[1] = center[1] + 20;
     } else {
-      this.end1[0] = center[0] - 20;
-      this.end1[1] = center[1];
-      this.end2[0] = center[0] + 20;
-      this.end2[1] = center[1];
+      end1[0] = center[0] - 20;
+      end1[1] = center[1];
+      end2[0] = center[0] + 20;
+      end2[1] = center[1];
     }
   }
 
   bool compareEnd1(otherPicks) {
     int flag;
     otherPicks.forEach((pick) {
-      if (!listEq(pick.center, this.center)) {
-        if (listEq(pick.end1, this.end1) |
-            listEq(pick.end2, this.end1) |
-            listEq(pick.center, this.end1)) {
+      if (!listEq(pick.center, center)) {
+        if (listEq(pick.end1, end1) |
+            listEq(pick.end2, end1) |
+            listEq(pick.center, end1)) {
           flag = 1;
         }
       }
@@ -45,10 +45,10 @@ class Toothpick {
   bool compareEnd2(otherPicks) {
     int flag = 0;
     otherPicks.forEach((pick) {
-      if (!listEq(pick.center, this.center)) {
-        if (listEq(pick.end1, this.end2) |
-            listEq(pick.end2, this.end2) |
-            listEq(pick.center, this.end2)) {
+      if (!listEq(pick.center, center)) {
+        if (listEq(pick.end1, end2) |
+            listEq(pick.end2, end2) |
+            listEq(pick.center, end2)) {
           flag = 1;
         }
       }
@@ -62,34 +62,38 @@ class Toothpick {
 }
 
 class ToothpickPattern extends StatefulWidget {
+  const ToothpickPattern({Key key}) : super(key: key);
+
   @override
   _ToothpickPatternState createState() => _ToothpickPatternState();
 }
 
 class _ToothpickPatternState extends State<ToothpickPattern> {
   int step = 0;
-  var activeToothPicks = new List<Toothpick>();
-  var prevToothPicks = new List<List<Toothpick>>();
-  var toothPicks = new List<Toothpick>();
+  var activeToothPicks = <Toothpick>[];
+  var prevToothPicks = <List<Toothpick>>[];
+  var toothPicks = <Toothpick>[];
+  // ignore: prefer_typing_uninitialized_variables
   var extra;
   double _scaleAmount = 1.0;
 
   addStep() {
     setState(() {
       step++;
+      // ignore: prefer_spread_collections
       prevToothPicks.add([]..addAll(activeToothPicks));
       toothPicks += prevToothPicks[prevToothPicks.length - 1];
       activeToothPicks.clear();
-      prevToothPicks[prevToothPicks.length - 1].forEach((pick) {
+      for (var pick in prevToothPicks[prevToothPicks.length - 1]) {
         extra = pick.compareEnd1(toothPicks);
         if (extra) {
-          activeToothPicks += [new Toothpick(pick.end1, !pick.alignment)];
+          activeToothPicks += [Toothpick(pick.end1, !pick.alignment)];
         }
         extra = pick.compareEnd2(toothPicks);
         if (extra) {
-          activeToothPicks += [new Toothpick(pick.end2, !pick.alignment)];
+          activeToothPicks += [Toothpick(pick.end2, !pick.alignment)];
         }
-      });
+      }
     });
   }
 
@@ -133,7 +137,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
   @override
   Widget build(BuildContext context) {
     if (step == 1) {
-      activeToothPicks.add(new Toothpick([
+      activeToothPicks.add(Toothpick([
         (MediaQuery.of(context).size.width / 2).roundToDouble(),
         (MediaQuery.of(context).size.height / 2 - 100).roundToDouble()
       ], true));
@@ -144,14 +148,14 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(512.0, 1024.0),
+            designSize: const Size(512.0, 1024.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -169,7 +173,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
               elevation: 10,
               label: Text(
                 'Step: $step',
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white,
                 ),
               ),
@@ -186,13 +190,13 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         IconButton(
-                          icon: Icon(Icons.remove),
+                          icon: const Icon(Icons.remove),
                           onPressed: () {
                             subtract();
                           },
                         ),
                         IconButton(
-                          icon: Icon(Icons.add),
+                          icon: const Icon(Icons.add),
                           onPressed: () {
                             addStep();
                           },
@@ -202,7 +206,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.zoom_out),
+                          icon: const Icon(Icons.zoom_out),
                           onPressed: () {
                             setState(() {
                               _scaleAmount -=
@@ -225,7 +229,7 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.zoom_in),
+                          icon: const Icon(Icons.zoom_in),
                           onPressed: () {
                             setState(() {
                               _scaleAmount += _scaleAmount + 0.1 > 2 ? 0 : 0.1;
@@ -238,17 +242,15 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
                 ),
               ),
             ),
-            body: Container(
-              child: Transform.scale(
-                scale: _scaleAmount,
-                child: CustomPaint(
-                  painter: ToothpickPainter(
-                    activeToothPicks,
-                    toothPicks,
-                    Theme.of(context).colorScheme.secondary,
-                  ),
-                  child: Container(),
+            body: Transform.scale(
+              scale: _scaleAmount,
+              child: CustomPaint(
+                painter: ToothpickPainter(
+                  activeToothPicks,
+                  toothPicks,
+                  Theme.of(context).colorScheme.secondary,
                 ),
+                child: Container(),
               ),
             ),
           );
@@ -259,15 +261,15 @@ class _ToothpickPatternState extends State<ToothpickPattern> {
 }
 
 class ToothpickPainter extends CustomPainter {
-  var activeToothpicks = new List<Toothpick>();
-  var toothpicks = new List<Toothpick>();
-  var colorTheme = new Color(0);
+  var activeToothpicks = <Toothpick>[];
+  var toothpicks = <Toothpick>[];
+  var colorTheme = const Color(0x00000000);
   ToothpickPainter(this.activeToothpicks, this.toothpicks, this.colorTheme);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint();
     paint.strokeWidth = 2;
-    paint.color = this.colorTheme;
+    paint.color = colorTheme;
     for (int i = 0; i < toothpicks.length; i++) {
       canvas.drawLine(Offset(toothpicks[i].end1[0], toothpicks[i].end1[1]),
           Offset(toothpicks[i].end2[0], toothpicks[i].end2[1]), paint);

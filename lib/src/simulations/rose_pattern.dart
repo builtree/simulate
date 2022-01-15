@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 GlobalKey<_RoseState> globalKey = GlobalKey<_RoseState>();
 
 class RosePattern extends StatefulWidget {
+  const RosePattern({Key key}) : super(key: key);
+
   @override
   _RosePatternState createState() => _RosePatternState();
 }
@@ -37,14 +39,14 @@ class _RosePatternState extends State<RosePattern> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(512.0, 1024.0),
+            designSize: const Size(512.0, 1024.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -58,7 +60,7 @@ class _RosePatternState extends State<RosePattern> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Visibility(
                 visible: animate,
                 child: Row(
@@ -68,11 +70,11 @@ class _RosePatternState extends State<RosePattern> {
                       heroTag: null,
                       backgroundColor: Colors.white,
                       child: (!animating)
-                          ? Icon(
+                          ? const Icon(
                               Icons.play_arrow,
                               color: Colors.black,
                             )
-                          : Icon(
+                          : const Icon(
                               Icons.pause,
                               color: Colors.black,
                             ),
@@ -85,7 +87,7 @@ class _RosePatternState extends State<RosePattern> {
                     FloatingActionButton(
                       heroTag: null,
                       backgroundColor: Colors.white,
-                      child: Icon(
+                      child: const Icon(
                         Icons.highlight_off,
                         color: Colors.black,
                       ),
@@ -104,7 +106,7 @@ class _RosePatternState extends State<RosePattern> {
                 child: parameters(context, ScreenUtil().setHeight(1024 / 5))),
             body: Row(
               children: [
-                Container(
+                SizedBox(
                   width: isLandscape()
                       ? 2 * MediaQuery.of(context).size.width / 3
                       : MediaQuery.of(context).size.width,
@@ -133,13 +135,14 @@ class _RosePatternState extends State<RosePattern> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text("Animate"),
+                            const Text("Animate"),
                             Checkbox(
                               onChanged: (_) {
                                 setState(() {
                                   animate = !animate;
-                                  if (animating)
+                                  if (animating) {
                                     animating = (animating && animate);
+                                  }
                                 });
                               },
                               value: animate,
@@ -174,6 +177,7 @@ class _RosePatternState extends State<RosePattern> {
   }
 
   Container parameters(BuildContext context, num height) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: height,
       child: Material(
@@ -184,9 +188,9 @@ class _RosePatternState extends State<RosePattern> {
           isAlwaysShown: true,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Slider(
@@ -255,7 +259,7 @@ class _RosePatternState extends State<RosePattern> {
 }
 
 class Rose extends StatefulWidget {
-  Rose({
+  const Rose({
     Key key,
     @required this.d,
     @required this.n,
@@ -284,6 +288,7 @@ class _RoseState extends State<Rose> {
   double tx, ty;
   bool orientationChanged = true;
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -362,7 +367,7 @@ class RosePainter extends CustomPainter {
   RosePainter(this.d, this.n, this.transformx, this.transformy, this.r, this.c,
       this.animate, points) {
     k = n / d;
-    this.points = new List<Offset>.from(points);
+    this.points = List<Offset>.from(points);
   }
 
   @override
@@ -371,14 +376,14 @@ class RosePainter extends CustomPainter {
     paint.color = Colors.red;
     paint.strokeWidth = 2;
     if (!animate) {
-      this.points.clear();
+      points.clear();
       for (double i = 0; i < 2 * d * pi; i += 0.01) {
         points.add(
             Offset(r * (cos(k * i) + c) * cos(i), r * (cos(k * i) + c) * sin(i))
                 .translate(transformx, transformy));
       }
     }
-    if (points.length > 0) {
+    if (points.isNotEmpty) {
       canvas.drawPoints(PointMode.polygon, points, paint);
     }
   }

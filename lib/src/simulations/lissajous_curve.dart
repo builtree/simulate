@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 GlobalKey<_LissajousState> globalKey = GlobalKey<_LissajousState>();
 
 class LissajousCurve extends StatefulWidget {
+  const LissajousCurve({Key key}) : super(key: key);
+
   @override
   _LissajousCurveState createState() => _LissajousCurveState();
 }
@@ -38,14 +40,14 @@ class _LissajousCurveState extends State<LissajousCurve> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(512.0, 1024.0),
+            designSize: const Size(512.0, 1024.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -69,11 +71,11 @@ class _LissajousCurveState extends State<LissajousCurve> {
                         heroTag: null,
                         backgroundColor: Colors.white,
                         child: (!animating)
-                            ? Icon(
+                            ? const Icon(
                                 Icons.play_arrow,
                                 color: Colors.black,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.pause,
                                 color: Colors.black,
                               ),
@@ -84,7 +86,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                         }),
                     FloatingActionButton(
                       heroTag: null,
-                      child: Icon(
+                      child: const Icon(
                         Icons.highlight_off,
                         color: Colors.black,
                       ),
@@ -108,7 +110,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
             ),
             body: Row(
               children: [
-                Container(
+                SizedBox(
                   width: isLandscape()
                       ? 2 * MediaQuery.of(context).size.width / 3
                       : MediaQuery.of(context).size.width,
@@ -138,7 +140,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text('Animate: '),
+                            const Text('Animate: '),
                             Checkbox(
                               onChanged: (_) {
                                 setState(() {
@@ -180,6 +182,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
   }
 
   Container parameters(BuildContext context, num height) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: height,
       child: Material(
@@ -190,9 +193,9 @@ class _LissajousCurveState extends State<LissajousCurve> {
           isAlwaysShown: true,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Slider(
@@ -278,7 +281,7 @@ class _LissajousCurveState extends State<LissajousCurve> {
 }
 
 class Lissajous extends StatefulWidget {
-  Lissajous({
+  const Lissajous({
     Key key,
     @required double b,
     @required double a,
@@ -311,6 +314,7 @@ class _LissajousState extends State<Lissajous> {
   double tx, ty;
   bool orientationChanged = true;
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -331,8 +335,8 @@ class _LissajousState extends State<Lissajous> {
     if (loopi >= looplength) {
       clear();
     }
-    await Future.delayed(Duration(milliseconds: 10));
-    if (this.mounted) {
+    await Future.delayed(const Duration(milliseconds: 10));
+    if (mounted) {
       setState(() {
         loopi += 0.01;
         points.add(Offset(r * sin(widget._a * loopi + widget.delta),
@@ -400,7 +404,7 @@ class LissajousPainter extends CustomPainter {
     points,
     this.thickness,
   ) {
-    this.points = new List<Offset>.from(points);
+    this.points = List<Offset>.from(points);
     k = n / d;
   }
 
@@ -410,13 +414,13 @@ class LissajousPainter extends CustomPainter {
     paint.color = Colors.red;
     paint.strokeWidth = thickness;
     if (!animate) {
-      this.points.clear();
+      points.clear();
       for (double i = 0; i <= 2 * pi; i += 0.01) {
-        this.points.add(Offset(r * sin(n * i + c), r * sin(d * i))
+        points.add(Offset(r * sin(n * i + c), r * sin(d * i))
             .translate(transformx, transformy));
       }
     }
-    if (points.length > 0) {
+    if (points.isNotEmpty) {
       canvas.drawPoints(PointMode.polygon, points, paint);
     }
   }

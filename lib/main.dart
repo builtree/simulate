@@ -21,12 +21,14 @@ void main() async {
           create: (context) => ThemeProvider(sharedPreferences),
         ),
       ],
-      child: HomeCall(),
+      child: const HomeCall(),
     ),
   );
 }
 
 class HomeCall extends StatelessWidget {
+  const HomeCall({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<ThemeProvider>(context);

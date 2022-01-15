@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_initializing_formals
+
 import 'dart:math';
 import 'dart:core';
 import 'dart:ui';
@@ -10,6 +12,8 @@ GlobalKey<_NormalEpicycloidState> globalKey =
 List<Offset> ys = [];
 
 class NormalEpicycloidCurve extends StatefulWidget {
+  const NormalEpicycloidCurve({Key key}) : super(key: key);
+
   @override
   _NormalEpicycloidCurveState createState() => _NormalEpicycloidCurveState();
 }
@@ -19,7 +23,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   int innerRadius = 50;
   int outerRadius = 50;
   double f = 0.01;
-  double _scaleAmount = 1;
+  final double _scaleAmount = 1;
   bool animate = false;
   bool animating = false;
   final ScrollController _scrollController = ScrollController();
@@ -44,14 +48,14 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
-            designSize: Size(720.0, 1600.0),
+            designSize: const Size(720.0, 1600.0),
             allowFontScaling: true,
           );
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: Icon(Icons.arrow_back_ios),
+                icon: const Icon(Icons.arrow_back_ios),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -75,11 +79,11 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                         heroTag: null,
                         backgroundColor: Colors.white,
                         child: (!animating)
-                            ? Icon(
+                            ? const Icon(
                                 Icons.play_arrow,
                                 color: Colors.black,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.pause,
                                 color: Colors.black,
                               ),
@@ -90,7 +94,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                         }),
                     FloatingActionButton(
                       heroTag: null,
-                      child: Icon(
+                      child: const Icon(
                         Icons.highlight_off,
                         color: Colors.black,
                       ),
@@ -116,7 +120,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
             ),
             body: Row(
               children: [
-                Container(
+                SizedBox(
                   width: isLandscape()
                       ? 2 * MediaQuery.of(context).size.width / 3
                       : MediaQuery.of(context).size.width,
@@ -149,7 +153,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Text('Animate: '),
+                            const Text('Animate: '),
                             Checkbox(
                               onChanged: (animating)
                                   ? null
@@ -190,6 +194,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
   }
 
   Container parameters(BuildContext context, num height) {
+    // ignore: sized_box_for_whitespace
     return Container(
       height: height,
       child: Material(
@@ -200,9 +205,9 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
           isAlwaysShown: true,
           child: ListView(
             controller: _scrollController,
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             children: <Widget>[
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Slider(
@@ -277,7 +282,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
 }
 
 class NormalEpicycloid extends StatefulWidget {
-  NormalEpicycloid({
+  const NormalEpicycloid({
     @required int outerRadius,
     @required int innerRadius,
     @required double f,
@@ -312,6 +317,7 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
   double time = 0;
   bool orientationChanged = true;
 
+  @override
   void dispose() {
     super.dispose();
   }
@@ -345,27 +351,25 @@ class _NormalEpicycloidState extends State<NormalEpicycloid> {
       orientationChanged = !orientationChanged;
     }
 
-    return Container(
-      child: Transform.scale(
-        scale: widget.isLandscape
-            ? 0.7 * widget._scaleAmount
-            : widget._scaleAmount,
-        child: CustomPaint(
-          painter: NormalEpicycloidPainter(
-            widget.outerRadius,
-            widget.innerRadius,
-            time,
-            (widget.isLandscape
-                    ? MediaQuery.of(context).size.width / 3
-                    : MediaQuery.of(context).size.width / 2)
-                .roundToDouble(),
-            (MediaQuery.of(context).size.height / 3).roundToDouble(),
-            widget.animate,
-            points,
-            context,
-          ),
-          child: Container(),
+    return Transform.scale(
+      scale: widget.isLandscape
+          ? 0.7 * widget._scaleAmount
+          : widget._scaleAmount,
+      child: CustomPaint(
+        painter: NormalEpicycloidPainter(
+          widget.outerRadius,
+          widget.innerRadius,
+          time,
+          (widget.isLandscape
+                  ? MediaQuery.of(context).size.width / 3
+                  : MediaQuery.of(context).size.width / 2)
+              .roundToDouble(),
+          (MediaQuery.of(context).size.height / 3).roundToDouble(),
+          widget.animate,
+          points,
+          context,
         ),
+        child: Container(),
       ),
     );
   }
@@ -392,12 +396,12 @@ class NormalEpicycloidPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    Offset coor = new Offset(transformx, transformy);
+    Offset coor = Offset(transformx, transformy);
     if (!animate) {
       var paint = Paint();
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
-      this.points.clear();
+      points.clear();
       paint.color = Theme.of(context).colorScheme.secondary;
       canvas.drawCircle(
           Offset(transformx, transformy), innerRadius.toDouble(), paint);
@@ -406,7 +410,7 @@ class NormalEpicycloidPainter extends CustomPainter {
         for (double loopi = 0;
             loopi <= (innerRadius / innerRadius.gcd(outerRadius)) * 2 * pi;
             loopi += 0.01) {
-          this.points.add(Offset(
+            points.add(Offset(
                   (((innerRadius + outerRadius) * cos(loopi)) -
                       (outerRadius *
                           cos(((innerRadius / outerRadius) + 1) * loopi))),
@@ -418,7 +422,7 @@ class NormalEpicycloidPainter extends CustomPainter {
         canvas.drawPoints(PointMode.polygon, points, paint);
       }
     } else {
-      Paint paint = new Paint();
+      Paint paint = Paint();
       paint.style = PaintingStyle.stroke;
       paint.strokeWidth = 2;
       paint.color = Theme.of(context).colorScheme.secondary;
@@ -438,9 +442,9 @@ class NormalEpicycloidPainter extends CustomPainter {
         smallCenter = Offset((innerRadius + outerRadius) * cos(time),
             (innerRadius + outerRadius) * sin(time));
         ys.insert(0, coor);
-        ys.forEach((value) {
+        for (var value in ys) {
           points.add(value);
-        });
+        }
         paint.color = Colors.red;
         canvas.drawPoints(PointMode.polygon, points, paint);
       }
