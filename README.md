@@ -1,11 +1,11 @@
 <p align="center">
     <a href="https://github.com/builtree/simulate">
-        <img src="https://raw.githubusercontent.com/builtree/assets/simulate/documentation/SimulateTitle.svg" width=40%>
-        </img>
+        <img src="https://raw.githubusercontent.com/builtree/assets/simulate/documentation/SimulateTitle.svg" width=40%/>
     </a>
 </p>
 
 [![Gitter](https://badges.gitter.im/codEd-org/simulate.svg)](https://gitter.im/codEd-org/simulate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Checks](https://github.com/builtree/simulate/actions/workflows/checks.yml/badge.svg)](https://github.com/builtree/simulate/actions/workflows/checks.yml)
 
 Welcome to Simulate! Simulate aims to be a collection of simulations and visualizations from various domains like mathematics, physics, computer science etc. in a cross platform app made using [Flutter](https://flutter.dev/).
 

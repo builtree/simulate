@@ -1,0 +1,52 @@
+name: Checks
+
+on:
+  push:
+  pull_request:
+
+  # everyday at 3 am UTC
+  schedule:
+    - cron:  '0 3 * * *'
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java for Flutter
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: Lint
+        run: |
+          flutter pub get
+          flutter analyze
+
+  build-apk-and-web:
+    needs: lint-check
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Java for Flutter
+        uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Build APK
+        run: flutter build apk
+      - name: Build web
+        run: flutter build web
