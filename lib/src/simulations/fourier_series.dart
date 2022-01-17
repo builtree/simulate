@@ -63,7 +63,7 @@ class _FourierSeriesState extends State<FourierSeries> {
           ScreenUtil.init(
             constraints,
             designSize: Size(1024.0, 512.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(
@@ -122,7 +122,8 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 1,
                             max: 100,
-                            activeColor: Theme.of(context).colorScheme.secondary,
+                            activeColor:
+                                Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {
@@ -140,7 +141,8 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 10,
                             max: 200,
-                            activeColor: Theme.of(context).colorScheme.secondary,
+                            activeColor:
+                                Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {
@@ -158,7 +160,8 @@ class _FourierSeriesState extends State<FourierSeries> {
                           Slider(
                             min: 0,
                             max: 0.3,
-                            activeColor: Theme.of(context).colorScheme.secondary,
+                            activeColor:
+                                Theme.of(context).colorScheme.secondary,
                             inactiveColor: Colors.grey,
                             onChanged: (value) {
                               setState(() {

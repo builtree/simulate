@@ -39,7 +39,7 @@ class MaurerRoseCurveState extends State<MaurerRoseCurve> {
           ScreenUtil.init(
             constraints,
             designSize: Size(512.0, 1024.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(

@@ -124,7 +124,7 @@ class _InsertionHomeState extends State<InsertionHome> {
           ScreenUtil.init(
             constraints,
             designSize: Size(512.0, 1024.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(

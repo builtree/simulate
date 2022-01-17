@@ -45,7 +45,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
           ScreenUtil.init(
             constraints,
             designSize: Size(720.0, 1600.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(

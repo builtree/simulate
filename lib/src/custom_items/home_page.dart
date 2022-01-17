@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
           ScreenUtil.init(
             constraints,
             designSize: Size(512.0, 850.0),
-            allowFontScaling: false,
+            minTextAdapt: false,
           );
           return Container(
             child: ListView(
