@@ -37,7 +37,7 @@ class _EpicycloidCurveState extends State<EpicycloidCurve> {
           ScreenUtil.init(
             constraints,
             designSize: Size(434.0, 924.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(
