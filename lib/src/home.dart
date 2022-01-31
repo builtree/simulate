@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:simulate/src/custom_items/app_drawer.dart';
 import 'data/simulations.dart';
 import 'package:provider/provider.dart';
 import 'package:simulate/src/custom_items/home_page.dart';
@@ -68,41 +69,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           tabs: widget._categoryTabs,
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Center(
-                child: Text(
-                  'Simulate',
-                  style: Theme.of(context).textTheme.headline6.copyWith(
-                        fontSize: 40,
-                      ),
-                ),
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-            ListTile(
-              leading: Text(
-                "Dark Mode",
-                style: Theme.of(context).textTheme.subtitle2.copyWith(
-                      fontSize: 20,
-                    ),
-              ),
-              trailing: Switch(
-                value: theme.darkTheme,
-                activeColor: Colors.black,
-                onChanged: (bool value) {
-                  theme.toggleTheme();
-                },
-              ),
-            )
-          ],
-        ),
-      ),
+      drawer: AppDrawer(),
       body: TabBarView(
         controller: _categoryController,
         children: <Widget>[
