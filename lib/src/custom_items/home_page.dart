@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
+            context: context,
             designSize: Size(512.0, 850.0),
             minTextAdapt: false,
           );

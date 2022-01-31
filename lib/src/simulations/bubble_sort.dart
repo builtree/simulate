@@ -144,6 +144,7 @@ class _BubbleSortBarsState extends State<BubbleSortBars> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
+            context: context,
             designSize: Size(512.0, 1024.0),
             minTextAdapt: true,
           );

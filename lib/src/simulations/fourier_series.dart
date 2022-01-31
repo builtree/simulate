@@ -62,6 +62,7 @@ class _FourierSeriesState extends State<FourierSeries> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
+            context: context,
             designSize: Size(1024.0, 512.0),
             minTextAdapt: true,
           );

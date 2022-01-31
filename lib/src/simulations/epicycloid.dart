@@ -44,6 +44,7 @@ class _NormalEpicycloidCurveState extends State<NormalEpicycloidCurve> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
+            context: context,
             designSize: Size(720.0, 1600.0),
             minTextAdapt: true,
           );
