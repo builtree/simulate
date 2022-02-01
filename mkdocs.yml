@@ -1,79 +1,78 @@
-site_name: 'Simulate'
-site_description: 'Official site for Simulate'
-site_author: 'Yash Lamba'
-site_url: 'https://builtree.github.io/simulate/'
+site_name: "Simulate"
+site_description: "Official site for Simulate"
+site_author: "Yash Lamba"
+site_url: "https://builtree.github.io/simulate/"
 
 # Repository
-repo_name: 'builtree/simulate'
-repo_url: 'https://github.com/builtree/simulate'
+repo_name: "builtree/simulate"
+repo_url: "https://github.com/builtree/simulate"
 
 # Copyright
 nav:
-  - Home: 'index.md'
-  - Contributing: 'contributing.md'
-  - Documentation: 
-    - Home: 'doc/index.md'
-  - Simulations: 
-    - All Simulations: 'simulations/index.md'
-    - Algorithms: 
-      - Toothpick Pattern: 'simulations/algorithms/ToothpickPattern.md'
-    - Mathematics: 
-      - Lissajous Pattern: 'simulations/mathematics/LissajousPattern.md'
-      - Maurer Rose Pattern: 'simulations/mathematics/MaurerRosePattern.md'
-      - Fourier Series: 'simulations/mathematics/FourierSeries.md'
-  - Simulate Web:
-    - Home: 'https://builtree.github.io/simulate/web'
+    - Home: "index.md"
+    - Contributing: "contributing.md"
+    # - Documentation:
+    #   - Home: 'doc/index.md'
+    - Simulations:
+          - All Simulations: "simulations/index.md"
+          - Algorithms:
+                - Toothpick Pattern: "simulations/algorithms/ToothpickPattern.md"
+          - Mathematics:
+                - Lissajous Pattern: "simulations/mathematics/LissajousPattern.md"
+                - Maurer Rose Pattern: "simulations/mathematics/MaurerRosePattern.md"
+                - Fourier Series: "simulations/mathematics/FourierSeries.md"
+    - Simulate Web:
+          - Home: "https://builtree.github.io/simulate/web"
 
 # Configuration
 theme:
-  name: 'material'
-  features:
-    - navigation.tabs
-  palette:
-    primary: 'black'
-    accent: 'white'
-  font:
-    text: 'Ubuntu'
-    code: 'Ubuntu Mono'
-  icon:
-    logo: material/atom
-    repo: octicons/mark-github-16
+    name: "material"
+    features:
+        - navigation.tabs
+    palette:
+        primary: "black"
+        accent: "white"
+    font:
+        text: "Ubuntu"
+        code: "Ubuntu Mono"
+    icon:
+        logo: material/atom
+        repo: octicons/mark-github-16
 
 # Customization
 
 # Extensions
 markdown_extensions:
-  - admonition
-  - codehilite:
-      guess_lang: false
-  - toc:
-      permalink: true
-  - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  - pymdownx.inlinehilite
-  - pymdownx.magiclink
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - footnotes
-  - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.tabbed
-  - pymdownx.tilde
-  - attr_list
+    - admonition
+    - codehilite:
+          guess_lang: false
+    - toc:
+          permalink: true
+    - pymdownx.arithmatex
+    - pymdownx.betterem:
+          smart_enable: all
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.emoji:
+          emoji_generator: !!python/name:pymdownx.emoji.to_svg
+    - pymdownx.inlinehilite
+    - pymdownx.magiclink
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.superfences
+    - footnotes
+    - pymdownx.tasklist:
+          custom_checkbox: true
+    - pymdownx.tabbed
+    - pymdownx.tilde
+    - attr_list
 
-  # Plugins
+    # Plugins
 plugins:
-  - search
-  - git-revision-date-localized:
-      type: date
-  
-extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+    - search
+    - git-revision-date-localized:
+          type: date
 
+extra_javascript:
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
