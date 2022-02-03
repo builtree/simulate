@@ -15,6 +15,7 @@ dependencies:
   provider: ^6.0.2
   shared_preferences: ^2.0.12
   flutter_screenutil: ^5.1.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +25,6 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/simulations/
     - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
   fonts:
