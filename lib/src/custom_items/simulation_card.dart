@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,9 +60,11 @@ class _SimulationCardState extends State<SimulationCard> {
                 flex: 10,
                 child: Container(
                   padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
-                  child: Image.asset(
-                    widget.image,
-                    fit: BoxFit.fill,
+                  child:CachedNetworkImage(
+                    imageUrl: widget.image,
+                    progressIndicatorBuilder: (context, url, downloadProgress) =>
+                        CircularProgressIndicator(value: downloadProgress.progress),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
                 ),
               ),

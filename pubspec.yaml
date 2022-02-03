@@ -4,30 +4,30 @@ description: A collection of simulations and visualizations
 version: 1.0.0+1
 
 environment:
-    sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
-    flutter:
-        sdk: flutter
+  flutter:
+    sdk: flutter
 
-    cupertino_icons: ^1.0.4
-    url_launcher: ^6.0.17
-    provider: ^6.0.2
-    shared_preferences: ^2.0.11
-    flutter_screenutil: ^4.0.3+2
+  cupertino_icons: ^1.0.4
+  url_launcher: ^6.0.18
+  provider: ^6.0.2
+  shared_preferences: ^2.0.12
+  flutter_screenutil: ^5.1.0
+  cached_network_image: ^3.2.0
 
 dev_dependencies:
-    flutter_test:
-        sdk: flutter
+  flutter_test:
+    sdk: flutter
 
 flutter:
-    uses-material-design: true
+  uses-material-design: true
 
-    assets:
-        - assets/simulations/
-        - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+  assets:
+    - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
 
-    fonts:
-        - family: Ubuntu
-          fonts:
-              - asset: fonts/Ubuntu-Regular.ttf
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu-Regular.ttf

@@ -37,8 +37,9 @@ class _RosePatternState extends State<RosePattern> {
         if (constraints.maxWidth != 0) {
           ScreenUtil.init(
             constraints,
+            context: context,
             designSize: Size(512.0, 1024.0),
-            allowFontScaling: true,
+            minTextAdapt: true,
           );
           return Scaffold(
             appBar: AppBar(

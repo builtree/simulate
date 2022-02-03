@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simulate/src/simulations/lissajous_curve.dart';
 import 'package:simulate/src/simulations/epicycloid_curve.dart';
 import 'package:simulate/src/simulations/maurer_rose.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Simulations with ChangeNotifier {
   static var _favorites = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
@@ -57,8 +58,8 @@ class Simulations with ChangeNotifier {
         id: 0,
         simulationName: 'Toothpick Pattern',
         image: theme.darkTheme
-            ? 'assets/simulations/ToothpickPatternDark.png'
-            : 'assets/simulations/ToothpickPatternLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/ToothpickPatternDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/ToothpickPatternLight.png',
         direct: ToothpickPattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Toothpick_sequence',
         fav: _favorites[0],
@@ -67,8 +68,8 @@ class Simulations with ChangeNotifier {
         id: 1,
         simulationName: 'Bubble Sort (Bars)',
         image: theme.darkTheme
-            ? 'assets/simulations/BubbleSortDark.png'
-            : 'assets/simulations/BubbleSortLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/BubbleSortDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/BubbleSortLight.png',
         direct: BubbleSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Bubble_sort',
         fav: _favorites[1],
@@ -77,8 +78,8 @@ class Simulations with ChangeNotifier {
         id: 2,
         simulationName: 'Insertion Sort',
         image: theme.darkTheme
-            ? 'assets/simulations/InsertionSortDark.png'
-            : 'assets/simulations/InsertionSortLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/InsertionSortDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/InsertionSortLight.png',
         direct: InsertionHome(),
         infoLink: 'https://en.wikipedia.org/wiki/Insertion_sort',
         fav: _favorites[2],
@@ -87,8 +88,8 @@ class Simulations with ChangeNotifier {
         id: 3,
         simulationName: 'Rose Pattern',
         image: theme.darkTheme
-            ? 'assets/simulations/RosePatternDark.png'
-            : 'assets/simulations/RosePatternLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/RosePatternDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/RosePatternLight.png',
         direct: RosePattern(),
         infoLink: 'https://en.wikipedia.org/wiki/Rose_(mathematics)',
         fav: _favorites[3],
@@ -97,8 +98,8 @@ class Simulations with ChangeNotifier {
         id: 4,
         simulationName: 'Fourier Series',
         image: theme.darkTheme
-            ? 'assets/simulations/FourierSeriesDark.png'
-            : 'assets/simulations/FourierSeriesLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/FourierSeriesDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/FourierSeriesLight.png',
         direct: FourierSeries(),
         infoLink: 'https://en.wikipedia.org/wiki/Fourier_series',
         fav: _favorites[4],
@@ -107,8 +108,8 @@ class Simulations with ChangeNotifier {
         id: 5,
         simulationName: 'Lissajous Pattern',
         image: theme.darkTheme
-            ? 'assets/simulations/LissajousCurveDark.png'
-            : 'assets/simulations/LissajousCurveLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/LissajousCurveDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/LissajousCurveLight.png',
         direct: LissajousCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Lissajous_curve',
         fav: _favorites[5],
@@ -117,8 +118,8 @@ class Simulations with ChangeNotifier {
         id: 6,
         simulationName: 'Epicycloid Pattern (Pencil of Lines)',
         image: theme.darkTheme
-            ? 'assets/simulations/Epicycloid1Dark.png'
-            : 'assets/simulations/Epicycloid1Light.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/Epicycloid1Dark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/Epicycloid1Light.png',
         direct: EpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[6],
@@ -127,8 +128,8 @@ class Simulations with ChangeNotifier {
         id: 7,
         simulationName: 'Epicycloid Curve',
         image: theme.darkTheme
-            ? 'assets/simulations/EpicycloidDark.png'
-            : 'assets/simulations/Epicycloid.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/EpicycloidDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/Epicycloid.png',
         direct: NormalEpicycloidCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Epicycloid',
         fav: _favorites[7],
@@ -137,8 +138,8 @@ class Simulations with ChangeNotifier {
         id: 8,
         simulationName: 'Maurer Rose Pattern',
         image: theme.darkTheme
-            ? 'assets/simulations/MaurerRoseDark.png'
-            : 'assets/simulations/MaurerRoseLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/MaurerRoseDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/MaurerRoseLight.png',
         direct: MaurerRoseCurve(),
         infoLink: 'https://en.wikipedia.org/wiki/Maurer_rose',
         fav: _favorites[8],
@@ -147,8 +148,8 @@ class Simulations with ChangeNotifier {
         id: 9,
         simulationName: 'Selection Sort',
         image: theme.darkTheme
-            ? 'assets/simulations/InsertionSortDark.png'
-            : 'assets/simulations/InsertionSortLight.png',
+            ? 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/InsertionSortDark.png'
+            : 'https://raw.githubusercontent.com/builtree/assets/simulate/web-assets/InsertionSortLight.png',
         direct: SelectionSortBars(),
         infoLink: 'https://en.wikipedia.org/wiki/Selection_sort',
         fav: _favorites[9],

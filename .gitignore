@@ -9,6 +9,7 @@
 .history
 .svn/
 /site/
+.venv/
 
 # IntelliJ related
 *.iml
