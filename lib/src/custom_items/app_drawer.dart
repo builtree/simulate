@@ -88,7 +88,7 @@ class AppDrawer extends StatelessWidget {
                   ),
             ),
             trailing: Text(
-              "1.0.0",
+              "0.0.1",
               style: Theme.of(context).textTheme.subtitle2.copyWith(
                     fontSize: 20,
                   ),
@@ -109,11 +109,15 @@ class AppDrawer extends StatelessWidget {
               },
             ),
           ),
-          InkWell(
-            child: SvgPicture.asset(
-              "assets/images/builtree.svg",
-              width: 100,
+          ListTile(
+            leading: Text(
+              "Project By",
+              style: Theme.of(context).textTheme.subtitle2.copyWith(
+                    fontSize: 20,
+                  ),
             ),
+            trailing:
+                SvgPicture.asset("assets/images/builtree.svg", width: 100),
             onTap: () => _launch("https://www.builtree.org/"),
           ),
         ],
